@@ -1,0 +1,31 @@
+{
+  "name": "resources",
+  "version": "0.0.0",
+  "authors": [
+    "Maarten Aerts <maarten.702@gmail.com>"
+  ],
+  "description": "web app InputDeviceTestingApp",
+  "main": "",
+  "moduleType": [
+    "amd",
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.3",
+    "jquery": "jqurey#~2.1.4",
+    "react-flux": "*",
+    "react-router": "~0.13.3",
+    "requirejs": "~2.1.20"
+  }
+}

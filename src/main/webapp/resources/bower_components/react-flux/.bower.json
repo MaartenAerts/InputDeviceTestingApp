@@ -1,0 +1,14 @@
+{
+  "name": "react-flux",
+  "homepage": "https://github.com/kjda/ReactFlux",
+  "_release": "d74ef6d1e0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d74ef6d1e06365b7b9e2b82e98c37265702fe68a"
+  },
+  "_source": "git://github.com/kjda/ReactFlux.git",
+  "_target": "*",
+  "_originalSource": "react-flux",
+  "_direct": true
+}
