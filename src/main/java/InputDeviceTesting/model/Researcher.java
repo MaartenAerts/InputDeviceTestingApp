@@ -1,4 +1,4 @@
-package org.uantwerpen.model;
+package InputDeviceTesting.model;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.Id;
