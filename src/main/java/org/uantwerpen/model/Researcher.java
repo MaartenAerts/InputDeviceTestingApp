@@ -5,10 +5,10 @@ import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 
+
 /**
  * Created by TooLate on 3/10/2015.
  */
-@Entity
 @DynamicUpdate
 public class Researcher {
     @Id
@@ -17,5 +17,7 @@ public class Researcher {
     String firstname;
     String lastname;
     String email;
+
+
 
 }
