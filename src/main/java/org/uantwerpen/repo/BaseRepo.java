@@ -1,4 +1,4 @@
-package org.uantwerpen.repository;
+package org.uantwerpen.repo;
 
 import org.springframework.data.repository.Repository;
 
