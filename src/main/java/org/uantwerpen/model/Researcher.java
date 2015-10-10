@@ -23,13 +23,10 @@ public class Researcher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
     private String firstName;
-    @Column
     private String lastName;
     @Email
     private String email;
-    @Column
     private String organization;
     @CreatedDate
     private LocalDateTime createdDate;
