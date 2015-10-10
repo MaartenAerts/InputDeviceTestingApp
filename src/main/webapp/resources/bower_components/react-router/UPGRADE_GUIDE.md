@@ -5,8 +5,345 @@ To see discussion around these API changes, please refer to the
 [changelog](/CHANGELOG.md) and visit the commits and issues they
 reference.
 
-0.12.x -> 0.13.x
+0.13.3 -> 1.0.0
+---------------
+
+Thanks for your patience :) Big changes. While on the surface a lot of
+this just looks like shuffling around API, the entire codebase has been
+rewritten to handle some really great use cases, like loading routes and
+components on demand, session-based route matching, server rendering,
+integration with libs like redux and relay, and lots more.
+
+But for now, here's how to translate the old API to the new one.
+
+### Rendering
+
+```js
+// v0.13.x
+Router.run(routes, (Handler) => {
+  React.render(<Handler/>, el);
+})
+
+// v1.0
+React.render(<Router>{routes}</Router>, el)
+
+// looks more like this:
+React.render((
+  <Router>
+    <Route path="/" component={App}/>
+  </Router>
+), el);
+
+// or if you'd rather
+React.render(<Router routes={routes}/>, el)
+```
+
+### Locations
+
+Locations are now called histories (that emit locations). You import
+them from the [`history` package](https://github.com/rackt/history), not react router.
+
+```js
+// v0.13.x
+Router.run(routes, Router.BrowserHistory, (Handler) => {
+  React.render(<Handler/>, el);
+})
+
+// v1.0
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+let history = createBrowserHistory()
+React.render(<Router history={history}>{routes}</Router>, el)
+```
+
+If you do not specify a history type (as in the example above) then you will notice some unusual behaviour after updating to 1.0.0. With the default hash based routing a querystring entry not defined by yourself will start appearing in your URLs called "_k". An example of how it looks is this: `?_k=umhx1s`.  
+
+This is intended and part of [createHashHistory](https://github.com/rackt/react-router/blob/master/docs/guides/basics/Histories.md#createhashhistory) (which is the default history approach used if one is not specified). You can read more about the feature [here](https://github.com/rackt/react-router/blob/master/docs/guides/basics/Histories.md#what-is-that-_kckuvup-junk-in-the-url) and how to opt out [here](https://rackt.github.io/history/stable/HashHistoryCaveats.html).
+
+### Route Config
+
+You can still nest your routes as before, paths are inherited from
+parents just like before but prop names have changed.
+
+```js
+// v0.13.x
+<Route name="about" handler={About}/>
+
+// v1.0
+<Route path="about" component={About}/>
+```
+
+Named routes are gone (for now, [see discussion](https://github.com/rackt/react-router/issues/1840))
+
+### NotFound route
+
+Not found really confused people, mistaking not finding resources
+from your API for not matching a route. We've removed it completely
+since it's simple with a `*` path.
+
+```js
+// v0.13.x
+<NotFoundRoute handler={NoMatch}/>
+
+// v1.0
+<Route path="*" component={NoMatch}/>
+```
+
+### Redirect route
+
+- no more params
+- must have absolute `from` (for now)
+
+```js
+// v0.13.x
+<Redirect from="some/where/:id" to="somewhere/else/:id" params={{id: 2}}/>
+
+// v1.0
+// Works the same as before, except no params, just put them in the path
+<Redirect from="/some/where/:id" to="/somewhere/else/2"/>
+```
+
+### Links
+
+#### path / params
+
+```js
+// v0.13.x
+<Link to="user" params={{userId: user.id}}>Mateusz</Link>
+
+// v1.0
+// because named routes are gone, link to full paths, you no longer need
+// to know the names of the parameters, and string templates are quite
+// nice. Note that `query` has not changed.
+<Link to={`/users/${user.id}`}>Mateusz</Link>
+```
+
+#### "active" class
+
+In 0.13.x links added the "active" class by default which you could
+override with `activeClassName`, or provide `activeStyle`s. Most links
+don't need this and the check is (currently) expensive.
+
+Links no longer add the "active" class by default, you opt-in by
+providing one; if no `activeClassName` or `activeStyle`s are provided,
+the link will not check if it's active.
+
+```js
+// v0.13.x
+<Link to="about">About</Link>
+
+// v1.0
+<Link to="/about" activeClassName="active">About</Link>
+```
+
+#### Linking to Index routes
+
+Because named routes are gone, a link to `/` with an index route at `/`
+will always be active. So we've introduced `IndexLink` that is only
+active when the index route is active.
+
+**Note:** `DefaultRoute` is gone.
+
+```js
+// v0.13.x
+// with this route config
+<Route path="/" handler={App}>
+  <DefaultRoute name="home" handler={Home}/>
+  <Route name="about" handler={About}/>
+</Route>
+
+// will be active only when home is active, not when about is active
+<Link to="home">Home</Link>
+
+// v1.0
+<Route path="/" component={App}>
+  <IndexRoute component={Home}/>
+  <Route path="about" component={About}/>
+</Route>
+
+// will be active only when home is active, not when about is active
+<IndexLink to="/">Home</IndexLink>
+```
+
+### RouteHandler
+
+`RouteHandler` is gone. `Router` now automatically populates
+`this.props.children` of your components based on the active route.
+
+```js
+// v0.13.x
+<RouteHandler/>
+<RouteHandler someExtraProp={something}/>
+
+// v1.0
+{this.props.children}
+{React.cloneElement(this.props.children, {someExtraProp: something })}
+```
+
+### Navigation Mixin
+
+If you were using the `Navigation` mixin, use the `History` mixin instead.
+
+```js
+// v0.13.x
+var Assignment = React.createClass({
+  mixins: [ Navigation ],
+  navigateAfterSomethingHappened () {
+    this.transitionTo('/users', { userId: user.id }, query);
+    // this.replaceWith('/users', { userId: user.id }, query);
+  }
+})
+
+// v1.0
+var Assignment = React.createClass({
+  mixins: [ History ],
+  navigateAfterSomethingHappened () {
+    // the router is now built on rackt/history, and it is a first class
+    // API in the router for navigating
+    this.history.pushState(null, `/users/${user.id}`, query);
+    // this.history.replaceState(null, `/users/${user.id}`, query);
+  }
+})
+```
+
+The following `Navigation` methods are now also found on the history
+object, main difference again is there are no params or route names,
+just pathnames.
+
+| v0.13                                | v1.0                          |
+|--------------------------------------|-------------------------------|
+| `go(n)`                              | `go(n)`                       |
+| `goBack()`                           | `goBack()`                    |
+| `goForward()`                        | `goForward()`                 |
+| `makeHref(routeName, params, query)` | `createHref(pathname, query)` |
+| `makePath(routeName, params, query)` | `createPath(pathname, query)` |
+
+### State mixin
+
+```js
+// v0.13.x
+var Assignment = React.createClass({
+  mixins: [ State ],
+  foo () {
+    this.getPath()
+    this.getParams()
+    // etc...
+  }
+})
+
+// v1.0
+// if you are a route component...
+<Route component={Assignment} />
+
+var Assignment = React.createClass({
+  foo () {
+    this.props.location // contains path information
+    this.props.params // contains params
+    this.props.history.isActive
+  }
+})
+
+// if you're not a route component, you need to pass location down the
+// tree or get the location from context. We will probably provide a
+// higher order component that will do this for you but haven't yet.
+// see further down for more information on what can be passed down
+// via context
+var Assignment = React.createClass({
+  contextTypes: {
+    location: React.PropTypes.object
+  },
+  foo () {
+    this.context.location
+  }
+})
+```
+
+Here's a table of where you used to get stuff with the `State` mixin,
+and where you get it now if you're a route component (`this.props`)
+
+
+| v0.13 (this)    | v1.0 (this.props)                  |
+|-----------------|------------------------------------|
+| `getPath()`     | `location.pathname+location.search` |
+| `getPathname()` | `location.pathname`                |
+| `getParams()`   | `params`                           |
+| `getQuery()`    | `location.search`                  |
+| `getRoutes()`   | `routes`                           |
+| `isActive(to, params, query)` | `history.isActive(pathname, query, onlyActiveOnIndex)` |
+
+Here is another table of properties you used to get via the `State` and 
+where you can get it now if you are **not** a route component (`this.context`).
+
+| v0.13 (this)    | v1.0 (this.context)                |
+|-----------------|------------------------------------|
+| `getPath()`     | `location.pathname+location.search`|
+| `getPathname()` | `location.pathname`                |
+| `getQuery()`    | `location.search`                  |
+| `isActive(to, params, query)` | `history.isActive(pathname, query, onlyActiveOnIndex)` |
+
+Note not all `State` functionality can be accessed via context in v1.0. 
+For example, `params` is not available via context.
+
+### Scrolling
+
+In 0.13.x we had a couple of implementations to restore scroll position,
+we've realized that we can build a better implementation on top of the
+router and will be doing that very soon, before the 1.0 final release,
+but it doesn't need to be baked into routing like it was before.
+
+### `willTransitionTo` and `willTransitionFrom`
+
+Routes now define this behavior:
+
+```js
+// v0.13.x
+var Home = React.createClass({
+  statics: {
+    willTransitionTo (transition, params, query, callback) {
+    }
+    willTransitionFrom (component, transition, params, query, callback) {
+    }
+  }
+})
+
+// v1.0
+<Route
+  component={Home}
+  onEnter={(location, replaceWith) => {}}
+  onLeave={() => {}}
+/>
+```
+
+To cancel a "transition from", please refer to the
+[Confirming Navigation](docs/guides/advanced/ConfirmingNavigation.md) guide.
+
+### We'll keep updating this
+
+There's a lot of the old API we've missed, please give the [new
+docs](/docs) a read and help us fill this guide in. Thanks!
+
+
+0.13.2 -> 0.13.3
 ----------------
+
+Like many others in the community, we misunderstood the "mixins are
+going away" sentiment. Mixins, along with `React.createClass` are not
+going away any time soon, and definitely not until ES6 classes have
+better answers to replace what mixins do (like decorators).
+
+So, don't access context, use the mixins, sorry for the churn, we know
+it can be frustrating.
+
+Upgrade path from `0.13.2` to `0.13.3` is to put your code back to how
+it was in `0.12.x`. The context stuff will still work, so you can do it
+incrementally.
+
+0.12.x -> 0.13.2 (PLEASE SKIP THIS)
+-----------------------------------
+
+**SKIP THIS UPGRADE AND GO STRAIGHT TO 0.13.3**
+
+`0.13.3` has the same API as `0.12.x`, so please upgrade to `0.13.3` and
+skip the `0.13.0-0.13.2` stuff and leave your code alone :)
 
 React introduced the ability to use ES6 classes for component
 definitions, which has the side-effect of mixins not being "the thing"
@@ -446,7 +783,7 @@ function fn() {
 
 ### `.` in params support
 
-`.` used to be a delimiter like `/`, but now its a valid character in
+`.` used to be a delimiter like `/`, but now it's a valid character in
 your params.
 
 ### `transition.retry()`
@@ -577,7 +914,7 @@ handlers) so we've removed it.
 Please don't upgrade to `0.8.0`, just skip to `0.9.x`.
 
 `0.8.0` had some transient mixins we didn't intend to document, but had
-some miscommunication :( If you were one of three people who used some
+some miscommunication :(. If you were one of three people who used some
 of these mixins and need help upgrading from `0.8.0 -> 0.9.x` find us on
 freenode in `#rackt` or open a ticket. Thanks!
 
@@ -619,7 +956,7 @@ Simply add `/` in front of all your paths to keep things working.
 </Route>
 ```
 
-Though, you may want to embrace this new feature:
+Though you may want to embrace this new feature:
 
 ```xml
 <!-- 0.5.x -->
@@ -788,4 +1125,3 @@ router.renderComponent(element);
 // 0.2.x
 React.renderComponent(routes, element);
 ```
-
