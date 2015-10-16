@@ -14,10 +14,11 @@ interface HelloWorldProps extends React.Props<any> {
 }
 class HelloMessage extends React.Component<HelloWorldProps, {}> {
     render() {
-        return <div>Hello {this.props.name}</div>;
+        return <div>Hello {this.props.name}</div>
     }
 }
 
 React.render(<HelloMessage name="John" />,    document.getElementById('example'));
+
 
 

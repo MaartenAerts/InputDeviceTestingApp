@@ -33,6 +33,18 @@ public class Researcher implements Serializable {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
+    public Researcher(String firstName, String lastName, String email, String organization, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.organization = organization;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Researcher() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -88,6 +100,7 @@ public class Researcher implements Serializable {
     public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
 
     @Override
     public boolean equals(Object o) {
