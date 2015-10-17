@@ -20,23 +20,33 @@ class HelloMessage extends React.Component<HelloWorldProps, {}>
     }
 }
 
+var Form =React.createClass({
+    mixins: [React.addons.LinkedStateMixin],
+
+    getInitialState:function()
+    {return{text: "test"};
+    },
+
+    render: function()
+    {
+
+        return<div>
+            <input type="text" value={this.linkState("text")}/>
+            {this.state.text}
+        </div>
+    }
+});
+
+React.render
+(
+    <Form/>,document.getElementById("hier")
+
+);
+
+
 React.render
 (
     <HelloMessage name="John" />,
-    document.getElementById('user')
+    document.getElementById('example')
+
 );
-
-var Frorm= React.createClass({getInitialState:function()
-{return{text: "test"};
-},
-    render: function()
-    {
-        return<input type="text" value={this.state.text} onchange={this.handleChange}/>
-    },
-
-
-
-
-
-
-})
