@@ -1,7 +1,5 @@
 /// <reference path="../typings/react/react.d.ts" />
 /// <reference path="../typings/requirejs/require.d.ts" />
-
-
 ///<amd-dependency path="../bower_components/requirejs/require" />
 
 import React = require('react')

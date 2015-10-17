@@ -3,6 +3,8 @@
 ///<amd-dependency path="../bower_components/requirejs/require" />
 
 import React = require('react')
+import ReactAddons = require('reactaddons')
+
 declare var mountNode: any;
 interface HelloWorldProps extends React.Props<any>
 {
@@ -21,7 +23,7 @@ class HelloMessage extends React.Component<HelloWorldProps, {}>
 }
 
 var Form =React.createClass({
-    mixins: [React.addons.LinkedStateMixin],
+    mixins: [ReactAddons.addons.LinkedStateMixin],
 
     getInitialState:function()
     {return{text: "test"};
@@ -31,7 +33,7 @@ var Form =React.createClass({
     {
 
         return<div>
-            <input type="text" value={this.linkState("text")}/>
+            <input type="text" valueLink={this.linkState("text")}/>
             {this.state.text}
         </div>
     }
