@@ -1,5 +1,6 @@
 package org.uantwerpen.model;
 
+import ch.qos.logback.core.joran.spi.NoAutoStart;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -19,13 +21,13 @@ import java.time.LocalDateTime;
  */
 @Entity
 @DynamicUpdate
-public class Researcher implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Researcher extends AbstractEntity implements Serializable {
+
     private String firstName;
     private String lastName;
     @Email
+    @Column(unique = true)
+    @NotNull
     private String email;
     private String organization;
     @CreatedDate
@@ -43,14 +45,6 @@ public class Researcher implements Serializable {
     }
 
     public Researcher() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -109,7 +103,7 @@ public class Researcher implements Serializable {
 
         Researcher that = (Researcher) o;
 
-        if (!getId().equals(that.getId())) return false;
+        if (getId() != (that.getId())) return false;
         if (!getFirstName().equals(that.getFirstName())) return false;
         if (!getLastName().equals(that.getLastName())) return false;
         if (!getEmail().equals(that.getEmail())) return false;
@@ -119,7 +113,9 @@ public class Researcher implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
+
+        int result = (int) (getId() ^ (getId() >>> 32));
+
         result = 31 * result + getFirstName().hashCode();
         result = 31 * result + getLastName().hashCode();
         result = 31 * result + getEmail().hashCode();

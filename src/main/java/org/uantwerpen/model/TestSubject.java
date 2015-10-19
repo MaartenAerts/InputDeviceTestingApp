@@ -13,9 +13,7 @@ import java.util.Date;
 @Entity
 @DynamicUpdate
 //@DynamicInsert //Is dit Nodig????
-public class TestSubject {
-    @Id
-    Integer id;
+public class TestSubject extends AbstractEntity {
 
     String firstname;
     String lastname;
