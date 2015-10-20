@@ -1,11 +1,13 @@
-
-
 /// <reference path="../typings/react/react.d.ts" />
 /// <reference path="../typings/requirejs/require.d.ts" />
-///<amd-dependency path="../bower_components/requirejs/require" />
+///<reference path="../typings/react-dom/react-dom.d.ts"/>
 
 import React = require('react')
 
+
+
+import * as React from 'react'
+import * as ReactDom from 'react-dom'
 class Test extends React.Component {
     constructor(props) {
         super(props);
@@ -116,6 +118,7 @@ class Test extends React.Component {
         </svg>;
     }
 
+ReactDom.render(<HelloMessage name="John" />,    document.getElementById('example'));
     renderBigCircle(cxBigCirle, cyBigCircle, radiusBigCircle, strokewidthBigCircle) {
         return <circle cx={cxBigCirle} cy={cyBigCircle} r={radiusBigCircle-10} fill="#ccffff" stroke="black" strokeWidth={"1"}/>;
     }
@@ -126,7 +129,7 @@ class Test extends React.Component {
 
 }
 
-    React.render(
+ReactDom.render(
         <Test width="900" height="600" />,
         document.getElementById('canvas_for_test')
     );

@@ -1,9 +1,9 @@
 /// <reference path="../typings/react/react.d.ts" />
-/// <reference path="../typings/requirejs/require.d.ts" />
-///<amd-dependency path="../bower_components/requirejs/require" />
+///<reference path="../typings/react-dom/react-dom.d.ts"/>
 
-import React = require('react')
-import ReactAddons = require('reactaddons')
+import * as React from 'react'
+import * as ReactAddons from 'react-with-addons'
+import * as ReactDom from 'react-dom'
 
 declare var mountNode: any;
 interface HelloWorldProps extends React.Props<any>
@@ -39,16 +39,17 @@ var Form =React.createClass({
     }
 });
 
-React.render
+ReactDom.render
 (
     <Form/>,document.getElementById("hier")
 
 );
 
 
-React.render
+ReactDom.render
 (
     <HelloMessage name="John" />,
     document.getElementById('example')
 
 );
+

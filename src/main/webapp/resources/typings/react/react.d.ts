@@ -806,7 +806,7 @@ declare module "react" {
     export = __React;
 }
 
-declare module "react/addons" {
+declare module "react-with-addons" {
     //
     // React Elements
     // ----------------------------------------------------------------------
