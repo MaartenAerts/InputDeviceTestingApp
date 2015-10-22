@@ -1,6 +1,5 @@
-package org.uantwerpen.model;
+package InputDeviceTesting.uantwerpen.model;
 
-import ch.qos.logback.core.joran.spi.NoAutoStart;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,8 +19,13 @@ import java.time.LocalDateTime;
  * Created by TooLate on 3/10/2015.
  */
 @Entity
-@DynamicUpdate
-public class Researcher extends AbstractEntity implements Serializable {
+public class Researcher  implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private long  id;
+
 
     private String firstName;
     private String lastName;
@@ -47,6 +51,14 @@ public class Researcher extends AbstractEntity implements Serializable {
     public Researcher() {
     }
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     public String getFirstName() {
         return firstName;
     }

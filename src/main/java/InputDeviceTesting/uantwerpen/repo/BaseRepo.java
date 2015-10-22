@@ -1,10 +1,8 @@
-package org.uantwerpen.repo;
+package InputDeviceTesting.uantwerpen.repo;
 
 import org.springframework.data.repository.Repository;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by TooLate on 10/10/2015.

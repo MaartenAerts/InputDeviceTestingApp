@@ -1,4 +1,4 @@
-package org.uantwerpen.service.Interface;
+package InputDeviceTesting.uantwerpen.service.Interface;
 
 import org.springframework.stereotype.Service;
 

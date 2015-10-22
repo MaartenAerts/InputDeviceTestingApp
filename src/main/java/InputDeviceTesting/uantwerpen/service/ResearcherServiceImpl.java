@@ -1,9 +1,9 @@
-package org.uantwerpen.service;
+package InputDeviceTesting.uantwerpen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.uantwerpen.model.Researcher;
-import org.uantwerpen.repo.ResearcherRepo;
-import org.uantwerpen.service.Interface.ResearcherService;
+import InputDeviceTesting.uantwerpen.model.Researcher;
+import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
+import InputDeviceTesting.uantwerpen.service.Interface.ResearcherService;
 
 /**
  * Created by TooLate on 10/10/2015.

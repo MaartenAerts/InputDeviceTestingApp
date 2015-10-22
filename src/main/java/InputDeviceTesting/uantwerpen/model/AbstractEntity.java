@@ -1,4 +1,4 @@
-package org.uantwerpen.model;
+package InputDeviceTesting.uantwerpen.model;
 
 import org.springframework.data.annotation.Id;
 
