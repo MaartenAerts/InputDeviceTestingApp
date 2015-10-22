@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
+define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (require, exports, React, ReactDom) {
     var aantalCirkels = 5;
     var xCircleArray = new Array();
     var yCircleArray = new Array();

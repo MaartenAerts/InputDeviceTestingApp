@@ -3,6 +3,7 @@
 
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
+import 'testjoris'
 
 var aantalCirkels = 5;
 var xCircleArray = new Array();

@@ -88,10 +88,10 @@ Actions
 ```
 var userActions = ReactFlux.createActions({
 	
-	login: [userConstants.LOGIN, function loginAction(username, password){
+	login: [userConstants.LOGIN, function loginAction(userName, password){
 		return {
 			id: 1,
-			username: 'Max Mustermann'
+			userName: 'Max Mustermann'
 		}
 	}]
 	
@@ -274,7 +274,7 @@ UserStore.addActionHandler(constants.SAVE_NEW_USERNAME, {
 		
 		//here we set the state of parent store(UserStore) using this.parent.setState
 		this.parent.setState({
-			username: payload.username
+			userName: payload.userName
 		});
 	},
 	
@@ -381,7 +381,7 @@ var LoginComponent = React.createClass({
 	renderLogout: function(){
 		return(
 			<div>
-			Hello {this.state.user.get('data').username}!
+			Hello {this.state.user.get('data').userName}!
 			<a href="#" onClick={this.logout}>Logout</a>
 			</div>
 		);
