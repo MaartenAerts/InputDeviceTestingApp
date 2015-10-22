@@ -4,6 +4,14 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 
+var aantalCirkels = 5;
+var xCircleArray = new Array();
+var yCircleArray = new Array();
+var IdArray = new Array();
+
+var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
+var radius = radiusBigCircle/10;
+
 class Test extends React.Component<propke,stateje>
 {
     constructor(props) {
@@ -16,37 +24,22 @@ class Test extends React.Component<propke,stateje>
     }
 
     render() {
-        let radiusBigCircle = Math.min(this.props.width, this.props.height) / 2.5;
-        let strokeWidthBigCircle = radiusBigCircle / 50;
-        let cxBigCircle = this.props.width / 2;
-        let cyBigCircle = this.props.height / 2;
 
-        /*   var circles = new Array();
-         var circle = function(id, x, y, radius) {
-         this.left = x - radius;
-         this.top = y - radius;
-         this.right = x + radius;
-         this.bottom = y + radius;
-         };*/
+        var strokeWidthBigCircle = radiusBigCircle / 50;
+        var cxBigCircle = this.props.width / 2;
+        var cyBigCircle = this.props.height / 2;
 
-        let radius = radiusBigCircle/10;
+        var graden = 360/aantalCirkels;
 
-        let aantalCirkels = 15;
-        let graden = 360/aantalCirkels;
-        let xCircleArray = new Array();
-        let yCircleArray = new Array();
+        var tellerVoorHelft = 0;
+        var tellerNaHelft = 0;
+        var circleID = 0;
 
-        let tellerVoorHelft = 0;
-        let tellerNaHelft = 0;
-        let circleID = 0;
-        let IdArray = new Array();
 
         for(var i = 1; i <= aantalCirkels;i++) {
             let radian = (graden * (i - 1)) * (Math.PI / 180);
             xCircleArray[i] = radiusBigCircle * Math.cos(radian) + cxBigCircle;
             yCircleArray[i] = radiusBigCircle * Math.sin(radian) + cyBigCircle;
-            // let xCircle = radiusBigCircle * Math.cos(radian) + cxBigCircle;
-            // let yCircle = radiusBigCircle * Math.sin(radian) + cyBigCircle;
 
             if (i <= ((aantalCirkels + 1) / 2)) {
                 circleID = tellerVoorHelft + 1;
@@ -56,26 +49,10 @@ class Test extends React.Component<propke,stateje>
                 tellerNaHelft += 2;
             }
             IdArray[i] = circleID;
-
-            /*     var circle = new circle(circleID,xCircle,yCircle,radius);
-             circles.push(circle);
-             circles[i].Id = circleID;
-             }
-
-             {this.renderCircle(circles[1].id, circles[1].x, circles[1].y,radius,strokeWidthBigCircle)}
-             */
         }
 
-        var clickedX = event.pageX;
-        var clickedY = event.pageY;
+        return  <svg ref="svg" {...this.props} onMouseMove={this.handleMouseMove.bind(this)} onMouseDown={this.handleMouseClick.bind(this)}>
 
-        for (var i = 1; i < 15+1; i++) {
-            if (clickedX < xCircleArray[i]+radius){ //&& clickedX > xCircleArray[i]-radius && clickedY > yCircleArray[i]-radius && clickedY < yCircleArray[i]+radius) {
-                alert ('clicked number ' + (i));
-            }
-        }
-
-        return <svg ref="svg" {...this.props} onMouseMove={this.handleMouseMove.bind(this)}>
             {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle,strokeWidthBigCircle)}
             {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius,strokeWidthBigCircle)}
             {this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2],radius,strokeWidthBigCircle)}
@@ -111,20 +88,49 @@ class Test extends React.Component<propke,stateje>
     }
 
     renderCircle(id, cx, cy, radius, strokewidth) {
-        /*var circle = function() {
-         this.left = cx - radius;
-         this.top =  cy - radius;
-         this.right = cx + radius;
-         this.bottom = cy + radius;
-         }*/
-        //  circles.push(circle());
-        return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth={strokewidth} />;
+        if (id==1){
+            return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth={strokewidth} />; //{this.handleMouseClick.bind(this)}/>;
+
+        }
+        return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth={strokewidth} />; //{this.handleMouseClick.bind(this)}/>;
     }
 
-    /*updateCircle(id, cx,cy,radius, strokewidth, color) {
-     return <circle id={id} cx={cx} cy={cy} r={radius} fill={color} stroke="black" strokeWidth={strokewidth} />;
-     }*/
+  /*  renderIdList(id){
+        return <input type="text" value={id} >
+    }*/
 
+    handleMouseClick(e){
+        //aangeklikte bol groen kleuren
+        e.target.setAttribute('fill','yellow');
+
+        //volgende aan te klikken bol kleuren
+      //  var IdVolgendeCirkel = e.target.getAttribute('id');
+var id = parseInt(e.target.id)
+        if(id==aantalCirkels){
+
+            alert('trolololo')
+        }
+        document.getElementById((id +1).toString()).setAttribute('fill','green');
+
+
+        //document.getElementById((aanTeKlikkenCirkel+1).toString()).setAttribute(('fill', 'green'));
+        /*if(aanTeKlikkenCirkel<aantalCirkels) {
+            aanTeKlikkenCirkel += 1;
+        } else {
+            alert('gedaan!');
+        }
+*/
+        // var clickedX = e.pageX; //- pageXOffset;
+        // var clickedY = e.pageY; //- pageYOffset;
+        /*
+        for (var i = 1; i < aantalCirkels+1; i++) {
+            if (clickedX < xCircleArray[i]+radius && clickedX > yCircleArray[i]-radius && clickedY > yCircleArray[i]-radius && clickedY < yCircleArray[i]+radius){ //&& clickedX > xCircleArray[i]-radius && clickedY > yCircleArray[i]-radius && clickedY < yCircleArray[i]+radius) {
+                document.getElementById(IdArray[i]).setAttribute('fill','yellow');
+
+                //alert ('clicked number ' + (i));
+            }
+        }*/
+    }
 
     handleMouseMove (event) {
         // let svg = React.findDOMNode(this.refs.svg);
@@ -144,11 +150,11 @@ class Test extends React.Component<propke,stateje>
     }
 
 }
+
+
 ReactDom.render(
     <Test width="900" height="600" />,
     document.getElementById('canvas_for_test')
-
-
 );
 
 
