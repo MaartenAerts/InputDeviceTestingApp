@@ -5,13 +5,16 @@ import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'testjoris'
 
-var aantalCirkels = 5;
+var aantalCirkels = 10;
 var xCircleArray = new Array();
 var yCircleArray = new Array();
 var IdArray = new Array();
 
 var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
 var radius = radiusBigCircle/10;
+
+var id = 1;
+var idVolgende = 1;
 
 class Test extends React.Component<propke,stateje>
 {
@@ -52,7 +55,8 @@ class Test extends React.Component<propke,stateje>
             IdArray[i] = circleID;
         }
 
-        return  <svg ref="svg" {...this.props} onMouseMove={this.handleMouseMove.bind(this)} onMouseDown={this.handleMouseClick.bind(this)}>
+        //onMouseMove={this.handleMouseMove.bind(this)}
+        return  <svg ref="svg" {...this.props} onMouseDown={this.handleMouseClick.bind(this)}>
 
             {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle,strokeWidthBigCircle)}
             {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius,strokeWidthBigCircle)}
@@ -90,66 +94,36 @@ class Test extends React.Component<propke,stateje>
 
     renderCircle(id, cx, cy, radius, strokewidth) {
         if (id==1){
-            return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth={strokewidth} />; //{this.handleMouseClick.bind(this)}/>;
+            return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth={strokewidth} />;
 
         }
-        return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth={strokewidth} />; //{this.handleMouseClick.bind(this)}/>;
+        return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth={strokewidth} />;
     }
-
-  /*  renderIdList(id){
-        return <input type="text" value={id} >
-    }*/
 
     handleMouseClick(e){
-        //aangeklikte bol groen kleuren
-        e.target.setAttribute('fill','yellow');
 
-        //volgende aan te klikken bol kleuren
-      //  var IdVolgendeCirkel = e.target.getAttribute('id');
-var id = parseInt(e.target.id)
-        if(id==aantalCirkels){
 
-            alert('trolololo')
+        //kijken of de test voltooid is
+        id = parseInt(e.target.id)
+        if(id == aantalCirkels){
+
+            alert('De test is gedaan!')
         }
-        document.getElementById((id +1).toString()).setAttribute('fill','green');
 
-
-        //document.getElementById((aanTeKlikkenCirkel+1).toString()).setAttribute(('fill', 'green'));
-        /*if(aanTeKlikkenCirkel<aantalCirkels) {
-            aanTeKlikkenCirkel += 1;
-        } else {
-            alert('gedaan!');
+        //aangeklikte bol geel kleuren
+        //volgende aan te klikken bol groen kleuren
+        //kijken of je op de juiste bol klikt, anders is dit een fout
+        if (id == idVolgende) {
+            e.target.setAttribute('fill','yellow');
+            document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
+            idVolgende++;
+        } else if (id < idVolgende) {
+            alert('Eerder aangeklikte cirkel!')
+        } else if (id > idVolgende) {
+            alert('Klik eerst op de groene cirkel, deze is te vroeg!')
         }
-*/
-        // var clickedX = e.pageX; //- pageXOffset;
-        // var clickedY = e.pageY; //- pageYOffset;
-        /*
-        for (var i = 1; i < aantalCirkels+1; i++) {
-            if (clickedX < xCircleArray[i]+radius && clickedX > yCircleArray[i]-radius && clickedY > yCircleArray[i]-radius && clickedY < yCircleArray[i]+radius){ //&& clickedX > xCircleArray[i]-radius && clickedY > yCircleArray[i]-radius && clickedY < yCircleArray[i]+radius) {
-                document.getElementById(IdArray[i]).setAttribute('fill','yellow');
 
-                //alert ('clicked number ' + (i));
-            }
-        }*/
     }
-
-    handleMouseMove (event) {
-        // let svg = React.findDOMNode(this.refs.svg);
-        //   let rect = svg.getBoundingClientRect();
-        /* this.setState({
-         x: event.clientX,
-         y: event.clientY
-         });*/
-
-
-
-        /*    let clickedX, clickedY;
-         onclick(function(e){
-         clickedX = this.state.x;
-         clickedY = this.state.y;
-         });*/
-    }
-
 }
 
 
