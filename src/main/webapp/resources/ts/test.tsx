@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-
+import 'testjoris'
 class Test extends React.Component<propke,stateje>
 {
     constructor(props) {

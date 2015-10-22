@@ -1,43 +1,56 @@
 package InputDeviceTesting.uantwerpen.model;
 
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by TooLate on 3/10/2015.
  */
 @Entity
-public class Researcher  implements Serializable {
+public class Researcher extends AbstractPersistable<Long> implements Serializable {
 
-    @Id
+   /* @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private long  id;
+    private long  id;*/
 
 
     private String firstName;
+    @NotNull
     private String lastName;
     @Email
-    @Column(unique = true)
-    @NotNull
+    //@Column(unique = true)
+    //@NotNull
     private String email;
     private String organization;
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    private String userName;
+    private String password;
+
+    //@ManyToMany
+    @JoinTable(
+            name = "USER_ROLE",
+            joinColumns = {@JoinColumn(name = "USER_ID",
+                                        referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",
+                                                referencedColumnName = "ID")}
+    )
+    private ArrayList<Role> roles;
+
 
     public Researcher(String firstName, String lastName, String email, String organization, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.firstName = firstName;
@@ -52,13 +65,13 @@ public class Researcher  implements Serializable {
     }
 
 
-    public long getId() {
+    /*public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
+    }*/
     public String getFirstName() {
         return firstName;
     }
@@ -107,6 +120,29 @@ public class Researcher  implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = (ArrayList<Role>) roles;
+    }
 
     @Override
     public boolean equals(Object o) {
