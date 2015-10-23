@@ -3,11 +3,9 @@ package InputDeviceTesting.uantwerpen.model;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.Set;
  * Created by TooLate on 3/10/2015.
  */
 @Entity
-public class Researcher extends AbstractPersistable<Long> implements Serializable {
+public class Researcher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,13 +64,13 @@ public class Researcher extends AbstractPersistable<Long> implements Serializabl
         this.modifiedDate = modifiedDate;
     }
 
-    /*public long getId() {
+    public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }*/
+    }
     public String getFirstName() {
         return firstName;
     }

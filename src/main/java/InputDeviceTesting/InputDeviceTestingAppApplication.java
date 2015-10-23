@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan("InputDeviceTesting.uantwerpen.model")
-@EnableJpaRepositories//    (basePackages = "InputDeviceTesting.uantwerpen.repo")
-@EntityScan(basePackages = " InputDeviceTesting.uantwerpen.model")
+//@EnableJpaRepositories//    (basePackages = "InputDeviceTesting.uantwerpen.repo")
+//@EntityScan(basePackages = " InputDeviceTesting.uantwerpen.model")
 public class InputDeviceTestingAppApplication {
 
     public static void main(String[] args) {
