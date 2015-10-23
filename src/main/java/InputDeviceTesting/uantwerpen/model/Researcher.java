@@ -55,6 +55,11 @@ public class Researcher {
     public Researcher() {
     }
 
+    public Researcher(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Researcher(String firstName, String lastName, String email, String organization, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.firstName = firstName;
         this.lastName = lastName;
