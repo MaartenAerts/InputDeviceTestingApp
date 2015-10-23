@@ -17,5 +17,5 @@ import java.util.List;
 @RepositoryRestResource
 public interface ResearcherRepo extends CrudRepository<Researcher,Long> {
     List<Researcher> findByLastName(@Param("lastName") String lastName);
-    Researcher findByUserName(String username);
+    Researcher findByUserName(@Param("userName")String username);
 }
