@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -19,10 +20,9 @@ import java.util.List;
 @Entity
 public class Researcher extends AbstractPersistable<Long> implements Serializable {
 
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private long  id;*/
+    private long  id;
 
 
     private String firstName;
@@ -42,15 +42,20 @@ public class Researcher extends AbstractPersistable<Long> implements Serializabl
     private String password;
 
     //@ManyToMany
-    @JoinTable(
+    /*@JoinTable(
             name = "USER_ROLE",
             joinColumns = {@JoinColumn(name = "USER_ID",
                                         referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",
                                                 referencedColumnName = "ID")}
-    )
-    private ArrayList<Role> roles;
+    )*/
 
+    @OneToMany(mappedBy = "researcher")
+    private Set<Role> roles;
+
+
+    public Researcher() {
+    }
 
     public Researcher(String firstName, String lastName, String email, String organization, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.firstName = firstName;
@@ -60,10 +65,6 @@ public class Researcher extends AbstractPersistable<Long> implements Serializabl
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }
-
-    public Researcher() {
-    }
-
 
     /*public long getId() {
         return id;
@@ -136,12 +137,12 @@ public class Researcher extends AbstractPersistable<Long> implements Serializabl
         this.password = password;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = (ArrayList<Role>) roles;
+    public void setRoles(Set<Role> roles) {
+        this.roles =  roles;
     }
 
     @Override

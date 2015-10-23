@@ -15,7 +15,7 @@ import java.util.List;
  * Created by TooLate on 10/10/2015.
  */
 @RepositoryRestResource
-public interface ResearcherRepo extends JpaRepository<Researcher,Long> {
+public interface ResearcherRepo extends CrudRepository<Researcher,Long> {
     List<Researcher> findByLastName(@Param("lastName") String lastName);
     Researcher findByUserName(String username);
 }
