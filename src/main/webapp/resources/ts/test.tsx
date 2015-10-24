@@ -19,6 +19,7 @@ var idVolgende = 1;
 var startTime = 0;
 var endTime = 0;
 var timeSeconds = 0;
+var timeGemiddelde = 0;
 var errorArray = new Array();
 var opTeHalenCirkelId = 0;
 var xWaardeGeklikt = 0;
@@ -139,6 +140,8 @@ class Test extends React.Component<propke,stateje>
         endTime = Date.now();
         timeSeconds = (endTime-startTime)/1000;
         alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
+        timeGemiddelde = timeSeconds/aantalCirkels;
+        alert('Dus time per trial: ' + timeGemiddelde)
       //  alert('Lengte errorArray: ' + errorArray.length.toString());
         alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10])
         //standard deviation berekenen
@@ -162,14 +165,26 @@ class Test extends React.Component<propke,stateje>
         alert('Standaardafwijking: ' + standardDeviation);      // OP TE LOSSEN: de laatste cirkel aanklikken zit er precies altijd iets naast, waardoor er altijd een standaardafwijking is..
         var we = 4.133 * standardDeviation;
         alert('We: ' + we);
-        if (we != 0) {
-            var ide = Math.log2((radiusBigCircle - radius) / we);
-        } else {
-            var ide = Math.log2((radiusBigCircle - radius) / 1);
+        var ae = 0;
+        var xAfstand = 0;
+        var yAfstand = 0;
+        var afTeLeggenAfstand = 0;
+        for(var k=1;k<=errorArray.length-2;k++) {
+            //pythagoras om de afstanden tussen 2 cirkels te berekenen
+            xAfstand = Math.abs(xCircleArray[opTeHalenCirkelId+1] - xCircleArray[opTeHalenCirkelId]);
+            yAfstand = Math.abs(yCircleArray[opTeHalenCirkelId+1] - yCircleArray[opTeHalenCirkelId]);
+
+            afTeLeggenAfstand += Math.sqrt(Math.pow(xAfstand,2) + Math.pow(yAfstand,2)) - radius;
         }
-        alert('Ide: ' + ide);
-        var throughput = ide/timeSeconds;
-        alert('Throughput: ' + throughput + "bits/s\n Aantal Errors: " + aantalErrors);
+        ae =  afTeLeggenAfstand/(aantalCirkels-1);
+        if (we != 0) {
+            var ide = Math.log(ae/we) / Math.LN2;
+        } else {
+            var ide = Math.log(ae/1) / Math.LN2;
+        }
+        alert('Ide: ' + ae);
+        var throughput = ide/timeGemiddelde;
+        alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
 
     }
 
