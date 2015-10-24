@@ -69,6 +69,61 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
             }
             return React.createElement("circle", {"id": id, "cx": cx, "cy": cy, r: radius, "fill": "red", "stroke": "black", "strokeWidth": strokewidth});
         };
+        Test.prototype.berekenVerschilCoördinaten = function (e) {
+            // met pythagoras waarde dat ernaast geklikt is berekenen
+            // coördinaten waar geklikt is ophalen
+            xWaardeGeklikt = e.pageX;
+            yWaardeGeklikt = e.pageY;
+            // juiste circleID ophalen om de positie van de juiste cirkel op te halen, want de cirkels worden anders gegenereerd dan ze ID's krijgen
+            // omgekeerd denken, waar is IdArray = 2? => gefoefel door die ID's
+            for (var i = 1; i <= IdArray.length; i++) {
+                if (IdArray[i] == idVolgende) {
+                    opTeHalenCirkelId = i;
+                }
+            }
+            // pythagoras
+            xWaardeVerschil = (Math.abs(xCircleArray[opTeHalenCirkelId] - xWaardeGeklikt)) - (radius / 2);
+            yWaardeVerschil = (Math.abs(yCircleArray[opTeHalenCirkelId] - yWaardeGeklikt)) - (radius / 2);
+            errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil, 2) + Math.pow(yWaardeVerschil, 2));
+            errorArray[idVolgende] = errorWaarde;
+        };
+        Test.prototype.berekenEindResultatenTest = function () {
+            // test afsluiten en alles berekenen
+            endTime = Date.now();
+            timeSeconds = (endTime - startTime) / 1000;
+            alert('De test werd afgelegd op ' + timeSeconds + ' seconden');
+            //  alert('Lengte errorArray: ' + errorArray.length.toString());
+            alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10]);
+            //standard deviation berekenen
+            var sum = 0;
+            var average = 0;
+            var verschil = 0;
+            var variantieTemp = 0;
+            var variantie = 0;
+            // errorArray.length -1 omdat de lengte altijd +1 meer is omdat die van 0 telt, en wij steken er van plaats 1 pas iets in
+            for (var i = 1; i <= errorArray.length - 1; i++) {
+                sum += parseInt(errorArray[i]);
+            }
+            average = sum / (errorArray.length - 1);
+            for (var j = 1; j <= errorArray.length - 1; j++) {
+                verschil = parseInt(errorArray[j]) - average;
+                variantieTemp += Math.pow(verschil, 2);
+            }
+            variantie = variantieTemp / (errorArray.length - 1);
+            standardDeviation = Math.sqrt(variantie);
+            alert('Standaardafwijking: ' + standardDeviation); // OP TE LOSSEN: de laatste cirkel aanklikken zit er precies altijd iets naast, waardoor er altijd een standaardafwijking is..
+            var we = 4.133 * standardDeviation;
+            alert('We: ' + we);
+            if (we != 0) {
+                var ide = Math.log2((radiusBigCircle - radius) / we);
+            }
+            else {
+                var ide = Math.log2((radiusBigCircle - radius) / 1);
+            }
+            alert('Ide: ' + ide);
+            var throughput = ide / timeSeconds;
+            alert('Throughput: ' + throughput + "bits/s\n Aantal Errors: " + aantalErrors);
+        };
         Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT
             //kijken of de test voltooid is
@@ -100,81 +155,36 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
                 startTime = Date.now();
                 alert('Test is gestart');
             }
-            if (id == aantalCirkels && idVolgende == aantalCirkels) {
-                // voor die laatste cirkel ook de error berekenen voor als er naast geklikt wordt, anders gebeurt dit niet!
-                xWaardeGeklikt = e.pageX;
-                yWaardeGeklikt = e.pageY;
-                // juiste circleID ophalen om de positie van de juiste cirkel op te halen, want de cirkels worden anders gegenereerd dan ze ID's krijgen
-                // omgekeerd denken, waar is IdArray = 2? => gefoefel door die ID's
-                for (var i = 1; i <= IdArray.length; i++) {
-                    if (IdArray[i] == idVolgende) {
-                        opTeHalenCirkelId = i;
-                    }
+            // || idVolgende == aantalCirkels dient voor als je fout klikt bij de laatste cirkel, dat de test toch wordt afgesloten
+            if ((id == aantalCirkels && idVolgende == aantalCirkels) || idVolgende == aantalCirkels) {
+                //werd er op de laatste niet geklikt?
+                if (id != aantalCirkels) {
+                    aantalErrors++;
                 }
-                // pythagoras
-                xWaardeVerschil = (Math.abs(xCircleArray[opTeHalenCirkelId] - xWaardeGeklikt)) - (radius / 2);
-                yWaardeVerschil = (Math.abs(yCircleArray[opTeHalenCirkelId] - yWaardeGeklikt)) - (radius / 2);
-                errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil, 2) + Math.pow(yWaardeVerschil, 2));
-                errorArray[idVolgende] = errorWaarde;
-                // test afsluiten en alles berekenen
-                endTime = Date.now();
-                timeSeconds = (endTime - startTime) / 1000;
-                alert('De test werd afgelegd op ' + timeSeconds + ' seconden');
-                //alert('Grootte errorArray: ' + errorArray.length);
-                //alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10])
-                //standard deviation berekenen
-                var sum = 0;
-                var average = 0;
-                var verschil = 0;
-                var variantieTemp = 0;
-                var variantie = 0;
-                for (var i = 1; i <= errorArray.length - 1; i++) {
-                    sum += parseInt(errorArray[i]);
+                this.berekenVerschilCoördinaten(e);
+                //gefoefel ivm de errorwaarde van de laatste cirkel
+                // deze kreeg ander altijd een waarde, ookal werd er op geklikt
+                if (id == aantalCirkels) {
+                    errorArray[id] = 0;
                 }
-                average = sum / (errorArray.length - 1);
-                for (var j = 1; j <= errorArray.length - 1; j++) {
-                    verschil = parseInt(errorArray[j]) - average;
-                    variantieTemp += Math.pow(verschil, 2);
-                }
-                variantie = variantieTemp / (errorArray.length - 1);
-                standardDeviation = Math.sqrt(variantie);
-                alert('Standaardafwijking: ' + standardDeviation); // OP TE LOSSEN: de laatste cirkel aanklikken zit er precies altijd iets naast, waardoor er altijd een standaardafwijking is..
-                var we = 4.133 * standardDeviation;
-                alert('We: ' + we);
-                var ide = Math.log2((radiusBigCircle + we) / we);
-                alert('Ide: ' + ide);
-                var throughput = ide / timeSeconds;
-                alert('Throughput: ' + throughput + "\n Aantal Errors: " + aantalErrors);
+                this.berekenEindResultatenTest();
             }
-            //aangeklikte bol geel kleuren
-            //volgende aan te klikken bol groen kleuren
+            // deze if staat laatst omdat ander bij het aanklikken van de laatste bol de test niet wordt afgesloten
             //kijken of je op de juiste bol klikt, anders is dit een fout
             if (id == idVolgende) {
                 e.target.setAttribute('fill', 'yellow');
+                //volgende aan te klikken bol groen kleuren
                 document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
                 //errorArray vullen met 0, want er is juist geklikt
                 errorArray[id] = 0;
             }
-            else {
+            else if (idVolgende != aantalCirkels) {
                 alert('Fout geklikt');
+                // de niet aangeklikte bol terug rood kleuren
                 document.getElementById((idVolgende).toString()).setAttribute('fill', 'red');
+                // volgende aan te klikken bol groen kleuren
                 document.getElementById((idVolgende + 1).toString()).setAttribute('fill', 'green');
-                // met pythagoras waarde dat ernaast geklikt is berekenen
-                // coördinaten waar geklikt is ophalen
-                xWaardeGeklikt = e.pageX;
-                yWaardeGeklikt = e.pageY;
-                // juiste circleID ophalen om de positie van de juiste cirkel op te halen, want de cirkels worden anders gegenereerd dan ze ID's krijgen
-                // omgekeerd denken, waar is IdArray = 2? => gefoefel door die ID's
-                for (var i = 1; i <= IdArray.length; i++) {
-                    if (IdArray[i] == idVolgende) {
-                        opTeHalenCirkelId = i;
-                    }
-                }
-                // pythagoras
-                xWaardeVerschil = (Math.abs(xCircleArray[opTeHalenCirkelId] - xWaardeGeklikt)) - (radius / 2);
-                yWaardeVerschil = (Math.abs(yCircleArray[opTeHalenCirkelId] - yWaardeGeklikt)) - (radius / 2);
-                errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil, 2) + Math.pow(yWaardeVerschil, 2));
-                errorArray[idVolgende] = errorWaarde;
+                this.berekenVerschilCoördinaten(e);
                 aantalErrors++;
             }
             idVolgende++;
