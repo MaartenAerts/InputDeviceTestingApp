@@ -32,6 +32,7 @@ var standardDeviation = 0;
 
 var aantalErrors = 0;
 
+
 class Test extends React.Component<propke,stateje>
 {
     constructor(props) {
@@ -54,7 +55,6 @@ class Test extends React.Component<propke,stateje>
         var tellerVoorHelft = 0;
         var tellerNaHelft = 0;
         var circleID = 0;
-
 
         for(var i = 1; i <= aantalCirkels;i++) {
             let radian = (graden * (i - 1)) * (Math.PI / 180);

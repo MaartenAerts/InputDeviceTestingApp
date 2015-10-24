@@ -11,7 +11,6 @@ interface HelloWorldProps extends React.Props<any>
     name: string;
 }
 
-
 class HelloMessage extends React.Component<HelloWorldProps, {}>
 {
     render()
