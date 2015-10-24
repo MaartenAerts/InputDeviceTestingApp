@@ -35,7 +35,7 @@ public class Researcher implements Serializable {
     private String lastName;
     @Email
     //@Column(unique = true)
-    //@NotNull
+    @NotNull
     private String email;
     private String organization;
     @CreatedDate
