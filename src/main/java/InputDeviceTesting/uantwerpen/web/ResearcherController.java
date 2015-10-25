@@ -27,7 +27,7 @@ public class ResearcherController  implements Serializable{
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Researcher> findAll(){
-        return (repo.findAll();
+        return (repo.findAll());
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -35,7 +35,7 @@ public class ResearcherController  implements Serializable{
         return repo.save(researcher);
     }
 
-    @RequestMapping("/hello/",method=RequestMethod.GET)
+    @RequestMapping(value = "/hello/",method=RequestMethod.GET)
     public String hello(){
         return "YOLO";
     }

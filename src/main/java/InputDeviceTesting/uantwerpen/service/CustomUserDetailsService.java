@@ -1,17 +1,17 @@
 package InputDeviceTesting.uantwerpen.service;
 
-import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.model.Researcher;
+import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,9 +23,9 @@ import java.util.Set;
  * Created by Niels on 23/10/2015.
  */
 //@Qualifier("ResearcherService")
-@Configurable
+//@Configurable
 @Service
-public class CustomUserDetailsService implements UserDetailsService, Serializable {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private ResearcherRepo researcherRepo;
