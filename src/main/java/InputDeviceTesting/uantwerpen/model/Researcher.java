@@ -1,42 +1,42 @@
 package InputDeviceTesting.uantwerpen.model;
 
+import lombok.Singular;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 
 /**
  * Created by TooLate on 3/10/2015.
  */
+
 @Entity
-public class Researcher {
+public class Researcher implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long  id;
-
+    private long id;
 
     private String firstName;
-    @NotNull
     private String lastName;
-    @Email
-    //@Column(unique = true)
-    //@NotNull
-    private String email;
+
     private String organization;
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
-    private String userName;
+    @Email
+    @NotNull
+    @Column(unique = true)
+    private String email;
+    @NotNull
     private String password;
 
     //@ManyToMany
@@ -47,26 +47,16 @@ public class Researcher {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",
                                                 referencedColumnName = "ID")}
     )*/
-
     @OneToMany(mappedBy = "researcher")
+    @Singular
     private Set<Role> roles;
 
-
     public Researcher() {
-    }
 
-    public Researcher(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
-
-    public Researcher(String firstName, String lastName, String email, String organization, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.organization = organization;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+    public Researcher(String email, String password) {
+        this.email=email;
+        this.password=password;
     }
 
     public long getId() {
@@ -76,6 +66,7 @@ public class Researcher {
     public void setId(long id) {
         this.id = id;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -90,14 +81,6 @@ public class Researcher {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getOrganization() {
@@ -124,12 +107,12 @@ public class Researcher {
         this.modifiedDate = modifiedDate;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -145,7 +128,7 @@ public class Researcher {
     }
 
     public void setRoles(Set<Role> roles) {
-        this.roles =  roles;
+        this.roles = roles;
     }
 
     @Override
@@ -155,23 +138,34 @@ public class Researcher {
 
         Researcher that = (Researcher) o;
 
-        if (getId() != (that.getId())) return false;
-        if (!getFirstName().equals(that.getFirstName())) return false;
-        if (!getLastName().equals(that.getLastName())) return false;
+        if (getId() != that.getId()) return false;
+        if (getFirstName() != null ? !getFirstName().equals(that.getFirstName()) : that.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(that.getLastName()) : that.getLastName() != null)
+            return false;
+        if (getOrganization() != null ? !getOrganization().equals(that.getOrganization()) : that.getOrganization() != null)
+            return false;
+        if (getCreatedDate() != null ? !getCreatedDate().equals(that.getCreatedDate()) : that.getCreatedDate() != null)
+            return false;
+        if (getModifiedDate() != null ? !getModifiedDate().equals(that.getModifiedDate()) : that.getModifiedDate() != null)
+            return false;
         if (!getEmail().equals(that.getEmail())) return false;
-        return getOrganization().equals(that.getOrganization());
+        if (!getPassword().equals(that.getPassword())) return false;
+        return !(getRoles() != null ? !getRoles().equals(that.getRoles()) : that.getRoles() != null);
 
     }
 
     @Override
     public int hashCode() {
-
         int result = (int) (getId() ^ (getId() >>> 32));
-
-        result = 31 * result + getFirstName().hashCode();
-        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getOrganization() != null ? getOrganization().hashCode() : 0);
+        result = 31 * result + (getCreatedDate() != null ? getCreatedDate().hashCode() : 0);
+        result = 31 * result + (getModifiedDate() != null ? getModifiedDate().hashCode() : 0);
         result = 31 * result + getEmail().hashCode();
-        result = 31 * result + getOrganization().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
         return result;
     }
 }
