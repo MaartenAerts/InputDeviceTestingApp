@@ -1,6 +1,5 @@
 package InputDeviceTesting.uantwerpen.model;
 
-import lombok.Singular;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -48,7 +47,6 @@ public class Researcher implements Serializable {
                                                 referencedColumnName = "ID")}
     )*/
     @OneToMany(mappedBy = "researcher")
-    @Singular
     private Set<Role> roles;
 
     public Researcher() {
