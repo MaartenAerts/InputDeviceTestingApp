@@ -166,4 +166,10 @@ public class Researcher implements Serializable {
         result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TestSubject:[ Id = " + this.id + " firstName = " + this.firstName + " lastName = " + this.lastName + " email = " + this.email
+                + "organization = " + this.organization + " ]";
+    }
 }
