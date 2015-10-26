@@ -3,15 +3,11 @@ package InputDeviceTesting.uantwerpen.web;
 import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.orm.jpa.EntityManagerFactoryBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
 import java.util.List;
 
 
@@ -20,8 +16,8 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/")
-public class ResearcherController  implements Serializable{
+@RequestMapping("/api/researcher/")
+public class ResearcherController{
     @Autowired
     private ResearcherRepo repo;
 
@@ -35,7 +31,7 @@ public class ResearcherController  implements Serializable{
         return repo.save(researcher);
     }
 
-    @RequestMapping(value = "/hello/",method=RequestMethod.GET)
+    @RequestMapping(value = "hello",method=RequestMethod.GET)
     public String hello(){
         return "YOLO";
     }

@@ -1,25 +1,17 @@
 package InputDeviceTesting.uantwerpen.model;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.Entity;
-import java.util.Date;
-
 /**
  * Created by Niels on 5/10/2015.
  */
 
-/*
-@Entity
-@DynamicUpdate
-//@DynamicInsert //Is dit Nodig????
-public class TestSubject extends AbstractEntity {
 
-    String firstname;
-    String lastname;
-    String email;
-    String Illness;
-    String Description;
-    Date DateOfBirth;
-}
-*/
+//@Entity
+//public class TestSubject  {
+//
+//    String firstname;
+//    String lastname;
+//    String email;
+//    String Illness;
+//    String Description;
+//    Date DateOfBirth;
+//}
