@@ -2,16 +2,11 @@ package InputDeviceTesting.uantwerpen.web;
 
 import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
+import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.orm.jpa.EntityManagerFactoryBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.io.Serializable;
 import java.util.List;
 
 
@@ -20,25 +15,54 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api")
-public class ResearcherController  implements Serializable{
+@RequestMapping("/api/researcher/")
+public class ResearcherController{
     @Autowired
-    private ResearcherRepo repo;
+    private CustomUserDetailsService customUserDetailsService;
+    //private ResearcherRepo repo;
 
-
-    @RequestMapping(method = RequestMethod .GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Researcher> findAll(){
-        return (repo.findAll());
+        return (customUserDetailsService.findAll());
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public Researcher add(@RequestBody Researcher researcher){
-        return repo.save(researcher);
+    @RequestMapping(params={"save"},method = RequestMethod.POST)
+    public String save(@RequestBody Researcher researcher){ //Save , add , insert, update = hetzelfde.
+        customUserDetailsService.save(researcher);
+        return "addResearcher";
     }
 
-    @RequestMapping(value = "/hello ",method=RequestMethod.GET)
+    @RequestMapping(value = "hello",method=RequestMethod.GET)
     public String hello(){
         return "YOLO";
+    }
+
+    @RequestMapping("form")
+    public ModelAndView getForm(@ModelAttribute Researcher researcher) {
+        return new ModelAndView("form");
+    }
+
+    @RequestMapping("register")
+    public ModelAndView registerResearcher(@ModelAttribute Researcher researcher) {
+        customUserDetailsService.save(researcher);
+        return new ModelAndView("redirect:list");
+    }
+
+    @RequestMapping("delete")
+    public ModelAndView deleteResearcher(@RequestParam Long id) {
+        customUserDetailsService.deleteById(id);
+        return new ModelAndView("redirect:list");
+    }
+
+    @RequestMapping("edit")
+    public ModelAndView editResearcher(@RequestParam Long id,@ModelAttribute Researcher researcher) {
+        return new ModelAndView("edit", "researcher", customUserDetailsService.findById(id));
+    }
+
+    @RequestMapping("update")
+    public ModelAndView updateResearcher(@ModelAttribute Researcher researcher) {
+        customUserDetailsService.save(researcher);
+        return new ModelAndView("redirect:list");
     }
 
 }
