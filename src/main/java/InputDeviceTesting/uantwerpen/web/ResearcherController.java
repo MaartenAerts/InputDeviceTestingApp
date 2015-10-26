@@ -20,12 +20,13 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class ResearcherController  implements Serializable{
     @Autowired
     private ResearcherRepo repo;
 
-    @RequestMapping(method = RequestMethod.GET)
+
+    @RequestMapping(method = RequestMethod .GET)
     public List<Researcher> findAll(){
         return (repo.findAll());
     }
@@ -35,7 +36,7 @@ public class ResearcherController  implements Serializable{
         return repo.save(researcher);
     }
 
-    @RequestMapping(value = "/hello/",method=RequestMethod.GET)
+    @RequestMapping(value = "/hello ",method=RequestMethod.GET)
     public String hello(){
         return "YOLO";
     }
