@@ -1,8 +1,7 @@
 package InputDeviceTesting.uantwerpen.model;
 
 import javax.persistence.*;
-import java.security.Permission;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by TooLate on 22/10/2015.
@@ -16,16 +15,16 @@ public class Role {
 
     private String roleName;
 
-    @ManyToOne
-    private Researcher researcher;
+    @ManyToMany
+    private Set<Researcher> researchers;
 
     public Role() {
     }
 
-    public Role(Long id, Researcher researcher) {
+    public Role(Long id, Set<Researcher> researchers) {
 
         this.id = id;
-        this.researcher = researcher;
+        this.researchers = researchers;
     }
 
     public Long getId() {
@@ -44,12 +43,12 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public Researcher getResearcher() {
-        return researcher;
+    public Set<Researcher> getResearchers() {
+        return researchers;
     }
 
-    public void setResearcher(Researcher researcher) {
-        this.researcher = researcher;
+    public void setResearchers(Set<Researcher> researchers) {
+        this.researchers = researchers;
     }
 
     /* private String name;

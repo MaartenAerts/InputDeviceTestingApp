@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by Niels on 5/10/2015.
@@ -29,16 +30,23 @@ public class TestSubject implements Serializable {
     @NotNull
     @Column(unique = true)
     private String email;
-    @NotNull
     private String password;
+
+    @NotNull
     @CreatedDate
     private LocalDateTime createdDate;
+    @NotNull
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+    @ManyToMany
+    private List<Test> tests;
 
     public TestSubject(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public TestSubject() {
     }
 
     public long getId() {
@@ -111,6 +119,51 @@ public class TestSubject implements Serializable {
 
     public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public List<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(List<Test> tests) {
+        this.tests = tests;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TestSubject that = (TestSubject) o;
+
+        if (getId() != that.getId()) return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (getIllness() != null ? !getIllness().equals(that.getIllness()) : that.getIllness() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
+            return false;
+        if (!getEmail().equals(that.getEmail())) return false;
+        if (getPassword() != null ? !getPassword().equals(that.getPassword()) : that.getPassword() != null)
+            return false;
+        if (!getCreatedDate().equals(that.getCreatedDate())) return false;
+        if (!getModifiedDate().equals(that.getModifiedDate())) return false;
+        return !(getTests() != null ? !getTests().equals(that.getTests()) : that.getTests() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (getIllness() != null ? getIllness().hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + getEmail().hashCode();
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + getCreatedDate().hashCode();
+        result = 31 * result + getModifiedDate().hashCode();
+        result = 31 * result + (getTests() != null ? getTests().hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan
-@EnableAutoConfiguration
 public class InputDeviceTestingAppApplication {
 
     public static void main(String[] args) {

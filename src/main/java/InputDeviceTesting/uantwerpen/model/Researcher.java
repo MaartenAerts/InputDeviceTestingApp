@@ -46,7 +46,7 @@ public class Researcher implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",
                                                 referencedColumnName = "ID")}
     )*/
-    @OneToMany(mappedBy = "researcher")
+    @ManyToMany(mappedBy = "researchers")
     private Set<Role> roles;
 
     public Researcher() {
