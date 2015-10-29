@@ -6,12 +6,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (require, exports, React, ReactDom) {
+    // in te stellen parameters via applicatie
     var aantalCirkels = 10;
+    var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
+    var radius = radiusBigCircle / 7.5;
     var xCircleArray = new Array();
     var yCircleArray = new Array();
     var IdArray = new Array();
-    var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
-    var radius = radiusBigCircle / 10;
     var id = 1;
     var idVolgende = 1;
     var startTime = 0;
@@ -26,6 +27,7 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
     var yWaardeVerschil = 0;
     var errorWaarde = 0;
     var standardDeviation = 0;
+    var opTeHalenCirkelIdVolgende = 0;
     var aantalErrors = 0;
     var Test = (function (_super) {
         __extends(Test, _super);
@@ -92,11 +94,11 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
             // test afsluiten en alles berekenen
             endTime = Date.now();
             timeSeconds = (endTime - startTime) / 1000;
-            alert('De test werd afgelegd op ' + timeSeconds + ' seconden');
+            //alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
             timeGemiddelde = timeSeconds / aantalCirkels;
-            alert('Dus time per trial: ' + timeGemiddelde);
+            //alert('Dus time per trial: ' + timeGemiddelde)
             //  alert('Lengte errorArray: ' + errorArray.length.toString());
-            alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10]);
+            //alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10])
             //standard deviation berekenen
             var sum = 0;
             var average = 0;
@@ -114,60 +116,82 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
             }
             variantie = variantieTemp / (errorArray.length - 1);
             standardDeviation = Math.sqrt(variantie);
-            alert('Standaardafwijking: ' + standardDeviation); // OP TE LOSSEN: de laatste cirkel aanklikken zit er precies altijd iets naast, waardoor er altijd een standaardafwijking is..
+            //alert('Standaardafwijking: ' + standardDeviation);      // OP TE LOSSEN: de laatste cirkel aanklikken zit er precies altijd iets naast, waardoor er altijd een standaardafwijking is..
             var we = 4.133 * standardDeviation;
-            alert('We: ' + we);
+            //alert('We: ' + we);
             var ae = 0;
             var xAfstand = 0;
             var yAfstand = 0;
             var afTeLeggenAfstand = 0;
+            /*for(var i=1;i<=IdArray.length;i++) {
+             if (IdArray[i] == idVolgende) {
+             opTeHalenCirkelId = i;
+             }
+             }*/
+            //lus om afstanden(amplitude) tussen de cirkels te berekenen
             for (var k = 1; k <= errorArray.length - 2; k++) {
+                for (var l = 1; l <= IdArray.length - 1; l++) {
+                    if (IdArray[l] == k) {
+                        opTeHalenCirkelId = l;
+                    }
+                    else if (IdArray[l] == (k + 1)) {
+                        opTeHalenCirkelIdVolgende = l;
+                    }
+                }
                 //pythagoras om de afstanden tussen 2 cirkels te berekenen
-                xAfstand = Math.abs(xCircleArray[opTeHalenCirkelId + 1] - xCircleArray[opTeHalenCirkelId]);
-                yAfstand = Math.abs(yCircleArray[opTeHalenCirkelId + 1] - yCircleArray[opTeHalenCirkelId]);
-                afTeLeggenAfstand += Math.sqrt(Math.pow(xAfstand, 2) + Math.pow(yAfstand, 2)) - radius;
+                xAfstand = Math.abs(xCircleArray[opTeHalenCirkelIdVolgende] - xCircleArray[opTeHalenCirkelId]);
+                yAfstand = Math.abs(yCircleArray[opTeHalenCirkelIdVolgende] - yCircleArray[opTeHalenCirkelId]);
+                afTeLeggenAfstand += Math.sqrt((Math.pow(xAfstand, 2)) + Math.pow(yAfstand, 2)) - radius;
             }
             ae = afTeLeggenAfstand / (aantalCirkels - 1);
+            var ide = 0;
             if (we != 0) {
-                var ide = Math.log(ae / we) / Math.LN2;
+                ide = Math.log(ae / we) / Math.LN2;
             }
             else {
-                var ide = Math.log(ae / 1) / Math.LN2;
+                ide = Math.log(ae / 1) / Math.LN2;
             }
-            alert('Ide: ' + ae);
+            //alert('Ide: ' + ae);
             var throughput = ide / timeGemiddelde;
-            alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
+            //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
+            this.toonResultaten(ae, we, ide, throughput);
+        };
+        Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
+            alert('TASK CONDITIONS:\n     ' +
+                'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
+                '\nMOVEMENT BEHAVIOUR:\n     Ae = ' +
+                Math.round(ae * 100) / 100 + '\n     We = ' + Math.round(we * 100) / 100 + '\n     IDe = ' + Math.round(ide * 100) / 100 + '\n     Errors = ' + aantalErrors +
+                '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + Math.round((timeGemiddelde * 1000) * 10) / 10 + ' ms/trial\n     ER = ' + (aantalErrors / aantalCirkels) * 100 + ' %\n     TP = ' + Math.round(throughput * 10) / 10 + ' bits/s');
         };
         Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT
-            //kijken of de test voltooid is
-            id = parseInt(e.target.id)
-            if (id == 1) {
-                startTime = Date.now();
-                alert('Test is gestart')
-            }
-            if(id == aantalCirkels){
-                endTime = Date.now();
-                timeSeconds = (endTime-startTime)/1000;
-                alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
-            }
+             //kijken of de test voltooid is
+             id = parseInt(e.target.id)
+             if (id == 1) {
+             startTime = Date.now();
+             alert('Test is gestart')
+             }
+             if(id == aantalCirkels){
+             endTime = Date.now();
+             timeSeconds = (endTime-startTime)/1000;
+             alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
+             }
     
-            //aangeklikte bol geel kleuren
-            //volgende aan te klikken bol groen kleuren
-            //kijken of je op de juiste bol klikt, anders is dit een fout
-            if (id == idVolgende) {
-                e.target.setAttribute('fill','yellow');
-                document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
-                idVolgende++;
-            } else if (id < idVolgende) {
-                alert('Eerder aangeklikte cirkel!')
-            } else if (id > idVolgende) {
-                alert('Klik eerst op de groene cirkel, deze is te vroeg!')
-            } */
+             //aangeklikte bol geel kleuren
+             //volgende aan te klikken bol groen kleuren
+             //kijken of je op de juiste bol klikt, anders is dit een fout
+             if (id == idVolgende) {
+             e.target.setAttribute('fill','yellow');
+             document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
+             idVolgende++;
+             } else if (id < idVolgende) {
+             alert('Eerder aangeklikte cirkel!')
+             } else if (id > idVolgende) {
+             alert('Klik eerst op de groene cirkel, deze is te vroeg!')
+             } */
             id = parseInt(e.target.id);
             if (idVolgende == 1) {
                 startTime = Date.now();
-                alert('Test is gestart');
             }
             // || idVolgende == aantalCirkels dient voor als je fout klikt bij de laatste cirkel, dat de test toch wordt afgesloten
             if ((id == aantalCirkels && idVolgende == aantalCirkels) || idVolgende == aantalCirkels) {
@@ -193,7 +217,7 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
                 errorArray[id] = 0;
             }
             else if (idVolgende != aantalCirkels) {
-                alert('Fout geklikt');
+                //alert ('Fout geklikt')
                 // de niet aangeklikte bol terug rood kleuren
                 document.getElementById((idVolgende).toString()).setAttribute('fill', 'red');
                 // volgende aan te klikken bol groen kleuren
