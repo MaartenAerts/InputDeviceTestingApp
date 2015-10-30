@@ -16,5 +16,5 @@ public interface ResearcherRepo extends JpaRepository<Researcher,Long> {
     List<Researcher> findByLastName(@Param("lastName") String lastName);
     Researcher findByEmail(@Param("email")String email);
     Researcher findById(@Param("id")Long id);
-    Researcher deleteById(@Param("id")Long id);
+
 }

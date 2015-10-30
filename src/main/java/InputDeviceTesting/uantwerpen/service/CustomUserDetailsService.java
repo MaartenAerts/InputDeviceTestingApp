@@ -35,27 +35,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         return this.researcherRepo.findAll();
     }
 
-    public Researcher findById(Long id){
-        return this.researcherRepo.findById(id);
-    }
-
-    public String save(final Researcher researcher) {
-        this.researcherRepo.save(researcher);
-        return researcher.toString() + " Saved";
-    }
-
-    public String deleteById(final Long id){
-        Researcher researcher = researcherRepo.findById(id);
-        this.researcherRepo.deleteById(id);
-        return researcher.toString() + " Deleted";
-    }
-
-    /*public String updateResearcher(Researcher researcher){
-        this.researcherRepo.save(researcher);
-        return researcher.toString() + "Updated";
-    }*/
-
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { //username = email
         Researcher researcher = researcherRepo.findByEmail(email);
