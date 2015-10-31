@@ -115,7 +115,7 @@ public class ResearcherController{
         return "YOLO";
     }
 
-    private Researcher genereteResearcher(int j){
+    private Researcher generateResearcher(int j){
         Researcher researcher = new Researcher("mail@mail.com","pass");
         return researcher;
     }
