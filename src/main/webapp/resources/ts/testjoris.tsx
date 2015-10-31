@@ -10,17 +10,57 @@ interface HelloWorldProps extends React.Props<any>
 {
     name: string;
 }
-
-class HelloMessage extends React.Component<HelloWorldProps, {}>
+interface loginState extends React.Props<any>
 {
-    render()
-    {
-        return (
-            <h2>i like to eat</h2>
-        );
-    }
+    user: string;
+    password: string;
 }
 
+class Login extends React.Component<loginState,{}> {
+
+    constructor(props) {
+        super(props);
+
+        this.state =
+        {
+            username: '',
+            password: ''
+        }
+    }
+
+}
+
+var LoginForm = React.createClass({
+    mixins: [ReactAddons.addons.LinkedStateMixin],
+
+    getInitialState:function()
+    {return{username: 'leeeg'};
+    },
+
+
+    render: function()
+    {
+        return(
+            <div className="login jumbotron center-block">
+                <h1>Login</h1>
+                <form role="form">
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input type="text"  valueLink={this.linkState('username')} className="form-control" id="username" placeholder="Username" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" valueLink={this.linkState('password')} className="form-control" id="password" ref="password" placeholder="Password" />
+                    </div>
+                    <button type="submit" className="btn btn-default" onClick={this.login.bind(this)}>Submit</button>
+                </form>
+            </div>
+        );
+    }
+
+});
+
+/*
 var Form =React.createClass({
     mixins: [ReactAddons.addons.LinkedStateMixin],
 
@@ -38,11 +78,26 @@ var Form =React.createClass({
     }
 });
 
+*/
+
 ReactDom.render
 (
-    <Form/>,document.getElementById("hier")
+    <LoginForm />,document.getElementById("hier")
 
 );
+
+
+
+/*
+class HelloMessage extends React.Component<HelloWorldProps, {}>
+{
+    render()
+    {
+        return (
+            <h2>i like to eat</h2>
+        );
+    }
+}
 
 
 ReactDom.render
@@ -50,5 +105,5 @@ ReactDom.render
     <HelloMessage name="John" />,
     document.getElementById('example')
 
-);
-
+)
+*/
