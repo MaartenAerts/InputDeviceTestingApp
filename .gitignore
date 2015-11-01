@@ -1,0 +1,9 @@
+.idea/workspace.xml
+*.class
+.idea/dataSources.ids
+build/resources/main/application.properties
+.idea/dataSources.local.xml
+build/
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/watcherTasks.xml
