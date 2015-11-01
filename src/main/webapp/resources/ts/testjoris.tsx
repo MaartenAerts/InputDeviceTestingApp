@@ -34,8 +34,6 @@ class Login extends React.Component<loginState,{}> {
 
 
 /*
-
-//test
 var LoginForm = React.createClass({
     mixins: [ReactAddons.addons.LinkedStateMixin],
 
@@ -89,8 +87,16 @@ var Form =React.createClass({
     mixins: [ReactAddons.addons.LinkedStateMixin],
 
     getInitialState:function()
-    {return{text: "test"};
+    {return{text: "test", password: "testje"};
     },
+
+    clickmij: function (event)
+    {
+
+        event.currentTarget.style.backgroundColor = '#000000';
+
+    },
+
 
     render: function()
     {
@@ -104,13 +110,15 @@ var Form =React.createClass({
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="text"  valueLink={this.linkState("text")} className="form-control" id="password" ref="password" placeholder="Password" />
+                        <input type="password"  valueLink={this.linkState("password")} className="form-control" id="password" ref="password" placeholder="Password" />
+                        <button type="submit" className="btn btn-default" onClick={this.clickmij}>Submit</button>
                     </div>
                 </form>
-            </div>
-        )
+            </div>)
     }
+
 });
+
 
 ReactDom.render
 (

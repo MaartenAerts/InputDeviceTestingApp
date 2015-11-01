@@ -19,8 +19,6 @@ define(["require", "exports", 'react', 'react-with-addons', 'react-dom'], functi
         return Login;
     })(React.Component);
     /*
-    
-    //test
     var LoginForm = React.createClass({
         mixins: [ReactAddons.addons.LinkedStateMixin],
     
@@ -65,10 +63,13 @@ define(["require", "exports", 'react', 'react-with-addons', 'react-dom'], functi
     var Form = React.createClass({
         mixins: [ReactAddons.addons.LinkedStateMixin],
         getInitialState: function () {
-            return { text: "test" };
+            return { text: "test", password: "testje" };
+        },
+        clickmij: function (event) {
+            event.currentTarget.style.backgroundColor = '#000000';
         },
         render: function () {
-            return (React.createElement("div", {"className": "login jumbotron center-block"}, React.createElement("h1", null, "Login"), React.createElement("form", {"role": "form"}, React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "username"}, "Username"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "username", "placeholder": "Username"})), React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "password"}, "Password"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "password", "ref": "password", "placeholder": "Password"})))));
+            return (React.createElement("div", {"className": "login jumbotron center-block"}, React.createElement("h1", null, "Login"), React.createElement("form", {"role": "form"}, React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "username"}, "Username"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "username", "placeholder": "Username"})), React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "password"}, "Password"), React.createElement("input", {"type": "password", "valueLink": this.linkState("password"), "className": "form-control", "id": "password", "ref": "password", "placeholder": "Password"}), React.createElement("button", {"type": "submit", "className": "btn btn-default", "onClick": this.clickmij}, "Submit")))));
         }
     });
     ReactDom.render(React.createElement(Form, null), document.getElementById("user"));
