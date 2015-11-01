@@ -19,6 +19,8 @@ define(["require", "exports", 'react', 'react-with-addons', 'react-dom'], functi
         return Login;
     })(React.Component);
     /*
+    
+    //test
     var LoginForm = React.createClass({
         mixins: [ReactAddons.addons.LinkedStateMixin],
     

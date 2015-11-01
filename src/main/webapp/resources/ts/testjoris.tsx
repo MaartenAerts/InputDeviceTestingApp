@@ -34,6 +34,8 @@ class Login extends React.Component<loginState,{}> {
 
 
 /*
+
+//test
 var LoginForm = React.createClass({
     mixins: [ReactAddons.addons.LinkedStateMixin],
 
