@@ -10,6 +10,8 @@ interface HelloWorldProps extends React.Props<any>
 {
     name: string;
 }
+
+
 interface loginState extends React.Props<any>
 {
     user: string;
@@ -30,11 +32,13 @@ class Login extends React.Component<loginState,{}> {
 
 }
 
+
+/*
 var LoginForm = React.createClass({
     mixins: [ReactAddons.addons.LinkedStateMixin],
 
     getInitialState:function()
-    {return{username: 'leeeg'};
+    {return{username: 'leeg', password:'leeg'};
     },
 
 
@@ -59,8 +63,26 @@ var LoginForm = React.createClass({
     }
 
 });
+*/
 
-/*
+class HelloMessage extends React.Component<HelloWorldProps, {}>
+{
+    render()
+    {
+        return(
+            <h2>i like to eat</h2>
+        );
+    }
+}
+
+ReactDom.render
+(
+    <HelloMessage name="John" />,
+    document.getElementById('example')
+
+);
+
+
 var Form =React.createClass({
     mixins: [ReactAddons.addons.LinkedStateMixin],
 
@@ -70,40 +92,47 @@ var Form =React.createClass({
 
     render: function()
     {
-
-        return<div>
-            <input type="text" valueLink={this.linkState("text")}/>
-            {this.state.text}
-        </div>
+        return(
+            <div className="login jumbotron center-block">
+                <h1>Login</h1>
+                <form role="form">
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input type="text"   valueLink={this.linkState("text")} className="form-control" id="username" placeholder="Username" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input type="text"  valueLink={this.linkState("text")} className="form-control" id="password" ref="password" placeholder="Password" />
+                    </div>
+                </form>
+            </div>
+        )
     }
 });
 
-*/
+ReactDom.render
+(
+    <Form />,document.getElementById("user")
+);
+
+
+class Button extends React.Component<HelloWorldProps, {}>
+{
+    render()
+    {
+        return(
+            <button type="submit" className="btn btn-default">Submit</button>
+        );
+    }
+}
 
 ReactDom.render
 (
-    <LoginForm />,document.getElementById("hier")
+    <Button name="John" />,
+    document.getElementById('hier')
 
 );
 
 
 
-/*
-class HelloMessage extends React.Component<HelloWorldProps, {}>
-{
-    render()
-    {
-        return (
-            <h2>i like to eat</h2>
-        );
-    }
-}
 
-
-ReactDom.render
-(
-    <HelloMessage name="John" />,
-    document.getElementById('example')
-
-)
-*/

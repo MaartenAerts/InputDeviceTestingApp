@@ -18,53 +18,68 @@ define(["require", "exports", 'react', 'react-with-addons', 'react-dom'], functi
         }
         return Login;
     })(React.Component);
-    var LoginForm = React.createClass({
-        mixins: [ReactAddons.addons.LinkedStateMixin],
-        getInitialState: function () {
-            return { username: 'leeeg' };
-        },
-        render: function () {
-            return (React.createElement("div", {"className": "login jumbotron center-block"}, React.createElement("h1", null, "Login"), React.createElement("form", {"role": "form"}, React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "username"}, "Username"), React.createElement("input", {"type": "text", "valueLink": this.linkState('username'), "className": "form-control", "id": "username", "placeholder": "Username"})), React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "password"}, "Password"), React.createElement("input", {"type": "password", "valueLink": this.linkState('password'), "className": "form-control", "id": "password", "ref": "password", "placeholder": "Password"})), React.createElement("button", {"type": "submit", "className": "btn btn-default", "onClick": this.login.bind(this)}, "Submit"))));
-        }
-    });
     /*
-    var Form =React.createClass({
+    var LoginForm = React.createClass({
         mixins: [ReactAddons.addons.LinkedStateMixin],
     
         getInitialState:function()
-        {return{text: "test"};
+        {return{username: 'leeg', password:'leeg'};
         },
+    
     
         render: function()
         {
+            return(
+                <div className="login jumbotron center-block">
+                    <h1>Login</h1>
+                    <form role="form">
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input type="text"  valueLink={this.linkState('username')} className="form-control" id="username" placeholder="Username" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input type="password" valueLink={this.linkState('password')} className="form-control" id="password" ref="password" placeholder="Password" />
+                        </div>
+                        <button type="submit" className="btn btn-default" onClick={this.login.bind(this)}>Submit</button>
+                    </form>
+                </div>
+            );
+        }
     
-            return<div>
-                <input type="text" valueLink={this.linkState("text")}/>
-                {this.state.text}
-            </div>
+    });
+    */
+    var HelloMessage = (function (_super) {
+        __extends(HelloMessage, _super);
+        function HelloMessage() {
+            _super.apply(this, arguments);
+        }
+        HelloMessage.prototype.render = function () {
+            return (React.createElement("h2", null, "i like to eat"));
+        };
+        return HelloMessage;
+    })(React.Component);
+    ReactDom.render(React.createElement(HelloMessage, {"name": "John"}), document.getElementById('example'));
+    var Form = React.createClass({
+        mixins: [ReactAddons.addons.LinkedStateMixin],
+        getInitialState: function () {
+            return { text: "test" };
+        },
+        render: function () {
+            return (React.createElement("div", {"className": "login jumbotron center-block"}, React.createElement("h1", null, "Login"), React.createElement("form", {"role": "form"}, React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "username"}, "Username"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "username", "placeholder": "Username"})), React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "password"}, "Password"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "password", "ref": "password", "placeholder": "Password"})))));
         }
     });
-    
-    */
-    ReactDom.render(React.createElement(LoginForm, null), document.getElementById("hier"));
+    ReactDom.render(React.createElement(Form, null), document.getElementById("user"));
+    var Button = (function (_super) {
+        __extends(Button, _super);
+        function Button() {
+            _super.apply(this, arguments);
+        }
+        Button.prototype.render = function () {
+            return (React.createElement("button", {"type": "submit", "className": "btn btn-default"}, "Submit"));
+        };
+        return Button;
+    })(React.Component);
+    ReactDom.render(React.createElement(Button, {"name": "John"}), document.getElementById('hier'));
 });
-/*
-class HelloMessage extends React.Component<HelloWorldProps, {}>
-{
-    render()
-    {
-        return (
-            <h2>i like to eat</h2>
-        );
-    }
-}
-
-
-ReactDom.render
-(
-    <HelloMessage name="John" />,
-    document.getElementById('example')
-
-)
-*/ 
 //# sourceMappingURL=testjoris.js.map
