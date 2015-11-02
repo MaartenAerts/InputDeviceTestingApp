@@ -48,15 +48,22 @@ public class ResearcherController{
     public ResponseEntity<Void> createResearcher(@RequestBody Researcher researcher,    UriComponentsBuilder ucBuilder) {
 
         System.out.println("Creating researcher " + researcher.getEmail());
+
         if (researcherRepo.exists(researcher.getId())){
+            System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+        else if (researcherRepo.findByEmail(researcher.getEmail()) != null){
             System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
         researcherRepo.save(researcher);
+        System.out.println(researcher.toString() + " created!!!");
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(researcher.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        //return new ResponseEntity<Researcher>(researcher,HttpStatus.CREATED);
     }
 
     //Update researcher

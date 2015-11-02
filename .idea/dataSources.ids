@@ -2396,28 +2396,63 @@
       <column name="organization" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="password" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="researcher_pkey" columns="id"/>
-      <exported-key name="fk_hsetr3efaxj2u2dxrytl5jm49" table="role" schema="public" catalog="POSTGRESQL" columns="researcher_id"/>
+      <exported-key name="fk_ipo12n1vo4npfrf4q9jesc6dy" table="role_researchers" schema="public" catalog="POSTGRESQL" columns="researchers_id"/>
       <index name="uk_cbfv98xw52qivjsihvyjgqtks" unique="true" columns="email"/>
     </table>
     <table name="role" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="role_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="researcher_id" sqlType="int8" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="role_pkey" columns="id"/>
-      <foreign-key name="fk_hsetr3efaxj2u2dxrytl5jm49" columns="researcher_id" ref-table="researcher" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_81gxfwpdh9s07if2fr75fe28x" table="role_researchers" schema="public" catalog="POSTGRESQL" columns="roles_id"/>
+    </table>
+    <table name="role_researchers" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="roles_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="researchers_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="role_researchers_pkey" columns="roles_id,researchers_id"/>
+      <foreign-key name="fk_ipo12n1vo4npfrf4q9jesc6dy" columns="researchers_id" ref-table="researcher" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_81gxfwpdh9s07if2fr75fe28x" columns="roles_id" ref-table="role" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="test" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="created_date" sqlType="bytea" precision="2147483647" scale="0" nullable="false" jdbcType="-2"/>
+      <column name="description" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="modified_date" sqlType="bytea" precision="2147483647" scale="0" nullable="false" jdbcType="-2"/>
+      <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="test_pkey" columns="id"/>
+      <exported-key name="fk_lg7673r8ls7rqxkv426mqbljn" table="test_sequence" schema="public" catalog="POSTGRESQL" columns="test_id"/>
+      <exported-key name="fk_fx75d002ep2qqixb3e4u1hfxb" table="test_subject_tests" schema="public" catalog="POSTGRESQL" columns="tests_id"/>
+    </table>
+    <table name="test_sequence" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="amount_targets" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_date" sqlType="bytea" precision="2147483647" scale="0" nullable="false" jdbcType="-2"/>
+      <column name="modified_date" sqlType="bytea" precision="2147483647" scale="0" nullable="false" jdbcType="-2"/>
+      <column name="relative_error_max" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
+      <column name="target_amplitudes" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
+      <column name="target_width" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
+      <column name="test_id" sqlType="int8" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="test_sequence_pkey" columns="id"/>
+      <foreign-key name="fk_lg7673r8ls7rqxkv426mqbljn" columns="test_id" ref-table="test" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="test_subject" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="created_date" sqlType="bytea" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="created_date" sqlType="bytea" precision="2147483647" scale="0" nullable="false" jdbcType="-2"/>
       <column name="description" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="email" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="firstname" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="first_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="illness" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="lastname" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="modified_date" sqlType="bytea" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
-      <column name="password" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="modified_date" sqlType="bytea" precision="2147483647" scale="0" nullable="false" jdbcType="-2"/>
+      <column name="password" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="test_subject_pkey" columns="id"/>
+      <exported-key name="fk_r6p8p288vvvxyo8bo6ncd87re" table="test_subject_tests" schema="public" catalog="POSTGRESQL" columns="test_subjects_id"/>
       <index name="uk_fjx1gwpp8jiemuegvopci3cge" unique="true" columns="email"/>
+    </table>
+    <table name="test_subject_tests" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="test_subjects_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="tests_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <foreign-key name="fk_fx75d002ep2qqixb3e4u1hfxb" columns="tests_id" ref-table="test" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_r6p8p288vvvxyo8bo6ncd87re" columns="test_subjects_id" ref-table="test_subject" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <procedure name="_pg_char_max_length" schema="information_schema" catalog="POSTGRESQL" type="2">
       <prototype>

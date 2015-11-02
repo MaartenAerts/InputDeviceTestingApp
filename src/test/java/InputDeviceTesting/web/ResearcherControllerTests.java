@@ -89,15 +89,14 @@ public class ResearcherControllerTests {
                 .build();
     }
 
-    @Test
+   /* @Test
     public void findResearchers() throws Exception{
 
         this.mockMvc
                 .perform(
-                        get("/api/researcher/")).andExpect(status().isOk());
-    }
+                        get
 
-
+    }*/
 
     @Test
     public void testSaveResearcher() throws Exception  {
@@ -108,47 +107,31 @@ public class ResearcherControllerTests {
         System.out.println(json);
 
         // create our object as a json string
-        researcher = new Researcher("potzak@mail.com","pot");
-            json = gson.toJson(researcher);
+        //researcher = new Researcher("potzak@mail.com","pot");
+        //    json = gson.toJson(researcher);
+        //System.out.println(json);
+
+        this.mockMvc
+                .perform(
+                        post("/api/researcher/").content(json)
+                                .contentType(APPLICATION_JSON_UTF8))
+                        .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void testResearcherAlreadyExists() throws Exception {
+        // create our object as a json string
+        researcher = new Researcher("lol@brol.fu","trolol");
+        json = gson.toJson(researcher);
         System.out.println(json);
 
         this.mockMvc
                 .perform(
                         post("/api/researcher/").content(json)
                                 .contentType(APPLICATION_JSON_UTF8))
-                        .andExpect(status().isOk());
-
-
-
-        //HttpPost post = new HttpPost(serviceURL);
-
-        /*String credentials = "username:slettenbak";
-        String testString = "Basic " + new String(Base64.encodeBase64(credentials.getBytes()));
-        post.setHeader("Authorization",testString);*/
-
-        //StringEntity entity = new StringEntity(json, "UTF-8");
-       // post.setEntity(entity);
+                .andExpect(status().isConflict());
 
     }
-
-
-
-
-    /*public class TestMain{
-
-        OkHttpClient client = new OkHttpClient();
-        public final MediaType JSON  = MediaType.parse("application/json; charset=utf-8");
-
-        String doPostRequest(String url, String json) throws IOException {
-            RequestBody body = RequestBody.create(JSON, json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }
-    }*/
 }
 
 
