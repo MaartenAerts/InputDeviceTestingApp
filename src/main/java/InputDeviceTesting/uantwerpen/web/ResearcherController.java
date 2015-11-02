@@ -44,7 +44,7 @@ public class ResearcherController{
     }
 
     //Create researcher
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> createResearcher(@RequestBody Researcher researcher,    UriComponentsBuilder ucBuilder) {
 
         System.out.println("Creating researcher " + researcher.getEmail());
@@ -60,7 +60,7 @@ public class ResearcherController{
     }
 
     //Update researcher
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Researcher> updateResearcher(@PathVariable("id") long id, @RequestBody Researcher researcher) {
 
         System.out.println("Updating researcher " + id);
@@ -81,7 +81,7 @@ public class ResearcherController{
     }
 
     //Delete researcher
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Researcher> deleteResearcher(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting User with id " + id);
 
@@ -96,7 +96,7 @@ public class ResearcherController{
     }
 
     //Delete all researchers
-    @RequestMapping(value = "/deleteAll/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
     public ResponseEntity<Researcher> deleteAllResearchers() {
         System.out.println("Deleting All Researchers");
 

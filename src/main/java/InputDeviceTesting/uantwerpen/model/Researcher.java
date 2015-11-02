@@ -169,7 +169,7 @@ public class Researcher implements Serializable {
 
     @Override
     public String toString() {
-        return "TestSubject:[ Id = " + this.id + " firstName = " + this.firstName + " lastName = " + this.lastName + " email = " + this.email
+        return "Researcher:[ Id = " + this.id + " firstName = " + this.firstName + " lastName = " + this.lastName + " email = " + this.email
                 + "organization = " + this.organization + " ]";
     }
 }
