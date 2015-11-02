@@ -3,36 +3,12 @@ package InputDeviceTesting.web;
 import InputDeviceTesting.InputDeviceTestingAppApplication;
 import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
-import InputDeviceTesting.uantwerpen.web.ResearcherController;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CredentialsProvider;
+import InputDeviceTesting.uantwerpen.web.ResearcherRestController;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -72,7 +47,7 @@ public class ResearcherControllerTests {
     private ResearcherRepo researcherRepo;
 
     @Autowired
-    private ResearcherController researcherController;
+    private ResearcherRestController researcherRestController;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -85,7 +60,7 @@ public class ResearcherControllerTests {
 
     @Before
     public void setup() throws Exception {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(researcherController)
+        this.mockMvc = MockMvcBuilders.standaloneSetup(researcherRestController)
                 .build();
     }
 
@@ -121,7 +96,7 @@ public class ResearcherControllerTests {
     @Test
     public void testResearcherAlreadyExists() throws Exception {
         // create our object as a json string
-        researcher = new Researcher("lol@brol.fu","trolol");
+        researcher = new Researcher("lol@brol.fu","trolol"); // email bestaat al en zou conflicten moeten geven.
         json = gson.toJson(researcher);
         System.out.println(json);
 

@@ -51,6 +51,8 @@ dependencies {
     compile('org.springframework:spring-webmvc:4.1.6.RELEASE')
     compile('com.h2database:h2:1.3.164')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf:1.0.2.RELEASE')
+    compile('org.webjars:bootstrap:3.3.4')
+    compile('org.webjars:jquery:jar:2.1.4')
     //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     runtime('org.postgresql:postgresql:9.4-1201-jdbc41')
     testCompile('org.springframework.boot:spring-boot-starter-test') 

@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/researcher/")
-public class ResearcherController{
+public class ResearcherRestController {
     @Autowired
     private ResearcherRepo researcherRepo;
 
