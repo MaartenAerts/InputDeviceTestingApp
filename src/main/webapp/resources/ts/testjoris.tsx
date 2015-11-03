@@ -111,7 +111,7 @@ var Form =React.createClass({
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input type="password"  valueLink={this.linkState("password")} className="form-control" id="password" ref="password" placeholder="Password" />
-                        <button type="submit" className="btn btn-default" onClick={this.clickmij}>Submit</button>
+                        <button class type="submit" className="btn btn-default" onClick={this.clickmij}>Submit</button>
                     </div>
                 </form>
             </div>)
