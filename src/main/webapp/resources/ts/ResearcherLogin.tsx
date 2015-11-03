@@ -34,10 +34,12 @@ ReactDom.render
 
 );
 
+/*
 
 ReactDom.render
 (
-    <HelloMessage name="John" />,
+   <HelloMessage name="John" />,
     document.getElementById('example')
 
 );
+*/
