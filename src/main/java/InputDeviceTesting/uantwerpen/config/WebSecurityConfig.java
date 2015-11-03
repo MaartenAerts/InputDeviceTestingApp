@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,8 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Created by Niels on 23/10/2015.
  */
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static PasswordEncoder encoder;
 
@@ -26,22 +26,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/auth/**").authenticated();
+        //http.authorizeRequests().antMatchers("/auth/**").authenticated(); //auto naar de login page gaan hier.
         //http.authorizeRequests().antMatchers("/auth/**").permitAll(); //Laat alles door
 
-        http.formLogin()
-                .defaultSuccessUrl("/auth")
-                .loginPage("/login")
-                .permitAll()
-                .and()
+        http
+                .authorizeRequests()
+                    .antMatchers("/","/index").permitAll() //iedereen mag hierop
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login") // iedereen mag deze pagina zien
+                    .permitAll()
+                    .and()
                 .logout()
-                .logoutSuccessUrl("/logout")
-                .permitAll();
+                    .permitAll();
     }
 
-    @Override
+  /*  @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+    }*/
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("trol").password("trol").roles("RESEARCHER"); // in memory user credentials.
+
     }
 
     @Bean
