@@ -10,6 +10,7 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
     var aantalCirkels = 10;
     var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
     var radius = radiusBigCircle / 7.5;
+    var errorMax = 0.5;
     var xCircleArray = new Array();
     var yCircleArray = new Array();
     var IdArray = new Array();
@@ -61,7 +62,7 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
                 IdArray[i] = circleID;
             }
             //onMouseMove={this.handleMouseMove.bind(this)}
-            return React.createElement("svg", React.__spread({"ref": "svg"}, this.props, {"onMouseDown": this.handleMouseClick.bind(this)}), this.renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle, strokeWidthBigCircle), this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1], radius, strokeWidthBigCircle), this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2], radius, strokeWidthBigCircle), this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3], radius, strokeWidthBigCircle), this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4], radius, strokeWidthBigCircle), this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5], radius, strokeWidthBigCircle), this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6], radius, strokeWidthBigCircle), this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7], radius, strokeWidthBigCircle), this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8], radius, strokeWidthBigCircle), this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9], radius, strokeWidthBigCircle), this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10], radius, strokeWidthBigCircle), this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11], radius, strokeWidthBigCircle), this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12], radius, strokeWidthBigCircle), this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13], radius, strokeWidthBigCircle), this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14], radius, strokeWidthBigCircle), this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15], radius, strokeWidthBigCircle), this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16], radius, strokeWidthBigCircle), this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17], radius, strokeWidthBigCircle), this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18], radius, strokeWidthBigCircle), this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19], radius, strokeWidthBigCircle), this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20], radius, strokeWidthBigCircle), this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21], radius, strokeWidthBigCircle), this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22], radius, strokeWidthBigCircle), this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23], radius, strokeWidthBigCircle), this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24], radius, strokeWidthBigCircle), this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25], radius, strokeWidthBigCircle));
+            return React.createElement("svg", React.__spread({"ref": "svg", "id": "svgcomponent"}, this.props, {"onMouseDown": this.handleMouseClick.bind(this)}), this.renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle, strokeWidthBigCircle), this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1], radius, strokeWidthBigCircle), this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2], radius, strokeWidthBigCircle), this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3], radius, strokeWidthBigCircle), this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4], radius, strokeWidthBigCircle), this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5], radius, strokeWidthBigCircle), this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6], radius, strokeWidthBigCircle), this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7], radius, strokeWidthBigCircle), this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8], radius, strokeWidthBigCircle), this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9], radius, strokeWidthBigCircle), this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10], radius, strokeWidthBigCircle), this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11], radius, strokeWidthBigCircle), this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12], radius, strokeWidthBigCircle), this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13], radius, strokeWidthBigCircle), this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14], radius, strokeWidthBigCircle), this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15], radius, strokeWidthBigCircle), this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16], radius, strokeWidthBigCircle), this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17], radius, strokeWidthBigCircle), this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18], radius, strokeWidthBigCircle), this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19], radius, strokeWidthBigCircle), this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20], radius, strokeWidthBigCircle), this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21], radius, strokeWidthBigCircle), this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22], radius, strokeWidthBigCircle), this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23], radius, strokeWidthBigCircle), this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24], radius, strokeWidthBigCircle), this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25], radius, strokeWidthBigCircle));
         };
         Test.prototype.renderBigCircle = function (cxBigCircle, cyBigCircle, radiusBigCircle, strokewidthBigCircle) {
             return React.createElement("circle", {"cx": cxBigCircle, "cy": cyBigCircle, r: radiusBigCircle - 10, "fill": "#ccffff", "stroke": "black", "strokeWidth": "1"});
@@ -205,7 +206,13 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
                 if (id == aantalCirkels) {
                     errorArray[id] = 0;
                 }
-                this.berekenEindResultatenTest();
+                if (errorMax >= (aantalErrors / aantalCirkels)) {
+                    this.berekenEindResultatenTest();
+                }
+                else {
+                    alert('Je errorpercentage bedraagt ' + (aantalErrors / aantalCirkels * 100) + '%, maximum toegelaten is ' + errorMax * 100 + '%!\nOpnieuw!');
+                    window.location.reload();
+                }
             }
             // deze if staat laatst omdat ander bij het aanklikken van de laatste bol de test niet wordt afgesloten
             //kijken of je op de juiste bol klikt, anders is dit een fout
@@ -219,7 +226,7 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
             else if (idVolgende != aantalCirkels) {
                 //alert ('Fout geklikt')
                 // de niet aangeklikte bol terug rood kleuren
-                document.getElementById((idVolgende).toString()).setAttribute('fill', 'red');
+                document.getElementById((idVolgende).toString()).setAttribute('fill', '#660000');
                 // volgende aan te klikken bol groen kleuren
                 document.getElementById((idVolgende + 1).toString()).setAttribute('fill', 'green');
                 this.berekenVerschilCoördinaten(e);
