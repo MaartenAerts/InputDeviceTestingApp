@@ -1,19 +1,24 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Spring Framework Guru</title>
-
-
-
-
+    <title>Name Research Group</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<h1>Name Research Group</h1>
 
 
-<h1>Hello</h1>
+<p align="right">
+<input type="submit" value="Dashboard"
+       onclick="window.location='/dashboard';" />
 
-<h2>Fellow Spring Framework Gurus!!!</h2>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</p>
+
 </body>
 </html>
