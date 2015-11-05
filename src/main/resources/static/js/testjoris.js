@@ -49,17 +49,22 @@ define(["require", "exports", 'react', 'react-with-addons', 'react-dom'], functi
     
     });
     */
-    var HelloMessage = (function (_super) {
-        __extends(HelloMessage, _super);
-        function HelloMessage() {
-            _super.apply(this, arguments);
-        }
-        HelloMessage.prototype.render = function () {
-            return (React.createElement("h2", null, "i like to eat"));
-        };
-        return HelloMessage;
-    })(React.Component);
-    ReactDom.render(React.createElement(HelloMessage, {"name": "John"}), document.getElementById('example'));
+    //class HelloMessage extends React.Component<HelloWorldProps, {}>
+    //{
+    //    render()
+    //    {
+    //        return(
+    //            <h2>i like to eat</h2>
+    //        );
+    //    }
+    //}
+    //
+    //ReactDom.render
+    //(
+    //    <HelloMessage name="John" />,
+    //    document.getElementById('example')
+    //
+    //);
     var Form = React.createClass({
         mixins: [ReactAddons.addons.LinkedStateMixin],
         getInitialState: function () {
@@ -69,7 +74,7 @@ define(["require", "exports", 'react', 'react-with-addons', 'react-dom'], functi
             event.currentTarget.style.backgroundColor = '#000000';
         },
         render: function () {
-            return (React.createElement("div", {"className": "login jumbotron center-block"}, React.createElement("h1", null, "Login"), React.createElement("form", {"role": "form"}, React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "username"}, "Username"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "username", "placeholder": "Username"})), React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "password"}, "Password"), React.createElement("input", {"type": "password", "valueLink": this.linkState("password"), "className": "form-control", "id": "password", "ref": "password", "placeholder": "Password"}), React.createElement("button", {"class": true, "type": "submit", "className": "btn btn-default", "onClick": this.clickmij}, "Submit")))));
+            return (React.createElement("div", {"className": "login jumbotron center-block"}, React.createElement("h1", null, "Login"), React.createElement("form", {"role": "form"}, React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "username"}, "Username"), React.createElement("input", {"type": "text", "valueLink": this.linkState("text"), "className": "form-control", "id": "username", "placeholder": "Username"})), React.createElement("div", {"className": "form-group"}, React.createElement("label", {"htmlFor": "password"}, "Password"), React.createElement("input", {"type": "password", "valueLink": this.linkState("password"), "className": "form-control", "id": "password", "ref": "password", "placeholder": "Password"}), React.createElement("button", {"type": "button", "className": "btn btn-default", "onClick": this.clickmij}, "Submit")))));
         }
     });
     ReactDom.render(React.createElement(Form, null), document.getElementById("user"));

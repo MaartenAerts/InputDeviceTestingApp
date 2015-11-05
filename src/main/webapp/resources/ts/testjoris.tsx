@@ -19,17 +19,14 @@ interface loginState extends React.Props<any>
 }
 
 class Login extends React.Component<loginState,{}> {
-
     constructor(props) {
         super(props);
-
         this.state =
         {
             username: '',
             password: ''
         }
     }
-
 }
 
 
@@ -65,22 +62,22 @@ var LoginForm = React.createClass({
 });
 */
 
-class HelloMessage extends React.Component<HelloWorldProps, {}>
-{
-    render()
-    {
-        return(
-            <h2>i like to eat</h2>
-        );
-    }
-}
-
-ReactDom.render
-(
-    <HelloMessage name="John" />,
-    document.getElementById('example')
-
-);
+//class HelloMessage extends React.Component<HelloWorldProps, {}>
+//{
+//    render()
+//    {
+//        return(
+//            <h2>i like to eat</h2>
+//        );
+//    }
+//}
+//
+//ReactDom.render
+//(
+//    <HelloMessage name="John" />,
+//    document.getElementById('example')
+//
+//);
 
 
 var Form =React.createClass({
@@ -111,7 +108,7 @@ var Form =React.createClass({
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input type="password"  valueLink={this.linkState("password")} className="form-control" id="password" ref="password" placeholder="Password" />
-                        <button class type="submit" className="btn btn-default" onClick={this.clickmij}>Submit</button>
+                        <button type="button" className="btn btn-default" onClick={this.clickmij}>Submit</button>
                     </div>
                 </form>
             </div>)
