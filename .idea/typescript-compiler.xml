@@ -4,6 +4,6 @@
     <option name="isCompilerEnabled" value="true" />
     <option name="typeScriptCompilerParams" value="--jsx react --module AMD $FileName$  -sourceRoot  &quot;../ts/&quot;" />
     <option name="hasOutDirectory" value="true" />
-    <option name="outDirectory" value="$PROJECT_DIR$/src/main/webapp/resources/js" />
+    <option name="outDirectory" value="C:\Users\TooLate\IdeaProjects\InputDeviceTestingApp\src\main\resources\static\js" />
   </component>
 </project>

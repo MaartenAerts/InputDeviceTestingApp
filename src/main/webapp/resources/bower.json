@@ -23,11 +23,12 @@
   ],
   "dependencies": {
     "jquery": "jqurey#~2.1.4",
-    "react-flux": "*",
     "requirejs": "~2.1.20",
     "react": "0.14.0",
     "react-bootstrap": "~0.27.1",
     "react-dom": "~0.1.0",
-    "react-router": "1.0.0-rc3"
+    "react-router": "1.0.0-rc3",
+    "fluxxor": "~1.7.3",
+    "reflux": "~0.3.0"
   }
 }
