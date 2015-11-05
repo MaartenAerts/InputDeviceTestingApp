@@ -19,7 +19,7 @@ public class TestController {
         return "Dit is een Test!!!";
     }
 
-    @RequestMapping("/lol")
+    @RequestMapping("/test")
     public ModelAndView testpage(){
 
         ModelAndView modelAndView = new ModelAndView("test");
