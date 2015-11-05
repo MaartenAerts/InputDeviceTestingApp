@@ -1,11 +1,11 @@
-/// <reference path="../../../webapp/resources/typings/react/react.d.ts" />
-///<reference path="../../../webapp/resources/typings/react-dom/react-dom.d.ts"/>
+/// <reference path="../typings/react/react.d.ts" />
+///<reference path="../typings/react-dom/react-dom.d.ts"/>
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
+define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (require, exports, React, ReactDom) {
     // in te stellen parameters via applicatie
     var aantalCirkels = 10;
     var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
