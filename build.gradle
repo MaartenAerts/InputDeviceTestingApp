@@ -55,7 +55,7 @@ dependencies {
     //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     runtime('org.postgresql:postgresql:9.4-1201-jdbc41')
     testCompile('org.springframework.boot:spring-boot-starter-test') 
-    testCompile('org.springframework.restdocs:spring-restdocs-mockmvc:1.0.0.RC1')
+    //testCompile('org.springframework.restdocs:spring-restdocs-mockmvc:1.0.0.RC1')
     testCompile('com.google.code.gson:gson:2.4')
     testCompile('com.squareup.okhttp:okhttp:2.5.0')
     testCompile('org.apache.httpcomponents:httpclient:4.5.1')
