@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="">
@@ -7,13 +8,12 @@
     <meta charset="UTF-8">
     <title>app</title>
     <!--<script type='../../resources/js/requirebase.js'></script>-->
-    <script src="../../resources/js/react.js"></script>
-    <script src="../../resources/js/react-with-addons.js"></script>
-    <script src="../../resources/js/react-dom.js"></script>
-    <script src="../../resources/js/reflux.js"></script>
+    <script src="../../webapp/resources/js/react.js"></script>
+    <script src="../../webapp/resources/js/react-with-addons.js"></script>
+    <script src="../../webapp/resources/js/react-dom.js"></script>
 
     <!-- Data main is de basis js, van hieruit begint alles -->
-   <script data-main="../../resources/js/test.js" src="../../resources/bower_components/requirejs/require.js"></script>
+   <script data-main="../../resources/js/test.js" src="../../webapp/resources/bower_components/requirejs/require.js"></script>
 
 
 </head>
@@ -24,9 +24,6 @@
   //  <canvas id="myCanvas" style="border:1px thick" width="500" height="500"></canvas> -->
 </div>
 
-<div id="example" align="center"></div>
-<div id="user" align="center"></div>
-<div id="hier" align="center"></div>
 
 
 </body>

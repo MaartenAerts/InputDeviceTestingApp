@@ -1,38 +1,18 @@
 package InputDeviceTesting.uantwerpen.web;
 
-import InputDeviceTesting.uantwerpen.model.Researcher;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by Niels on 23/10/2015.
+ * Created by TooLate on 5/11/2015.
  */
-@RestController
+@Controller
+@RequestMapping("/test/")
 public class TestController {
-
-    @ModelAttribute("data")
-    public String Test(){
-
-        return "Dit is een Test!!!";
+    @RequestMapping("test")//moet {id} worde
+    public ModelAndView getTest(){
+        return new ModelAndView("test");
     }
 
-    @RequestMapping("/test")
-    public ModelAndView testpage(){
-
-        ModelAndView modelAndView = new ModelAndView("test");
-        //modelAndView.addObject("data","LOLOLOLOLO");
-
-        return modelAndView;
-
-    }
-    /*@RequestMapping(value = "/test")
-    public String showHome(ModelMap model) {
-
-        return "test";
-    }*/
 }
-
-

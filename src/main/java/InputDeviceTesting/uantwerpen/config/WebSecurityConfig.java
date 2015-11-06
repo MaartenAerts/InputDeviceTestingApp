@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/","/index").permitAll() //iedereen mag hierop
+                    .antMatchers("/","/index","/**").permitAll() //iedereen mag hierop
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

@@ -1,9 +1,8 @@
-/// <reference path="../typings/react/react.d.ts" />
-///<reference path="../typings/react-dom/react-dom.d.ts"/>
+/// <reference path="../../../webapp/resources/typings/react/react.d.ts" />
+///<reference path="../../../webapp/resources/typings/react-dom/react-dom.d.ts"/>
 
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-import 'testjoris'
 
 // in te stellen parameters via applicatie
 var aantalCirkels = 10;
@@ -33,6 +32,7 @@ var errorWaarde = 0;
 
 var standardDeviation = 0;
 var opTeHalenCirkelIdVolgende = 0;
+
 
 var aantalErrors = 0;
 
