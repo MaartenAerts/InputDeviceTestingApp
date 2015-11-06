@@ -2,25 +2,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Hello World!</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
 
-<table border="1" style="width:100%">
+<table class="table table-striped">
     <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>50</td>
+        <th>EMAIL</th>
+        <th>PASSWORD</th>
+        <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/sort.html'" th:value="Sort" /></th>
+        <th>LASTNAME</th>
+        <th>ORGANIZATION</th>
+        <th>CREATEDDATE</th>
+        <th>MODIFIEDDATE</th>
+        <th>ROLE</th>
     </tr>
-    <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td>94</td>
+    <tr th:each="researcher : ${allResearchers}">
+        <td th:text="${researcher.email}"/>
+        <td th:text="${researcher.password}"/>
+        <td th:text="${researcher.firstName}"/>
+        <td th:text="${researcher.lastName}"/>
+        <td th:text="${researcher.organization}"/>
+        <td th:text="${researcher.createdDate}"/>
+        <td th:text="${researcher.modifiedDate}"/>
+
+        <td>
+            <table>
+                <tr th:each="role : ${researcher.roles}">
+                    <td th:text="${role.name}"/>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
+
 </body>
+
 </html>

@@ -1,6 +1,9 @@
 package InputDeviceTesting.uantwerpen.model;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,16 +18,14 @@ public class Role {
 
     private String roleName;
 
+
     @ManyToMany
     private Set<Researcher> researchers;
 
-    public Role() {
-    }
 
-    public Role(Long id, Set<Researcher> researchers) {
+    public Role(String roleName) {
 
-        this.id = id;
-        this.researchers = researchers;
+        this.roleName = roleName;
     }
 
     public Long getId() {
@@ -35,14 +36,6 @@ public class Role {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
     public Set<Researcher> getResearchers() {
         return researchers;
     }
@@ -50,6 +43,11 @@ public class Role {
     public void setResearchers(Set<Researcher> researchers) {
         this.researchers = researchers;
     }
+
+    public String getRoleName() {return roleName;}
+
+    public void setRoleName(String roleName) {this.roleName = roleName;}
+
 
     /* private String name;
     private List<Permission> permissions;

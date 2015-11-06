@@ -1,12 +1,10 @@
 package InputDeviceTesting.uantwerpen.repo;
 
-import InputDeviceTesting.uantwerpen.model.Role;
+import InputDeviceTesting.uantwerpen.model.Researcher;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
- * Created by Niels on 23/10/2015.
+ * Created by Niels on 6/11/2015.
  */
-@Repository
-public interface RoleRepo extends CrudRepository<Role,Long> {
+public interface RoleRepo extends CrudRepository<Researcher,Long> {
 }

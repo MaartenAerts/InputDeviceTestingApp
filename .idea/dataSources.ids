@@ -2388,11 +2388,11 @@
     </table>
     <table name="researcher" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="created_date" sqlType="bytea" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="created_date" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
       <column name="email" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="first_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="last_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="modified_date" sqlType="bytea" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="modified_date" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
       <column name="organization" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="password" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="researcher_pkey" columns="id"/>

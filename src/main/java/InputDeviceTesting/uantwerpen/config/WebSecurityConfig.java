@@ -4,7 +4,10 @@ import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,12 +15,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Created by Niels on 23/10/2015.
  */
 @Configuration
 @EnableWebMvcSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static PasswordEncoder encoder;
 
@@ -31,16 +36,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/","/index","/**").permitAll() //iedereen mag hierop
-                    .anyRequest().authenticated()
-                    .and()
+                    .antMatchers("login","/**").permitAll() //iedereen mag hierop
+                    .anyRequest().fullyAuthenticated()
+                .and()
                 .formLogin()
                     .loginPage("/login") // iedereen mag deze pagina zien
                     .permitAll()
-                    .and()
-                .logout()
-                    .permitAll();
+                    .failureUrl("/login?error")
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and()
+                .exceptionHandling().accessDeniedPage("/access?error");
+
     }
+
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Configuration
+    protected static class AuthenticationSecurity extends GlobalAuthenticationConfigurerAdapter {
+
+        @Autowired
+        private CustomUserDetailsService customUserDetailsService;
+
+        @Override
+        public void init(AuthenticationManagerBuilder auth) throws Exception {
+            auth.userDetailsService(customUserDetailsService);
+        }
+    }
+
 
   /*  @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

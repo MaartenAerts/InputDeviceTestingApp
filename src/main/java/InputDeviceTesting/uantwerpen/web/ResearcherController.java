@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by Joelg on 5/11/2015.
  */
-@Controller
+/*@Controller
 @RequestMapping("researcher")
 public class ResearcherController {
     @RequestMapping("/dashboard")
@@ -18,4 +18,4 @@ public class ResearcherController {
         return modelAndView;
 
     }
-}
+}*/

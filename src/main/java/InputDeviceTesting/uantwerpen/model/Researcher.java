@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,7 +18,7 @@ import java.util.Set;
  */
 
 @Entity
-public class Researcher implements Serializable {
+public class Researcher implements Serializable, Comparable<Researcher> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,23 +40,26 @@ public class Researcher implements Serializable {
     @NotNull
     private String password;
 
-    //@ManyToMany
-    /*@JoinTable(
-            name = "USER_ROLE",
-            joinColumns = {@JoinColumn(name = "USER_ID",
-                                        referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",
-                                                referencedColumnName = "ID")}
-    )*/
     @ManyToMany(mappedBy = "researchers")
-    private Set<Role> roles;
+    private List<Role> roles;
+
 
     public Researcher() {
 
     }
+
     public Researcher(String email, String password) {
         this.email=email;
         this.password=password;
+    }
+    public Researcher(String email, String password,String firstName, String lastName, String organization, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+        this.email=email;
+        this.password=password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.organization = organization;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 
     public long getId() {
@@ -121,11 +126,11 @@ public class Researcher implements Serializable {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
@@ -149,7 +154,7 @@ public class Researcher implements Serializable {
             return false;
         if (!getEmail().equals(that.getEmail())) return false;
         if (!getPassword().equals(that.getPassword())) return false;
-        return !(getRoles() != null ? !getRoles().equals(that.getRoles()) : that.getRoles() != null);
+        return (!(getRoles() != null ? !getRoles().equals(that.getRoles()) : that.getRoles() != null));
 
     }
 
@@ -161,8 +166,8 @@ public class Researcher implements Serializable {
         result = 31 * result + (getOrganization() != null ? getOrganization().hashCode() : 0);
         result = 31 * result + (getCreatedDate() != null ? getCreatedDate().hashCode() : 0);
         result = 31 * result + (getModifiedDate() != null ? getModifiedDate().hashCode() : 0);
-        result = 31 * result + getEmail().hashCode();
-        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode(): 0);
         result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
         return result;
     }
@@ -171,5 +176,34 @@ public class Researcher implements Serializable {
     public String toString() {
         return "Researcher:[ Id = " + this.id + " firstName = " + this.firstName + " lastName = " + this.lastName + " email = " + this.email
                 + "organization = " + this.organization + " ]";
+    }
+
+    public static Comparator<Researcher> ResearcherNameComparator
+            = new Comparator<Researcher>() {
+
+        public int compare(Researcher researcher1, Researcher researcher2) {
+
+            String ReName1 = researcher1.getFirstName().toUpperCase();
+            String ReName2 = researcher2.getFirstName().toUpperCase();
+
+            //ascending order
+            return ReName1.compareTo(ReName2);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+    };
+
+    @Override
+    public int compareTo(Researcher o) {
+        long compareQuantity = ((Researcher) o).getId();
+
+
+        //ascending order
+        return (int)this.id - (int)compareQuantity;
+
+        //descending order
+        //return compareQuantity - this.quantity;
     }
 }

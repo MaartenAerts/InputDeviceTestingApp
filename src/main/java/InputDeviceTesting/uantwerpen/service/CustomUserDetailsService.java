@@ -4,20 +4,15 @@ import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 /**
  * Created by Niels on 23/10/2015.
@@ -36,26 +31,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { //username = email
-        Researcher researcher = researcherRepo.findByEmail(email);
-        List<GrantedAuthority> authorities = buildUserAuthority(researcher.getRoles());
+    public UserDetails loadUserByUsername(String Email) throws UsernameNotFoundException {
+        UserDetails ud = null;
+        for (Researcher researcher : findAll()){
+            if (Email.equals(researcher.getEmail())){
+                Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+                for (Role role : researcher.getRoles()) {
+                        authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+                }
 
-        return buildUserForAuthentication(researcher, authorities);
-    }
-
-    private User buildUserForAuthentication(Researcher researcher, List<GrantedAuthority> authorities) {
-        return new User(researcher.getEmail(), researcher.getPassword(), authorities);
-    }
-
-    private List<GrantedAuthority> buildUserAuthority(Set<Role> researcherRoles) {
-
-        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-
-        // Build user's authorities
-        for (Role researcherRole : researcherRoles) {
-            setAuths.add(new SimpleGrantedAuthority(researcherRole.getRoleName()));
+                ud = new org.springframework.security.core.userdetails.User(Email, researcher.getPassword(), true, true, true, true,authorities);
+            }
         }
-
-        return new ArrayList<GrantedAuthority>(setAuths);
+        if (ud == null) throw new UsernameNotFoundException("No Researcher with email '" + Email + "' found!");
+        return ud;
     }
+
 }
