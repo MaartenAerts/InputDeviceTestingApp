@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <title>Register Researcher </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<body onload="document.f.username.focus();">
+
+<div class="container">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><a th:href="@{/}" href="dashboard.html"> Dashboard </a></li>
+            </ul>
+        </div>
+    </div>
+    <div align="center">
+        <form th:action="@{/register}" action="/register" method="POST" commandName="researcherForm" >
+            <table>
+                <tr>
+                    <td ><h2>Researcher - Registration</h2></td>
+                </tr>
+                <tr>
+                    <td>Email Name:</td>
+                    <td><input type="text" name="email" value="" placeholder="email" /></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" placeholder="Password" /></td>
+                </tr>
+                <tr>
+                    <td>Firstname:</td>
+                    <td><input type="text" name="firstName" placeholder="FirstName"/></td>
+                </tr>
+                <tr>
+                    <td>Lastname:</td>
+                    <td><input type="text" name="lastName" placeholder="LastName"/></td>
+                </tr>
+                <tr>
+                    <td>Organization:</td>
+                    <td><input type="text" name="Organization" placeholder="Organization"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Register" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
 
 </body>
 </html>

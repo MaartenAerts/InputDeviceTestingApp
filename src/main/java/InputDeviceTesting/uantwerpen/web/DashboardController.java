@@ -42,10 +42,6 @@ public class DashboardController {
     @RequestMapping(value = "/sort", method = RequestMethod.GET)
     public String Sort(Model model) {
 
-        boolean test;
-        test = model.containsAttribute("researcher");
-        test = model.containsAttribute("allResearchers");
-
         List<Researcher> researcherList = customUserDetailsService.findAll();
         Collections.sort(researcherList, Researcher.ResearcherNameComparator);
         model.addAttribute("allResearchers", researcherList);

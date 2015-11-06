@@ -33,7 +33,7 @@ public class InputDeviceTestingAppApplication {
         roleList.add(role);
         researcher.setRoles(roleList);
         final Researcher researcher2 = new Researcher("kak@brol.fu","blub","U","Moeder", "U moeder op een fles", LocalDateTime.now() , LocalDateTime.now());
-        final Researcher researcher3 = new Researcher("Lekkere@piemel.fu","pis","Sharia","Belgiums", "Allukahbar", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher3 = new Researcher("Lekkere@piemel.fu","pis","Sharia","Belgium", "Allukahbar", LocalDateTime.now() , LocalDateTime.now());
 
         return new CommandLineRunner() {
             @Override
