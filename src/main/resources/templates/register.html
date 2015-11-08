@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Register Researcher </title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
@@ -16,38 +15,45 @@
             </ul>
         </div>
     </div>
-    <div align="center" th:class="bs-component">
+    <div th:class="page-header">
+    <h1>        Researcher - Registration</h1>
+    </div>
+       <div class="col-lg-6 well bs-component col-md-offset-3">
         <form th:action="@{/register}" action="/register" method="POST" commandName="researcherForm" >
+            <fieldset>
+                <legend>Register as a researcher</legend>
             <table>
                 <tr>
-                    <td ><h2>Researcher - Registration</h2></td>
+                    <td><h4 class="col-lg-2 control-label">Email:</h4></td>
+                    <td  class="form-control"><input type="text" name="email" value="" placeholder="email" /></td>
                 </tr>
                 <tr>
-                    <td>Email Name:</td>
-                    <td><input type="text" name="email" value="" placeholder="email" /></td>
+                    <td><h4 class="col-lg-2 control-label">Password:</h4></td>
+                    <td><input type="password" name="password" placeholder="Password" class="form-control"/></td>
                 </tr>
                 <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password" placeholder="Password" /></td>
+                    <td><h4 class="col-lg-2 control-label">Firstname:</h4></td>
+                    <td><input type="text" name="firstName" placeholder="FirstName"  class="form-control"/></td>
                 </tr>
                 <tr>
-                    <td>Firstname:</td>
-                    <td><input type="text" name="firstName" placeholder="FirstName"/></td>
+                    <td><h4 class="col-lg-2 control-label">Lastname:</h4></td>
+                    <td><input type="text" name="lastName" placeholder="LastName" class="form-control"/></td>
                 </tr>
                 <tr>
-                    <td>Lastname:</td>
-                    <td><input type="text" name="lastName" placeholder="LastName"/></td>
+                    <td><h4 class="col-lg-2 control-label">Organization:</h4></td>
+                    <td><input type="text" name="Organization" placeholder="Organization" class="form-control"/></td>
                 </tr>
                 <tr>
-                    <td>Organization:</td>
-                    <td><input type="text" name="Organization" placeholder="Organization"/></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Register" /></td>
+                    <td class="col-lg-10 col-lg-offset-2"><input type="submit" value="Register" class="btn btn-primary control-label"/></td>
                 </tr>
             </table>
+            </fieldset>
         </form>
     </div>
+</div>
+
+<div th:align="center">
+    <img src="../images/LOGOBack.png" />
 </div>
 
 
