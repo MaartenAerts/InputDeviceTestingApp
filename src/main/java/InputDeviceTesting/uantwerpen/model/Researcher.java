@@ -8,9 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -21,7 +19,8 @@ import java.util.Set;
 public class Researcher implements Serializable, Comparable<Researcher> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "RESEARCHER_ID")
     private long id;
 
     private String firstName;
@@ -40,8 +39,18 @@ public class Researcher implements Serializable, Comparable<Researcher> {
     @NotNull
     private String password;
 
-    @ManyToMany(mappedBy = "researchers")
-    private List<Role> roles;
+    //@ManyToMany(mappedBy = "researchers")
+    /*@ManyToMany //you have a collection in your entity, and that collection has one or more items which are not present in the database. By specifying the above options you tell hibernate to save them to the database when saving their parent
+    @JoinTable(                         //anders error
+            name="RESEARCHER_ROLE",
+            joinColumns={@JoinColumn(name="RESEARCHER_ID",
+                    referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID",
+                    referencedColumnName="ID")})*/
+    //@ManyToMany(mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name="RESEARCHER_ROLE", joinColumns={@JoinColumn(name="RESEARCHER_ID")}, inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
+    private List<Role> roles = new ArrayList<Role>();
 
 
     public Researcher() {

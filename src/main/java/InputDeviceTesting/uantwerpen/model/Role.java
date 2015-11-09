@@ -3,6 +3,7 @@ package InputDeviceTesting.uantwerpen.model;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -13,15 +14,18 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "ROLE_ID")
     private Long id;
 
     private String roleName;
 
+    @ManyToMany(mappedBy="roles")
+    private List<Researcher> researchers = new ArrayList<Researcher>();
 
-    @ManyToMany
-    private Set<Researcher> researchers;
+    public Role() {
 
+    }
 
     public Role(String roleName) {
 
@@ -36,29 +40,16 @@ public class Role {
         this.id = id;
     }
 
-    public Set<Researcher> getResearchers() {
-        return researchers;
-    }
-
-    public void setResearchers(Set<Researcher> researchers) {
-        this.researchers = researchers;
-    }
-
     public String getRoleName() {return roleName;}
 
     public void setRoleName(String roleName) {this.roleName = roleName;}
 
+    public List<Researcher> getResearchers() {
+        return researchers;
+    }
 
-    /* private String name;
-    private List<Permission> permissions;
-
-    public Role(String name) {this.name = name;}
-
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
-
-    public List<Permission> getPermissions() {return permissions;}
-
-    public void setPermissions(List<Permission> permissions) {this.permissions = permissions;}*/
+    public void setResearchers(List<Researcher> researchers) {
+        this.researchers = researchers;
+    }
 }
 

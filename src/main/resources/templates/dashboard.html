@@ -36,7 +36,7 @@
     <tr>
         <th>EMAIL</th>
         <th>PASSWORD</th>
-        <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/sort.html'" th:value="Sort" /></th>
+        <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/dashboard?sort=firstname.html'" th:value="Sort" /></th>
         <th>LASTNAME</th>
         <th>ORGANIZATION</th>
         <th>CREATEDDATE</th>
@@ -55,7 +55,7 @@
         <td>
             <table>
                 <tr th:each="role : ${researcher.roles}">
-                    <td th:text="${role.name}"/>
+                    <td th:text="${role.roleName}"/>
                 </tr>
             </table>
         </td>

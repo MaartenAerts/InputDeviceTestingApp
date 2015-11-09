@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 
@@ -29,16 +30,34 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String Register(@ModelAttribute("researcherForm") Researcher researcher){
-        if (researcher != null){
+    public ModelAndView Register(@ModelAttribute("researcherForm") Researcher researcher){
+
+        ModelAndView modelAndView = new ModelAndView();
+        if (researcher.getEmail() != "" && researcher.getEmail() != null && researcher.getPassword() != null){
+
+            System.out.println("Creating researcher " + researcher.getEmail());
+
+            if (researcherRepo.exists(researcher.getId())){
+                System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+                modelAndView.addObject("ResearcherExists","Researcher with this id/email already exists!!!");
+                modelAndView.setViewName("register");
+                return modelAndView;
+            } else if (researcherRepo.findByEmail(researcher.getEmail()) != null){
+                System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+                modelAndView.addObject("ResearcherExists","Researcher with this id/email already exists!!!");
+                modelAndView.setViewName("register");
+                return modelAndView;
+            }
             researcher.setCreatedDate(LocalDateTime.now());
             researcher.setModifiedDate(LocalDateTime.now());
             researcherRepo.save(researcher);
             System.out.println(researcher.toString() + " created");
-            return "login";
+            modelAndView.setViewName("login");
+            return modelAndView;
         }
         System.out.println("Error");
-        return "register";
+        modelAndView.setViewName("register");
+        return modelAndView;
     }
 
 

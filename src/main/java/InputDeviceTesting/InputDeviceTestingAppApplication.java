@@ -12,9 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = RepositoryRestMvcAutoConfiguration.class)
@@ -27,13 +25,24 @@ public class InputDeviceTestingAppApplication {
     }
     @Bean
     CommandLineRunner init(final ResearcherRepo researcherRepo){
-        final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Potsac die 2e", "The anal organ", LocalDateTime.now() , LocalDateTime.now());
-        Role role = new Role("HEUMEUW");
+        final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
+        Role role = new Role("HEADRESEARCHER");
         List<Role> roleList = new ArrayList<Role>();
+        Role testRole = new Role("LEUTROL");
         roleList.add(role);
+        roleList.add(testRole);
         researcher.setRoles(roleList);
-        final Researcher researcher2 = new Researcher("kak@brol.fu","blub","U","Moeder", "U moeder op een fles", LocalDateTime.now() , LocalDateTime.now());
-        final Researcher researcher3 = new Researcher("Lekkere@piemel.fu","pis","Sharia","Belgium", "Allukahbar", LocalDateTime.now() , LocalDateTime.now());
+
+        final Researcher researcher2 = new Researcher("lol@bro.fu","blub","U","Mama", "Familie", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher3 = new Researcher("Lekkere@Soep.fu","Pil","Shakira","Belgium", "Thuis", LocalDateTime.now() , LocalDateTime.now());
+        Role role2 = new Role("RESEARCHER");
+        List<Role> roleList2 = new ArrayList<Role>();
+        roleList2.add(role2);
+        researcher2.setRoles(roleList2);
+        Role role3 = new Role("TESTER");
+        List<Role> roleList3 = new ArrayList<Role>();
+        roleList3.add(role3);
+        researcher3.setRoles(roleList3);
 
         return new CommandLineRunner() {
             @Override
