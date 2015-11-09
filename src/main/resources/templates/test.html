@@ -5,11 +5,20 @@
     <link rel="stylesheet" th:href="@{../css/bootstrap.css}"/>
     <meta charset="UTF-8"/>
     <title>app</title>
-    <!--<script type='../../resources/js/requirebase.js'></script>-->
     <script th:src="@{/js/react.js}"></script>
     <script th:src="@{/js/react-with-addons.js}"></script>
     <script th:src="@{/js/react-dom.js}"></script>
-    <script th:src="@{/js/test.js}"></script>
+    <!--<script th:src="@{/js/test.js}"></script>-->
+    <script th:src="@{/js/require.js}"></script>
+    <script>
+        require.config({
+            baseUrl: "/../js"
+        });
+
+        require( ["test"], function(test) {
+            /*...*/
+        });
+    </script>
 </head>
 <body>
 <div id="canvas_for_test" align="center">
