@@ -39,10 +39,20 @@ public class InputDeviceTestingAppApplication {
         List<Role> roleList2 = new ArrayList<Role>();
         roleList2.add(role2);
         researcher2.setRoles(roleList2);
-        Role role3 = new Role("TESTER");
+        Role role3 = new Role("RESEARCHER");
         List<Role> roleList3 = new ArrayList<Role>();
+        Role role4 = new Role("HEUMEUW");
         roleList3.add(role3);
+        roleList3.add(role4);
         researcher3.setRoles(roleList3);
+
+        final Researcher researcher4 = new Researcher("Kietel@brol.fu","bak","PRefix","Poep", "Kont", LocalDateTime.now() , LocalDateTime.now());
+        Role role5 = new Role("RESEARCHER");
+        List<Role> roleList4 = new ArrayList<Role>();
+        Role testRole2 = new Role("TESTER");
+        roleList4.add(role5);
+        roleList4.add(testRole2);
+        researcher4.setRoles(roleList4);
 
         return new CommandLineRunner() {
             @Override
@@ -50,6 +60,7 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher);
                 researcherRepo.save(researcher2);
                 researcherRepo.save(researcher3);
+                researcherRepo.save(researcher4);
             }
         };
     }
