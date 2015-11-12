@@ -1,6 +1,7 @@
 package InputDeviceTesting.uantwerpen.web;
 
 import InputDeviceTesting.uantwerpen.model.Researcher;
+import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Niels on 6/11/2015.
@@ -50,6 +53,7 @@ public class RegisterController {
             }
             researcher.setCreatedDate(LocalDateTime.now());
             researcher.setModifiedDate(LocalDateTime.now());
+            researcher.addRole(new Role("RESEARCHER"));
             researcherRepo.save(researcher);
             System.out.println(researcher.toString() + " created");
             modelAndView.setViewName("login");

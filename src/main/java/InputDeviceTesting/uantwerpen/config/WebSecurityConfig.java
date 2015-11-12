@@ -2,6 +2,7 @@ package InputDeviceTesting.uantwerpen.config;
 
 import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -21,8 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * Created by Niels on 23/10/2015.
  */
 @Configuration
-@EnableWebMvcSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+//@EnableWebMvcSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static PasswordEncoder encoder;
 
@@ -36,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("login","/**").permitAll() //iedereen mag hierop
+                    .antMatchers("login" , "register").permitAll() //iedereen mag hierop
                     .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()
@@ -49,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+   /* @Order(Ordered.HIGHEST_PRECEDENCE)
     @Configuration
     protected static class AuthenticationSecurity extends GlobalAuthenticationConfigurerAdapter {
 
@@ -60,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         public void init(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(customUserDetailsService);
         }
-    }
+    }*/
 
 
   /*  @Override
@@ -68,20 +70,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }*/
 
-    @Autowired
+   /* @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
                 .withUser("trol").password("trol").roles("RESEARCHER"); // in memory user credentials.
 
+    }*/
+   @Override
+   public UserDetailsService userDetailsServiceBean() {
+       return new CustomUserDetailsService();
+   }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(customUserDetailsService);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        if(encoder == null) {
-            encoder = new BCryptPasswordEncoder();
-        }
 
-        return encoder;
-    }
+
 }
