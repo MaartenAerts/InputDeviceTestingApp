@@ -60,7 +60,7 @@ class Test extends React.Component<propke,stateje>
 
     for (var i = 1; i <= aantalCirkels; i++) {
         let radian = (graden * (i - 1)) * (Math.PI / 180);
-        xCircleArray[i] = radiusBigCircle * Math.cos(radian) + cxBigCircle;
+        xCircleArray[i] = (radiusBigCircle * Math.cos(radian) + cxBigCircle);
         yCircleArray[i] = radiusBigCircle * Math.sin(radian) + cyBigCircle;
 
         if (i <= ((aantalCirkels + 1) / 2)) {
@@ -76,31 +76,31 @@ class Test extends React.Component<propke,stateje>
     //onMouseMove={this.handleMouseMove.bind(this)}
     return <svg ref="svg" id="svgcomponent" {...this.props} onMouseDown={this.handleMouseClick.bind(this)}>
         {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle)}
-        {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24],radius,strokeWidthBigCircle)}
-        {this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25],radius,strokeWidthBigCircle)}
+        {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius)}
+        {this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2],radius)}
+        {this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3],radius)}
+        {this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4],radius)}
+        {this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5],radius)}
+        {this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6],radius)}
+        {this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7],radius)}
+        {this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8],radius)}
+        {this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9],radius)}
+        {this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10],radius)}
+        {this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11],radius)}
+        {this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12],radius)}
+        {this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13],radius)}
+        {this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14],radius)}
+        {this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15],radius)}
+        {this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16],radius)}
+        {this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17],radius)}
+        {this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18],radius)}
+        {this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19],radius)}
+        {this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20],radius)}
+        {this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21],radius)}
+        {this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22],radius)}
+        {this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23],radius)}
+        {this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24],radius)}
+        {this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25],radius)}
     </svg>;
 }
 
@@ -108,7 +108,7 @@ class Test extends React.Component<propke,stateje>
         return <circle cx={cxBigCircle} cy={cyBigCircle} r={radiusBigCircle-10} fill="#ffffff" />;
     }
 
-    renderCircle(id, cx, cy, radius, strokewidth) {
+    renderCircle(id, cx, cy, radius) {
         if (id==1){
             return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth="2" />;
 
@@ -133,10 +133,14 @@ class Test extends React.Component<propke,stateje>
             }
         }
         // pythagoras
-        xWaardeVerschil = (Math.abs(xCircleArray[opTeHalenCirkelId]-xWaardeGeklikt))-(radius/2);
+        // + screen.width/2 omdat de test gecentreerd staat op de pagina
+        // + 450 omdat de positie van het canvas (=width(900)/2) anders niet overeen komt
+        xWaardeVerschil = (Math.abs((screen.width/2 + xCircleArray[opTeHalenCirkelId])- (xWaardeGeklikt+450)) - (radius/2));
         yWaardeVerschil = (Math.abs(yCircleArray[opTeHalenCirkelId]-yWaardeGeklikt))-(radius/2);
         errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil,2) + Math.pow(yWaardeVerschil,2));
         errorArray[idVolgende] = errorWaarde;
+    //    alert("x-waarde te klikken: " + (xCircleArray[opTeHalenCirkelId]) + ", geklikt: " + (xWaardeGeklikt-screen.width/2) + "\ny-waarde te klikken: " + yCircleArray[opTeHalenCirkelId] + ", geklikt: " + yWaardeGeklikt);
+       // alert(xCircleArray[opTeHalenCirkelId] +"\n"+ screen.width +"\n"+ xWaardeGeklikt +"\n"+ xWaardeVerschil);
     }
 
 
@@ -169,6 +173,7 @@ class Test extends React.Component<propke,stateje>
         standardDeviation = Math.sqrt(variantie);
         //alert('Standaardafwijking: ' + standardDeviation);      // OP TE LOSSEN: de laatste cirkel aanklikken zit er precies altijd iets naast, waardoor er altijd een standaardafwijking is..
         var we = 4.133 * standardDeviation;
+        //alert(standardDeviation);
         //alert('We: ' + we);
         var ae = 0;
         var xAfstand = 0;
