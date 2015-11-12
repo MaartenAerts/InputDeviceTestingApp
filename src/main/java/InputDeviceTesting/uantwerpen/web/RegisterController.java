@@ -4,6 +4,8 @@ import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,11 +17,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by Niels on 6/11/2015.
  */
 @Controller
 public class RegisterController {
+
+    private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -38,16 +43,18 @@ public class RegisterController {
         ModelAndView modelAndView = new ModelAndView();
         if (researcher.getEmail() != "" && researcher.getEmail() != null && researcher.getPassword() != null){
 
-            System.out.println("Creating researcher " + researcher.getEmail());
+            logger.debug("Creating researcher " + researcher.getEmail());
 
             if (researcherRepo.exists(researcher.getId())){
-                System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+                //System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+                logger.info("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
                 modelAndView.addObject("ResearcherExists","Researcher with this id/email already exists!!!");
                 modelAndView.setViewName("register");
                 return modelAndView;
             } else if (researcherRepo.findByEmail(researcher.getEmail()) != null){
-                System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
-                modelAndView.addObject("ResearcherExists","Researcher with this id/email already exists!!!");
+                //System.out.println("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+                logger.info("A researcher with id: " + researcher.getId() + " email: " + researcher.getEmail() + " already exist");
+                modelAndView.addObject("ResearcherExists","Email already exist!   ");
                 modelAndView.setViewName("register");
                 return modelAndView;
             }
@@ -55,11 +62,14 @@ public class RegisterController {
             researcher.setModifiedDate(LocalDateTime.now());
             researcher.addRole(new Role("RESEARCHER"));
             researcherRepo.save(researcher);
-            System.out.println(researcher.toString() + " created");
+            //System.out.println(researcher.toString() + " created");
+            logger.debug(researcher.toString() + " created");
             modelAndView.setViewName("login");
             return modelAndView;
         }
-        System.out.println("Error");
+        //System.out.println("Error");
+        logger.error("Error cannot create researcher.");
+        modelAndView.addObject("error","There was an error, please try again.");
         modelAndView.setViewName("register");
         return modelAndView;
     }
