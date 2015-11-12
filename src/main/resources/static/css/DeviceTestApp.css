@@ -12,3 +12,10 @@
     float: none;
     margin: 0 auto;
 }
+
+.timestamp{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    position: relative;
+}
