@@ -4,6 +4,7 @@ import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,19 +32,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String Email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String UserName) throws UsernameNotFoundException {
         UserDetails ud = null;
         for (Researcher researcher : findAll()){
-            if (Email.equals(researcher.getEmail())){
+            if (UserName.equals(researcher.getEmail())){
                 Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
                 for (Role role : researcher.getRoles()) {
                         authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
                 }
 
-                ud = new org.springframework.security.core.userdetails.User(Email, researcher.getPassword(), true, true, true, true,authorities);
+                ud = new org.springframework.security.core.userdetails.User(UserName, researcher.getPassword(), true, true, true, true,authorities);
             }
-        }
-        if (ud == null) throw new UsernameNotFoundException("No Researcher with email '" + Email + "' found!");
+            }
+        if (ud == null) throw new UsernameNotFoundException("No Researcher with email '" + UserName + "' found!");
         return ud;
     }
 

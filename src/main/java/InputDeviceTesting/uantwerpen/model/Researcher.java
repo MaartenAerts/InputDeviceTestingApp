@@ -16,7 +16,7 @@ import java.util.*;
  */
 
 @Entity
-public class Researcher implements Serializable, Comparable<Researcher> {
+public class Researcher implements Serializable, Comparable<Researcher>  {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -48,7 +48,7 @@ public class Researcher implements Serializable, Comparable<Researcher> {
             inverseJoinColumns={@JoinColumn(name="ROLE_ID",
                     referencedColumnName="ID")})*/
     //@ManyToMany(mappedBy = "roles")
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name="RESEARCHER_ROLE", joinColumns={@JoinColumn(name="RESEARCHER_ID")}, inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
     private List<Role> roles = new ArrayList<Role>();
 
@@ -141,6 +141,10 @@ public class Researcher implements Serializable, Comparable<Researcher> {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Role role){
+        this.roles.add(role);
     }
 
     @Override

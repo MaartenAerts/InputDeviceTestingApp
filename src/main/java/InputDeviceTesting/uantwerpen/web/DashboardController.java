@@ -27,8 +27,8 @@ public class DashboardController {
 
     @ModelAttribute("allResearchers")
     public List<Researcher> populateResearchers() {
-        List<Researcher> lol = customUserDetailsService.findAll();
-        return lol;
+        List<Researcher> researcherList = customUserDetailsService.findAll();
+        return researcherList;
     }
 
     @RequestMapping({"/","/home","/index"})

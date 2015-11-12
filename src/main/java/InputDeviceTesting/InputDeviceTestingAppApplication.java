@@ -3,56 +3,59 @@ package InputDeviceTesting;
 import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
+import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = RepositoryRestMvcAutoConfiguration.class)
+@EnableAutoConfiguration
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@ComponentScan
 public class InputDeviceTestingAppApplication {
 
     public static void main(String[] args) {
 
         SpringApplication.run(InputDeviceTestingAppApplication.class, args);
     }
+
+
     @Bean
     CommandLineRunner init(final ResearcherRepo researcherRepo){
         final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
-        Role role = new Role("HEADRESEARCHER");
-        List<Role> roleList = new ArrayList<Role>();
-        Role testRole = new Role("LEUTROL");
-        roleList.add(role);
-        roleList.add(testRole);
-        researcher.setRoles(roleList);
+        researcher.addRole(new Role("HEADRESEARCHER"));
+        researcher.addRole(new Role("LEUTROL"));
 
         final Researcher researcher2 = new Researcher("lol@bro.fu","blub","U","Mama", "Familie", LocalDateTime.now() , LocalDateTime.now());
-        final Researcher researcher3 = new Researcher("Lekkere@Soep.fu","Pil","Shakira","Belgium", "Thuis", LocalDateTime.now() , LocalDateTime.now());
-        Role role2 = new Role("RESEARCHER");
-        List<Role> roleList2 = new ArrayList<Role>();
-        roleList2.add(role2);
-        researcher2.setRoles(roleList2);
-        Role role3 = new Role("RESEARCHER");
-        List<Role> roleList3 = new ArrayList<Role>();
-        Role role4 = new Role("HEUMEUW");
-        roleList3.add(role3);
-        roleList3.add(role4);
-        researcher3.setRoles(roleList3);
+        researcher2.addRole(new Role("RESEARCHER"));
 
-        final Researcher researcher4 = new Researcher("Kietel@brol.fu","bak","PRefix","Poep", "Kont", LocalDateTime.now() , LocalDateTime.now());
-        Role role5 = new Role("RESEARCHER");
-        List<Role> roleList4 = new ArrayList<Role>();
-        Role testRole2 = new Role("TESTER");
-        roleList4.add(role5);
-        roleList4.add(testRole2);
-        researcher4.setRoles(roleList4);
+        final Researcher researcher3 = new Researcher("Lekkere@Soep.fu","Pil","Shakira","Belgium", "Thuis", LocalDateTime.now() , LocalDateTime.now());
+        researcher3.addRole(new Role("RESEARCHER"));
+        researcher3.addRole(new Role("HEUMEUW"));
+
+        final Researcher researcher4 = new Researcher("Kietel@brol.fu","bak","PRefix","test", "test", LocalDateTime.now() , LocalDateTime.now());
+        researcher4.addRole(new Role("RESEARCHER"));
+        researcher4.addRole(new Role("TESTER"));
+        researcher4.addRole(new Role("TROL"));
+
+        final Researcher researcher5 = new Researcher("Re5@brol.fu","pass5","5plep","plop", "kabouter", LocalDateTime.now() , LocalDateTime.now());
+        researcher5.addRole(new Role("HEADRESEARCHER"));
+        researcher5.addRole(new Role("TOPPIE"));
+
 
         return new CommandLineRunner() {
             @Override
@@ -61,6 +64,7 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher2);
                 researcherRepo.save(researcher3);
                 researcherRepo.save(researcher4);
+                researcherRepo.save(researcher5);
             }
         };
     }
