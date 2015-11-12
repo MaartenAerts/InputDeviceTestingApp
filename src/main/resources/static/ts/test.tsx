@@ -10,7 +10,6 @@ var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5
 var radius = radiusBigCircle/7.5;
 var errorMax = 0.5;
 
-
 var xCircleArray = new Array();
 var yCircleArray = new Array();
 var IdArray = new Array();
@@ -76,8 +75,7 @@ class Test extends React.Component<propke,stateje>
 
     //onMouseMove={this.handleMouseMove.bind(this)}
     return <svg ref="svg" id="svgcomponent" {...this.props} onMouseDown={this.handleMouseClick.bind(this)}>
-
-        {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle,strokeWidthBigCircle)}
+        {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle)}
         {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius,strokeWidthBigCircle)}
         {this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2],radius,strokeWidthBigCircle)}
         {this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3],radius,strokeWidthBigCircle)}
@@ -103,21 +101,24 @@ class Test extends React.Component<propke,stateje>
         {this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23],radius,strokeWidthBigCircle)}
         {this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24],radius,strokeWidthBigCircle)}
         {this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25],radius,strokeWidthBigCircle)}
-
     </svg>;
 }
 
-    renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle, strokewidthBigCircle) {
-        return <circle cx={cxBigCircle} cy={cyBigCircle} r={radiusBigCircle-10} fill="#ccffff" stroke="black" strokeWidth={"1"}/>;
+    renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle) {
+        return <circle cx={cxBigCircle} cy={cyBigCircle} r={radiusBigCircle-10} fill="#ffffff" />;
     }
 
     renderCircle(id, cx, cy, radius, strokewidth) {
         if (id==1){
-            return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth={strokewidth} />;
+            return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth="2" />;
 
         }
-        return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth={strokewidth} />;
+
+        if (id<=aantalCirkels) {
+            return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth="2" />;
+        }
     }
+
 
     berekenVerschilCoördinaten(e) {
         // met pythagoras waarde dat ernaast geklikt is berekenen
