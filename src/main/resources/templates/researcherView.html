@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="dashboard.html"><img src="../images/LOGOBack25.png"/></a>
+    </div>
+
+
+    <div class="navbar">
+        <div class="col-xs-6">
+            <ul class="nav">
+                <li><a th:href="@{/logout}" href="login.html"> Log out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <p><br /><br /><br /> </p>
+
+    <h2>Head Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/dashboard?sort=firstname.html'" th:value="Sort" /></th>
+            <th>LASTNAME</th>
+            <th>ORGANIZATION</th>
+            <th>CREATEDDATE</th>
+            <th>MODIFIEDDATE</th>
+            <th>ROLE</th>
+        </tr>
+        <tr th:each="researcher : ${allResearchers}">
+                <span  th:each="roleT : ${researcher.roles}" th:object="${roleT}" th:if="${roleT.roleName} == 'HEADRESEARCHER'">
+                    <td  th:text="${researcher.email}"/>
+                    <td th:text="${researcher.password}"/>
+                    <td th:text="${researcher.firstName}"/>
+                    <td th:text="${researcher.lastName}"/>
+                    <td th:text="${researcher.organization}"/>
+                    <td th:text="${researcher.createdDate}"/>
+                    <td th:text="${researcher.modifiedDate}"/>
+
+                    <td>
+                        <table>
+                            <tr th:each="role : ${researcher.roles}">
+                                <td th:text="${role.roleName}"/>
+                            </tr>
+                        </table>
+                    </td>
+                </span>
+        </tr>
+    </table>
+
+    <p><br /><br /></p>
+
+    <h2>Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/dashboard?sort=firstname.html'" th:value="Sort" /></th>
+            <th>LASTNAME</th>
+            <th>ORGANIZATION</th>
+            <th>CREATEDDATE</th>
+            <th>MODIFIEDDATE</th>
+            <th>ROLE</th>
+        </tr>
+        <tr> </tr>
+        <tr th:each="researcher : ${allResearchers}">
+                <span  th:each="roleT : ${researcher.roles}" th:object="${roleT}" th:if="${roleT.roleName} == 'RESEARCHER'">
+                    <td  th:text="${researcher.email}"/>
+                    <td th:text="${researcher.password}"/>
+                    <td th:text="${researcher.firstName}"/>
+                    <td th:text="${researcher.lastName}"/>
+                    <td th:text="${researcher.organization}"/>
+                    <td th:text="${researcher.createdDate}"/>
+                    <td th:text="${researcher.modifiedDate}"/>
+
+                    <td>
+                        <table>
+                            <tr th:each="role : ${researcher.roles}">
+                                <td th:text="${role.roleName}"/>
+                            </tr>
+                        </table>
+                    </td>
+                </span>
+        </tr>
+    </table>
+
+</div>
+</body>
+
+</html>
