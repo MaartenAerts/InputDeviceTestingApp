@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by Niels on 13/11/2015.
  */
+
 @Entity
 public class ResearchGroup implements Serializable {
 
