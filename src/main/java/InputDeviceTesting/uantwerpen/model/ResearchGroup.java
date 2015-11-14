@@ -7,14 +7,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Niels on 13/11/2015.
  */
 @Entity
-public class ResearchGroup implements Serializable,{
+public class ResearchGroup implements Serializable{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -25,11 +24,11 @@ public class ResearchGroup implements Serializable,{
 
     private String creator;
 
-    @ManyToMany(mappedBy = "researcherGroups")
-    private List<Researcher> researcherList = new ArrayList<Researcher>();
+    @ManyToMany(mappedBy = "researchGroups")
+    private Set<Researcher> researchers;
     private int amountOfResaerchers;
-    @ManyToMany(mappedBy = "researcherGroups")
-    private List<Test> testList = new ArrayList<Test>();
+    @OneToMany(mappedBy = "researchGroup")
+    private Set<Test> tests;
     private int amountOfTests;
 
     @NotNull
@@ -64,16 +63,16 @@ public class ResearchGroup implements Serializable,{
         this.creator = creator;
     }
 
-    public List<Researcher> getResearcherList() {
-        return researcherList;
+    public Set<Researcher> getResearchers() {
+        return researchers;
     }
 
-    public void setResearcherList(List<Researcher> researcherList) {
-        this.researcherList = researcherList;
+    public void setResearchers(Set<Researcher> researchers) {
+        this.researchers = researchers;
     }
 
     public void addResearcher(Researcher researcher){
-        researcherList.add(researcher);
+        researchers.add(researcher);
         amountOfResaerchers++;
     }
 
@@ -89,15 +88,15 @@ public class ResearchGroup implements Serializable,{
         this.amountOfResaerchers = amountOfResaerchers;
     }
 
-    public List<Test> getTestList() {
-        return testList;
+    public Set<Test> getTests() {
+        return tests;
     }
 
-    public void setTestList(List<Test> testList) {
-        this.testList = testList;
+    public void setTests(Set<Test> tests) {
+        this.tests = tests;
     }
     public void addTest(Test test){
-        testList.add(test);
+        tests.add(test);
         amountOfTests++;
     }
 

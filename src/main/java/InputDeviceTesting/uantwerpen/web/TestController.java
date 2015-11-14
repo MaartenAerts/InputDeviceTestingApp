@@ -10,9 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/test/")
 public class TestController {
-    @RequestMapping("test")//moet {id} worde
+    @RequestMapping("test")//Todo:moet {id} worden
     public ModelAndView getTest(){
         return new ModelAndView("test");
     }
+
+    public ModelAndView createTest(){
+        return new ModelAndView();
+    }
+
 
 }
