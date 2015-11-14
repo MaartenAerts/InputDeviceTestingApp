@@ -50,13 +50,13 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
     //@ManyToMany(mappedBy = "roles")
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name="RESEARCHER_ROLE", joinColumns={@JoinColumn(name="RESEARCHER_ID")}, inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<Role>();
 
-    @ManyToMany()
+    /*@ManyToMany()
     private Set<ResearchGroup> researchGroups;
 
-    //@ManyToMany
-    //private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
+    @ManyToMany
+    private List<ResearchGroup> researchGroupList;// = new ArrayList<ResearchGroup>();*/
 
     public Researcher() {
 
@@ -147,6 +147,11 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    public void addRole(Role role){
+        roles.add(role);
+    }
+
 
     @Override
     public boolean equals(Object o) {
