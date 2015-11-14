@@ -55,6 +55,8 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
     @ManyToMany()
     private Set<ResearchGroup> researchGroups;
 
+    //@ManyToMany
+    //private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
 
     public Researcher() {
 

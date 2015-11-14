@@ -6,7 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Niels on 5/10/2015.
@@ -20,19 +21,19 @@ public class Test {
     String title;
     String description;
     @OneToMany(mappedBy = "test")
-    Set<TestSequence> testSequences;
-
-    @ManyToOne
-    ResearchGroup researchGroup;
+    List<TestSequence> testSequences;
 
     @ManyToMany(mappedBy = "tests")
-    Set<TestSubject> testSubjects;
+    List<TestSubject> testSubjects;
     @NotNull
     @CreatedDate
     private LocalDateTime createdDate;
     @NotNull
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    //@ManyToMany
+    //private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
 
     public Test() {
     }
@@ -77,19 +78,19 @@ public class Test {
         this.description = description;
     }
 
-    public Set<TestSequence> getTestSequences() {
+    public List<TestSequence> getTestSequences() {
         return testSequences;
     }
 
-    public void setTestSequences(Set<TestSequence> testSequences) {
+    public void setTestSequences(List<TestSequence> testSequences) {
         this.testSequences = testSequences;
     }
 
-    public Set<TestSubject> getTestSubjects() {
+    public List<TestSubject> getTestSubjects() {
         return testSubjects;
     }
 
-    public void setTestSubjects(Set<TestSubject> testSubjects) {
+    public void setTestSubjects(List<TestSubject> testSubjects) {
         this.testSubjects = testSubjects;
     }
 

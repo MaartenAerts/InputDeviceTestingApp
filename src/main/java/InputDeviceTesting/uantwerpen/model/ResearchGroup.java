@@ -7,13 +7,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Niels on 13/11/2015.
  */
 @Entity
-public class ResearchGroup implements Serializable{
+public class ResearchGroup implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -24,11 +25,11 @@ public class ResearchGroup implements Serializable{
 
     private String creator;
 
-    @ManyToMany(mappedBy = "researchGroups")
-    private Set<Researcher> researchers;
+   // @ManyToMany(mappedBy = "researcherGroups")
+    //private List<Researcher> researcherList = new ArrayList<Researcher>();
     private int amountOfResaerchers;
-    @OneToMany(mappedBy = "researchGroup")
-    private Set<Test> tests;
+    //@ManyToMany(mappedBy = "researcherGroups")
+    //private List<Test> testList = new ArrayList<Test>();
     private int amountOfTests;
 
     @NotNull
@@ -63,18 +64,18 @@ public class ResearchGroup implements Serializable{
         this.creator = creator;
     }
 
-    public Set<Researcher> getResearchers() {
-        return researchers;
-    }
+  /*  public List<Researcher> getResearcherList() {
+        return researcherList;
+    }*/
 
-    public void setResearchers(Set<Researcher> researchers) {
-        this.researchers = researchers;
-    }
+/*    public void setResearcherList(List<Researcher> researcherList) {
+        this.researcherList = researcherList;
+    }*/
 
-    public void addResearcher(Researcher researcher){
-        researchers.add(researcher);
+    /*public void addResearcher(Researcher researcher){
+        researcherList.add(researcher);
         amountOfResaerchers++;
-    }
+    }*/
 
     public void deleteResearcher(String researcherName){
 
@@ -88,17 +89,17 @@ public class ResearchGroup implements Serializable{
         this.amountOfResaerchers = amountOfResaerchers;
     }
 
-    public Set<Test> getTests() {
-        return tests;
-    }
+    /*public List<Test> getTestList() {
+        return testList;
+    }*/
 
-    public void setTests(Set<Test> tests) {
-        this.tests = tests;
-    }
-    public void addTest(Test test){
-        tests.add(test);
+    /*public void setTestList(List<Test> testList) {
+        this.testList = testList;
+    }*/
+    /*public void addTest(Test test){
+        testList.add(test);
         amountOfTests++;
-    }
+    }*/
 
     public int getAmountOfTests() {
         return amountOfTests;
