@@ -90,12 +90,14 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             // pythagoras
             // + screen.width/2 omdat de test gecentreerd staat op de pagina
             // + 450 omdat de positie van het canvas (=width(900)/2) anders niet overeen komt
-            xWaardeVerschil = (Math.abs((screen.width / 2 + xCircleArray[opTeHalenCirkelId]) - (xWaardeGeklikt + 450)) - (radius / 2));
-            yWaardeVerschil = (Math.abs(yCircleArray[opTeHalenCirkelId] - yWaardeGeklikt)) - (radius / 2);
+            // + 115.5 omdat dit de totale grootte is van alle elementen van de page-header (42px + 42px + 9.5px + 1px + 21px)al => veranderd naar 125 na testen
+            xWaardeVerschil = (Math.abs((screen.width / 2 + xCircleArray[opTeHalenCirkelId]) - (xWaardeGeklikt + 450)) - (radius));
+            yWaardeVerschil = (Math.abs(125 + yCircleArray[opTeHalenCirkelId] - yWaardeGeklikt)) - (radius);
             errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil, 2) + Math.pow(yWaardeVerschil, 2));
             errorArray[idVolgende] = errorWaarde;
             //    alert("x-waarde te klikken: " + (xCircleArray[opTeHalenCirkelId]) + ", geklikt: " + (xWaardeGeklikt-screen.width/2) + "\ny-waarde te klikken: " + yCircleArray[opTeHalenCirkelId] + ", geklikt: " + yWaardeGeklikt);
-            // alert(xCircleArray[opTeHalenCirkelId] +"\n"+ screen.width +"\n"+ xWaardeGeklikt +"\n"+ xWaardeVerschil);
+            //alert(xCircleArray[opTeHalenCirkelId] +"\n"+ screen.width +"\n"+ xWaardeGeklikt +"\n"+ xWaardeVerschil);
+            //alert(yCircleArray[opTeHalenCirkelId] + "\n" + yWaardeGeklikt + "\n" + yWaardeVerschil);
         };
         Test.prototype.berekenEindResultatenTest = function () {
             // test afsluiten en alles berekenen
