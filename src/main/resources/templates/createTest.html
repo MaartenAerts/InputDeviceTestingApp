@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div class="container">
+        <div th:class="page-header">
+            <h1>        Test - Create</h1>
+        </div>
+        <div class="col-lg-6 well bs-component col-md-offset-3">
+            <form th:action="@{/createTest}" action="/createTest" method="POST" commandName="createTestForm" >  <!--al deze dingen nog maken!-->
+                <fieldset>
+                    <legend>Create new test</legend>
+                    <table>
+                        <tr>
+                            <td><h4 class="col-lg-2 control-label">Participant Code:</h4></td>
+                            <td  class="form-control"><input type="text" name="participantCode" placeholder="participantCode" /></td>
+                        </tr>
+                        <tr>
+                            <td><h4 class="col-lg-2 control-label">Number of Targets:</h4></td>
+                            <td  class="form-control"><input type="text" name="aantalCirkels" placeholder="aantalCirkels" /></td>  <!--nog omzetten naar dropdown-->
+                        </tr>
+                        <tr>
+                            <td><h4 class="col-lg-2 control-label">Target Amplitude:</h4></td>
+                            <td  class="form-control"><input type="text" name="grootteGroteCirkel" placeholder="grootteGroteCirkel" /></td>
+                        </tr>
+                        <tr>
+                            <td><h4 class="col-lg-2 control-label">Target width:</h4></td>
+                            <td  class="form-control"><input type="text" name="grootteKleineCirkels" placeholder="grootteKleineCirkels" /></td>
+                        </tr>
+                        <tr>
+                            <td><h4 class="col-lg-2 control-label">Error Threshold:</h4></td>
+                            <td  class="form-control"><input type="text" name="errorMaxPercentage" placeholder="errorMaxPercentage" /></td>  <!--nog omzetten naar dropdown %-->
+                        </tr>
+                        <!--NOG IN TE VOEGEN: inputDevice, contrastkleuren?-->
+
+                        <tr>
+                            <td class="col-lg-10 col-lg-offset-2"><input type="submit" value="CreateTest" class="btn btn-primary control-label"/></td>
+                        </tr>
+
+                    </table>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div th:align="center">
+        <img src="../images/LOGOBack.png" th:class="img-responsive"/>
+    </div>
+
+</body>
+</html>
