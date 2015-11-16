@@ -10,6 +10,7 @@ var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5
 var radius = radiusBigCircle/7.5;
 var errorMax = 0.5;
 
+
 var xCircleArray = new Array();
 var yCircleArray = new Array();
 var IdArray = new Array();
