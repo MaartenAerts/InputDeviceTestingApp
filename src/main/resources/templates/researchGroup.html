@@ -1,10 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+    <style>
+        h2 {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
+
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%" />
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Researchers<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/bootstrap2/bootstrap2-activation}">Head Researcher</a></li>
+                            <li><a th:href="@{/bootstrap2/bootstrap2-responsive}">Reasercher</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Researchgroup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/bootstrap3/bootstrap3-activation}">Groep 1</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Test <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/test.html}">Test 2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <div class="dropdown">
+                        <li><a th:href="@{/login?logout}" href="login.html" class="btn btn-default"> Log out</a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <p>
+      <h1 align="center" style="margin-top: 10%"> Research Group </h1>
+    </p>
+
+    <h2 style="margin-top: 5%"> Tests</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>CREATEDDATE</th>
+            <th>MODIFIEDDATE</th>
+        </tr>
+        <tr> </tr>
+        <tr th:each="test : ${Tests}">
+                    <td  th:text="${test.title}"/>
+                    <td th:text="${test.description}"/>
+                    <td th:text="${test.createdDate}"/>
+                    <td th:text="${test.modifiedDate}"/>
+        </tr>
+    </table>
+
+
+    <p>
+        <a th:href="@{/}" class="btn btn-default" role="button">Add Test</a>
+    </p>
+
+    <h2>Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>EMAIL</th>
+            <th>-------</th>
+        </tr>
+        <tr th:each="researcher : ${Researchers}">
+                    <td  th:text="${researcher.email}"/>
+                    <td><a  class="btn btn-default" role="button"> Delete</a></td>
+        </tr>
+
+    </table>
+
+    <h2>New Researcher</h2>
+
+    <form th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
+        <fieldset>
+            <table>
+                <tr>
+                    <td><h4 class="col-lg-2 control-label">Email:</h4></td>
+                    <td><input type="email" name="email" value="" placeholder="email" /></td> <td th:text="${ResearcherExists}" class="text-danger"></td>
+                </tr>
+                <tr>
+                    <td style="margin-left: 10px" /> <td><input type="submit" value="Add Researcher" class="btn btn-primary control-label"/></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+    <input type="button"  onclick="location.href='/saveGroup'"   value="Save Group" />
+    <!--a th:action="@{/saveGroup}" action="/saveGroup" class="btn btn-default" role="button" >Save Group</a  onclick="location.href='/register.htm'" -->
+
+
+</div>
 </body>
+
 </html>

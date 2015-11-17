@@ -44,7 +44,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <div class="dropdown">
-                        <li><a th:href="@{/logout}" href="login.html" class="btn btn-default"> Log out</a></li>
+                        <li><a th:href="@{/logout}"  class="btn btn-default"> Log out</a></li>
                     </div>
                 </ul>
             </div>
@@ -52,9 +52,11 @@
     </nav>
 
 
-    <p><br /><br /><br /> </p>
+    <p>
+        <a th:href="@{/researchGroup}" class="btn btn-default" role="button" style="margin-top: 10%">New Research Group</a>
+    </p>
 
-    <h2>Head Researchers</h2>
+    <h2 style="margin-top: 5%">Head Researchers</h2>
     <table class="table table-striped">
         <tr>
             <th>EMAIL</th>
@@ -66,7 +68,7 @@
             <th>MODIFIEDDATE</th>
             <th>ROLE</th>
         </tr>
-        <tr th:each="researcher : ${allResearchers}">
+        <tr th:each="researcher : ${allResearcherGroups}">
                 <span  th:each="roleT : ${researcher.roles}" th:object="${roleT}" th:if="${roleT.roleName} == 'HEADRESEARCHER'">
                     <td  th:text="${researcher.email}"/>
                     <td th:text="${researcher.password}"/>

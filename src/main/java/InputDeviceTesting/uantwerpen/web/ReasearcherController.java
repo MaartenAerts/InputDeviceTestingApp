@@ -28,16 +28,16 @@ public class ReasearcherController {
         return researcherList;
     }
 
-    @RequestMapping("/researcherView")
-    public String ShowDashboardPage(){return "researcherView";}
+    @RequestMapping("/researchers")
+    public String ShowDashboardPage(){return "researchers";}
 
-    @RequestMapping(value = "/researcherView?sort=firstname", method = RequestMethod.GET)
-    public String Sort(@RequestParam(value="name", required=false, defaultValue="World") String sort, Model model) {
+    @RequestMapping(value = "/researcherView?sort=firstName", method = RequestMethod.GET)
+    public String Sort(@RequestParam(value="firstName", required=false, defaultValue="World") String sort, Model model) {
 
         List<Researcher> researcherList = customUserDetailsService.findAll();
         Collections.sort(researcherList, Researcher.ResearcherNameComparator);
         model.addAttribute("allResearchers", researcherList);
-        return "researcherView";
+        return "researchers";
     }
 
 }

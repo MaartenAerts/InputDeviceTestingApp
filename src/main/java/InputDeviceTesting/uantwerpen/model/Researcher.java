@@ -39,24 +39,12 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
     @NotNull
     private String password;
 
-    //@ManyToMany(mappedBy = "researchers")
-    /*@ManyToMany //you have a collection in your entity, and that collection has one or more items which are not present in the database. By specifying the above options you tell hibernate to save them to the database when saving their parent
-    @JoinTable(                         //anders error
-            name="RESEARCHER_ROLE",
-            joinColumns={@JoinColumn(name="RESEARCHER_ID",
-                    referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID",
-                    referencedColumnName="ID")})*/
-    //@ManyToMany(mappedBy = "roles")
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name="RESEARCHER_ROLE", joinColumns={@JoinColumn(name="RESEARCHER_ID")}, inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
     private List<Role> roles = new ArrayList<Role>();
 
-    /*@ManyToMany()
-    private Set<ResearchGroup> researchGroups;
-
-    @ManyToMany
-    private List<ResearchGroup> researchGroupList;// = new ArrayList<ResearchGroup>();*/
+    @ManyToMany(mappedBy = "researcherList")
+    private List<ResearchGroup> researchGroupList;
 
     public Researcher() {
 
@@ -152,8 +140,11 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
         roles.add(role);
     }
 
+    public List<ResearchGroup> getResearchGroupList() {return researchGroupList;}
 
-    @Override
+    public void setResearchGroupList(List<ResearchGroup> researchGroupList) {this.researchGroupList = researchGroupList;}
+
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -175,6 +166,11 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
         if (!getPassword().equals(that.getPassword())) return false;
         return (!(getRoles() != null ? !getRoles().equals(that.getRoles()) : that.getRoles() != null));
 
+    }*/
+
+    @Override
+    public boolean equals(Object o){
+        return this.email.equals(((Researcher) o).email);
     }
 
     @Override

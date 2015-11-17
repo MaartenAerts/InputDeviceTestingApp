@@ -2386,6 +2386,30 @@
       <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
+    <table name="research_group" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="researchergoup_id" sqlType="bigserial" precision="19" scale="0" nullable="false" jdbcType="-5" def="bmV4dHZhbCgncmVzZWFyY2hfZ3JvdXBfcmVzZWFyY2hlcmdvdXBfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="amount_of_resaerchers" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="amount_of_tests" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_date" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
+      <column name="creator" sqlType="bytea" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="group_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="modified_date" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
+      <primary-key name="research_group_pkey" columns="researchergoup_id"/>
+      <exported-key name="fk_g9m5jalmjovh5bkv1naxvfqsg" table="researcher_research_group_list" schema="public" catalog="POSTGRESQL" columns="research_group_list_researchergoup_id"/>
+      <exported-key name="fk_euaobwlpl4eihiudawsw1b9gu" table="test_research_group_list" schema="public" catalog="POSTGRESQL" columns="research_group_list_researchergoup_id"/>
+    </table>
+    <table name="research_group_researchergoup_id_seq" schema="public" catalog="POSTGRESQL" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="researcher" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="researcher_id" sqlType="bigserial" precision="19" scale="0" nullable="false" jdbcType="-5" def="bmV4dHZhbCgncmVzZWFyY2hlcl9yZXNlYXJjaGVyX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
       <column name="created_date" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
@@ -2396,8 +2420,32 @@
       <column name="organization" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="password" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="researcher_pkey" columns="researcher_id"/>
+      <exported-key name="fk_sk1vvm09kopx0pr48t1wip5go" table="researcher_research_group_list" schema="public" catalog="POSTGRESQL" columns="researcher_list_researcher_id"/>
       <exported-key name="fk_5uamngc1e2ltpgdkivskdc1mw" table="researcher_role" schema="public" catalog="POSTGRESQL" columns="researcher_id"/>
       <index name="uk_cbfv98xw52qivjsihvyjgqtks" unique="true" columns="email"/>
+    </table>
+    <table name="researcher_research_group_list" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="researcher_list_researcher_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="research_group_list_researchergoup_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <foreign-key name="fk_g9m5jalmjovh5bkv1naxvfqsg" columns="research_group_list_researchergoup_id" ref-table="research_group" ref-schema="public" ref-catalog="" ref-columns="researchergoup_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_sk1vvm09kopx0pr48t1wip5go" columns="researcher_list_researcher_id" ref-table="researcher" ref-schema="public" ref-catalog="" ref-columns="researcher_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="researcher_research_groups" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="researcher_researcher_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="research_groups_researchergoup_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="researcher_research_groups_pkey" columns="researcher_researcher_id,research_groups_researchergoup_id"/>
+    </table>
+    <table name="researcher_researcher_id_seq" schema="public" catalog="POSTGRESQL" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
     <table name="researcher_role" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="researcher_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
@@ -2406,10 +2454,22 @@
       <foreign-key name="fk_se8nry1q119noe00w47ta9grw" columns="role_id" ref-table="role" ref-schema="public" ref-catalog="" ref-columns="role_id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="role" schema="public" catalog="POSTGRESQL" type="TABLE">
-      <column name="role_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="role_id" sqlType="bigserial" precision="19" scale="0" nullable="false" jdbcType="-5" def="bmV4dHZhbCgncm9sZV9yb2xlX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
       <column name="role_name" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="role_pkey" columns="role_id"/>
       <exported-key name="fk_se8nry1q119noe00w47ta9grw" table="researcher_role" schema="public" catalog="POSTGRESQL" columns="role_id"/>
+    </table>
+    <table name="role_role_id_seq" schema="public" catalog="POSTGRESQL" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
     <table name="test" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
@@ -2418,8 +2478,15 @@
       <column name="modified_date" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
       <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="test_pkey" columns="id"/>
+      <exported-key name="fk_bwy9mgdds284l85kdedreutom" table="test_research_group_list" schema="public" catalog="POSTGRESQL" columns="test_list_id"/>
       <exported-key name="fk_lg7673r8ls7rqxkv426mqbljn" table="test_sequence" schema="public" catalog="POSTGRESQL" columns="test_id"/>
       <exported-key name="fk_fx75d002ep2qqixb3e4u1hfxb" table="test_subject_tests" schema="public" catalog="POSTGRESQL" columns="tests_id"/>
+    </table>
+    <table name="test_research_group_list" schema="public" catalog="POSTGRESQL" type="TABLE">
+      <column name="test_list_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="research_group_list_researchergoup_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <foreign-key name="fk_euaobwlpl4eihiudawsw1b9gu" columns="research_group_list_researchergoup_id" ref-table="research_group" ref-schema="public" ref-catalog="" ref-columns="researchergoup_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_bwy9mgdds284l85kdedreutom" columns="test_list_id" ref-table="test" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="test_sequence" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>

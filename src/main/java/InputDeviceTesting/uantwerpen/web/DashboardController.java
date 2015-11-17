@@ -1,6 +1,8 @@
 package InputDeviceTesting.uantwerpen.web;
 
+import InputDeviceTesting.uantwerpen.model.ResearchGroup;
 import InputDeviceTesting.uantwerpen.model.Researcher;
+import InputDeviceTesting.uantwerpen.repo.ResearchGroupRepo;
 import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.hibernate.pretty.MessageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,13 @@ public class DashboardController {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    @Autowired
+    private ResearchGroupRepo researchGroupRepo;
+
     @ModelAttribute("allResearcherGroups")
-    public List<Researcher> populateResearchers() {
-        List<Researcher> researcherList = customUserDetailsService.findAll();
-        return researcherList;
+    public List<ResearchGroup> populateResearcherGroups() {
+        List<ResearchGroup> researchGroupList = researchGroupRepo.findAll();
+        return researchGroupList;
     }
 
     @RequestMapping({"/","/home","/index"})

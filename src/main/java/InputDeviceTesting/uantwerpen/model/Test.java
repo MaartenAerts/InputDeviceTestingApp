@@ -32,8 +32,8 @@ public class Test {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
-    //@ManyToMany
-    //private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
+    @ManyToMany(mappedBy = "testList")
+    private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
 
     public Test() {
     }
@@ -93,6 +93,10 @@ public class Test {
     public void setTestSubjects(List<TestSubject> testSubjects) {
         this.testSubjects = testSubjects;
     }
+
+    public List<ResearchGroup> getResearchGroupList() {return researchGroupList;}
+
+    public void setResearchGroupList(List<ResearchGroup> researchGroupList) {this.researchGroupList = researchGroupList;}
 
     @Override
     public String toString() {

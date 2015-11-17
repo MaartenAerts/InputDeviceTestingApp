@@ -31,12 +31,12 @@ public class InputDeviceTestingAppApplication {
         researcher.addRole(new Role("HEADRESEARCHER"));
         researcher.addRole(new Role("LEUTROL"));
 
-        final Researcher researcher2 = new Researcher("lol@bro.fu","blub","U","Mama", "Familie", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher2 = new Researcher("lol@bro.fu","blub","PAPA","Mama", "Familie", LocalDateTime.now() , LocalDateTime.now());
         researcher2.addRole(new Role("RESEARCHER"));
 
         final Researcher researcher3 = new Researcher("Lekkere@Soep.fu","Pil","Shakira","Belgium", "Thuis", LocalDateTime.now() , LocalDateTime.now());
         researcher3.addRole(new Role("RESEARCHER"));
-        researcher3.addRole(new Role("HEUMEUW"));
+        researcher3.addRole(new Role("BLUB"));
 
         final Researcher researcher4 = new Researcher("Kietel@brol.fu","bak","PRefix","test", "test", LocalDateTime.now() , LocalDateTime.now());
         researcher4.addRole(new Role("RESEARCHER"));
@@ -55,6 +55,8 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher2);
                 researcherRepo.save(researcher3);
                 researcherRepo.save(researcher4);
+                researcherRepo.save(researcher5);
+                researcher5.addRole(new Role("LOLOLOLO"));
                 researcherRepo.save(researcher5);
             }
         };

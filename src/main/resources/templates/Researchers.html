@@ -1,10 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%" />
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Researchers<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/bootstrap2/bootstrap2-activation}">Head Researcher</a></li>
+                            <li><a th:href="@{/bootstrap2/bootstrap2-responsive}">Reasercher</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Researchgroup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/bootstrap3/bootstrap3-activation}">Groep 1</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Test <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/test.html}">Test 2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <div class="dropdown">
+                        <li><a th:href="@{/logout}" href="login.html" class="btn btn-default"> Log out</a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <p><br /><br /><br /> </p>
+
+    <h2>Head Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/dashboard?sort=firstname.html'" th:value="Sort" /></th>
+            <th>LASTNAME</th>
+            <th>ORGANIZATION</th>
+            <th>CREATEDDATE</th>
+            <th>MODIFIEDDATE</th>
+            <th>ROLE</th>
+        </tr>
+        <tr th:each="researcher : ${allResearchers}">
+                <span  th:each="roleT : ${researcher.roles}" th:object="${roleT}" th:if="${roleT.roleName} == 'HEADRESEARCHER'">
+                    <td  th:text="${researcher.email}"/>
+                    <td th:text="${researcher.password}"/>
+                    <td th:text="${researcher.firstName}"/>
+                    <td th:text="${researcher.lastName}"/>
+                    <td th:text="${researcher.organization}"/>
+                    <td th:text="${researcher.createdDate}"/>
+                    <td th:text="${researcher.modifiedDate}"/>
+
+                    <td>
+                        <table>
+                            <tr th:each="role : ${researcher.roles}">
+                                <td th:text="${role.roleName}"/>
+                            </tr>
+                        </table>
+                    </td>
+                </span>
+        </tr>
+    </table>
+
+    <p><br /><br /></p>
+
+    <h2>Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>FIRSTNAME &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary btn-xs"  onclick="location.href='/dashboard?sort=firstname.html'" th:value="Sort" /></th>
+            <th>LASTNAME</th>
+            <th>ORGANIZATION</th>
+            <th>CREATEDDATE</th>
+            <th>MODIFIEDDATE</th>
+            <th>ROLE</th>
+        </tr>
+        <tr> </tr>
+        <tr th:each="researcher : ${allResearchers}">
+                <span  th:each="roleT : ${researcher.roles}" th:object="${roleT}" th:if="${roleT.roleName} == 'RESEARCHER'">
+                    <td  th:text="${researcher.email}"/>
+                    <td th:text="${researcher.password}"/>
+                    <td th:text="${researcher.firstName}"/>
+                    <td th:text="${researcher.lastName}"/>
+                    <td th:text="${researcher.organization}"/>
+                    <td th:text="${researcher.createdDate}"/>
+                    <td th:text="${researcher.modifiedDate}"/>
+
+                    <td>
+                        <table>
+                            <tr th:each="role : ${researcher.roles}">
+                                <td th:text="${role.roleName}"/>
+                            </tr>
+                        </table>
+                    </td>
+                </span>
+        </tr>
+    </table>
+
+</div>
 </body>
+
 </html>
