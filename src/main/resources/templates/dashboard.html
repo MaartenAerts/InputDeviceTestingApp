@@ -4,52 +4,46 @@
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 
-
 <div class="container">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%" />
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Researchers<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/dashboard.html}">Head Researcher</a></li>
-                            <li><a th:href="@{/bootstrap2/bootstrap2-responsive}">Researcher</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Researchgroup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/bootstrap3/bootstrap3-activation}">Groep 1</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Test <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/test/test.html}">Test 2</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <div class="dropdown">
-                        <li><a th:href="@{/logout}"  class="btn btn-default"> Log out</a></li>
-                    </div>
-                </ul>
-            </div>
+    <div class="navbar navbar-default navbar-fixed-top">
+    <ul class="nav navbar-default  navbar-collapse  nav-pills"  style="margin-left:10% ">
+        <div class="navbar-header" th:href="@{/dashboard.html}">
+            <img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%;" />
         </div>
-    </nav>
+        <li class="dropdown" style="margin-left: 2%">
+            <h4 href="#" data-toggle="dropdown" class="dropdown-toggle"> Researchers <b class="caret"></b></h4>
+            <ul class="dropdown-menu" id="menu1">
+                <li><a th:href="@{/dashboard.html}">Head Researcher</a></li>
+                <li><a th:href="@{/bootstrap2/bootstrap2-responsive}">Researcher</a></li>
+            </ul>
+        </li>
+        <li class="dropdown" style="margin-left: 2%">
+            <h4 href="#" class="dropdown-toggle" data-toggle="dropdown">Researchgroup <b class="caret"></b></h4>
+            <ul class="dropdown-menu">
+                <li><a th:href="@{/bootstrap3/bootstrap3-activation}">Groep 1</a></li>
+            </ul>
+        </li>
+        <li class="dropdown" style="margin-left: 2%">
+            <h4 href="#" class="dropdown-toggle" data-toggle="dropdown">Test <b class="caret"></b></h4>
+            <ul class="dropdown-menu">
+                <li><a th:href="@{/test/test.html}">Test 2</a></li>
+            </ul>
+        </li>
+        <div class="nav navbar-right" style="margin-right:12%">
+            <li><h4 th:href="@{/logout}" > Log out</h4></li>
+        </div>
+    </ul>
+
+    </div>
+
 
 
     <p>
