@@ -15,18 +15,14 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%" />
+                <a  href="dashboard.html"><img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%" /></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse nav-pills" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">Researchers<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/dashboard.html}">Head Researcher</a></li>
-                            <li><a th:href="@{/bootstrap2/bootstrap2-responsive}">Researcher</a></li>
-                        </ul>
+                        <a class="btn btn-default" th:href="@{/researchers.html}">Researchers</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">Researchgroup <b class="caret"></b></a>
