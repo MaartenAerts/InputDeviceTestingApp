@@ -95,16 +95,20 @@ public class ResearchGroupController {
 
     @RequestMapping(value = "saveGroup", method = RequestMethod.POST)
     public String SaveGroup(@ModelAttribute("saveGroupForm") ResearchGroup researchGroup, Model model,Principal principal) {
-        String researcherLogin = principal.getName();// get the username/email after login
-        logger.info("Adding researchGroup");
-        researchGroup.setCreator(researcherRepo.findByEmail(researcherLogin));
-        researchGroup.setCreatedDate(LocalDateTime.now());
-        researchGroup.setModifiedDate(LocalDateTime.now());
-        researchGroup.setAmountOfResearchers(researcherList.size());
-        researchGroup.setResearcherList(researcherList);
-        researchGroupRepo.save(researchGroup);
-        return "redirect:/dashboard";
 
+        if (researchGroup.getGroupName() != "" && !researchGroup.getGroupName().isEmpty()) {
+            String researcherLogin = principal.getName();// get the username/email after login
+            logger.info("Adding researchGroup");
+            researchGroup.setCreator(researcherRepo.findByEmail(researcherLogin));
+            researchGroup.setCreatedDate(LocalDateTime.now());
+            researchGroup.setModifiedDate(LocalDateTime.now());
+            researchGroup.setAmountOfResearchers(researcherList.size());
+            researchGroup.setResearcherList(researcherList);
+            researchGroupRepo.save(researchGroup);
+            return "redirect:/dashboard";
+        }
+        model.addAttribute("Error","Group Name is required!");
+        return "researchGroup";
     }
 
 }
