@@ -100,7 +100,7 @@ public class ResearchGroupController {
         researchGroup.setCreator(researcherRepo.findByEmail(researcherLogin));
         researchGroup.setCreatedDate(LocalDateTime.now());
         researchGroup.setModifiedDate(LocalDateTime.now());
-        researchGroup.setAmountOfResaerchers(researcherList.size());
+        researchGroup.setAmountOfResearchers(researcherList.size());
         researchGroup.setResearcherList(researcherList);
         researchGroupRepo.save(researchGroup);
         return "redirect:/dashboard";

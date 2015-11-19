@@ -65,12 +65,14 @@
             <th>MODIFIEDDATE</th>
         </tr>
         <tr th:each="researcherGroup : ${allResearcherGroups}">
-
+              <span  th:each="creatorData : ${researcherGroup.Creator}">
                     <td th:text="${researcherGroup.groupName}"/>
-                    <!--td th:value="${researcherGroup.amountOfResearchers}"/-->
+                    <td th:text="${researcherGroup.amountOfResearchers}"/>
+                    <td th:text="${researcherGroup.amountOfTests}"/>
+                    <td th:text="${creatorData.Email}"/>
                     <td th:text="${researcherGroup.createdDate}"/>
                     <td th:text="${researcherGroup.modifiedDate}"/>
-
+              </span>
         </tr>
     </table>
 

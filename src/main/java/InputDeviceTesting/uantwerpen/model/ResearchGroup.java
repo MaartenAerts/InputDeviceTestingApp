@@ -84,11 +84,12 @@ public class ResearchGroup implements Serializable {
 
     }
 
-    public int getAmountOfResaerchers() {
+    public int getAmountOfResearchers() {
+       amountOfResearchers = researcherList.size();
         return amountOfResearchers;
     }
 
-    public void setAmountOfResaerchers(int amountOfResaerchers) {
+    public void setAmountOfResearchers(int amountOfResaerchers) {
         this.amountOfResearchers = amountOfResaerchers;
     }
 
@@ -105,6 +106,7 @@ public class ResearchGroup implements Serializable {
     }
 
     public int getAmountOfTests() {
+        amountOfTests = testList.size();
         return amountOfTests;
     }
 

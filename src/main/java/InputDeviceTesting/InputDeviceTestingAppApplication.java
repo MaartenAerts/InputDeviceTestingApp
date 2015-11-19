@@ -1,7 +1,9 @@
 package InputDeviceTesting;
 
+import InputDeviceTesting.uantwerpen.model.ResearchGroup;
 import InputDeviceTesting.uantwerpen.model.Researcher;
 import InputDeviceTesting.uantwerpen.model.Role;
+import InputDeviceTesting.uantwerpen.repo.ResearchGroupRepo;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +24,7 @@ public class InputDeviceTestingAppApplication {
 
 
     @Bean
-    CommandLineRunner init(final ResearcherRepo researcherRepo){
+    CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo){
         final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
         researcher.addRole(new Role("HEADRESEARCHER"));
         researcher.addRole(new Role("LEUTROL"));
@@ -43,6 +45,12 @@ public class InputDeviceTestingAppApplication {
         researcher5.addRole(new Role("HEADRESEARCHER"));
         researcher5.addRole(new Role("TOPPIE"));
 
+        final ResearchGroup researchGroup1 = new ResearchGroup();
+        researchGroup1.setCreator(researcher);
+        researchGroup1.setGroupName("Group Name");
+        researchGroup1.setCreatedDate(LocalDateTime.now());
+        researchGroup1.setModifiedDate(LocalDateTime.now());
+
 
         return new CommandLineRunner() {
             @Override
@@ -54,6 +62,8 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher5);
                 researcher5.addRole(new Role("LOLOLOLO"));
                 researcherRepo.save(researcher5);
+
+                researchGroupRepo.save(researchGroup1);
             }
         };
     }
