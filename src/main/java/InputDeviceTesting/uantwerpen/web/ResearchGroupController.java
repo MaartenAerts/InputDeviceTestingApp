@@ -45,7 +45,7 @@ public class ResearchGroupController {
 
     private ResearchGroup researchGroup;
 
-    private List<Researcher> researcherList = new ArrayList<Researcher>();
+    private List<Researcher> researcherList;
 
     /*@ModelAttribute("Researchers")
     public List<Researcher> populateResearchers(Researcher researcher) {
@@ -62,6 +62,7 @@ public class ResearchGroupController {
     @RequestMapping("/researchGroup")
     public String ShowResearchGroupPage(){
         researchGroup = new ResearchGroup();
+        researcherList = new ArrayList<Researcher>();
         return "researchGroup";
     }
 

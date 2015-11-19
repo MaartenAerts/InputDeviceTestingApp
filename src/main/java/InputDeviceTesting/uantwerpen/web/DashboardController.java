@@ -6,6 +6,10 @@ import InputDeviceTesting.uantwerpen.repo.ResearchGroupRepo;
 import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.hibernate.pretty.MessageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,11 +42,12 @@ public class DashboardController {
     }
 
     @RequestMapping({"/","/home","/index"})
-    public String goToDashboardpage(){
+    public String goToDashboardpage(    ){
         return "redirect:/dashboard";
     }
     @RequestMapping("/dashboard")
-    public String ShowDashboardPage(){
+    public String ShowDashboardPage(Principal principal){
+        String researcherLogin = principal.getName();// get the username/email after login
         return "dashboard";
     }
 
