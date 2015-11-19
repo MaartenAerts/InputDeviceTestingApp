@@ -5,18 +5,14 @@ import InputDeviceTesting.uantwerpen.model.Role;
 import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import java.time.LocalDateTime;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@ComponentScan
 public class InputDeviceTestingAppApplication {
 
     public static void main(String[] args) {
