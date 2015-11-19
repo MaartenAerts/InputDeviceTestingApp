@@ -5,7 +5,7 @@ import * as React from 'react'
 import * as ReactDom from 'react-dom'
 
 // in te stellen parameters via applicatie
-var aantalCirkels = 10;
+var aantalCirkels = 7;      // enkel oneven toelaten via createTest !!!
 var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
 var radius = radiusBigCircle/7.5;
 var errorMax = 0.5;
@@ -17,6 +17,7 @@ var IdArray = new Array();
 
 var id = 1;
 var idVolgende = 1;
+var idLaatsteIsEersteCirkel = false;
 
 var startTime = 0;
 var endTime = 0;
@@ -33,8 +34,14 @@ var errorWaarde = 0;
 var standardDeviation = 0;
 var opTeHalenCirkelIdVolgende = 0;
 
-
 var aantalErrors = 0;
+
+var xWaardeVerschoven = 0;
+var yWaardeVerschoven = 0;
+var xWaardeVerschovenPlaats = 0;
+var yWaardeVerschovenPlaats = 0;
+var trackingArrayX = new Array();
+var trackingArrayY = new Array();
 
 class Test extends React.Component<propke,stateje>
 {
@@ -75,7 +82,7 @@ class Test extends React.Component<propke,stateje>
     }
 
     //onMouseMove={this.handleMouseMove.bind(this)}
-    return <svg ref="svg" id="svgcomponent" {...this.props} onMouseDown={this.handleMouseClick.bind(this)}>
+    return <svg ref="svg" id="svgcomponent" {...this.props} onMouseDown={this.handleMouseClick.bind(this)} onMouseMove={this.trackMousePosition.bind(this)}>
         {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle)}
         {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius)}
         {this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2],radius)}
@@ -122,6 +129,7 @@ class Test extends React.Component<propke,stateje>
 
 
     berekenVerschilCoördinaten(e) {
+        //alert('verschil!')
         // met pythagoras waarde dat ernaast geklikt is berekenen
         // coördinaten waar geklikt is ophalen
         xWaardeGeklikt = e.pageX;
@@ -141,6 +149,7 @@ class Test extends React.Component<propke,stateje>
         yWaardeVerschil = (Math.abs(125 + yCircleArray[opTeHalenCirkelId]-yWaardeGeklikt))-(radius);
         errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil,2) + Math.pow(yWaardeVerschil,2));
         errorArray[idVolgende] = errorWaarde;
+        //alert(errorWaarde)
     //    alert("x-waarde te klikken: " + (xCircleArray[opTeHalenCirkelId]) + ", geklikt: " + (xWaardeGeklikt-screen.width/2) + "\ny-waarde te klikken: " + yCircleArray[opTeHalenCirkelId] + ", geklikt: " + yWaardeGeklikt);
         //alert(xCircleArray[opTeHalenCirkelId] +"\n"+ screen.width +"\n"+ xWaardeGeklikt +"\n"+ xWaardeVerschil);
         //alert(yCircleArray[opTeHalenCirkelId] + "\n" + yWaardeGeklikt + "\n" + yWaardeVerschil);
@@ -155,7 +164,7 @@ class Test extends React.Component<propke,stateje>
         timeGemiddelde = timeSeconds/aantalCirkels;
         //alert('Dus time per trial: ' + timeGemiddelde)
         //  alert('Lengte errorArray: ' + errorArray.length.toString());
-        //alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10])
+        alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7])
         //standard deviation berekenen
         var sum = 0;
         var average = 0;
@@ -205,7 +214,7 @@ class Test extends React.Component<propke,stateje>
             //alert('Afstand tussen cirkel ' + k + ' en ' + (k+1) + ': ' + afTeLeggenAfstand);
         }
 
-        ae =  afTeLeggenAfstand/(aantalCirkels-1);
+        ae =  afTeLeggenAfstand/(aantalCirkels);
         var ide = 0;
         if (we != 0) {
             ide = Math.log(ae/we) / Math.LN2;
@@ -215,6 +224,8 @@ class Test extends React.Component<propke,stateje>
         //alert('Ide: ' + ae);
         var throughput = ide/timeGemiddelde;
         //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
+
+        this.showPathPixels();
         this.toonResultaten(ae,we,ide,throughput);
 
     }
@@ -258,16 +269,22 @@ class Test extends React.Component<propke,stateje>
 
         id = parseInt(e.target.id);
         if (idVolgende == 1) {
-            startTime = Date.now();
-            //alert('Test is gestart')
+            if(idLaatsteIsEersteCirkel == false) {
+                startTime = Date.now();
+
+              //  alert('Test is gestart')
+            }
         }
         // || idVolgende == aantalCirkels dient voor als je fout klikt bij de laatste cirkel, dat de test toch wordt afgesloten
-        if((id == aantalCirkels && idVolgende == aantalCirkels) || idVolgende == aantalCirkels){
+        if((id == aantalCirkels && idVolgende == aantalCirkels) || idVolgende == aantalCirkels || (idVolgende == 1 && idLaatsteIsEersteCirkel == true) || (id == 1 && idLaatsteIsEersteCirkel == true)){
             //werd er op de laatste niet geklikt?
-            if(id != aantalCirkels) {
+            if(id != aantalCirkels && idLaatsteIsEersteCirkel == false) {
                 aantalErrors++;
             }
-            this.berekenVerschilCoördinaten(e);
+            //alert('is da van hier?')
+            if (id != idVolgende) {
+                this.berekenVerschilCoördinaten(e);
+            }
 
             //gefoefel ivm de errorwaarde van de laatste cirkel
             // deze kreeg ander altijd een waarde, ookal werd er op geklikt
@@ -275,24 +292,39 @@ class Test extends React.Component<propke,stateje>
                 errorArray[id] = 0;
             }
 
-            if (errorMax >= (aantalErrors/aantalCirkels)) {
-                this.berekenEindResultatenTest();
-            } else {
-                alert('Je errorpercentage bedraagt ' + (aantalErrors/aantalCirkels*100) + '%, maximum toegelaten is ' + errorMax*100 + '%!\nOpnieuw!')
-                window.location.reload();
+            if (idLaatsteIsEersteCirkel == true) {
+                if (errorMax >= (aantalErrors / aantalCirkels)) {
+                 //   alert('resultaten worden weer berekend!');
+                    this.berekenEindResultatenTest();
+                } else {
+                    alert('Je errorpercentage bedraagt ' + (aantalErrors / aantalCirkels * 100) + '%, maximum toegelaten is ' + errorMax * 100 + '%!\nOpnieuw!')
+                    window.location.reload();
+                }
             }
 
+            // logica om terug te keren bij de eerste cirkel als laatste aan te klikken
+            if (idLaatsteIsEersteCirkel == false) {
+                idVolgende = 1;
+                idLaatsteIsEersteCirkel = true;
+            }
         }
 
         // deze if staat laatst omdat ander bij het aanklikken van de laatste bol de test niet wordt afgesloten
         //kijken of je op de juiste bol klikt, anders is dit een fout
         if (id == idVolgende) {
             e.target.setAttribute('fill', 'yellow');
-            //volgende aan te klikken bol groen kleuren
-            document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
-            //errorArray vullen met 0, want er is juist geklikt
-            errorArray[id] = 0;
-        } else if (idVolgende!=aantalCirkels) {
+            if (idLaatsteIsEersteCirkel == false) {
+                //volgende aan te klikken bol groen kleuren
+                document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
+                //errorArray vullen met 0, want er is juist geklikt
+                errorArray[id] = 0;
+            } else if (idLaatsteIsEersteCirkel == true) {
+                //laatste positie in de errorArray (die de eerste cirkel als laatste weer aanklikt) op 0 zetten
+               // alert('hier')
+                errorArray[aantalCirkels+1] = 0;
+            }
+
+        } else if (idVolgende!=aantalCirkels && idLaatsteIsEersteCirkel == false) {
             //alert ('Fout geklikt')
             // de niet aangeklikte bol terug rood kleuren
             document.getElementById((idVolgende).toString()).setAttribute('fill', '#660000');
@@ -300,11 +332,42 @@ class Test extends React.Component<propke,stateje>
             document.getElementById((idVolgende + 1).toString()).setAttribute('fill', 'green');
             this.berekenVerschilCoördinaten(e);
             aantalErrors++;
+
+        } else if (idVolgende!=aantalCirkels && idLaatsteIsEersteCirkel == true) {
+            if (id == aantalCirkels) {
+                document.getElementById((aantalCirkels).toString()).setAttribute('fill', 'yellow');
+            } else if (id!= aantalCirkels && idVolgende == 1) {
+                document.getElementById((aantalCirkels).toString()).setAttribute('fill', '#660000');
+                aantalErrors++;
+            }
+            document.getElementById((idVolgende).toString()).setAttribute('fill', 'green');
         }
 
-        idVolgende++;
-        // id wegdoen om volgende klik te detecteren of een cirkel is geklikt of niet
-        id = null;
+
+        if(idLaatsteIsEersteCirkel == false) {
+            idVolgende++;
+            // id wegdoen om volgende klik te detecteren of een cirkel is geklikt of niet
+            id = null;
+        }
+    }
+
+    trackMousePosition(e) {
+        if(idVolgende != 1 || (idVolgende == 1 && idLaatsteIsEersteCirkel == true)) {
+            xWaardeVerschoven = e.pageX;
+            yWaardeVerschoven = e.pageY;
+            trackingArrayX[xWaardeVerschovenPlaats] = xWaardeVerschoven;
+            trackingArrayY[yWaardeVerschovenPlaats] = yWaardeVerschoven;
+            xWaardeVerschovenPlaats++;
+            yWaardeVerschovenPlaats++;
+        }
+    }
+
+    showPathPixels() {
+        alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length)
+        //alert(trackingArrayX[200] + "," + trackingArrayY[200]);
+       /* for (var i = 0;i<trackingArrayX.length;i++){
+            alert(trackingArrayX[i]);
+        }*/
     }
 }
 

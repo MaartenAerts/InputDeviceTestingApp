@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
     // in te stellen parameters via applicatie
-    var aantalCirkels = 10;
+    var aantalCirkels = 7; // enkel oneven toelaten via createTest !!!
     var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
     var radius = radiusBigCircle / 7.5;
     var errorMax = 0.5;
@@ -16,6 +16,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var IdArray = new Array();
     var id = 1;
     var idVolgende = 1;
+    var idLaatsteIsEersteCirkel = false;
     var startTime = 0;
     var endTime = 0;
     var timeSeconds = 0;
@@ -30,6 +31,12 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var standardDeviation = 0;
     var opTeHalenCirkelIdVolgende = 0;
     var aantalErrors = 0;
+    var xWaardeVerschoven = 0;
+    var yWaardeVerschoven = 0;
+    var xWaardeVerschovenPlaats = 0;
+    var yWaardeVerschovenPlaats = 0;
+    var trackingArrayX = new Array();
+    var trackingArrayY = new Array();
     var Test = (function (_super) {
         __extends(Test, _super);
         function Test(props) {
@@ -62,7 +69,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 IdArray[i] = circleID;
             }
             //onMouseMove={this.handleMouseMove.bind(this)}
-            return React.createElement("svg", React.__spread({"ref": "svg", "id": "svgcomponent"}, this.props, {"onMouseDown": this.handleMouseClick.bind(this)}), this.renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle), this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1], radius), this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2], radius), this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3], radius), this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4], radius), this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5], radius), this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6], radius), this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7], radius), this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8], radius), this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9], radius), this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10], radius), this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11], radius), this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12], radius), this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13], radius), this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14], radius), this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15], radius), this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16], radius), this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17], radius), this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18], radius), this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19], radius), this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20], radius), this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21], radius), this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22], radius), this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23], radius), this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24], radius), this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25], radius));
+            return React.createElement("svg", React.__spread({"ref": "svg", "id": "svgcomponent"}, this.props, {"onMouseDown": this.handleMouseClick.bind(this), "onMouseMove": this.trackMousePosition.bind(this)}), this.renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle), this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1], radius), this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2], radius), this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3], radius), this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4], radius), this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5], radius), this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6], radius), this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7], radius), this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8], radius), this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9], radius), this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10], radius), this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11], radius), this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12], radius), this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13], radius), this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14], radius), this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15], radius), this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16], radius), this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17], radius), this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18], radius), this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19], radius), this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20], radius), this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21], radius), this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22], radius), this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23], radius), this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24], radius), this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25], radius));
         };
         Test.prototype.renderBigCircle = function (cxBigCircle, cyBigCircle, radiusBigCircle) {
             return React.createElement("circle", {"cx": cxBigCircle, "cy": cyBigCircle, r: radiusBigCircle - 10, "fill": "#ffffff"});
@@ -76,6 +83,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             }
         };
         Test.prototype.berekenVerschilCoördinaten = function (e) {
+            //alert('verschil!')
             // met pythagoras waarde dat ernaast geklikt is berekenen
             // coördinaten waar geklikt is ophalen
             xWaardeGeklikt = e.pageX;
@@ -95,6 +103,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             yWaardeVerschil = (Math.abs(125 + yCircleArray[opTeHalenCirkelId] - yWaardeGeklikt)) - (radius);
             errorWaarde = Math.sqrt(Math.pow(xWaardeVerschil, 2) + Math.pow(yWaardeVerschil, 2));
             errorArray[idVolgende] = errorWaarde;
+            //alert(errorWaarde)
             //    alert("x-waarde te klikken: " + (xCircleArray[opTeHalenCirkelId]) + ", geklikt: " + (xWaardeGeklikt-screen.width/2) + "\ny-waarde te klikken: " + yCircleArray[opTeHalenCirkelId] + ", geklikt: " + yWaardeGeklikt);
             //alert(xCircleArray[opTeHalenCirkelId] +"\n"+ screen.width +"\n"+ xWaardeGeklikt +"\n"+ xWaardeVerschil);
             //alert(yCircleArray[opTeHalenCirkelId] + "\n" + yWaardeGeklikt + "\n" + yWaardeVerschil);
@@ -107,7 +116,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             timeGemiddelde = timeSeconds / aantalCirkels;
             //alert('Dus time per trial: ' + timeGemiddelde)
             //  alert('Lengte errorArray: ' + errorArray.length.toString());
-            //alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7] + "," + errorArray[8] + "," + errorArray[9] + "," + errorArray[10])
+            alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7]);
             //standard deviation berekenen
             var sum = 0;
             var average = 0;
@@ -153,7 +162,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 yAfstand = Math.abs(yCircleArray[opTeHalenCirkelIdVolgende] - yCircleArray[opTeHalenCirkelId]);
                 afTeLeggenAfstand += Math.sqrt((Math.pow(xAfstand, 2)) + Math.pow(yAfstand, 2)) - radius;
             }
-            ae = afTeLeggenAfstand / (aantalCirkels - 1);
+            ae = afTeLeggenAfstand / (aantalCirkels);
             var ide = 0;
             if (we != 0) {
                 ide = Math.log(ae / we) / Math.LN2;
@@ -164,6 +173,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             //alert('Ide: ' + ae);
             var throughput = ide / timeGemiddelde;
             //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
+            this.showPathPixels();
             this.toonResultaten(ae, we, ide, throughput);
         };
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
@@ -201,38 +211,58 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
              } */
             id = parseInt(e.target.id);
             if (idVolgende == 1) {
-                startTime = Date.now();
+                if (idLaatsteIsEersteCirkel == false) {
+                    startTime = Date.now();
+                }
             }
             // || idVolgende == aantalCirkels dient voor als je fout klikt bij de laatste cirkel, dat de test toch wordt afgesloten
-            if ((id == aantalCirkels && idVolgende == aantalCirkels) || idVolgende == aantalCirkels) {
+            if ((id == aantalCirkels && idVolgende == aantalCirkels) || idVolgende == aantalCirkels || (idVolgende == 1 && idLaatsteIsEersteCirkel == true) || (id == 1 && idLaatsteIsEersteCirkel == true)) {
                 //werd er op de laatste niet geklikt?
-                if (id != aantalCirkels) {
+                if (id != aantalCirkels && idLaatsteIsEersteCirkel == false) {
                     aantalErrors++;
                 }
-                this.berekenVerschilCoördinaten(e);
+                //alert('is da van hier?')
+                if (id != idVolgende) {
+                    this.berekenVerschilCoördinaten(e);
+                }
                 //gefoefel ivm de errorwaarde van de laatste cirkel
                 // deze kreeg ander altijd een waarde, ookal werd er op geklikt
                 if (id == aantalCirkels) {
                     errorArray[id] = 0;
                 }
-                if (errorMax >= (aantalErrors / aantalCirkels)) {
-                    this.berekenEindResultatenTest();
+                if (idLaatsteIsEersteCirkel == true) {
+                    if (errorMax >= (aantalErrors / aantalCirkels)) {
+                        //   alert('resultaten worden weer berekend!');
+                        this.berekenEindResultatenTest();
+                    }
+                    else {
+                        alert('Je errorpercentage bedraagt ' + (aantalErrors / aantalCirkels * 100) + '%, maximum toegelaten is ' + errorMax * 100 + '%!\nOpnieuw!');
+                        window.location.reload();
+                    }
                 }
-                else {
-                    alert('Je errorpercentage bedraagt ' + (aantalErrors / aantalCirkels * 100) + '%, maximum toegelaten is ' + errorMax * 100 + '%!\nOpnieuw!');
-                    window.location.reload();
+                // logica om terug te keren bij de eerste cirkel als laatste aan te klikken
+                if (idLaatsteIsEersteCirkel == false) {
+                    idVolgende = 1;
+                    idLaatsteIsEersteCirkel = true;
                 }
             }
             // deze if staat laatst omdat ander bij het aanklikken van de laatste bol de test niet wordt afgesloten
             //kijken of je op de juiste bol klikt, anders is dit een fout
             if (id == idVolgende) {
                 e.target.setAttribute('fill', 'yellow');
-                //volgende aan te klikken bol groen kleuren
-                document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
-                //errorArray vullen met 0, want er is juist geklikt
-                errorArray[id] = 0;
+                if (idLaatsteIsEersteCirkel == false) {
+                    //volgende aan te klikken bol groen kleuren
+                    document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
+                    //errorArray vullen met 0, want er is juist geklikt
+                    errorArray[id] = 0;
+                }
+                else if (idLaatsteIsEersteCirkel == true) {
+                    //laatste positie in de errorArray (die de eerste cirkel als laatste weer aanklikt) op 0 zetten
+                    // alert('hier')
+                    errorArray[aantalCirkels + 1] = 0;
+                }
             }
-            else if (idVolgende != aantalCirkels) {
+            else if (idVolgende != aantalCirkels && idLaatsteIsEersteCirkel == false) {
                 //alert ('Fout geklikt')
                 // de niet aangeklikte bol terug rood kleuren
                 document.getElementById((idVolgende).toString()).setAttribute('fill', '#660000');
@@ -241,9 +271,38 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 this.berekenVerschilCoördinaten(e);
                 aantalErrors++;
             }
-            idVolgende++;
-            // id wegdoen om volgende klik te detecteren of een cirkel is geklikt of niet
-            id = null;
+            else if (idVolgende != aantalCirkels && idLaatsteIsEersteCirkel == true) {
+                if (id == aantalCirkels) {
+                    document.getElementById((aantalCirkels).toString()).setAttribute('fill', 'yellow');
+                }
+                else if (id != aantalCirkels && idVolgende == 1) {
+                    document.getElementById((aantalCirkels).toString()).setAttribute('fill', '#660000');
+                    aantalErrors++;
+                }
+                document.getElementById((idVolgende).toString()).setAttribute('fill', 'green');
+            }
+            if (idLaatsteIsEersteCirkel == false) {
+                idVolgende++;
+                // id wegdoen om volgende klik te detecteren of een cirkel is geklikt of niet
+                id = null;
+            }
+        };
+        Test.prototype.trackMousePosition = function (e) {
+            if (idVolgende != 1 || (idVolgende == 1 && idLaatsteIsEersteCirkel == true)) {
+                xWaardeVerschoven = e.pageX;
+                yWaardeVerschoven = e.pageY;
+                trackingArrayX[xWaardeVerschovenPlaats] = xWaardeVerschoven;
+                trackingArrayY[yWaardeVerschovenPlaats] = yWaardeVerschoven;
+                xWaardeVerschovenPlaats++;
+                yWaardeVerschovenPlaats++;
+            }
+        };
+        Test.prototype.showPathPixels = function () {
+            alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length);
+            //alert(trackingArrayX[200] + "," + trackingArrayY[200]);
+            /* for (var i = 0;i<trackingArrayX.length;i++){
+                 alert(trackingArrayX[i]);
+             }*/
         };
         return Test;
     })(React.Component);
