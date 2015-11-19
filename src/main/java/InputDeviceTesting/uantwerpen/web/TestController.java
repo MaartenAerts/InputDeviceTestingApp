@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/test/")
 public class TestController {
     @RequestMapping(method=RequestMethod.GET)//Todo:moet {id} worden
-    public ModelAndView getTest(@RequestParam int testId){
+    public ModelAndView getTest(){
         return new ModelAndView("test");
     }
 

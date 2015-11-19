@@ -44,6 +44,9 @@ var trackingArrayX = new Array();
 var trackingArrayY = new Array();
 var interval;
 
+var sequentieNummer = 1;
+var sequentieMax = 4;
+var testGedaan = false;
 
 class Test extends React.Component<propke,stateje>
 {
@@ -67,6 +70,19 @@ class Test extends React.Component<propke,stateje>
     var tellerVoorHelft = 0;
     var tellerNaHelft = 0;
     var circleID = 0;
+
+    // sequentienummer uit localstorage halen
+        sequentieNummer = localStorage.getItem("sequentieNummer");
+        alert("Sequentienummer: " + sequentieNummer);
+    if (sequentieNummer == null && testGedaan == false) {
+        sequentieNummer = 1;
+        alert("Test " + sequentieNummer + " van de " + sequentieMax);
+    } else if (sequentieNummer < sequentieMax && testGedaan == false){
+        sequentieNummer = localStorage.getItem("sequentieNummer");
+        alert("Test " + sequentieNummer + " van de " + sequentieMax);
+    } else {
+        alert("Test " + sequentieNummer + " van de " + sequentieMax);
+    }
 
     for (var i = 1; i <= aantalCirkels; i++) {
         let radian = (graden * (i - 1)) * (Math.PI / 180);
@@ -164,7 +180,7 @@ class Test extends React.Component<propke,stateje>
         endTime = Date.now();
         // alles rond Mousetracking
         window.clearInterval(interval);
-        this.showPathPixels();
+        //this.showPathPixels();
         timeSeconds = (endTime-startTime)/1000;
         //alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
         timeGemiddelde = timeSeconds/aantalCirkels;
@@ -233,6 +249,17 @@ class Test extends React.Component<propke,stateje>
 
         this.toonResultaten(ae,we,ide,throughput);
 
+        // sequentienummer behouden na page refresh
+        if (sequentieNummer < sequentieMax && testGedaan == false) {
+            sequentieNummer++;
+            localStorage.setItem("sequentieNummer",sequentieNummer.toString());
+            window.location.reload();
+        } else {
+            //localStorage.setItem("sequentieNummer", null);
+            localStorage.clear();
+            testGedaan = true;
+            alert("Bedankt voor de test! De data werd goed ontvangen!")
+        }
     }
 
     toonResultaten(ae,we,ide,throughput) {
@@ -369,18 +396,18 @@ class Test extends React.Component<propke,stateje>
 
     }
 
-    showPathPixels() {
+   /* showPathPixels() {
         alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length)
         for (var i = 0;i<trackingArrayX.length-1;i++) {
             //return  <line x1={trackingArrayX[i]} y1={trackingArrayY[i]} x2={trackingArrayX[i+1]} y2={trackingArrayY[i+1]} stroke="black" />
              //<line x1="0" y1="0" x2="200" y2="200" />;
-            //alert("hier!");
+            alert(trackingArrayX.length);
         }
         //alert(trackingArrayX[200] + "," + trackingArrayY[200]);
        /* for (var i = 0;i<trackingArrayX.length;i++){
             alert(trackingArrayX[i]);
-        }*/
-    }
+        }
+    }*/
 }
 
 ReactDom.render(

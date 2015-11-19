@@ -38,6 +38,9 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var trackingArrayX = new Array();
     var trackingArrayY = new Array();
     var interval;
+    var sequentieNummer = 1;
+    var sequentieMax = 4;
+    var testGedaan = false;
     var Test = (function (_super) {
         __extends(Test, _super);
         function Test(props) {
@@ -55,6 +58,20 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             var tellerVoorHelft = 0;
             var tellerNaHelft = 0;
             var circleID = 0;
+            // sequentienummer uit localstorage halen
+            sequentieNummer = localStorage.getItem("sequentieNummer");
+            alert("Sequentienummer: " + sequentieNummer);
+            if (sequentieNummer == null && testGedaan == false) {
+                sequentieNummer = 1;
+                alert("Test " + sequentieNummer + " van de " + sequentieMax);
+            }
+            else if (sequentieNummer < sequentieMax && testGedaan == false) {
+                sequentieNummer = localStorage.getItem("sequentieNummer");
+                alert("Test " + sequentieNummer + " van de " + sequentieMax);
+            }
+            else {
+                alert("Test " + sequentieNummer + " van de " + sequentieMax);
+            }
             for (var i = 1; i <= aantalCirkels; i++) {
                 var radian = (graden * (i - 1)) * (Math.PI / 180);
                 xCircleArray[i] = (radiusBigCircle * Math.cos(radian) + cxBigCircle);
@@ -115,7 +132,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             endTime = Date.now();
             // alles rond Mousetracking
             window.clearInterval(interval);
-            this.showPathPixels();
+            //this.showPathPixels();
             timeSeconds = (endTime - startTime) / 1000;
             //alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
             timeGemiddelde = timeSeconds / aantalCirkels;
@@ -179,6 +196,18 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             var throughput = ide / timeGemiddelde;
             //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
             this.toonResultaten(ae, we, ide, throughput);
+            // sequentienummer behouden na page refresh
+            if (sequentieNummer < sequentieMax && testGedaan == false) {
+                sequentieNummer++;
+                localStorage.setItem("sequentieNummer", sequentieNummer.toString());
+                window.location.reload();
+            }
+            else {
+                //localStorage.setItem("sequentieNummer", null);
+                localStorage.clear();
+                testGedaan = true;
+                alert("Bedankt voor de test! De data werd goed ontvangen!");
+            }
         };
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
             alert('TASK CONDITIONS:\n     ' +
@@ -302,15 +331,6 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 xWaardeVerschovenPlaats++;
                 yWaardeVerschovenPlaats++;
             }, 10);
-        };
-        Test.prototype.showPathPixels = function () {
-            alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length);
-            for (var i = 0; i < trackingArrayX.length - 1; i++) {
-            }
-            //alert(trackingArrayX[200] + "," + trackingArrayY[200]);
-            /* for (var i = 0;i<trackingArrayX.length;i++){
-                 alert(trackingArrayX[i]);
-             }*/
         };
         return Test;
     })(React.Component);
