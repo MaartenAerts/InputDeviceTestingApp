@@ -93,6 +93,14 @@ public class ResearchGroupController {
         return "researchGroup";
     }
 
+    @RequestMapping(value = "deleteResearcher", method = RequestMethod.POST)
+    public String DeleteResearcher(@ModelAttribute("deleteForm") Researcher researcher, Model model) {
+
+        researcherList.remove(researcher) ;// weer zotte shit enzuu
+        model.addAttribute("Researchers",researcherList);
+        return "researchGroup";
+    }
+
     @RequestMapping(value = "saveGroup", method = RequestMethod.POST)
     public String SaveGroup(@ModelAttribute("saveGroupForm") ResearchGroup researchGroup, Model model,Principal principal) {
 

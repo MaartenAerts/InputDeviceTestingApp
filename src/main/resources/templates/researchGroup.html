@@ -90,8 +90,10 @@
             <th>-------</th>
         </tr>
         <tr th:each="researcher : ${Researchers}">
-                    <td  th:text="${researcher.email}"/>
-                    <td><a  class="btn btn-default" role="button"> Delete</a></td>
+            <form th:action="@{/deleteResearcher}" method="post" commandName="deleteForm">
+                    <td><input  th:value="${researcher.email}"  name="email" readonly="readonly"/></td>
+                    <td><input  class="btn btn-default" type="submit" value="Delete"/></td>
+            </form>
         </tr>
 
     </table>
