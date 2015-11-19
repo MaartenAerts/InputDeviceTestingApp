@@ -37,6 +37,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var yWaardeVerschovenPlaats = 0;
     var trackingArrayX = new Array();
     var trackingArrayY = new Array();
+    var interval;
     var Test = (function (_super) {
         __extends(Test, _super);
         function Test(props) {
@@ -69,7 +70,8 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 IdArray[i] = circleID;
             }
             //onMouseMove={this.handleMouseMove.bind(this)}
-            return React.createElement("svg", React.__spread({"ref": "svg", "id": "svgcomponent"}, this.props, {"onMouseDown": this.handleMouseClick.bind(this), "onMouseMove": this.trackMousePosition.bind(this)}), this.renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle), this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1], radius), this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2], radius), this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3], radius), this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4], radius), this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5], radius), this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6], radius), this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7], radius), this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8], radius), this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9], radius), this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10], radius), this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11], radius), this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12], radius), this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13], radius), this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14], radius), this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15], radius), this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16], radius), this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17], radius), this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18], radius), this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19], radius), this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20], radius), this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21], radius), this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22], radius), this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23], radius), this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24], radius), this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25], radius));
+            //onMouseMove={this.trackMousePosition.bind(this)}
+            return React.createElement("svg", React.__spread({"ref": "svg", "id": "svgcomponent"}, this.props, {"onMouseDown": this.handleMouseClick.bind(this)}), this.renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle), this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1], radius), this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2], radius), this.renderCircle(IdArray[3], xCircleArray[3], yCircleArray[3], radius), this.renderCircle(IdArray[4], xCircleArray[4], yCircleArray[4], radius), this.renderCircle(IdArray[5], xCircleArray[5], yCircleArray[5], radius), this.renderCircle(IdArray[6], xCircleArray[6], yCircleArray[6], radius), this.renderCircle(IdArray[7], xCircleArray[7], yCircleArray[7], radius), this.renderCircle(IdArray[8], xCircleArray[8], yCircleArray[8], radius), this.renderCircle(IdArray[9], xCircleArray[9], yCircleArray[9], radius), this.renderCircle(IdArray[10], xCircleArray[10], yCircleArray[10], radius), this.renderCircle(IdArray[11], xCircleArray[11], yCircleArray[11], radius), this.renderCircle(IdArray[12], xCircleArray[12], yCircleArray[12], radius), this.renderCircle(IdArray[13], xCircleArray[13], yCircleArray[13], radius), this.renderCircle(IdArray[14], xCircleArray[14], yCircleArray[14], radius), this.renderCircle(IdArray[15], xCircleArray[15], yCircleArray[15], radius), this.renderCircle(IdArray[16], xCircleArray[16], yCircleArray[16], radius), this.renderCircle(IdArray[17], xCircleArray[17], yCircleArray[17], radius), this.renderCircle(IdArray[18], xCircleArray[18], yCircleArray[18], radius), this.renderCircle(IdArray[19], xCircleArray[19], yCircleArray[19], radius), this.renderCircle(IdArray[20], xCircleArray[20], yCircleArray[20], radius), this.renderCircle(IdArray[21], xCircleArray[21], yCircleArray[21], radius), this.renderCircle(IdArray[22], xCircleArray[22], yCircleArray[22], radius), this.renderCircle(IdArray[23], xCircleArray[23], yCircleArray[23], radius), this.renderCircle(IdArray[24], xCircleArray[24], yCircleArray[24], radius), this.renderCircle(IdArray[25], xCircleArray[25], yCircleArray[25], radius));
         };
         Test.prototype.renderBigCircle = function (cxBigCircle, cyBigCircle, radiusBigCircle) {
             return React.createElement("circle", {"cx": cxBigCircle, "cy": cyBigCircle, r: radiusBigCircle - 10, "fill": "#ffffff"});
@@ -111,6 +113,9 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
         Test.prototype.berekenEindResultatenTest = function () {
             // test afsluiten en alles berekenen
             endTime = Date.now();
+            // alles rond Mousetracking
+            window.clearInterval(interval);
+            this.showPathPixels();
             timeSeconds = (endTime - startTime) / 1000;
             //alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
             timeGemiddelde = timeSeconds / aantalCirkels;
@@ -173,7 +178,6 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             //alert('Ide: ' + ae);
             var throughput = ide / timeGemiddelde;
             //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
-            this.showPathPixels();
             this.toonResultaten(ae, we, ide, throughput);
         };
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
@@ -213,6 +217,8 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             if (idVolgende == 1) {
                 if (idLaatsteIsEersteCirkel == false) {
                     startTime = Date.now();
+                    // vanaf de 1ste cirkel ticker starten
+                    this.startTickerMousePosition(e);
                 }
             }
             // || idVolgende == aantalCirkels dient voor als je fout klikt bij de laatste cirkel, dat de test toch wordt afgesloten
@@ -287,18 +293,20 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 id = null;
             }
         };
-        Test.prototype.trackMousePosition = function (e) {
-            if (idVolgende != 1 || (idVolgende == 1 && idLaatsteIsEersteCirkel == true)) {
+        Test.prototype.startTickerMousePosition = function (e) {
+            interval = window.setInterval(function () {
                 xWaardeVerschoven = e.pageX;
                 yWaardeVerschoven = e.pageY;
                 trackingArrayX[xWaardeVerschovenPlaats] = xWaardeVerschoven;
                 trackingArrayY[yWaardeVerschovenPlaats] = yWaardeVerschoven;
                 xWaardeVerschovenPlaats++;
                 yWaardeVerschovenPlaats++;
-            }
+            }, 10);
         };
         Test.prototype.showPathPixels = function () {
             alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length);
+            for (var i = 0; i < trackingArrayX.length - 1; i++) {
+            }
             //alert(trackingArrayX[200] + "," + trackingArrayY[200]);
             /* for (var i = 0;i<trackingArrayX.length;i++){
                  alert(trackingArrayX[i]);

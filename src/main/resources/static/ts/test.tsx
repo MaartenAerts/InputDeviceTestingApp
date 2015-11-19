@@ -42,6 +42,8 @@ var xWaardeVerschovenPlaats = 0;
 var yWaardeVerschovenPlaats = 0;
 var trackingArrayX = new Array();
 var trackingArrayY = new Array();
+var interval;
+
 
 class Test extends React.Component<propke,stateje>
 {
@@ -82,7 +84,8 @@ class Test extends React.Component<propke,stateje>
     }
 
     //onMouseMove={this.handleMouseMove.bind(this)}
-    return <svg ref="svg" id="svgcomponent" {...this.props} onMouseDown={this.handleMouseClick.bind(this)} onMouseMove={this.trackMousePosition.bind(this)}>
+    //onMouseMove={this.trackMousePosition.bind(this)}
+    return <svg ref="svg" id="svgcomponent" {...this.props} onMouseDown={this.handleMouseClick.bind(this)}>
         {this.renderBigCircle(cxBigCircle,cyBigCircle,radiusBigCircle)}
         {this.renderCircle(IdArray[1], xCircleArray[1], yCircleArray[1],radius)}
         {this.renderCircle(IdArray[2], xCircleArray[2], yCircleArray[2],radius)}
@@ -159,6 +162,9 @@ class Test extends React.Component<propke,stateje>
     berekenEindResultatenTest() {
         // test afsluiten en alles berekenen
         endTime = Date.now();
+        // alles rond Mousetracking
+        window.clearInterval(interval);
+        this.showPathPixels();
         timeSeconds = (endTime-startTime)/1000;
         //alert('De test werd afgelegd op ' + timeSeconds + ' seconden')
         timeGemiddelde = timeSeconds/aantalCirkels;
@@ -225,7 +231,6 @@ class Test extends React.Component<propke,stateje>
         var throughput = ide/timeGemiddelde;
         //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
 
-        this.showPathPixels();
         this.toonResultaten(ae,we,ide,throughput);
 
     }
@@ -271,7 +276,8 @@ class Test extends React.Component<propke,stateje>
         if (idVolgende == 1) {
             if(idLaatsteIsEersteCirkel == false) {
                 startTime = Date.now();
-
+                // vanaf de 1ste cirkel ticker starten
+                this.startTickerMousePosition(e);
               //  alert('Test is gestart')
             }
         }
@@ -351,19 +357,25 @@ class Test extends React.Component<propke,stateje>
         }
     }
 
-    trackMousePosition(e) {
-        if(idVolgende != 1 || (idVolgende == 1 && idLaatsteIsEersteCirkel == true)) {
+    startTickerMousePosition(e) {
+        interval = window.setInterval(function(){
             xWaardeVerschoven = e.pageX;
             yWaardeVerschoven = e.pageY;
             trackingArrayX[xWaardeVerschovenPlaats] = xWaardeVerschoven;
             trackingArrayY[yWaardeVerschovenPlaats] = yWaardeVerschoven;
             xWaardeVerschovenPlaats++;
             yWaardeVerschovenPlaats++;
-        }
+        },10);
+
     }
 
     showPathPixels() {
         alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length)
+        for (var i = 0;i<trackingArrayX.length-1;i++) {
+            //return  <line x1={trackingArrayX[i]} y1={trackingArrayY[i]} x2={trackingArrayX[i+1]} y2={trackingArrayY[i+1]} stroke="black" />
+             //<line x1="0" y1="0" x2="200" y2="200" />;
+            //alert("hier!");
+        }
         //alert(trackingArrayX[200] + "," + trackingArrayY[200]);
        /* for (var i = 0;i<trackingArrayX.length;i++){
             alert(trackingArrayX[i]);
