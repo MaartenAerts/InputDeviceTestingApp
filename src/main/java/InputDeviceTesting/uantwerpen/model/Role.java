@@ -3,6 +3,7 @@ package InputDeviceTesting.uantwerpen.model;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
  * Created by TooLate on 22/10/2015.
  */
 @Entity
-public class Role {
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

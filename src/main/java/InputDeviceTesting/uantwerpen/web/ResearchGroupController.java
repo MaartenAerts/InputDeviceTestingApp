@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,15 +93,17 @@ public class ResearchGroupController {
         return "researchGroup";
     }
 
-    @RequestMapping(value = "saveGroup")
-    public String saveGroup(@ModelAttribute("saveGroup") ResearchGroup researchGroup, Model model) {
-
+    @RequestMapping(value = "saveGroup", method = RequestMethod.POST)
+    public String SaveGroup(@ModelAttribute("saveGroupForm") ResearchGroup researchGroup, Model model,Principal principal) {
+        String researcherLogin = principal.getName();// get the username/email after login
         logger.info("Adding researchGroup");
+        researchGroup.setCreator(researcherRepo.findByEmail(researcherLogin));
         researchGroup.setCreatedDate(LocalDateTime.now());
         researchGroup.setModifiedDate(LocalDateTime.now());
+        researchGroup.setAmountOfResaerchers(researcherList.size());
         researchGroup.setResearcherList(researcherList);
         researchGroupRepo.save(researchGroup);
-        return "dashboard";
+        return "redirect:/dashboard";
 
     }
 

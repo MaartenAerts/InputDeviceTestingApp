@@ -26,10 +26,12 @@ public class ResearchGroup implements Serializable {
 
     private Researcher creator;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="RESEARCHERGOUP_RESEARCHER", joinColumns={@JoinColumn(name="RESEARCHERGOUP_ID")}, inverseJoinColumns={@JoinColumn(name="RESEARCHER_ID")})
     private List<Researcher> researcherList = new ArrayList<Researcher>();
-    private int amountOfResaerchers;
-    @ManyToMany
+    private int amountOfResearchers;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="RESEARCHERGOUP_TEST", joinColumns={@JoinColumn(name="RESEARCHERGOUP_ID")}, inverseJoinColumns={@JoinColumn(name="TEST_ID")})
     private List<Test> testList = new ArrayList<Test>();
     private int amountOfTests;
 
@@ -75,7 +77,7 @@ public class ResearchGroup implements Serializable {
 
     public void addResearcher(Researcher researcher){
         researcherList.add(researcher);
-        amountOfResaerchers++;
+        amountOfResearchers++;
     }
 
     public void deleteResearcher(String researcherName){
@@ -83,11 +85,11 @@ public class ResearchGroup implements Serializable {
     }
 
     public int getAmountOfResaerchers() {
-        return amountOfResaerchers;
+        return amountOfResearchers;
     }
 
     public void setAmountOfResaerchers(int amountOfResaerchers) {
-        this.amountOfResaerchers = amountOfResaerchers;
+        this.amountOfResearchers = amountOfResaerchers;
     }
 
     public List<Test> getTestList() {

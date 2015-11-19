@@ -58,6 +58,9 @@
       <h1 align="center" style="margin-top: 10%"> Research Group </h1>
     </p>
 
+
+
+
     <h2 style="margin-top: 5%"> Tests</h2>
     <table class="table table-striped">
         <tr>
@@ -97,21 +100,26 @@
 
     <form th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
         <fieldset>
-            <table>
-                <tr>
-                    <td><h4 class="col-lg-2 control-label">Email:</h4></td>
-                    <td><input type="email" name="email" value="" placeholder="email" /></td> <td th:text="${ResearcherExists}" class="text-danger"></td>
-                </tr>
-                <tr>
-                    <td style="margin-left: 10px" /> <td><input type="submit" value="Add Researcher" class="btn btn-primary control-label"/></td>
-                </tr>
-            </table>
+            <h4 class="col-lg-2 control-label">Email:</h4>
+            <input type="email" name="email" value="" placeholder="email" /> <a th:text="${ResearcherExists}" class="text-danger"></a>
+            <input type="submit" value="Add Researcher" class="btn btn-primary control-label"/>
         </fieldset>
     </form>
 
-    <input type="button"  onclick="location.href='/saveGroup'"   value="Save Group" />
+<form th:action="@{/saveGroup}" action="/saveGroup" method="POST" commandName="saveGroupForm">
+    <fieldset>
+    <table>
+        <tr>
+            <td><h4 class="col-lg-2 control-label">Name:</h4></td>
+            <td> <input type="text" name="groupName" value="" placeholder="groupName" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="btn btn-primary control-label" value="Save Group" /></td>
+        </tr>
+    </table>
+    </fieldset>
     <!--a th:action="@{/saveGroup}" action="/saveGroup" class="btn btn-default" role="button" >Save Group</a  onclick="location.href='/register.htm'" -->
-
+</form>
 
 </div>
 </body>
