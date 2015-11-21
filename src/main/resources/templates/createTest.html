@@ -3,14 +3,20 @@
 
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <div class="container">
-        <div th:class="page-header">
-            <h1>        Test - Create</h1>
-        </div>
-        <div class="col-lg-6 well bs-component col-md-offset-3">
+<div class="container">
+    <div th:include="navbar :: page"></div>
+
+    <div class="page-header" style="margin-top: 7%">
+        <h1 id="containers" align="center">Create Test</h1>
+    </div>
+
+        <div class="col-lg-6 well bs-component col-md-offset-3" style="margin-top: 3%">
             <form th:action="@{/createTest}" action="/createTest" method="POST" commandName="createTestForm" >  <!--al deze dingen nog maken!-->
                 <fieldset>
                     <legend>Create new test</legend>
@@ -47,9 +53,6 @@
         </div>
     </div>
 
-    <div th:align="center">
-        <img src="../images/LOGOBack.png" th:class="img-responsive"/>
-    </div>
 
 </body>
 </html>
