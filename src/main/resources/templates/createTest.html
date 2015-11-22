@@ -17,7 +17,7 @@
     </div>
 
         <div class="col-lg-6 well bs-component col-md-offset-3" style="margin-top: 3%">
-            <form th:action="@{/createTest}" action="/createTest" method="POST" commandName="createTestForm" >  <!--al deze dingen nog maken!-->
+            <form th:action="@{/test/Testform}" action="/createTest" method="POST" commandName="createTestForm" >
                 <fieldset>
                     <legend>Create new test</legend>
                     <table>
@@ -74,10 +74,9 @@
                             <td  class="form-control"><input type="text" name="Kleur" placeholder="Kleur" /></td>
                         </tr>
 
-                        <!--NOG IN TE VOEGEN: inputDevice, contrastkleuren?-->
-
                         <tr>
-                            <td class="col-lg-10 col-lg-offset-2"><input type="submit" value="CreateTest" class="btn btn-primary control-label"/></td>
+
+                            <td class="col-lg-10 col-lg-offset-2"><input type="submit" value="CreateTest"  class="btn btn-primary control-label"/></td>
                         </tr>
 
                     </table>
