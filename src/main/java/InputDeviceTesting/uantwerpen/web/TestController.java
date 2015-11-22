@@ -18,6 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/test/")
 public class TestController {
+
+    @RequestMapping("test")//Todo:moet {id} worden
+    public ModelAndView getTest(){
+        return new ModelAndView("test");
+    }
+
     @Autowired
     TestRepo testRepo;
 
