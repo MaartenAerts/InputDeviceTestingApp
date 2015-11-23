@@ -149,4 +149,10 @@ public class ResearchGroupController {
         return "researchGroup";
     }
 
+    @RequestMapping(value = "deleteGroup")
+    public String DeleteGroup(Model model){
+        researchGroupRepo.delete(globalResearchGroup);
+        return "redirect:/dashboard";
+    }
+
 }

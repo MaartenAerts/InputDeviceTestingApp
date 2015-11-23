@@ -96,6 +96,10 @@
     <!--a th:action="@{/saveGroup}" action="/saveGroup" class="btn btn-default" role="button" >Save Group</a  onclick="location.href='/register.htm'" -->
 </form>
 
+    <div th:if="${groupName}">
+        <button class="btn btn-default" th:action="@{/deleteGroup}" action="/deleteGroup" onclick="location.href='/deleteGroup'">Delete Group</button>
+    </div>
+
 </div>
 </body>
 
