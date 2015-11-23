@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:form="http://www.w3.org/1999/html">
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
@@ -65,9 +65,26 @@
 
     </table>
 
+
     <h2>New Researcher</h2>
 
-    <form th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
+    <h4 class="col-lg-2 control-label">Select Email:</h4>
+
+    <form  style="display: inline-block" th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
+        <select  type="email" name="email">
+            <option th:each="researchers:${allResearchers}"
+                    th:value="${researchers.email}"
+                    th:text="${researchers.email}">
+                researchers
+            </option>
+        </select>
+        <input type="submit" value="Add Researcher" class="btn btn-primary control-label"/>
+    </form>
+    <p width="40%" th:text="${ResearcherExists}" class="text-danger"></p>
+
+
+
+    <!--form th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
         <fieldset>
         <table>
             <tr>
@@ -77,7 +94,7 @@
             </tr>
         </table>
         </fieldset>
-    </form>
+    </form-->
 
     <h2>Group Name</h2>
 

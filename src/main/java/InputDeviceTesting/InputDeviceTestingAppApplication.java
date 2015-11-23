@@ -27,6 +27,7 @@ public class InputDeviceTestingAppApplication {
     CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo){
         final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
         researcher.addRole(new Role("HEADRESEARCHER"));
+        researcher.addRole(new Role("RESEARCHER"));
         researcher.addRole(new Role("LEUTROL"));
 
         final Researcher researcher2 = new Researcher("lol@bro.fu","blub","PAPA","Mama", "Familie", LocalDateTime.now() , LocalDateTime.now());
@@ -34,7 +35,6 @@ public class InputDeviceTestingAppApplication {
 
         final Researcher researcher3 = new Researcher("Lekkere@Soep.fu","Pil","Shakira","Belgium", "Thuis", LocalDateTime.now() , LocalDateTime.now());
         researcher3.addRole(new Role("RESEARCHER"));
-        researcher3.addRole(new Role("BLUB"));
 
         final Researcher researcher4 = new Researcher("Kietel@brol.fu","bak","PRefix","test", "test", LocalDateTime.now() , LocalDateTime.now());
         researcher4.addRole(new Role("RESEARCHER"));

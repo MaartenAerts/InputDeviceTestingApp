@@ -50,6 +50,13 @@ public class ResearchGroupController {
     private String globalGroupName;
 
 
+    @ModelAttribute("allResearchers")
+    public List<Researcher> populateResearchers() {
+        List<Researcher> researcherList = customUserDetailsService.findAll();
+        return researcherList;
+    }
+
+
     @RequestMapping("/researchGroup")
     public String ShowResearchGroupPage(@RequestParam(value="name", defaultValue="") String groupName, Model model){
         globalResearchGroup = null;

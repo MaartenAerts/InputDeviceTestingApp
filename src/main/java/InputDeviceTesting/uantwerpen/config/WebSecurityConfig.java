@@ -39,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("login" , "/register").permitAll() //iedereen mag hierop
+                    //.antMatchers("/**").hasRole("RESEARCHER")
                     .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()
