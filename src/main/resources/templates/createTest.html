@@ -31,7 +31,19 @@
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Error Threshold:</h4></td>   <!--dropdown met waarden van 10 tot 100, met stappen van 10, dus 10,20,30,40..tot 100 %-->
-                            <td  class="form-control"><input type="text" name="errorMaxPercentage" placeholder="errorMaxPercentage" /></td>
+                            <td  class="form-control"> <select>
+                                <option th:value="Waarde10">10</option>
+                                <option th:value="Waarde20">20</option>
+                                <option th:value="Waarde30">30</option>
+                                <option th:value="Waarde40">40</option>
+                                <option th:value="Waarde50">50</option>
+                                <option th:value="Waarde60">60</option>
+                                <option th:value="Waarde70">70</option>
+                                <option th:value="Waarde80">80</option>
+                                <option th:value="Waarde90">90</option>
+                                <option th:value="Waarde100">100</option>
+                            </select>
+                            </td>
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Number of Sequences:</h4></td> <!--met standaard 4%-->
@@ -39,7 +51,14 @@
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Difficulty:</h4></td> <!--dropdown met waarden van 1 tot 4, dus 1, 2, 3 en 4-->
-                            <td  class="form-control"><input type="text" name="1-4" placeholder="1-4" /></td>
+
+                            <td  class="form-control"><select>
+                                <option th:value="Waarde1">1</option>
+                                <option th:value="Waarde2">2</option>
+                                <option th:value="Waarde3">3</option>
+                                <option th:value="Waarde4">4</option>
+                            </select>
+                            </td>
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Target Amplitude min:</h4></td> <!--zal mogelijk nog veranderen met waarden die afgeleid worden van den difficulty dropdown-->
