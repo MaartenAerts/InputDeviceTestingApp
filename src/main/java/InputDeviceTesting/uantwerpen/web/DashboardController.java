@@ -38,6 +38,7 @@ public class DashboardController {
     @ModelAttribute("allResearcherGroups")
     public List<ResearchGroup> populateResearcherGroups() {
         List<ResearchGroup> researchGroupList = researchGroupRepo.findAll();
+        Collections.sort(researchGroupList);
         return researchGroupList;
     }
 

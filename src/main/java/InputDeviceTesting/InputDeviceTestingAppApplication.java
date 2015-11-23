@@ -50,6 +50,7 @@ public class InputDeviceTestingAppApplication {
         researchGroup1.setGroupName("Group Name");
         researchGroup1.setCreatedDate(LocalDateTime.now());
         researchGroup1.setModifiedDate(LocalDateTime.now());
+        researchGroup1.addResearcher(researcher);
 
 
         return new CommandLineRunner() {

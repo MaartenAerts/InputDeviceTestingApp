@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Entity
-public class ResearchGroup implements Serializable {
+public class ResearchGroup implements Serializable , Comparable<ResearchGroup> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -128,5 +128,17 @@ public class ResearchGroup implements Serializable {
 
     public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    @Override
+    public int compareTo(ResearchGroup o) {
+        long compareQuantity = ((ResearchGroup) o).getId();
+
+
+        //ascending order
+        return (int)this.id - (int)compareQuantity;
+
+        //descending order
+        //return compareQuantity - this.quantity;
     }
 }

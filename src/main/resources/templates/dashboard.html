@@ -33,7 +33,7 @@
         </tr>
         <tr th:each="researcherGroup : ${allResearcherGroups}">
               <span  th:each="creatorData : ${researcherGroup.Creator}">
-                    <td th:text="${researcherGroup.groupName}"/>
+                    <td><a th:href="@{'/researchGroup?name=' + ${researcherGroup.groupName}}" th:text="${researcherGroup.groupName}"></a></td>
                     <td th:text="${researcherGroup.amountOfResearchers}"/>
                     <td th:text="${researcherGroup.amountOfTests}"/>
                     <td th:text="${creatorData.Email}"/>
