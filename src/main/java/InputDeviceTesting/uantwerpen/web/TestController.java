@@ -38,11 +38,15 @@ public class TestController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "Testform", method = RequestMethod.GET)
+    /*@RequestMapping(value = "Testform", method = RequestMethod.GET)
     public String Testform(){
         return "Testform";
-    }
+    }*/
 
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String Testform(){
+        return "test";
+    }
 
 
 }
