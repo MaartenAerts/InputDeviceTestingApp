@@ -68,49 +68,44 @@
 
     <h2>New Researcher</h2>
 
-    <h4 class="col-lg-2 control-label">Select Email:</h4>
+
+
 
     <form  style="display: inline-block" th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
-        <select  type="email" name="email">
-            <option th:each="researchers:${allResearchers}"
-                    th:value="${researchers.email}"
-                    th:text="${researchers.email}">
-                researchers
-            </option>
-        </select>
-        <input type="submit" value="Add Researcher" class="btn btn-primary control-label"/>
+        <div class="form-group">
+            <label for="email" >Select Email:</label>
+                <div class=" col-md-6 input-group">
+                    <span class="input-group-btn">
+                     <select  class="form-control" type="email" name="email">
+                        <option th:each="researchers:${allResearchers}"
+                            th:value="${researchers.email}"
+                            th:text="${researchers.email}">
+                            researchers
+                        </option>
+                    </select>
+                        </span>
+                    <span class="input-group-btn">
+                    <input style="margin-left:2%" type="submit" value="Add Researcher" class="btn btn-primary control-label"/>
+                        </span>
+                </div>
+        </div>
+        <p th:text="${ResearcherExists}" class="text-danger"></p>
     </form>
-    <p width="40%" th:text="${ResearcherExists}" class="text-danger"></p>
 
-
-
-    <!--form th:action="@{/addResearcher}" action="/addResearcher" method="POST" commandName="researcherForm" >
-        <fieldset>
-        <table>
-            <tr>
-                <td><h4 class="col-lg-2 control-label">Email:</h4></td>
-                <td><input type="email" name="email" value="" placeholder="email" /></td> <td width="40%" th:text="${ResearcherExists}" class="text-danger"></td>
-                <td><input type="submit" value="Add Researcher" class="btn btn-primary control-label"/></td>
-            </tr>
-        </table>
-        </fieldset>
-    </form-->
 
     <h2>Group Name</h2>
 
 <form th:action="@{/saveGroup}" action="/saveGroup" method="POST" commandName="saveGroupForm">
-    <fieldset>
-        <table>
-            <tr>
-                <td><h4  class="col-lg-2 control-label">Name:</h4></td>
-                <td><input type="text" name="groupName" value="" placeholder="groupName" th:value="${groupName}" /></td> <td  th:text="${Error}" class="text-danger"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" class="btn btn-primary control-label" value="Save Group" /></td>
-            </tr>
-        </table>
-    </fieldset>
-    <!--a th:action="@{/saveGroup}" action="/saveGroup" class="btn btn-default" role="button" >Save Group</a  onclick="location.href='/register.htm'" -->
+    <label for="groupname">Name:</label>
+    <div class=" col-md-6 input-group">
+        <span class="input-group-btn">
+                <input class="form-control" type="text" name="groupName" value="" placeholder="groupName" th:value="${groupName}" />
+        </span>
+        <span class="input-group-btn">
+                <input type="submit" class="btn btn-primary control-label" value="Save Group" style="margin-left:2%"/>
+        </span>
+    </div>
+    <p th:text="${Error}" class="text-danger"></p>
 </form>
 
     <div th:if="${groupName}">
