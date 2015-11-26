@@ -17,13 +17,13 @@
     </div>
 
         <div class="col-lg-6 well bs-component col-md-offset-3" style="margin-top: 3%">
-            <form th:action="@{/test/Testform}" action="/createTest" method="POST" commandName="createTestForm" >
+            <form th:action="@{/test/createTest}" action="/test/createTest" method="POST" commandName="createTestForm" >
                 <fieldset>
                     <legend>Create new test</legend>
                     <table>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Participant Code:</h4></td>
-                            <td class="form-control"><input type="text" name="participantCode" placeholder="participantCode" /></td>
+                            <td class="form-control"><input type="text" name="Code" placeholder="participantCode"  /></td>
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Number of Targets:</h4></td>
