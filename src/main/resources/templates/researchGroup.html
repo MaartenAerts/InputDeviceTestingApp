@@ -92,7 +92,6 @@
         <p th:text="${ResearcherExists}" class="text-danger"></p>
     </form>
 
-
     <h2>Group Name</h2>
 
 <form th:action="@{/saveGroup}" action="/saveGroup" method="POST" commandName="saveGroupForm">
@@ -102,7 +101,7 @@
                 <input class="form-control" type="text" name="groupName" value="" placeholder="groupName" th:value="${groupName}" />
         </span>
         <span class="input-group-btn">
-                <input type="submit" class="btn btn-primary control-label" value="Save Group" style="margin-left:2%"/>
+                <input type="submit" class="btn btn-primary control-label" value="Save Group" style="margin-left:3%"/>
         </span>
     </div>
     <p th:text="${Error}" class="text-danger"></p>
