@@ -17,7 +17,38 @@
     </div>
 
     <h2 style="margin-top: 3%">Parameters</h2>
-    <p th:text="${Code}"/>
+    <h2 style="margin-top: 3%">Head Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>CODE</th>
+            <th>Targets</th>
+            <th>Sequences</th>
+            <th>AmplitudeMin</th>
+            <th>AmplitudeMax</th>
+            <th>WidthMin</th>
+            <th>WidthMax</th>
+            <th>ColorMain</th>
+            <th>ColorTargets</th>
+            <th>ColorNext</th>
+            <th>ColorPrevious</th>
+        </tr>
+        <tr th:each="test : ${Joel}">
+                    <td th:text="${test.Code}"/>
+                    <td th:text="${test.Targets}"/>
+                    <td th:text="${test.Sequences}"/>
+                    <td th:text="${test.AmplitudeMin}"/>
+                    <td th:text="${test.AmplitudeMax}"/>
+                    <td th:text="${test.WidthMin}"/>
+                    <td th:text="${test.WidthMax}"/>
+                    <td th:text="${test.ColorMain}"/>
+                    <td th:text="${test.ColorTargets}"/>
+                    <td th:text="${test.ColorNext}"/>
+                    <td th:text="${test.ColorPrevious}"/>
+
+        </tr>
+    </table>
+
+
 
 </div>
 </body>

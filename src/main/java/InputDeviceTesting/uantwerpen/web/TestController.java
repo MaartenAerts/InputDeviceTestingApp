@@ -27,9 +27,12 @@ public class TestController {
     @Autowired
     CreateTestRepo createTestRepo;
 
+    private createTest blub;
+
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public ModelAndView createTest(){
+        blub = null;
         return new ModelAndView("createTest");
     }
 
@@ -43,14 +46,16 @@ public class TestController {
     @RequestMapping(value = "createTest", method=RequestMethod.POST)
     public String CreateTest(@ModelAttribute("createTestForm") createTest test){
         ModelAndView modelAndView = new ModelAndView();
+        blub = test;
         createTestRepo.save(test);
-        return "redirect:/test/Testform?code="+test.getCode();
+        return "redirect:/test/Testform";
     }
 
 
     @RequestMapping(value = "Testform", method = RequestMethod.GET)
     public String Testform(@RequestParam(value="code", required=false, defaultValue="0") String code, Model model){
-        model.addAttribute("Code",code);
+        model.addAttribute("Joel",blub);
+        //model.addAttribute("Code",blub.getCode());
 
         return "Testform";
     }
