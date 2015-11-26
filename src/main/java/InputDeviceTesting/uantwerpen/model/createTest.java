@@ -1,10 +1,16 @@
 package InputDeviceTesting.uantwerpen.model;
 
+import javax.persistence.*;
+
 /**
  * Created by Joelg on 22/11/2015.
  */
+@Entity
 public class createTest {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long id;
     private long Code;
     private long Targets;
     private long ErrorTreshold;
@@ -20,6 +26,14 @@ public class createTest {
     private String ColorPrevious;
 
     public createTest() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getCode() {

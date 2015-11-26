@@ -2,7 +2,7 @@ package InputDeviceTesting.uantwerpen.web;
 
 import InputDeviceTesting.uantwerpen.model.Test;
 import InputDeviceTesting.uantwerpen.model.createTest;
-import InputDeviceTesting.uantwerpen.repo.TestRepo;
+import InputDeviceTesting.uantwerpen.repo.CreateTestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,28 +25,37 @@ public class TestController {
     }
 
     @Autowired
-    TestRepo testRepo;
+    CreateTestRepo createTestRepo;
+
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public ModelAndView createTest(){
         return new ModelAndView("createTest");
     }
-    @RequestMapping(value="create", method=RequestMethod.POST)
-    public ModelAndView createTest(@ModelAttribute("testForm") createTest test){
+
+    /*@RequestMapping(value="createTest", method=RequestMethod.POST)
+    public ModelAndView createTest(@ModelAttribute("createTestForm") createTest test){
         ModelAndView modelAndView = new ModelAndView();
         testRepo.save((Iterable<Test>) test);
         return modelAndView;
-    }
-
-    /*@RequestMapping(value = "Testform", method = RequestMethod.GET)
-    public String Testform(){
-        return "Testform";
     }*/
 
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String Testform(){
-        return "test";
+    @RequestMapping(value = "createTest", method=RequestMethod.POST)
+    public String CreateTest(@ModelAttribute("createTestForm") createTest test){
+        ModelAndView modelAndView = new ModelAndView();
+        createTestRepo.save(test);
+        return "redirect:/test/Testform?code="+test.getCode();
     }
+
+
+    @RequestMapping(value = "Testform", method = RequestMethod.GET)
+    public String Testform(@RequestParam(value="code", required=false, defaultValue="0") String code, Model model){
+        model.addAttribute("Code",code);
+
+        return "Testform";
+    }
+
+
 
 
 }
