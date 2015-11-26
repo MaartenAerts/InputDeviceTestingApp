@@ -1,3 +1,5 @@
+import javax.tools.ToolProvider
+
 buildscript {
     ext {
         springBootVersion = '1.2.6.RELEASE'
@@ -62,8 +64,7 @@ dependencies {
     testCompile('com.google.code.gson:gson:2.4')
     testCompile('com.squareup.okhttp:okhttp:2.5.0')
     testCompile('org.apache.httpcomponents:httpclient:4.5.1')
-    compile files("${System.properties['java.home']}/../lib/tools.jar")
-
+    compile (files(((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs()))
 }
 
 
