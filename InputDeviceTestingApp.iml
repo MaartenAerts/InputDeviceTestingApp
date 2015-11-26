@@ -128,5 +128,14 @@
     <orderEntry type="library" name="Gradle: org.springframework.data:spring-data-redis:1.4.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.session:spring-session:1.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: redis.clients:jedis:2.5.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: tools">
+        <CLASSES>
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_20/lib/tools.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
