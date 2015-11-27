@@ -98,7 +98,8 @@
     <label for="groupname">Name:</label>
     <div class=" col-md-6 input-group">
         <span class="input-group-btn">
-                <input class="form-control" type="text" name="groupName" value="" placeholder="groupName" th:value="${groupName}" />
+                <input th:if="!${groupName}" class="form-control" type="text" name="groupName" value="" placeholder="groupName" th:value="${groupName}" />
+                <input th:if="${groupName}"  readonly="readonly" class="form-control" type="text" name="groupName" value="" placeholder="groupName" th:value="${groupName}" />
         </span>
         <span class="input-group-btn">
                 <input type="submit" class="btn btn-primary control-label" value="Save Group" style="margin-left:3%"/>

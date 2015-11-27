@@ -27,8 +27,6 @@ public class Test {
 
     private String description;
 
-
-
     @NotNull
     private double relativeErrorMax;
 
@@ -47,6 +45,8 @@ public class Test {
 
     @ManyToMany(mappedBy = "testList")
     private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
+
+
 
     public long getId() {
         return id;
