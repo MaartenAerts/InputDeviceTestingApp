@@ -20,9 +20,11 @@
     <h2 style="margin-top: 3%">Head Researchers</h2>
     <table class="table table-striped">
         <tr>
-            <th>CODE</th>
+            <th>Code</th>
             <th>Targets</th>
+            <th>ErrorTreshold</th>
             <th>Sequences</th>
+            <th>Difficulty</th>
             <th>AmplitudeMin</th>
             <th>AmplitudeMax</th>
             <th>WidthMin</th>
@@ -35,7 +37,9 @@
         <tr th:each="test : ${Joel}">
                     <td th:text="${test.Code}"/>
                     <td th:text="${test.Targets}"/>
+                    <td th:text="${test.ErrorTreshold}"/>
                     <td th:text="${test.Sequences}"/>
+                    <td th:text="${test.Difficulty}"/>
                     <td th:text="${test.AmplitudeMin}"/>
                     <td th:text="${test.AmplitudeMax}"/>
                     <td th:text="${test.WidthMin}"/>
