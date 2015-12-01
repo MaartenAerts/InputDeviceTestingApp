@@ -19,97 +19,124 @@
         <div style="margin-top: 3%">
             <form th:action="@{/test/createTest}" action="/test/createTest" method="POST" commandName="createTestForm" >
                 <fieldset>
-                        <div class='row well bs-component'>
-                            <div class='form-group'>
+                        <div class="row well bs-component">
+                            <div class="form-group">
                                 <label for="participant_code">Participant Code:</label>
                                 <input class="form-control" type="text" name="Code" placeholder="participantCode" id="participant_code" />
                             </div>
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="number_of_targets">Number of Targets:</label>
+                                        <select id="number_of_targets" name="Targets" class="form-control">
+                                            <option th:value="Waarde1">10</option>
+                                            <option th:value="Waarde2">11</option>
+                                            <option th:value="Waarde3">12</option>
+                                            <option th:value="Waarde4">13</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Number_of_Sequences">Number of Sequences:</label>
+                                        <select id="Number_of_Sequences" name="Sequences" class="form-control">
+                                            <option th:value="Waarde1">1</option>
+                                            <option th:value="Waarde2">2</option>
+                                            <option th:value="Waarde3">3</option>
+                                            <option th:value="Waarde4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Difficulty">Difficulty</label>
+                                        <select id="Difficulty" class="form-control">
+                                            <option th:value="Waarde1">1</option>
+                                            <option th:value="Waarde2">2</option>
+                                            <option th:value="Waarde3">3</option>
+                                            <option th:value="Waarde4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Error_Threshold:">Error Threshold:</label>
+                                        <select id="Error_Threshold:" class="form-control">
+                                            <option th:value="Waarde10">10</option>
+                                            <option th:value="Waarde20">20</option>
+                                            <option th:value="Waarde30">30</option>
+                                            <option th:value="Waarde40">40</option>
+                                            <option th:value="Waarde50">50</option>
+                                            <option th:value="Waarde60">60</option>
+                                            <option th:value="Waarde70">70</option>
+                                            <option th:value="Waarde80">80</option>
+                                            <option th:value="Waarde90">90</option>
+                                            <option th:value="Waarde100">100</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Target_Amplitude_min">Target Amplitude min:</label>
+                                        <input type="text" name="AmplitudeMin" id="Target_Amplitude_min" placeholder="Min circle diameter" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="Target_Amplitude_max">Target Amplitude max:</label>
+                                    <input type="text" name="WidthMax" placeholder="Max circle diameter" id="Target_Amplitude_max" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Target_width_min">Target width min:</label>
+                                        <input type="text" name="WidthMin" placeholder="Width min" id="Target_width_min" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="Target_width_max">Target width max:</label>
+                                    <input type="text" name="WidthMax" id="Target_width_max" placeholder="Width max" class="form-control"/>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Color_main_circle">Color main circle:</label>
+                                        <input type="color" name="ColorMain" placeholder="kleur" id="Color_main_circle" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="Color_targets">Color targets:</label>
+                                    <input type="color" name="ColorTargets" id="Color_targets" placeholder="kleur" class="form-control"/>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="Color_next_target">Color next target:</label>
+                                        <input type="color" name="ColorNext" placeholder="kleur" id="Color_next_target" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="Color_previous_target">Color previous target:</label>
+                                    <input type="color" name="ColorPrevious" id="Color_previous_target" placeholder="kleur" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <input type="submit" value="CreateTest"  class="btn btn-primary control-label"/>
+
                         </div>
-
-                    <!--
-                    <table>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Participant Code:</h4></td>
-                            <td class="form-control"><input type="text" name="Code" placeholder="participantCode"  /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Number of Targets:</h4></td>
-                            <td  class="form-control"><input type="text" name="Targets" placeholder="aantalCirkels" /></td>  &lt;!&ndash;nog omzetten naar dropdown&ndash;&gt;
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Error Threshold:</h4></td>   &lt;!&ndash;dropdown met waarden van 10 tot 100, met stappen van 10, dus 10,20,30,40..tot 100 %&ndash;&gt;
-                            <td  class="form-control"> <select>
-                                <option th:value="Waarde10">10</option>
-                                <option th:value="Waarde20">20</option>
-                                <option th:value="Waarde30">30</option>
-                                <option th:value="Waarde40">40</option>
-                                <option th:value="Waarde50">50</option>
-                                <option th:value="Waarde60">60</option>
-                                <option th:value="Waarde70">70</option>
-                                <option th:value="Waarde80">80</option>
-                                <option th:value="Waarde90">90</option>
-                                <option th:value="Waarde100">100</option>
-                            </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Number of Sequences:</h4></td> &lt;!&ndash;met standaard 4%&ndash;&gt;
-                            <td  class="form-control"><input type="text" name="Sequences" placeholder="1-4" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Difficulty:</h4></td> &lt;!&ndash;dropdown met waarden van 1 tot 4, dus 1, 2, 3 en 4&ndash;&gt;
-
-                            <td  class="form-control"><select>
-                                <option th:value="Waarde1">1</option>
-                                <option th:value="Waarde2">2</option>
-                                <option th:value="Waarde3">3</option>
-                                <option th:value="Waarde4">4</option>
-                            </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Target Amplitude min:</h4></td> &lt;!&ndash;zal mogelijk nog veranderen met waarden die afgeleid worden van den difficulty dropdown&ndash;&gt;
-                            <td  class="form-control"><input type="text" name="AmplitudeMin" placeholder="grootteCirkels" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Target Amplitude max:</h4></td>
-                            <td  class="form-control"><input type="text" name="AmplitudeMax" placeholder="grootteCirkels" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Target width min:</h4></td>
-                            <td  class="form-control"><input type="text" name="WidthMin" placeholder="grootteCirkels" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Target width max:</h4></td>
-                            <td  class="form-control"><input type="text" name="WidthMax" placeholder="grootteCirkels" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Color main circle:</h4></td> &lt;!&ndash;of colorpicker-->
-                            <!--<td  class="form-control"><input type="text" name="ColorMain" placeholder="Kleur" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Color targets:</h4></td>
-                            <td  class="form-control"><input type="text" name="ColorTargets" placeholder="Kleur" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Color next target:</h4></td>
-                            <td  class="form-control"><input type="text" name="ColorNext" placeholder="Kleur" /></td>
-                        </tr>
-                        <tr>
-                            <td><h4 class="col-lg-2 control-label">Color previous target:</h4></td>
-                            <td  class="form-control"><input type="text" name="ColorPrevious" placeholder="Kleur" /></td>
-                        </tr>
-
-                        <tr>
-
-                            <td class="col-lg-10 col-lg-offset-2"><input type="submit" value="CreateTest"  class="btn btn-primary control-label"/></td>
-                        </tr>
-
-                    </table>-->
-
-
-
-
                 </fieldset>
             </form>
         </div>
