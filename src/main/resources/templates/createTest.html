@@ -20,19 +20,35 @@
             <form th:action="@{/test/createTest}" action="/test/createTest" method="POST" commandName="createTestForm" >
                 <fieldset>
                         <div class="row well bs-component">
-                            <div class="form-group">
-                                <label for="participant_code">Participant Code:</label>
-                                <input class="form-control" type="text" name="Code" placeholder="participantCode" id="participant_code" />
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <label for="participant_code">Participant Code:</label>
+                                        <input class="form-control" type="text" name="Code" placeholder="participantCode" id="participant_code" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <label for="input_device">Input Device:</label>
+                                        <input class="form-control" type="text" name="Device" placeholder="inputDevice" id="input_device" />
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="row">
                                 <div class='col-sm-6'>
                                     <div class='form-group'>
                                         <label for="number_of_targets">Number of Targets:</label>
                                         <select id="number_of_targets" name="Targets" class="form-control">
-                                            <option th:value="Waarde1">10</option>
-                                            <option th:value="Waarde2">11</option>
-                                            <option th:value="Waarde3">12</option>
-                                            <option th:value="Waarde4">13</option>
+                                            <option th:value="Waarde5">5</option>
+                                            <option th:value="Waarde7">7</option>
+                                            <option th:value="Waarde9">9</option>
+                                            <option th:value="Waarde11">11</option>
+                                            <option th:value="Waarde13">13</option>
+                                            <option th:value="Waarde15">15</option>
+                                            <option th:value="Waarde17">17</option>
+                                            <option th:value="Waarde19">19</option>
+                                            <option th:value="Waarde21">21</option>
                                         </select>
                                     </div>
                                 </div>
@@ -131,6 +147,15 @@
                                 <div class='col-sm-6'>
                                     <label for="Color_previous_target">Color previous target:</label>
                                     <input type="color" name="ColorPrevious" id="Color_previous_target" placeholder="kleur" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <label for="email">Send this test to:</label>
+                                        <input class="form-control" type="text" name="email" placeholder="insert patient's email here" id="email" />
+                                    </div>
                                 </div>
                             </div>
 
