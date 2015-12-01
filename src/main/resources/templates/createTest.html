@@ -16,10 +16,17 @@
         <h1 id="containers" align="center">Create Test</h1>
     </div>
 
-        <div class="col-lg-6 well bs-component col-md-offset-3" style="margin-top: 3%">
+        <div style="margin-top: 3%">
             <form th:action="@{/test/createTest}" action="/test/createTest" method="POST" commandName="createTestForm" >
                 <fieldset>
-                    <legend>Create new test</legend>
+                        <div class='row well bs-component'>
+                            <div class='form-group'>
+                                <label for="participant_code">Participant Code:</label>
+                                <input class="form-control" type="text" name="Code" placeholder="participantCode" id="participant_code" />
+                            </div>
+                        </div>
+
+                    <!--
                     <table>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Participant Code:</h4></td>
@@ -27,10 +34,10 @@
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Number of Targets:</h4></td>
-                            <td  class="form-control"><input type="text" name="Targets" placeholder="aantalCirkels" /></td>  <!--nog omzetten naar dropdown-->
+                            <td  class="form-control"><input type="text" name="Targets" placeholder="aantalCirkels" /></td>  &lt;!&ndash;nog omzetten naar dropdown&ndash;&gt;
                         </tr>
                         <tr>
-                            <td><h4 class="col-lg-2 control-label">Error Threshold:</h4></td>   <!--dropdown met waarden van 10 tot 100, met stappen van 10, dus 10,20,30,40..tot 100 %-->
+                            <td><h4 class="col-lg-2 control-label">Error Threshold:</h4></td>   &lt;!&ndash;dropdown met waarden van 10 tot 100, met stappen van 10, dus 10,20,30,40..tot 100 %&ndash;&gt;
                             <td  class="form-control"> <select>
                                 <option th:value="Waarde10">10</option>
                                 <option th:value="Waarde20">20</option>
@@ -46,11 +53,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><h4 class="col-lg-2 control-label">Number of Sequences:</h4></td> <!--met standaard 4%-->
+                            <td><h4 class="col-lg-2 control-label">Number of Sequences:</h4></td> &lt;!&ndash;met standaard 4%&ndash;&gt;
                             <td  class="form-control"><input type="text" name="Sequences" placeholder="1-4" /></td>
                         </tr>
                         <tr>
-                            <td><h4 class="col-lg-2 control-label">Difficulty:</h4></td> <!--dropdown met waarden van 1 tot 4, dus 1, 2, 3 en 4-->
+                            <td><h4 class="col-lg-2 control-label">Difficulty:</h4></td> &lt;!&ndash;dropdown met waarden van 1 tot 4, dus 1, 2, 3 en 4&ndash;&gt;
 
                             <td  class="form-control"><select>
                                 <option th:value="Waarde1">1</option>
@@ -61,7 +68,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><h4 class="col-lg-2 control-label">Target Amplitude min:</h4></td> <!--zal mogelijk nog veranderen met waarden die afgeleid worden van den difficulty dropdown-->
+                            <td><h4 class="col-lg-2 control-label">Target Amplitude min:</h4></td> &lt;!&ndash;zal mogelijk nog veranderen met waarden die afgeleid worden van den difficulty dropdown&ndash;&gt;
                             <td  class="form-control"><input type="text" name="AmplitudeMin" placeholder="grootteCirkels" /></td>
                         </tr>
                         <tr>
@@ -76,22 +83,21 @@
                             <td><h4 class="col-lg-2 control-label">Target width max:</h4></td>
                             <td  class="form-control"><input type="text" name="WidthMax" placeholder="grootteCirkels" /></td>
                         </tr>
-
                         <tr>
-                            <td><h4 class="col-lg-2 control-label">Color main circle:</h4></td> <!--of colorpicker-->
-                            <td  class="form-control"><input type="color" name="ColorMain" placeholder="Kleur" /></td>
+                            <td><h4 class="col-lg-2 control-label">Color main circle:</h4></td> &lt;!&ndash;of colorpicker-->
+                            <!--<td  class="form-control"><input type="text" name="ColorMain" placeholder="Kleur" /></td>
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Color targets:</h4></td>
-                            <td  class="form-control"><input type="color" name="ColorTargets" placeholder="Kleur" /></td>
+                            <td  class="form-control"><input type="text" name="ColorTargets" placeholder="Kleur" /></td>
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Color next target:</h4></td>
-                            <td  class="form-control"><input type="color" name="ColorNext" placeholder="Kleur" /></td>
+                            <td  class="form-control"><input type="text" name="ColorNext" placeholder="Kleur" /></td>
                         </tr>
                         <tr>
                             <td><h4 class="col-lg-2 control-label">Color previous target:</h4></td>
-                            <td  class="form-control"><input type="color" name="ColorPrevious" placeholder="Kleur" /></td>
+                            <td  class="form-control"><input type="text" name="ColorPrevious" placeholder="Kleur" /></td>
                         </tr>
 
                         <tr>
@@ -99,7 +105,11 @@
                             <td class="col-lg-10 col-lg-offset-2"><input type="submit" value="CreateTest"  class="btn btn-primary control-label"/></td>
                         </tr>
 
-                    </table>
+                    </table>-->
+
+
+
+
                 </fieldset>
             </form>
         </div>
