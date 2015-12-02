@@ -15,12 +15,49 @@
 
 <div th:include="navbar :: page"></div>
 
-
-
 <div class="container">
     <div class="page-header" style="margin-top: 7%">
         <h1 id="containers" align="center">Devices</h1>
     </div>
+
+
+    <h2>Devices</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Type of device</th>
+            <th>Build nummer:</th>
+            <th>information:</th>
+            <th>    </th>
+        </tr>
+    </table>
+
+    <div style="margin-top:5%">
+        <div class=" col-md-4 col-sm-6">
+
+        </div>
+
+        <div class="well bs-component col-md-4 col-sm-6">
+            <fieldset>
+                <legend>New Device</legend>
+                <div class="form-group">
+                    <label for="Device_name">Device name:</label>
+                    <input class="form-control" type="text" name="Device_name" placeholder="Device_name" id="Device_name" />
+                </div>
+                <div class="form-group">
+                    <label for="Build_number">Build number:</label>
+                    <input class="form-control" type="text" name="Build_number" placeholder="Build number" id="Build_number" />
+                </div>
+                <div class="form-group">
+                    <label for="Info">Info:</label>
+                    <textarea class="form-control" rows="4" id="Info" data-emoji_font="true" style="font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol', Symbola, EmojiSymbols !important;"></textarea>
+                </div>
+                <input type="submit" value="Save Device"  class="btn btn-primary control-label"/>
+            </fieldset>
+
+        </div>
+    </div>
+
+
 </div>
 
 </body>
