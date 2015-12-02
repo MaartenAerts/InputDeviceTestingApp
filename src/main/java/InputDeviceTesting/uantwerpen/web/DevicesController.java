@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/devices/")
-
 public class DevicesController
 {
     @RequestMapping(value = "devices", method = RequestMethod.GET)
