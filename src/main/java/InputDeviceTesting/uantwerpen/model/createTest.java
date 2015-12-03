@@ -11,7 +11,8 @@ public class createTest {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
-    private long Code;
+  //  private long Code;
+  private String Title;
     private String Device;
     private long Targets;
     private long errorThreshold;
@@ -25,7 +26,8 @@ public class createTest {
     private String ColorTargets;
     private String ColorNext;
     private String ColorPrevious;
-    private String email;
+    private String ColorMissed;
+   // private String email;
 
     public createTest() {
     }
@@ -38,13 +40,13 @@ public class createTest {
         this.id = id;
     }
 
-    public long getCode() {
-        return Code;
-    }
-
-    public void setCode(long Code) {
-        this.Code = Code;
-    }
+//    public long getCode() {
+//        return Code;
+//    }
+//
+//    public void setCode(long Code) {
+//        this.Code = Code;
+//    }
 
     public long getTargets() {
         return Targets;
@@ -118,6 +120,14 @@ public class createTest {
         this.ColorMain = colorMain;
     }
 
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String Title) {
+        this.Title = Title;
+    }
+
     public String getColorTargets() {
         return ColorTargets;
     }
@@ -150,13 +160,21 @@ public class createTest {
         this.ColorPrevious = colorPrevious;
     }
 
-    public String getemail() {
-        return email;
+    public String getColorMissed() {
+        return ColorMissed;
     }
 
-    public void setemail(String email) {
-        this.email = email;
+    public void setColorMissed(String colorMissed) {
+        this.ColorMissed = colorMissed;
     }
+
+//    public String getemail() {
+//        return email;
+//    }
+//
+//    public void setemail(String email) {
+//        this.email = email;
+//    }
 }
 
 
