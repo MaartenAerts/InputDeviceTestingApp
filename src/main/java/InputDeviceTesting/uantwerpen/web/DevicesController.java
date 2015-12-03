@@ -37,8 +37,11 @@ public class DevicesController
         return "redirect:/devices/devices";
     }
 
+
+
     @ModelAttribute("allDevices")
-    public List<Device> populateDevices() {
+    public List<Device> populateDevices()
+    {
         List<Device> deviceList = deviceRepo.findAll();
         return deviceList;
     }

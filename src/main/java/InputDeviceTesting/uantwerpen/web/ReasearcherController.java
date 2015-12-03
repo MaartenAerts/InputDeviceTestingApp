@@ -22,6 +22,8 @@ public class ReasearcherController {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
+
+
     @ModelAttribute("allResearchers")
     public List<Researcher> populateResearchers() {
         List<Researcher> researcherList = customUserDetailsService.findAll();

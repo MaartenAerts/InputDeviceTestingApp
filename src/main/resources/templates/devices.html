@@ -24,10 +24,15 @@
     <h2>Devices</h2>
     <table class="table table-striped">
         <tr>
-            <th>Type of device</th>
+            <th>Device name</th>
             <th>Build nummer:</th>
             <th>information:</th>
-            <th>    </th>
+        </tr>
+
+        <tr th:each="device : ${allDevices}">
+            <td th:text="${device.name}"/>
+            <td th:text="${device.vendor}"/>
+            <td th:text="${device.version}"/>
         </tr>
     </table>
 
@@ -52,8 +57,8 @@
                     </div>
                     <div class="form-group">
                         <label for="Info">Info:</label>
-                        <textarea class="form-control" rows="4" id="Info" data-emoji_font="true" name="version"
-                                  style="font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol', Symbola, EmojiSymbols !important;"></textarea>
+                        <input class="form-control" type="text" name="version" placeholder="vul hier versie info in"
+                               id="Info"/>
                     </div>
                     <input type="submit" value="Save Device" class="btn btn-primary control-label"/>
                 </fieldset>
