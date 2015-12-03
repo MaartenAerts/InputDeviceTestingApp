@@ -400,6 +400,7 @@ class Test extends React.Component<propke,stateje>
 
     }
 
+    // dit gaan we niet doen, is niet per sé nodig
    /* showPathPixels() {
         alert("lengte x-array:" + trackingArrayX.length + ", lengte y-array: " + trackingArrayY.length)
         for (var i = 0;i<trackingArrayX.length-1;i++) {
