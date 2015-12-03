@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
@@ -23,14 +23,14 @@
                             <div class="row">
                                 <div class='col-sm-6'>
                                     <div class="form-group">
-                                        <label for="participant_code">Participant Code:</label>
-                                        <input class="form-control" type="text" name="Code" placeholder="participantCode" id="participant_code" />
+                                        <label for="title">Title:</label>
+                                        <input class="form-control" type="text" name="Title" placeholder="Insert the title here" id="title" />
                                     </div>
                                 </div>
                                 <div class='col-sm-6'>
                                     <div class="form-group">
                                         <label for="input_device">Input Device:</label>
-                                        <input class="form-control" type="text" name="Device" placeholder="inputDevice" id="input_device" />
+                                        <input class="form-control" type="text" name="Device" placeholder="Insert the device here" id="input_device" />
                                     </div>
                                 </div>
                             </div>
@@ -68,19 +68,62 @@
                             <div class="row">
                                 <div class='col-sm-6'>
                                     <div class='form-group'>
-                                        <label for="Difficulty">Difficulty</label>
-                                        <select id="Difficulty" class="form-control">
-                                            <option th:value="Waarde1">1</option>
-                                            <option th:value="Waarde2">2</option>
-                                            <option th:value="Waarde3">3</option>
-                                            <option th:value="Waarde4">4</option>
-                                        </select>
+                                        <label for="amplitude_min">Amplitude min:</label>
+                                        <input type="text" name="AmplitudeMin" id="amplitude_min" placeholder="Insert min amplitude here" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class='col-sm-6'>
+                                    <label for="amplitude_max">Amplitude max:</label>
+                                    <input type="text" name="AmplitudeMax" placeholder="Insert max amplitude here" id="amplitude_max" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-6'>
                                     <div class='form-group'>
-                                        <label for="Error_Threshold:">Error Threshold:</label>
-                                        <select id="Error_Threshold:" class="form-control">
+                                        <label for="target_width_min">Target width min:</label>
+                                        <input type="text" name="TargetWidthMin" placeholder="Insert min target width here" id="target_width_min" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="target_width_max">Target width max:</label>
+                                    <input type="text" name="TargetWidthMax" id="target_width_max" placeholder="Insert max target width here" class="form-control"/>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="color_main_circle">Color main circle:</label>
+                                        <input type="color" name="ColorMainCircle" id="color_main_circle" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="color_targets">Color targets:</label>
+                                    <input type="color" name="ColorTargets" id="color_targets" class="form-control"/>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="color_next_target">Color next target:</label>
+                                        <input type="color" name="ColorNextTarget" id="color_next_target" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <label for="color_previous_target">Color previous target:</label>
+                                    <input type="color" name="ColorPreviousTarget" id="color_previous_target" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class='form-group'>
+                                        <label for="error_threshold">Error Threshold:</label>
+                                        <select id="error_threshold" class="form-control">
                                             <option th:value="Waarde10">10</option>
                                             <option th:value="Waarde20">20</option>
                                             <option th:value="Waarde30">30</option>
@@ -94,70 +137,31 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class='col-sm-6'>
                                     <div class='form-group'>
-                                        <label for="Target_Amplitude_min">Target Amplitude min:</label>
-                                        <input type="text" name="AmplitudeMin" id="Target_Amplitude_min" placeholder="Min circle diameter" class="form-control"/>
+                                        <label for="difficulty">Difficulty</label>
+                                        <select id="difficulty" class="form-control">
+                                            <option th:value="Waarde1">1</option>
+                                            <option th:value="Waarde2">2</option>
+                                            <option th:value="Waarde3">3</option>
+                                            <option th:value="Waarde4">4</option>
+                                        </select>
+                                       <!-- <input class="form-control" type="text" name="Difficulty" id="difficulty">-->
+
+                                        </input>
+
                                     </div>
-                                </div>
-                                <div class='col-sm-6'>
-                                    <label for="Target_Amplitude_max">Target Amplitude max:</label>
-                                    <input type="text" name="WidthMax" placeholder="Max circle diameter" id="Target_Amplitude_max" class="form-control" />
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class='col-sm-6'>
-                                    <div class='form-group'>
-                                        <label for="Target_width_min">Target width min:</label>
-                                        <input type="text" name="WidthMin" placeholder="Width min" id="Target_width_min" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class='col-sm-6'>
-                                    <label for="Target_width_max">Target width max:</label>
-                                    <input type="text" name="WidthMax" id="Target_width_max" placeholder="Width max" class="form-control"/>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class='col-sm-6'>
-                                    <div class='form-group'>
-                                        <label for="Color_main_circle">Color main circle:</label>
-                                        <input type="color" name="ColorMain" placeholder="kleur" id="Color_main_circle" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class='col-sm-6'>
-                                    <label for="Color_targets">Color targets:</label>
-                                    <input type="color" name="ColorTargets" id="Color_targets" placeholder="kleur" class="form-control"/>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class='col-sm-6'>
-                                    <div class='form-group'>
-                                        <label for="Color_next_target">Color next target:</label>
-                                        <input type="color" name="ColorNext" placeholder="kleur" id="Color_next_target" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class='col-sm-6'>
-                                    <label for="Color_previous_target">Color previous target:</label>
-                                    <input type="color" name="ColorPrevious" id="Color_previous_target" placeholder="kleur" class="form-control"/>
-                                </div>
-                            </div>
-
-                            <div class="row">
+                         <!--  <div class="row">
                                 <div class='col-sm-6'>
                                     <div class="form-group">
                                         <label for="email">Send this test to:</label>
                                         <input class="form-control" type="text" name="email" placeholder="insert patient's email here" id="email" />
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <input type="submit" value="CreateTest"  class="btn btn-primary control-label"/>
 

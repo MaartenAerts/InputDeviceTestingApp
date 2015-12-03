@@ -60,7 +60,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             var circleID = 0;
             // sequentienummer uit localstorage halen
             sequentieNummer = localStorage.getItem("sequentieNummer");
-            alert("Sequentienummer: " + sequentieNummer);
+            //alert("Sequentienummer: " + sequentieNummer);
             if (sequentieNummer == null && testGedaan == false) {
                 sequentieNummer = 1;
                 alert("Test " + sequentieNummer + " van de " + sequentieMax);
@@ -138,7 +138,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             timeGemiddelde = timeSeconds / aantalCirkels;
             //alert('Dus time per trial: ' + timeGemiddelde)
             //  alert('Lengte errorArray: ' + errorArray.length.toString());
-            alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7]);
+            //alert('errorArray waarden: ' + errorArray[1] + "," + errorArray[2] + "," + errorArray[3] + "," + errorArray[4] + "," + errorArray[5] + "," + errorArray[6] + "," + errorArray[7])
             //standard deviation berekenen
             var sum = 0;
             var average = 0;
