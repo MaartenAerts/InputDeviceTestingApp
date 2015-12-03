@@ -12,6 +12,7 @@ public class createTest {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private long Code;
+    private String Device;
     private long Targets;
     private long errorThreshold;
     private long Sequences;
@@ -24,6 +25,7 @@ public class createTest {
     private String ColorTargets;
     private String ColorNext;
     private String ColorPrevious;
+    private String email;
 
     public createTest() {
     }
@@ -132,6 +134,14 @@ public class createTest {
         this.ColorNext = colorNext;
     }
 
+    public String getDevice() {
+        return Device;
+    }
+
+    public void setDevice(String Device) {
+        this.Device = Device;
+    }
+
     public String getColorPrevious() {
         return ColorPrevious;
     }
@@ -139,4 +149,14 @@ public class createTest {
     public void setColorPrevious(String colorPrevious) {
         this.ColorPrevious = colorPrevious;
     }
+
+    public String getemail() {
+        return email;
+    }
+
+    public void setemail(String email) {
+        this.email = email;
+    }
 }
+
+

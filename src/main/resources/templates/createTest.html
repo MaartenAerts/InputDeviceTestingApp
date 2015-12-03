@@ -88,13 +88,34 @@
 
                         <div class='col-sm-6' style="margin-top: 1%">
                             <label for="Error_Threshold">Error Threshold:</label>
-                            <input type="text" name="errorThreshold" id="Error_Threshold" placeholder="Error Threshold" class="form-control"/>
+                            <select  class="form-control" type="text" name="errorThreshold" id="Error_Threshold" placeholder="Error Threshold">
+                                <span class="input-group-btn">
+                                    <option th:value="10">10</option>
+                                    <option th:value="20">20</option>
+                                    <option th:value="30">30</option>
+                                    <option th:value="40">40</option>
+                                    <option th:value="50">50</option>
+                                    <option th:value="60">60</option>
+                                    <option th:value="70">70</option>
+                                    <option th:value="80">80</option>
+                                    <option th:value="90">90</option>
+                                    <option th:value="100">100</option>
+                                </span>
+                            </select>
                         </div>
 
                         <div class='col-sm-6' style="margin-top: 1%">
                             <label for="Difficulty">Difficulty:</label>
-                            <input type="text" name="Difficulty" id="Difficulty" placeholder="Difficulty" class="form-control"/>
+                            <select  class="form-control" type="text" name="Difficulty" id="Difficulty" placeholder="Difficulty">
+                                <span class="input-group-btn">
+                                    <option th:value="1">1</option>
+                                    <option th:value="2">2</option>
+                                    <option th:value="3">3</option>
+                                    <option th:value="4">4</option>
+                                </span>
+                            </select>
                         </div>
+
 
                     </div>
 

@@ -1,5 +1,6 @@
 package InputDeviceTesting.uantwerpen.repo;
 
+import InputDeviceTesting.uantwerpen.model.Test;
 import InputDeviceTesting.uantwerpen.model.createTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
