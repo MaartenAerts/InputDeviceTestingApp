@@ -9,7 +9,11 @@ var aantalCirkels = 7;      // enkel oneven toelaten via createTest !!!
 var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
 var radius = radiusBigCircle/7.5;
 var errorMax = 0.5;
-
+var colorMainCircle = "#ffffff";
+var colorTarget = "red";
+var colorNextTarget = "green";
+var colorClickedTarget = "yellow";
+var colorMissedTarget = "#660000";
 
 var xCircleArray = new Array();
 var yCircleArray = new Array();
@@ -132,17 +136,17 @@ class Test extends React.Component<propke,stateje>
 }
 
     renderBigCircle(cxBigCircle, cyBigCircle, radiusBigCircle) {
-        return <circle cx={cxBigCircle} cy={cyBigCircle} r={radiusBigCircle-10} fill="#ffffff" />;
+        return <circle cx={cxBigCircle} cy={cyBigCircle} r={radiusBigCircle-10} fill={colorMainCircle} />;
     }
 
     renderCircle(id, cx, cy, radius) {
         if (id==1){
-            return <circle id={id} cx={cx} cy={cy} r={radius} fill="green" stroke="black" strokeWidth="2" />;
+            return <circle id={id} cx={cx} cy={cy} r={radius} fill={colorNextTarget} stroke="black" strokeWidth="2" />;
 
         }
 
         if (id<=aantalCirkels) {
-            return <circle id={id} cx={cx} cy={cy} r={radius} fill="red" stroke="black" strokeWidth="2" />;
+            return <circle id={id} cx={cx} cy={cy} r={radius} fill={colorTarget} stroke="black" strokeWidth="2" />;
         }
     }
 
@@ -345,10 +349,10 @@ class Test extends React.Component<propke,stateje>
         // deze if staat laatst omdat ander bij het aanklikken van de laatste bol de test niet wordt afgesloten
         //kijken of je op de juiste bol klikt, anders is dit een fout
         if (id == idVolgende) {
-            e.target.setAttribute('fill', 'yellow');
+            e.target.setAttribute('fill', colorClickedTarget);
             if (idLaatsteIsEersteCirkel == false) {
                 //volgende aan te klikken bol groen kleuren
-                document.getElementById((id + 1).toString()).setAttribute('fill', 'green');
+                document.getElementById((id + 1).toString()).setAttribute('fill', colorNextTarget);
                 //errorArray vullen met 0, want er is juist geklikt
                 errorArray[id] = 0;
             } else if (idLaatsteIsEersteCirkel == true) {
@@ -360,20 +364,20 @@ class Test extends React.Component<propke,stateje>
         } else if (idVolgende!=aantalCirkels && idLaatsteIsEersteCirkel == false) {
             //alert ('Fout geklikt')
             // de niet aangeklikte bol terug rood kleuren
-            document.getElementById((idVolgende).toString()).setAttribute('fill', '#660000');
+            document.getElementById((idVolgende).toString()).setAttribute('fill', colorMissedTarget);
             // volgende aan te klikken bol groen kleuren
-            document.getElementById((idVolgende + 1).toString()).setAttribute('fill', 'green');
+            document.getElementById((idVolgende + 1).toString()).setAttribute('fill', colorNextTarget);
             this.berekenVerschilCoördinaten(e);
             aantalErrors++;
 
         } else if (idVolgende!=aantalCirkels && idLaatsteIsEersteCirkel == true) {
             if (id == aantalCirkels) {
-                document.getElementById((aantalCirkels).toString()).setAttribute('fill', 'yellow');
+                document.getElementById((aantalCirkels).toString()).setAttribute('fill', colorClickedTarget);
             } else if (id!= aantalCirkels && idVolgende == 1) {
-                document.getElementById((aantalCirkels).toString()).setAttribute('fill', '#660000');
+                document.getElementById((aantalCirkels).toString()).setAttribute('fill', colorMissedTarget);
                 aantalErrors++;
             }
-            document.getElementById((idVolgende).toString()).setAttribute('fill', 'green');
+            document.getElementById((idVolgende).toString()).setAttribute('fill', colorNextTarget);
         }
 
 
