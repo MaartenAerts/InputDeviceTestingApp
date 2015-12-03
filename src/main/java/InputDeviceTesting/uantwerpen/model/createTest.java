@@ -13,7 +13,7 @@ public class createTest {
     private long id;
     private long Code;
     private long Targets;
-    private long ErrorTreshold;
+    private long errorThreshold;
     private long Sequences;
     private long Difficulty;
     private long AmplitudeMin;
@@ -52,12 +52,12 @@ public class createTest {
         this.Targets = Targets;
     }
 
-    public long getErrorTreshold() {
-        return ErrorTreshold;
+    public long getErrorThreshold() {
+        return errorThreshold;
     }
 
-    public void setErrorTreshold(long errorTreshold) {
-        this.ErrorTreshold = errorTreshold;
+    public void setErrorThreshold(long errorThreshold) {
+        this.errorThreshold = errorThreshold;
     }
 
     public long getSequences() {
