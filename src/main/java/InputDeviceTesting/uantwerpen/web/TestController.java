@@ -53,7 +53,7 @@ public class TestController {
 
 
     @RequestMapping(value = "Testform", method = RequestMethod.GET)
-    public String Testform(@RequestParam(value="code", required=false, defaultValue="0") String code, Model model){
+    public String TestForm(@RequestParam(value="code", required=false, defaultValue="0") String code, Model model){
         model.addAttribute("Joel",blub);
         //model.addAttribute("Code",blub.getCode());
 
