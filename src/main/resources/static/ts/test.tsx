@@ -4,13 +4,6 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 
-    var Ae =0;
-    var We = 0;
-    var IDe = 0;
-    var MT = 0;
-    var ER = 0;
-    var TP = 0;
-
 // in te stellen parameters via applicatie
 var aantalCirkels = 7;      // enkel oneven toelaten via createTest !!!
 var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
@@ -21,6 +14,15 @@ var colorTarget = "red";
 var colorNextTarget = "green";
 var colorClickedTarget = "yellow";
 var colorMissedTarget = "#660000";
+
+// door te geven parameters naar databank
+var Ae =0;
+var We = 0;
+var IDe = 0;
+var MT = 0;
+var ER = 0;
+var TP = 0;
+var resultatenArray = new Array();
 
 var xCircleArray = new Array();
 var yCircleArray = new Array();
@@ -224,11 +226,6 @@ class Test extends React.Component<propke,stateje>
         var xAfstand = 0;
         var yAfstand = 0;
         var afTeLeggenAfstand = 0;
-        /*for(var i=1;i<=IdArray.length;i++) {
-         if (IdArray[i] == idVolgende) {
-         opTeHalenCirkelId = i;
-         }
-         }*/
 
         //lus om afstanden(amplitude) tussen de cirkels te berekenen
         for(var k=1;k<=errorArray.length-2;k++) {
@@ -239,6 +236,7 @@ class Test extends React.Component<propke,stateje>
                     opTeHalenCirkelIdVolgende = l;
                 }
             }
+
             //pythagoras om de afstanden tussen 2 cirkels te berekenen
             xAfstand = Math.abs(xCircleArray[opTeHalenCirkelIdVolgende] - xCircleArray[opTeHalenCirkelId]);
             yAfstand = Math.abs(yCircleArray[opTeHalenCirkelIdVolgende] - yCircleArray[opTeHalenCirkelId]);
@@ -258,6 +256,7 @@ class Test extends React.Component<propke,stateje>
         var throughput = ide/timeGemiddelde;
         //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
 
+        // resultaten tonen op het einde van de test
         this.toonResultaten(ae,we,ide,throughput);
 
         // sequentienummer behouden na page refresh
@@ -270,39 +269,62 @@ class Test extends React.Component<propke,stateje>
             localStorage.clear();
             testGedaan = true;
             alert("Bedankt voor de test! De data werd goed ontvangen!")
+
         }
     }
 
-    function dbData(trial,a,w,ae,we,ide,aantalErrors,mt,er,tp){
-             document.getElementById('trial').value = trial;
-             document.getElementById('a').value = a;
-             document.getElementById('w').value = w;
-             document.getElementById('ae').value = ae;
-             document.getElementById('we').value = we;
-             document.getElementById('ide').value = ide;
-             document.getElementById('error').value = aantalErrors;
-             document.getElementById('mt').value = MT;
-             document.getElementById('er').value = er;
-             document.getElementById('tp').value = tp
-             document.forms['testResultForm'].submit();
+    saveToTempLocalStorage(trial,a,w,ae,we,ide,aantalErrors,mt,er,tp){
+        resultatenArray.push(trial,a,w,ae,we,ide,aantalErrors,mt,er,tp);
+        //alert(resultatenArray.length.toString());
+
+        localStorage.setItem("trial_" + sequentieNummer,trial);
+        localStorage.setItem("a_" + sequentieNummer,a);
+        localStorage.setItem("w_" + sequentieNummer,w);
+        localStorage.setItem("ae_" + sequentieNummer,ae);
+        localStorage.setItem("we_" + sequentieNummer,we);
+        localStorage.setItem("ide_" + sequentieNummer,ide);
+        localStorage.setItem("aantalErrors_" + sequentieNummer,aantalErrors);
+        localStorage.setItem("mt_" + sequentieNummer,mt);
+        localStorage.setItem("er_" + sequentieNummer,er);
+        localStorage.setItem("tp_" + sequentieNummer,tp);
+
+        //alert("AantalErrors: " + localStorage.getItem("aantalErrors_1"));
+        
+        /*trial = document.getElementById('trial');
+        a = document.getElementById('a');
+        w = document.getElementById('w');
+        ae = document.getElementById('ae');
+        we = document.getElementById('we');
+        ide = document.getElementById('ide');
+        aantalErrors = document.getElementById('error');
+        mt = document.getElementById('mt');
+        er = document.getElementById('er');
+        tp = document.getElementById('tp');
+        document.forms['testResultForm'].submit();*/
     }
 
+
+
     toonResultaten(ae,we,ide,throughput) {
-                   Ae = Math.round(ae * 100) / 100;
-                   We = Math.round(we * 100) / 100;
-                   IDe = Math.round(ide * 100) / 100;
-                   MT = Math.round((timeGemiddelde * 1000) * 10) / 10;
-                   ER = (aantalErrors / aantalCirkels) * 100;
-                   TP = Math.round(throughput * 10) / 10;
+        Ae = Math.round(ae * 100) / 100;
+        We = Math.round(we * 100) / 100;
+        IDe = Math.round(ide * 100) / 100;
+        MT = Math.round((timeGemiddelde * 1000) * 10) / 10;
+        ER = (aantalErrors / aantalCirkels) * 100;
+        TP = Math.round(throughput * 10) / 10;
+
+        //resultaten eerst naar de databank schrijven
+        this.saveToTempLocalStorage(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
 
 
-                   alert('TASK CONDITIONS:\n     ' +
+
+        alert('TASK CONDITIONS:\n     ' +
                        'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
                        '\nMOVEMENT BEHAVIOUR:\n     Ae = ' + Ae
                         + '\n     We = ' + We + '\n     IDe = ' + IDe + '\n     Errors = ' + aantalErrors +
                        '\nPARTICIPANT PERFORMANCE:\n     MT  = ' +MT + ' ms/trial\n     ER = ' + ER + ' %\n     TP = ' + TP + ' bits/s');
 
-                   dbData(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
+                 //  this.dbData(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
     }
 
 
