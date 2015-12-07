@@ -6,6 +6,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
+
+
+    var Ae =0;
+    var We = 0;
+    var IDe = 0;
+    var MT = 0;
+    var ER = 0;
+    var TP = 0;
     // in te stellen parameters via applicatie
     var aantalCirkels = 7; // enkel oneven toelaten via createTest !!!
     var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
@@ -46,6 +54,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var sequentieNummer = 1;
     var sequentieMax = 4;
     var testGedaan = false;
+
     var Test = (function (_super) {
         __extends(Test, _super);
         function Test(props) {
@@ -214,12 +223,38 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 alert("Bedankt voor de test! De data werd goed ontvangen!");
             }
         };
+
+         function dbData(trial,a,w,ae,we,ide,aantalErrors,mt,er,tp){
+             document.getElementById('trial').value = trial;
+             document.getElementById('a').value = a;
+             document.getElementById('w').value = w;
+             document.getElementById('ae').value = ae;
+             document.getElementById('we').value = we;
+             document.getElementById('ide').value = ide;
+             document.getElementById('error').value = aantalErrors;
+             document.getElementById('mt').value = MT;
+             document.getElementById('er').value = er;
+             document.getElementById('tp').value = tp
+             document.forms['testResultForm'].submit();
+         }
+
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
+
+            Ae = Math.round(ae * 100) / 100;
+            We = Math.round(we * 100) / 100;
+            IDe = Math.round(ide * 100) / 100;
+            MT = Math.round((timeGemiddelde * 1000) * 10) / 10;
+            ER = (aantalErrors / aantalCirkels) * 100;
+            TP = Math.round(throughput * 10) / 10;
+
+
             alert('TASK CONDITIONS:\n     ' +
                 'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
-                '\nMOVEMENT BEHAVIOUR:\n     Ae = ' +
-                Math.round(ae * 100) / 100 + '\n     We = ' + Math.round(we * 100) / 100 + '\n     IDe = ' + Math.round(ide * 100) / 100 + '\n     Errors = ' + aantalErrors +
-                '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + Math.round((timeGemiddelde * 1000) * 10) / 10 + ' ms/trial\n     ER = ' + (aantalErrors / aantalCirkels) * 100 + ' %\n     TP = ' + Math.round(throughput * 10) / 10 + ' bits/s');
+                '\nMOVEMENT BEHAVIOUR:\n     Ae = ' + Ae
+                 + '\n     We = ' + We + '\n     IDe = ' + IDe + '\n     Errors = ' + aantalErrors +
+                '\nPARTICIPANT PERFORMANCE:\n     MT  = ' +MT + ' ms/trial\n     ER = ' + ER + ' %\n     TP = ' + TP + ' bits/s');
+
+            dbData(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
         };
         Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT

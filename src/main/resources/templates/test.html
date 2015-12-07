@@ -29,11 +29,21 @@
         </div>
     </div>
 
-            <div id="canvas_for_test" align="center">
-             <!--<script type="text/jsx"></script>-->
-            <!--  Test
-              //  <canvas id="myCanvas" style="border:1px thick" width="500" height="500"></canvas> -->
-            </div>
+    <form th:action="@{/test/rapport}" action="/test/rapport" method="POST" commandName="resultForm" id="testResultForm">
+        <input type="hidden" name="trials" id="trial"  value=""/>
+        <input type="hidden" name="A" id="a"  value=""/>
+        <input type="hidden" name="W" id="w"  value=""/>
+        <input type="hidden" name="Ae" id="ae"  value=""/>
+        <input type="hidden" name="We" id="we"  value=""/>
+        <input type="hidden" name="IDe" id="ide"  value=""/>
+        <input type="hidden" name="error" id="error"  value=""/>
+        <input type="hidden" name="MT" id="mt"  value=""/>
+        <input type="hidden" name="ER" id="er"  value=""/>
+        <input type="hidden" name="TP" id="tp"  value=""/>
+    </form>
+
+            <div id="canvas_for_test" align="center" />
+
 
 </div>
 </body>

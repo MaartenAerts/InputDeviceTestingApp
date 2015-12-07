@@ -173,6 +173,7 @@ public class Researcher implements Serializable, Comparable<Researcher>  {
         return this.email.equals(((Researcher) o).email);
     }
 
+
     @Override
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));

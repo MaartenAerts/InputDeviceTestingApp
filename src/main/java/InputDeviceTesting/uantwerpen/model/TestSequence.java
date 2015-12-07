@@ -16,6 +16,11 @@ public class TestSequence {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private int sequenceIndex;
+
+    @OneToOne(mappedBy = "testsequence",cascade = CascadeType.ALL)
+    private TestResult testResult;
+
     @ManyToOne
     Test test;
 
@@ -38,6 +43,14 @@ public class TestSequence {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public TestResult getTestResult() {
+        return testResult;
+    }
+
+    public void setTestResult(TestResult testResult) {
+        this.testResult = testResult;
     }
 
     public Test getTest() {

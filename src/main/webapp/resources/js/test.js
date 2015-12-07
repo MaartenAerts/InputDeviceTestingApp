@@ -5,8 +5,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+
+var MT = 0;
+
 define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (require, exports, React, ReactDom) {
     // in te stellen parameters via applicatie
+
+
     var aantalCirkels = 10;
     var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
     var radius = radiusBigCircle / 7.5;
@@ -157,13 +162,25 @@ define(["require", "exports", 'react', 'react-dom', 'testjoris'], function (requ
             //alert('Throughput: ' + throughput + " bits/s\n Aantal Errors: " + aantalErrors);
             this.toonResultaten(ae, we, ide, throughput);
         };
+
+       /* function myFunction(a){
+            alert(a);
+        }*/
+
+
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
-            alert('TASK CONDITIONS:\n     ' +
+            alert('HOMO');
+            MT = Math.round((timeGemiddelde * 1000) * 10) / 10;
+            //myFunction(MT);
+            document.getElementById('mt').value = "500";
+           /* alert('TASK CONDITIONS:\n     ' +
                 'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
                 '\nMOVEMENT BEHAVIOUR:\n     Ae = ' +
                 Math.round(ae * 100) / 100 + '\n     We = ' + Math.round(we * 100) / 100 + '\n     IDe = ' + Math.round(ide * 100) / 100 + '\n     Errors = ' + aantalErrors +
-                '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + Math.round((timeGemiddelde * 1000) * 10) / 10 + ' ms/trial\n     ER = ' + (aantalErrors / aantalCirkels) * 100 + ' %\n     TP = ' + Math.round(throughput * 10) / 10 + ' bits/s');
+                '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + MT + ' ms/trial\n     ER = ' + (aantalErrors / aantalCirkels) * 100 + ' %\n     TP = ' + Math.round(throughput * 10) / 10 + ' bits/s');
+        */
         };
+
         Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT
              //kijken of de test voltooid is

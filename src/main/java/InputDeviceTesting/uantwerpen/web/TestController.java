@@ -1,6 +1,8 @@
 package InputDeviceTesting.uantwerpen.web;
 
+import InputDeviceTesting.uantwerpen.model.ResearchGroup;
 import InputDeviceTesting.uantwerpen.model.Test;
+import InputDeviceTesting.uantwerpen.model.TestResult;
 import InputDeviceTesting.uantwerpen.model.createTest;
 import InputDeviceTesting.uantwerpen.repo.CreateTestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 /**
  * Created by TooLate on 5/11/2015.
  */
@@ -19,16 +23,23 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/test/")
 public class TestController {
 
-    @RequestMapping("test")//Todo:moet {id} worden
-    public ModelAndView getTest(){
-        return new ModelAndView("test");
-    }
-
     @Autowired
     CreateTestRepo createTestRepo;
 
     private createTest blub;
 
+
+    @RequestMapping("test")//Todo:moet {id} worden
+    public ModelAndView getTest(){
+        return new ModelAndView("test");
+    }
+
+
+    @RequestMapping(value = "rapport", method = RequestMethod.POST)
+    public void SaveResults(@ModelAttribute("resultForm") TestResult testResult) {
+
+        System.out.println("Trololololo");
+    }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public ModelAndView createTest(){
