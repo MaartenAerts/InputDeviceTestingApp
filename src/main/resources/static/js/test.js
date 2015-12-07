@@ -255,8 +255,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 '\nPARTICIPANT PERFORMANCE:\n     MT  = ' +MT + ' ms/trial\n     ER = ' + ER + ' %\n     TP = ' + TP + ' bits/s');
 
             dbData(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
-        };
-        Test.prototype.handleMouseClick = function (e) {
+        };        Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT
              //kijken of de test voltooid is
              id = parseInt(e.target.id)

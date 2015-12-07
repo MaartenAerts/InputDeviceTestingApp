@@ -4,6 +4,13 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 
+    var Ae =0;
+    var We = 0;
+    var IDe = 0;
+    var MT = 0;
+    var ER = 0;
+    var TP = 0;
+
 // in te stellen parameters via applicatie
 var aantalCirkels = 7;      // enkel oneven toelaten via createTest !!!
 var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
@@ -266,12 +273,36 @@ class Test extends React.Component<propke,stateje>
         }
     }
 
+    function dbData(trial,a,w,ae,we,ide,aantalErrors,mt,er,tp){
+             document.getElementById('trial').value = trial;
+             document.getElementById('a').value = a;
+             document.getElementById('w').value = w;
+             document.getElementById('ae').value = ae;
+             document.getElementById('we').value = we;
+             document.getElementById('ide').value = ide;
+             document.getElementById('error').value = aantalErrors;
+             document.getElementById('mt').value = MT;
+             document.getElementById('er').value = er;
+             document.getElementById('tp').value = tp
+             document.forms['testResultForm'].submit();
+    }
+
     toonResultaten(ae,we,ide,throughput) {
-        alert('TASK CONDITIONS:\n     ' +
-            'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
-            '\nMOVEMENT BEHAVIOUR:\n     Ae = ' +
-            Math.round(ae*100)/100 + '\n     We = ' + Math.round(we*100)/100 + '\n     IDe = ' + Math.round(ide*100)/100 + '\n     Errors = ' + aantalErrors +
-            '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + Math.round((timeGemiddelde*1000)*10)/10 + ' ms/trial\n     ER = ' + (aantalErrors/aantalCirkels)*100 +' %\n     TP = ' + Math.round(throughput*10)/10 + ' bits/s')
+                   Ae = Math.round(ae * 100) / 100;
+                   We = Math.round(we * 100) / 100;
+                   IDe = Math.round(ide * 100) / 100;
+                   MT = Math.round((timeGemiddelde * 1000) * 10) / 10;
+                   ER = (aantalErrors / aantalCirkels) * 100;
+                   TP = Math.round(throughput * 10) / 10;
+
+
+                   alert('TASK CONDITIONS:\n     ' +
+                       'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
+                       '\nMOVEMENT BEHAVIOUR:\n     Ae = ' + Ae
+                        + '\n     We = ' + We + '\n     IDe = ' + IDe + '\n     Errors = ' + aantalErrors +
+                       '\nPARTICIPANT PERFORMANCE:\n     MT  = ' +MT + ' ms/trial\n     ER = ' + ER + ' %\n     TP = ' + TP + ' bits/s');
+
+                   dbData(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
     }
 
 
