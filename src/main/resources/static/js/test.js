@@ -218,7 +218,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 alert("Bedankt voor de test! De data werd goed ontvangen!");
             }
         };
-        Test.prototype.saveToTempLocalStorage = function (trial, a, w, ae, we, ide, aantalErrors, mt, er, tp) {
+        Test.prototype.saveToDb = function (trial, a, w, ae, we, ide, aantalErrors, mt, er, tp) {
             resultatenArray.push(trial, a, w, ae, we, ide, aantalErrors, mt, er, tp);
             //alert(resultatenArray.length.toString());
             localStorage.setItem("trial_" + sequentieNummer, trial);
@@ -232,17 +232,76 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             localStorage.setItem("er_" + sequentieNummer, er);
             localStorage.setItem("tp_" + sequentieNummer, tp);
             //alert("AantalErrors: " + localStorage.getItem("aantalErrors_1"));
-            /*trial = document.getElementById('trial');
-            a = document.getElementById('a');
-            w = document.getElementById('w');
-            ae = document.getElementById('ae');
-            we = document.getElementById('we');
-            ide = document.getElementById('ide');
-            aantalErrors = document.getElementById('error');
-            mt = document.getElementById('mt');
-            er = document.getElementById('er');
-            tp = document.getElementById('tp');
-            document.forms['testResultForm'].submit();*/
+            //form aanmaken dat oorspronkelijk op test.html stond
+            var submitForm = document.createElement("form");
+            submitForm.setAttribute('th:action', '@/test/rapport');
+            submitForm.setAttribute('action', '/test/rapport');
+            submitForm.setAttribute('method', 'POST');
+            submitForm.setAttribute('commandName', 'resultForm');
+            submitForm.setAttribute('id', 'testResultForm');
+            //alle hidden inputvelden aanmaken om de variabelen in op te slagen
+            for (var i = 1; i <= sequentieMax; i++) {
+                var trialInput = document.createElement("input");
+                trialInput.setAttribute('type', 'hidden');
+                trialInput.setAttribute('name', 'trial');
+                trialInput.setAttribute('id', 'trial_' + i);
+                trialInput.setAttribute('value', localStorage.getItem("trial_" + i));
+                submitForm.appendChild(trialInput);
+                var aInput = document.createElement("input");
+                aInput.setAttribute('type', 'hidden');
+                aInput.setAttribute('name', 'a');
+                aInput.setAttribute('id', 'a_' + i);
+                aInput.setAttribute('value', localStorage.getItem("a_" + i));
+                submitForm.appendChild(aInput);
+                var wInput = document.createElement("input");
+                wInput.setAttribute('type', 'hidden');
+                wInput.setAttribute('name', 'w');
+                wInput.setAttribute('id', 'w_' + i);
+                wInput.setAttribute('value', localStorage.getItem("w_" + i));
+                submitForm.appendChild(wInput);
+                var aeInput = document.createElement("input");
+                aeInput.setAttribute('type', 'hidden');
+                aeInput.setAttribute('name', 'ae');
+                aeInput.setAttribute('id', 'ae_' + i);
+                aeInput.setAttribute('value', localStorage.getItem("ae_" + i));
+                submitForm.appendChild(aeInput);
+                var weInput = document.createElement("input");
+                weInput.setAttribute('type', 'hidden');
+                weInput.setAttribute('name', 'we');
+                weInput.setAttribute('id', 'we_' + i);
+                weInput.setAttribute('value', localStorage.getItem("we_" + i));
+                submitForm.appendChild(weInput);
+                var ideInput = document.createElement("input");
+                ideInput.setAttribute('type', 'hidden');
+                ideInput.setAttribute('name', 'ide');
+                ideInput.setAttribute('id', 'ide_' + i);
+                ideInput.setAttribute('value', localStorage.getItem("ide_" + i));
+                submitForm.appendChild(ideInput);
+                var aantalErrorsInput = document.createElement("input");
+                aantalErrorsInput.setAttribute('type', 'hidden');
+                aantalErrorsInput.setAttribute('name', 'aantalErrors');
+                aantalErrorsInput.setAttribute('id', 'aantalErrors_' + i);
+                aantalErrorsInput.setAttribute('value', localStorage.getItem("aantalErrors_" + i));
+                submitForm.appendChild(aantalErrorsInput);
+                var mtInput = document.createElement("input");
+                mtInput.setAttribute('type', 'hidden');
+                mtInput.setAttribute('name', 'mt');
+                mtInput.setAttribute('id', 'mt_' + i);
+                mtInput.setAttribute('value', localStorage.getItem("mt_" + i));
+                submitForm.appendChild(mtInput);
+                var erInput = document.createElement("input");
+                erInput.setAttribute('type', 'hidden');
+                erInput.setAttribute('name', 'er');
+                erInput.setAttribute('id', 'er_' + i);
+                erInput.setAttribute('value', localStorage.getItem("er_" + i));
+                submitForm.appendChild(erInput);
+                var tpInput = document.createElement("input");
+                tpInput.setAttribute('type', 'hidden');
+                tpInput.setAttribute('name', 'tp');
+                tpInput.setAttribute('id', 'tp_' + i);
+                tpInput.setAttribute('value', localStorage.getItem("tp_" + i));
+                submitForm.appendChild(tpInput);
+            }
         };
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
             Ae = Math.round(ae * 100) / 100;
@@ -252,13 +311,12 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             ER = (aantalErrors / aantalCirkels) * 100;
             TP = Math.round(throughput * 10) / 10;
             //resultaten eerst naar de databank schrijven
-            this.saveToTempLocalStorage(aantalCirkels, radiusBigCircle, radius, Ae, We, IDe, aantalErrors, MT, ER, TP);
+            this.saveToDb(aantalCirkels, radiusBigCircle, radius, Ae, We, IDe, aantalErrors, MT, ER, TP);
             alert('TASK CONDITIONS:\n     ' +
                 'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
                 '\nMOVEMENT BEHAVIOUR:\n     Ae = ' + Ae
                 + '\n     We = ' + We + '\n     IDe = ' + IDe + '\n     Errors = ' + aantalErrors +
                 '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + MT + ' ms/trial\n     ER = ' + ER + ' %\n     TP = ' + TP + ' bits/s');
-            //  this.dbData(aantalCirkels,radiusBigCircle,radius,Ae,We,IDe,aantalErrors,MT,ER,TP);
         };
         Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT
