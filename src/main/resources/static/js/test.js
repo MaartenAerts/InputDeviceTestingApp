@@ -23,7 +23,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var MT = 0;
     var ER = 0;
     var TP = 0;
-    var resultatenArray = new Array();
+    //var resultatenArray = new Array();
     var xCircleArray = new Array();
     var yCircleArray = new Array();
     var IdArray = new Array();
@@ -216,10 +216,12 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 localStorage.clear();
                 testGedaan = true;
                 alert("Bedankt voor de test! De data werd goed ontvangen!");
+                //naar de databank sturen op het einde
+                this.saveToDb();
             }
         };
-        Test.prototype.saveToDb = function (trial, a, w, ae, we, ide, aantalErrors, mt, er, tp) {
-            resultatenArray.push(trial, a, w, ae, we, ide, aantalErrors, mt, er, tp);
+        Test.prototype.saveToTempStorage = function (trial, a, w, ae, we, ide, aantalErrors, mt, er, tp) {
+            //resultatenArray.push(trial,a,w,ae,we,ide,aantalErrors,mt,er,tp);
             //alert(resultatenArray.length.toString());
             localStorage.setItem("trial_" + sequentieNummer, trial);
             localStorage.setItem("a_" + sequentieNummer, a);
@@ -232,6 +234,8 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             localStorage.setItem("er_" + sequentieNummer, er);
             localStorage.setItem("tp_" + sequentieNummer, tp);
             //alert("AantalErrors: " + localStorage.getItem("aantalErrors_1"));
+        };
+        Test.prototype.saveToDb = function () {
             //form aanmaken dat oorspronkelijk op test.html stond
             var submitForm = document.createElement("form");
             submitForm.setAttribute('th:action', '@/test/rapport');
@@ -311,7 +315,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             ER = (aantalErrors / aantalCirkels) * 100;
             TP = Math.round(throughput * 10) / 10;
             //resultaten eerst naar de databank schrijven
-            this.saveToDb(aantalCirkels, radiusBigCircle, radius, Ae, We, IDe, aantalErrors, MT, ER, TP);
+            this.saveToTempStorage(aantalCirkels, radiusBigCircle, radius, Ae, We, IDe, aantalErrors, MT, ER, TP);
             alert('TASK CONDITIONS:\n     ' +
                 'Trials = ' + aantalCirkels + '\n     A = ' + radiusBigCircle + '\n     W = ' + radius +
                 '\nMOVEMENT BEHAVIOUR:\n     Ae = ' + Ae
