@@ -324,6 +324,15 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             //document.body.appendChild(submitForm);
             document.getElementById("testResultForm").submit();
         };
+
+        function addInput(theForm,name,value){
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name= 'testResults';
+            input.value = value;
+            theForm.appendChild(input);
+        }
+
         Test.prototype.toonResultaten = function (ae, we, ide, throughput) {
             Ae = Math.round(ae * 100) / 100;
             We = Math.round(we * 100) / 100;
@@ -339,14 +348,6 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 + '\n     We = ' + We + '\n     IDe = ' + IDe + '\n     Errors = ' + aantalErrors +
                 '\nPARTICIPANT PERFORMANCE:\n     MT  = ' + MT + ' ms/trial\n     ER = ' + ER + ' %\n     TP = ' + TP + ' bits/s');
         };
-
-        function addInput(theForm,name,value){
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name= 'testResults';
-            input.value = value;
-            theForm.appendChild(input);
-        }
 
         Test.prototype.handleMouseClick = function (e) {
             /*          TEST WAARBIJ JE OP ALLE CIRKELS MOET GEKLIKT HEBBEN VOORALEER DE TEST STOPT
