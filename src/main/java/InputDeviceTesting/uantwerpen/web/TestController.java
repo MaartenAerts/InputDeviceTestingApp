@@ -5,6 +5,7 @@ import InputDeviceTesting.uantwerpen.model.Test;
 import InputDeviceTesting.uantwerpen.model.TestResult;
 import InputDeviceTesting.uantwerpen.model.createTest;
 import InputDeviceTesting.uantwerpen.repo.CreateTestRepo;
+import InputDeviceTesting.uantwerpen.service.TestResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,9 +37,10 @@ public class TestController {
 
 
     @RequestMapping(value = "rapport", method = RequestMethod.POST)
-    public void SaveResults(@ModelAttribute("resultForm") TestResult testResult) {
+    public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper) {
 
         System.out.println("Trololololo");
+        return "redirect:/dashboard";
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
