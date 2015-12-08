@@ -18,4 +18,5 @@ public class TestResultWrapper {
     public void setTestResults(ArrayList<Double> testResults) {
         this.testResults = testResults;
     }
+
 }

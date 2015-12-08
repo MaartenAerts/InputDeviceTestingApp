@@ -29,15 +29,15 @@ public class TestResult {
     private TestSequence testsequence;
 
     //Task Conditions
-    private int trials;
-    private int A;
-    private int W;
+    private double trials;
+    private double A;
+    private double W;
 
     //Movement behaviour
     private double Ae;
     private double  We;
     private double IDe;
-    private int error;
+    private double error;
 
     //Participent Info
     private double MT;
@@ -65,27 +65,27 @@ public class TestResult {
         this.testsequence = testsequence;
     }
 
-    public int getTrials() {
+    public double getTrials() {
         return trials;
     }
 
-    public void setTrials(int trials) {
+    public void setTrials(double trials) {
         this.trials = trials;
     }
 
-    public int getA() {
+    public double getA() {
         return A;
     }
 
-    public void setA(int a) {
+    public void setA(double a) {
         A = a;
     }
 
-    public int getW() {
+    public double getW() {
         return W;
     }
 
-    public void setW(int w) {
+    public void setW(double w) {
         W = w;
     }
 
@@ -113,11 +113,11 @@ public class TestResult {
         this.IDe = IDe;
     }
 
-    public int getError() {
+    public double getError() {
         return error;
     }
 
-    public void setError(int error) {
+    public void setError(double error) {
         this.error = error;
     }
 

@@ -2518,18 +2518,18 @@
     </table>
     <table name="test_result" schema="public" catalog="POSTGRESQL" type="TABLE">
       <column name="id" sqlType="bigserial" precision="19" scale="0" nullable="false" jdbcType="-5" def="bmV4dHZhbCgndGVzdF9yZXN1bHRfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
-      <column name="a" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="a" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="ae" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="er" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="ide" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="mt" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="tp" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
-      <column name="w" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="w" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="we" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="created_date" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
-      <column name="error" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="error" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <column name="modified_date" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
-      <column name="trials" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="trials" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
       <primary-key name="test_result_pkey" columns="id"/>
     </table>
     <table name="test_result_id_seq" schema="public" catalog="POSTGRESQL" type="SEQUENCE">

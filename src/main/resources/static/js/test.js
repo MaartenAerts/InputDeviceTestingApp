@@ -313,9 +313,9 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 addInput(theForm,'A',localStorage.getItem("a_" + i));
                 addInput(theForm,'W',localStorage.getItem("w_" + i));
                 addInput(theForm,'Ae',localStorage.getItem("ae_" + i));
-                addInput(theForm,'We',localStorage.getItem("ew_" + i));
+                addInput(theForm,'We',localStorage.getItem("we_" + i));
                 addInput(theForm,'IDe',localStorage.getItem("ide_" + i));
-                addInput(theForm,'error',localStorage.getItem("aantalErrors__" + i));
+                addInput(theForm,'error',localStorage.getItem("aantalErrors_" + i));
                 addInput(theForm,'MT',localStorage.getItem("mt_" + i));
                 addInput(theForm,'ER',localStorage.getItem("er_" + i));
                 addInput(theForm,'TP',localStorage.getItem("tp_" + i));

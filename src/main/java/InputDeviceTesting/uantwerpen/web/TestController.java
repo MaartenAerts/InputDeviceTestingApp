@@ -5,6 +5,7 @@ import InputDeviceTesting.uantwerpen.model.Test;
 import InputDeviceTesting.uantwerpen.model.TestResult;
 import InputDeviceTesting.uantwerpen.model.createTest;
 import InputDeviceTesting.uantwerpen.repo.CreateTestRepo;
+import InputDeviceTesting.uantwerpen.repo.TestResultRepo;
 import InputDeviceTesting.uantwerpen.service.TestResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by TooLate on 5/11/2015.
@@ -27,7 +30,12 @@ public class TestController {
     @Autowired
     CreateTestRepo createTestRepo;
 
+    @Autowired
+    private TestResultRepo testResultRepo;
+
     private createTest blub;
+
+    private TestResult testResult;
 
 
     @RequestMapping("test")//Todo:moet {id} worden
@@ -40,6 +48,24 @@ public class TestController {
     public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper) {
 
         System.out.println("Trololololo");
+        int amountOfObjects = (testResultWrapper.getTestResults().size())/10;
+        for (int i = 0; i < amountOfObjects; i++){
+            testResult = new TestResult();
+            testResult.setTrials(testResultWrapper.getTestResults().get(i*10));
+            testResult.setA(testResultWrapper.getTestResults().get((i*10)+1));
+            testResult.setW(testResultWrapper.getTestResults().get((i*10)+2));
+            testResult.setAe(testResultWrapper.getTestResults().get((i * 10) + 3));
+            testResult.setWe(testResultWrapper.getTestResults().get((i * 10) + 4));
+            testResult.setIDe(testResultWrapper.getTestResults().get((i * 10) + 5));
+            testResult.setError(testResultWrapper.getTestResults().get((i * 10) + 6));
+            testResult.setMT(testResultWrapper.getTestResults().get((i * 10) + 7));
+            testResult.setER(testResultWrapper.getTestResults().get((i * 10) + 8));
+            testResult.setTP(testResultWrapper.getTestResults().get((i * 10) + 9));
+            testResult.setCreatedDate(LocalDateTime.now());
+            testResult.setModifiedDate(LocalDateTime.now());
+
+            testResultRepo.save(testResult);
+        }
         return "redirect:/dashboard";
     }
 
