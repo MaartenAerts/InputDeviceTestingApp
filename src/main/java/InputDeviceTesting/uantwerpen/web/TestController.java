@@ -66,7 +66,7 @@ public class TestController {
 
             testResultRepo.save(testResult);
         }
-        return "redirect:/dashboard";
+        return "redirect:/testResults";
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)

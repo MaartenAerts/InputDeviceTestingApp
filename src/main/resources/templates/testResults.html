@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
+    <meta charset="UTF-8" />
+    <title>Test Results</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:include="navbar :: page"></div>
+
+    <div class="page-header" style="margin-top: 7%">
+        <h1 id="containers" align="center">Researchers</h1>
+    </div>
+
+
+    <h2 style="margin-top: 3%">Head Researchers</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>TRIALS</th>
+            <th>A</th>
+            <th>W</th>
+            <th>Ae</th>
+            <th>We</th>
+            <th>IDe</th>
+            <th>ERRORS</th>
+            <th>MT</th>
+            <th>ER</th>
+            <th>TP</th>
+        </tr>
+        <tr th:each="results : ${allResults}">
+
+                    <td  th:text="${results.trials}"/>
+                    <td th:text="${results.A}"/>
+                    <td th:text="${results.W}"/>
+                    <td th:text="${results.Ae}"/>
+                    <td th:text="${results.We}"/>
+                    <td th:text="${results.IDe}"/>
+                    <td th:text="${results.error}"/>
+                    <td th:text="${results.MT}"/>
+                    <td th:text="${results.ER}"/>
+                    <td th:text="${results.TP}"/>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
