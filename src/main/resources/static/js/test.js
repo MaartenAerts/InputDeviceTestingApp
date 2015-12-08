@@ -213,11 +213,11 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             }
             else {
                 //localStorage.setItem("sequentieNummer", null);
-                //localStorage.clear();
                 testGedaan = true;
                 alert("Bedankt voor de test! De data werd goed ontvangen!");
                 //naar de databank sturen op het einde
                 this.saveToDb();
+                localStorage.clear();
             }
         };
         Test.prototype.saveToTempStorage = function (trial, a, w, ae, we, ide, aantalErrors, mt, er, tp) {

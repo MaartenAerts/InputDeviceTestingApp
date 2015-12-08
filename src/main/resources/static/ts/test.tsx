@@ -266,11 +266,11 @@ class Test extends React.Component<propke,stateje>
             window.location.reload();
         } else {
             //localStorage.setItem("sequentieNummer", null);
-            //localStorage.clear();
             testGedaan = true;
             alert("Bedankt voor de test! De data werd goed ontvangen!");
             //naar de databank sturen op het einde
             this.saveToDb();
+            localStorage.clear();
         }
     }
 
