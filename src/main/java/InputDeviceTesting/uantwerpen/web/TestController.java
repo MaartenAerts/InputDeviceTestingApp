@@ -1,8 +1,7 @@
 package InputDeviceTesting.uantwerpen.web;
 
-import InputDeviceTesting.uantwerpen.model.ResearchGroup;
-import InputDeviceTesting.uantwerpen.model.Test;
-import InputDeviceTesting.uantwerpen.model.TestResult;
+import InputDeviceTesting.uantwerpen.model.*;
+import InputDeviceTesting.uantwerpen.repo.DeviceRepo;
 import InputDeviceTesting.uantwerpen.repo.TestRepo;
 import InputDeviceTesting.uantwerpen.repo.TestResultRepo;
 import InputDeviceTesting.uantwerpen.service.TestResultWrapper;
@@ -20,6 +19,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by TooLate on 5/11/2015.
@@ -34,9 +34,20 @@ public class TestController {
     @Autowired
     private TestResultRepo testResultRepo;
 
+
+    @Autowired
+    private DeviceRepo deviceRepo;
+
     private Test blub;
 
     private TestResult testResult;
+
+    @ModelAttribute("allDevices")
+    public List<Device> populateDevices() {
+        List<Device> deviceList = deviceRepo.findAll();
+        return deviceList;
+    }
+
 
 
     @RequestMapping("test")//Todo:moet {id} worden
