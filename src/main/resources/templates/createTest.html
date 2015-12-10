@@ -17,6 +17,7 @@
     </div>
 
     <div style="margin-top: 3%">
+        <p th:text="${formErrors}" class="text-danger" />
         <form th:action="@{/test/createTest}" action="/test/createTest" method="POST" commandName="createTestForm" >
             <fieldset>
                 <div class="row well bs-component">

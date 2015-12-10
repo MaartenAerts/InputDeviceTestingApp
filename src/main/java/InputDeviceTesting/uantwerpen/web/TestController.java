@@ -3,19 +3,20 @@ package InputDeviceTesting.uantwerpen.web;
 import InputDeviceTesting.uantwerpen.model.ResearchGroup;
 import InputDeviceTesting.uantwerpen.model.Test;
 import InputDeviceTesting.uantwerpen.model.TestResult;
-import InputDeviceTesting.uantwerpen.model.createTest;
-import InputDeviceTesting.uantwerpen.repo.CreateTestRepo;
+import InputDeviceTesting.uantwerpen.repo.TestRepo;
 import InputDeviceTesting.uantwerpen.repo.TestResultRepo;
 import InputDeviceTesting.uantwerpen.service.TestResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -28,12 +29,12 @@ import java.util.Date;
 public class TestController {
 
     @Autowired
-    CreateTestRepo createTestRepo;
+    private TestRepo testRepo;
 
     @Autowired
     private TestResultRepo testResultRepo;
 
-    private createTest blub;
+    private Test blub;
 
     private TestResult testResult;
 
@@ -47,7 +48,7 @@ public class TestController {
     @RequestMapping(value = "rapport", method = RequestMethod.POST)
     public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper) {
 
-        System.out.println("Trololololo");
+        //System.out.println("Trololololo");
         int amountOfObjects = (testResultWrapper.getTestResults().size())/10;
         for (int i = 0; i < amountOfObjects; i++){
             testResult = new TestResult();
@@ -83,10 +84,19 @@ public class TestController {
     }*/
 
     @RequestMapping(value = "createTest", method=RequestMethod.POST)
-    public String CreateTest(@ModelAttribute("createTestForm") createTest test){
+    public String CreateTest(@ModelAttribute("createTestForm") Test test,BindingResult bindingResult,Model model){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("formErrors","Form has " + bindingResult.getErrorCount() +" invalid or empty values");
+            return "createTest";
+        }
+        if(test.getTitle()=="" || test.getTitle().isEmpty()){
+            model.addAttribute("formErrors","Form needs a title!!!");
+            return "createTest";
+        }
         ModelAndView modelAndView = new ModelAndView();
-        blub = test;
-        createTestRepo.save(test);
+        test.setCreatedDate(LocalDateTime.now());
+        test.setModifiedDate(LocalDateTime.now());
+        testRepo.save(test);
         return "redirect:/test/Testform";
     }
 
