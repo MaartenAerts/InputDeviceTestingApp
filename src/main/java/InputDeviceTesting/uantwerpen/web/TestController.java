@@ -101,23 +101,22 @@ public class TestController {
             return "createTest";
         }
         if(test.getTitle()=="" || test.getTitle().isEmpty()){
-            model.addAttribute("formErrors","Form needs a title!!!");
+            model.addAttribute("formErrors","Test needs a title!!!");
             return "createTest";
         }
         ModelAndView modelAndView = new ModelAndView();
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
         testRepo.save(test);
-        return "redirect:/test/Testform";
+        return "redirect:/test/addsequencetotest";
     }
 
 
-    @RequestMapping(value = "Testform", method = RequestMethod.GET)
+    @RequestMapping(value = "addsequencetotest", method = RequestMethod.GET)
     public String TestForm(@RequestParam(value="code", required=false, defaultValue="0") String code, Model model){
-        model.addAttribute("Joel",blub);
+        //model.addAttribute("Joel",blub);
         //model.addAttribute("Code",blub.getCode());
-
-        return "Testform";
+        return "addsequencetotest";
     }
 
 

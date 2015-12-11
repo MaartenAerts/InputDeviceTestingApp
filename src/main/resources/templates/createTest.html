@@ -29,8 +29,7 @@
 
                         <div class='col-sm-6'>
                             <label for="input_device">Input Device:</label>
-                            <input class="form-control" type="text" name="Device" placeholder="insert the device here" id="input_device"/>
-                            <span class="input-group-btn">
+                            <span class="input-group-btn form controll" id="input_device">
                                 <select  class="form-control" type="email" name="email">
                                  <option th:each="device:${allDevices}"
                                  th:value="${device.name}"
