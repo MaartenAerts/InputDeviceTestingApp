@@ -1,6 +1,8 @@
 package InputDeviceTesting.uantwerpen.web;
 
+import InputDeviceTesting.uantwerpen.model.ResearchGroup;
 import InputDeviceTesting.uantwerpen.model.Researcher;
+import InputDeviceTesting.uantwerpen.repo.ResearchGroupRepo;
 import InputDeviceTesting.uantwerpen.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,16 @@ import java.util.List;
  */
 @Controller
 public class ReasearcherController {
+
+    @Autowired
+    private ResearchGroupRepo researchGroupRepo;
+
+    @ModelAttribute("allResearcherGroups")
+    public List<ResearchGroup> populateResearcherGroups() {
+        List<ResearchGroup> researchGroupList = researchGroupRepo.findAll();
+        Collections.sort(researchGroupList);
+        return researchGroupList;
+    }
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;

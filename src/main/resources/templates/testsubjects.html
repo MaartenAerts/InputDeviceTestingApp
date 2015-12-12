@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+
+<body>
+
+<div th:include="navbar :: page"></div>
+
+<div class="container">
+    <div class="page-header" style="margin-top: 7%">
+        <h1 id="containers" align="center">Test Subjects</h1>
+    </div>
+
+
+    <h2>Test Subjects</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>First name:</th>
+            <th>last name:</th>
+            <th>email:</th>
+            <th>illnes:</th>
+            <th>description:</th>
+        </tr>
+
+        <tr th:each="testsubject : ${alltestsubjects}">
+            <td th:text="${testsubject.firstname}"/>
+            <td th:text="${testsubject.lastname}"/>
+            <td th:text="${testsubject.email}"/>
+            <td th:text="${testsubject.illness}"/>
+            <td th:text="${testsubject.description}"/>
+        </tr>
+    </table>
+
+    <div style="margin-top:5%">
+        <div class=" col-md-4 col-sm-6">
+
+        </div>
+
+        <div class="well bs-component col-md-4 col-sm-6">
+            <form th:action="@{/testsubjects/NewTestSubject}" action="/testsubjects/NewTestSubject" method="POST" commandName="SubjectForm">
+                <fieldset>
+                    <legend>New Test subject</legend>
+                    <div class="form-group">
+                        <label for="firstname">First name:</label>
+                        <input class="form-control" type="text" name="firstname" placeholder="first name"
+                               id="firstname"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last name:</label>
+                        <input class="form-control" type="text" name="lastname" placeholder="last name"
+                               id="lastname"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input class="form-control" type="text" name="email" placeholder="Email"
+                               id="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="illness">Illness:</label>
+                        <input class="form-control" type="text" name="illness" placeholder="Illness"
+                               id="illness"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Info:</label>
+                        <input class="form-control" type="text" name="description" placeholder="description"
+                               id="description"/>
+                    </div>
+                    <input type="submit" value="Save Subject" class="btn btn-primary control-label"/>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
