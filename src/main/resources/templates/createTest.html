@@ -111,16 +111,16 @@
                     <h2>Sequences</h2>
                     <table id="sequences" class="table table-striped">
                         <tr>
-                            <th>Sequence number:</th>
                             <th>Amplitude:</th>
                             <th>Target width:</th>
                             <th>Difficulty:</th>
+                            <td>&nbsp;</td>
                         </tr>
                     </table>
 
 
 
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add sequence</button>
+                        <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#myModal">Add sequence</button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
@@ -150,8 +150,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" id="btnSave" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close / done</button>
+                                        <button type="button" id="btnSave" class="btn btn-primary">Add Sequence</button>
                                     </div>
                                 </div>
                             </div>
@@ -180,29 +180,38 @@
 
                             $('#btnSave').click(function()
                             {
-                                var value = $('input').val();
-                                $('h1').html(value);
-                                $('#myModal').modal('hide');
+                                var Amplitude_big_circle = document.getElementById("Amplitude_big_circle");
+                                var Target_width = document.getElementById("Target_width");
+                                var mydifficulty = document.getElementById("mydifficulty");
+
+                                var table = document.getElementById("sequences");
+                                var row = table.insertRow(-1);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+
+                                cell1.innerHTML = Amplitude_big_circle.value;
+                                cell2.innerHTML = Target_width.value;
+                                cell3.innerHTML = mydifficulty.value;
+                                cell4.innerHTML = '<input type="button" class="btn btn-danger btn-sm" value = "Delete" onClick="deleteRow(this)"/>';
+                                //$('#myModal').modal('hide');
                             });
                         });
 
-                        function addseq()
+                        function deleteRow(obj)
                         {
+                            var index = obj.parentNode.parentNode.rowIndex;
                             var table = document.getElementById("sequences");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            cell1.innerHTML = "NEW CELL1";
-                            cell2.innerHTML = "NEW CELL2";
+                            table.deleteRow(index);
                         }
-
                     </script>
 
 
                 </fieldset>
 
             </div>
-            <input type="submit" value="CreateTest" class="btn btn-primary btn-lg control-label"
+            <input style="margin-top: 1%" type="submit" value="CreateTest" class="btn btn-primary btn-lg control-label"
                    th:href="@{'/test/addsequencetotest?name=' + ${}}"/>
 
         </form>
