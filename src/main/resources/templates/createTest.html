@@ -6,7 +6,21 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:href="@{/js/create-test.js}"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script>
+        require.config({
+            baseUrl: "/../js"
+        });
+
+        require( ["create-test"], function()
+        {
+
+            alert("hallo");
+            /*...*/
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -33,7 +47,7 @@
                             <div class='col-sm-6'>
                                 <label for="input_device">Input Device:</label>
                             <span class="input-group-btn form controll" id="input_device">
-                                <select class="form-control" type="text" name="Inputdevice">
+                                <select class="form-control" type="email" name="email">
                                     <option th:each="device:${allDevices}"
                                             th:value="${device.name}"
                                             th:text="${device.name}">
@@ -49,15 +63,8 @@
                                 <select class="form-control" type="text" name="Targets" id="number_of_targets"
                                         placeholder="">
                                 <span class="input-group-btn">
-                                    <option th:value="5">5</option>
-                                    <option th:value="7">7</option>
-                                    <option th:value="9">9</option>
-                                    <option th:value="11">11</option>
-                                    <option th:value="13">13</option>
-                                    <option th:value="15">15</option>
-                                    <option th:value="17">17</option>
-                                    <option th:value="19">19</option>
-                                    <option th:value="21">21</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="20">20</option>
                                 </span>
                                 </select>
                             </div>
@@ -81,37 +88,51 @@
                                 </select>
                             </div>
 
-
                             <div class='col-sm-6' style="margin-top: 1%">
-                                <label for="Color_main_circle">Color main circle:</label>
-                                <input type="color" name="ColorMain" placeholder="kleur" id="Color_main_circle" value="#ffffff"
-                                       class="form-control"/>
+
+                                <div class='col-sm-6' style="margin-top: 1%">
+                                    <label for="Color_main_circle">Color main circle:</label>
+                                    <input type="color" name="ColorMain" placeholder="kleur" id="Color_main_circle"
+                                           class="form-control"/>
+                                </div>
+
+                                <div class='col-sm-6' style="margin-top: 1%">
+                                    <label for="Color_targets">Color targets:</label>
+                                    <input type="color" name="ColorTargets" id="Color_targets" placeholder="kleur"
+                                           class="form-control"/>
+                                </div>
+
+                                <div class='col-sm-6' style="margin-top: 1%">
+                                    <label for="Color_next_target">Color next target:</label>
+                                    <input type="color" name="ColorNext" placeholder="kleur" id="Color_next_target"
+                                           class="form-control"/>
+                                </div>
+
+                                <div class='col-sm-6' style="margin-top: 1%">
+                                    <label for="Color_previous_target">color clicked target:</label>
+                                    <input type="color" name="ColorPrevious" id="Color_previous_target" placeholder="kleur"
+                                           class="form-control"/>
+                                </div>
+
+                                <div class='col-sm-6' style="margin-top: 1%">
+                                    <label for="color_missed_target">color missed target:</label>
+                                    <input type="color" name="ColorMissed" id="color_missed_target" placeholder="kleur"
+                                           class="form-control"/>
+                                </div>
                             </div>
 
                             <div class='col-sm-6' style="margin-top: 1%">
-                                <label for="Color_targets">Color targets:</label>
-                                <input type="color" name="ColorTargets" id="Color_targets" placeholder="kleur" value="#ff0000"
-                                       class="form-control"/>
+                                <label for="email">testers:</label>
+                                <input type="text" id="email" class="form-control"/>
+                                <button type="button" style="margin-top: 1%" id="tester" class="btn btn-info">Add tester</button>
+                                <div class="div-table-content" >
+                                <table id="emails" class="table table-striped" >
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                                </div>
                             </div>
-
-                            <div class='col-sm-6' style="margin-top: 1%">
-                                <label for="Color_next_target">Color next target:</label>
-                                <input type="color" name="ColorNext" placeholder="kleur" id="Color_next_target" value="#006400"
-                                       class="form-control"/>
-                            </div>
-
-                            <div class='col-sm-6' style="margin-top: 1%">
-                                <label for="Color_previous_target">color clicked target:</label>
-                                <input type="color" name="ColorPrevious" id="Color_previous_target" placeholder="kleur" value="#ffff00"
-                                       class="form-control"/>
-                            </div>
-
-                            <div class='col-sm-6' style="margin-top: 1%">
-                                <label for="color_missed_target">color missed target:</label>
-                                <input type="color" name="ColorMissed" id="color_missed_target" placeholder="kleur" value="#660000"
-                                       class="form-control"/>
-                            </div>
-
                         </div>
                     </div>
 
@@ -165,9 +186,9 @@
                         </div>
 
 
-
                     <script>
-                        function sum() {
+                        function sum()
+                        {
                             var Amplitude_big_circletj = document.getElementById('Amplitude_big_circle').value;
                             var Target_widthtje = document.getElementById('Target_width').value;
                             var result = Math.log(( parseInt(Amplitude_big_circletj) / parseInt(Target_widthtje) ) + 1) / Math.log(2);
@@ -178,12 +199,14 @@
                             document.getElementById("mydifficulty").value = result;
                         }
 
+
                         $(function()
                         {
                             $('#btnLaunch').click(function()
                             {
                                 $('#myModal').modal('show');
                             });
+
 
                             $('#btnSave').click(function()
                             {
@@ -204,6 +227,19 @@
                                 cell4.innerHTML = '<input type="button" class="btn btn-danger btn-sm" value = "Delete" onClick="deleteRow(this)"/>';
                                 //$('#myModal').modal('hide');
                             });
+
+
+                            $('#tester').click(function()
+                            {
+                                var email = document.getElementById("email");
+                                var table2 = document.getElementById("emails");
+                                var row = table2.insertRow(-1);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                cell1.innerHTML = email.value;
+                                cell2.innerHTML = '<input type="button" class="btn btn-danger btn-sm" value = "Delete" onClick="deleteRowuser(this)"/>';
+                            });
+
                         });
 
                         function deleteRow(obj)
@@ -212,16 +248,19 @@
                             var table = document.getElementById("sequences");
                             table.deleteRow(index);
                         }
-
-
+                        function deleteRowuser(obj)
+                        {
+                            var index = obj.parentNode.parentNode.rowIndex;
+                            var table = document.getElementById("emails");
+                            table.deleteRow(index);
+                        }
                     </script>
 
 
                 </fieldset>
 
             </div>
-            <input style="margin-top: 1%" type="submit" value="CreateTest" class="btn btn-primary btn-lg control-label"
-                   th:href="@{'/test/addsequencetotest?name=' + ${}}"/>
+            <input style="margin-top: 1%" type="submit" value="CreateTest" class="btn btn-primary btn-lg control-label"/>
 
         </form>
     </div>
