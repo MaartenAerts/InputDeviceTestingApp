@@ -58,7 +58,7 @@ var trackingArrayY = new Array();
 var interval;
 
 var sequentieNummer = 1;
-var sequentieMax = 4;
+var sequentieMax = 2;
 var testGedaan = false;
 
 class Test extends React.Component<propke,stateje>
@@ -292,102 +292,32 @@ class Test extends React.Component<propke,stateje>
         //alert("AantalErrors: " + localStorage.getItem("aantalErrors_1"));
     }
 
-    saveToDb() {{
-                    //form aanmaken dat oorspronkelijk op test.html stond
-                   /* var submitForm = document.createElement("form");
-                    submitForm.setAttribute('th:action', '@{/test/rapport}');
-                    submitForm.setAttribute('action', '/test/rapport');
-                    submitForm.setAttribute('method', 'POST');
-                    submitForm.setAttribute('commandName', 'resultForm');
-                    submitForm.setAttribute('id', 'testResultForm');
-                    //alle hidden inputvelden aanmaken om de variabelen in op te slagen
-                    for (var i = 1; i <= sequentieMax; i++) {
-                        var trialInput = document.createElement("input");
-                        trialInput.setAttribute('type', 'text');
-                        trialInput.setAttribute('name', 'trial');
-                        trialInput.setAttribute('id', 'trial_' + i);
-                        trialInput.setAttribute('value', localStorage.getItem("trial_" + i));
-                        submitForm.appendChild(trialInput);
-                        var aInput = document.createElement("input")    ;
-                        aInput.setAttribute('type', 'text');
-                        aInput.setAttribute('name', 'a');
-                        aInput.setAttribute('id', 'a_' + i);
-                        aInput.setAttribute('value', localStorage.getItem("a_" + i));
-                        submitForm.appendChild(aInput);
-                        var wInput = document.createElement("input");
-                        wInput.setAttribute('type', 'text');
-                        wInput.setAttribute('name', 'w');
-                        wInput.setAttribute('id', 'w_' + i);
-                        wInput.setAttribute('value', localStorage.getItem("w_" + i));
-                        submitForm.appendChild(wInput);
-                        var aeInput = document.createElement("input");
-                        aeInput.setAttribute('type', 'text');
-                        aeInput.setAttribute('name', 'ae');
-                        aeInput.setAttribute('id', 'ae_' + i);
-                        aeInput.setAttribute('value', localStorage.getItem("ae_" + i));
-                        submitForm.appendChild(aeInput);
-                        var weInput = document.createElement("input");
-                        weInput.setAttribute('type', 'text');
-                        weInput.setAttribute('name', 'we');
-                        weInput.setAttribute('id', 'we_' + i);
-                        weInput.setAttribute('value', localStorage.getItem("we_" + i));
-                        submitForm.appendChild(weInput);
-                        var ideInput = document.createElement("input");
-                        ideInput.setAttribute('type', 'text');
-                        ideInput.setAttribute('name', 'ide');
-                        ideInput.setAttribute('id', 'ide_' + i);
-                        ideInput.setAttribute('value', localStorage.getItem("ide_" + i));
-                        submitForm.appendChild(ideInput);
-                        var aantalErrorsInput = document.createElement("input");
-                        aantalErrorsInput.setAttribute('type', 'text');
-                        aantalErrorsInput.setAttribute('name', 'aantalErrors');
-                        aantalErrorsInput.setAttribute('id', 'aantalErrors_' + i);
-                        aantalErrorsInput.setAttribute('value', localStorage.getItem("aantalErrors_" + i));
-                        submitForm.appendChild(aantalErrorsInput);
-                        var mtInput = document.createElement("input");
-                        mtInput.setAttribute('type', 'text');
-                        mtInput.setAttribute('name', 'mt');
-                        mtInput.setAttribute('id', 'mt_' + i);
-                        mtInput.setAttribute('value', localStorage.getItem("mt_" + i));
-                        submitForm.appendChild(mtInput);
-                        var erInput = document.createElement("input");
-                        erInput.setAttribute('type', 'text');
-                        erInput.setAttribute('name', 'er');
-                        erInput.setAttribute('id', 'er_' + i);
-                        erInput.setAttribute('value', localStorage.getItem("er_" + i));
-                        submitForm.appendChild(erInput);
-                        var tpInput = document.createElement("input");
-                        tpInput.setAttribute('type', 'text');
-                        tpInput.setAttribute('name', 'tp');
-                        tpInput.setAttribute('id', 'tp_' + i);
-                        tpInput.setAttribute('value', localStorage.getItem("tp_" + i));
-                        submitForm.appendChild(tpInput);
-                    }*/
+    saveToDb() {
+        var theForm = document.forms['testResultForm'];
+        for (var i = 1; i <= sequentieMax; i++) {
+            this.addInput(theForm,'trials',localStorage.getItem("trial_" + i));
+            this.addInput(theForm,'A',localStorage.getItem("a_" + i));
+            this.addInput(theForm,'W',localStorage.getItem("w_" + i));
+            this.addInput(theForm,'Ae',localStorage.getItem("ae_" + i));
+            this.addInput(theForm,'We',localStorage.getItem("ew_" + i));
+            this.addInput(theForm,'IDe',localStorage.getItem("ide_" + i));
+            this.addInput(theForm,'error',localStorage.getItem("aantalErrors__" + i));
+            this.addInput(theForm,'MT',localStorage.getItem("mt_" + i));
+            this.addInput(theForm,'ER',localStorage.getItem("er_" + i));
+            this.addInput(theForm,'TP',localStorage.getItem("tp_" + i));
+        }
 
-                    var theForm = document.forms['testResultForm'];
-                    for (var i = 1; i <= sequentieMax; i++) {
-                        addInput(theForm,'trials',localStorage.getItem("trial_" + i));
-                        addInput(theForm,'A',localStorage.getItem("a_" + i));
-                        addInput(theForm,'W',localStorage.getItem("w_" + i));
-                        addInput(theForm,'Ae',localStorage.getItem("ae_" + i));
-                        addInput(theForm,'We',localStorage.getItem("ew_" + i));
-                        addInput(theForm,'IDe',localStorage.getItem("ide_" + i));
-                        addInput(theForm,'error',localStorage.getItem("aantalErrors__" + i));
-                        addInput(theForm,'MT',localStorage.getItem("mt_" + i));
-                        addInput(theForm,'ER',localStorage.getItem("er_" + i));
-                        addInput(theForm,'TP',localStorage.getItem("tp_" + i));
-                    }
+        var myTestResultForm = document.getElementById('testResultForm');
+        var myTestResultFormElement = <HTMLFormElement>myTestResultForm</HTMLFormElement>;
+        myTestResultFormElement.submit();
+    }
 
-                    //document.body.appendChild(submitForm);
-                    document.getElementById("testResultForm").submit();
-                };
-
-                addInput(theForm,name,value){
-                    var input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name= 'testResults';
-                    input.value = value;
-                    theForm.appendChild(input);
+    addInput(theForm,name,value){
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name= 'testResults';
+            input.value = value;
+            theForm.appendChild(input);
                 }
 
     toonResultaten(ae,we,ide,throughput) {

@@ -7,6 +7,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        require.config({
+            baseUrl: "/../js"
+        });
+
+        require( ["reportUser"], function(renderUserDetails) {
+            /*...*/
+        });
+    </script>
 </head>
 <body>
 
@@ -106,7 +115,7 @@
         <h3>Results </h3>
         <fieldset class="bs-component well ">
             <h4 class="col-md-4">Number of completed tests:</h4>
-            <h4 class="text-primary">4</h4>
+            <h4 class="text-primary" id="completedTestCount">4</h4>
 
             <div class="col-md-6 paddingleft">
                 <h4 class="col-md-12">Mean movement behaviour:</h4>
@@ -190,6 +199,11 @@
             </div>
         </fieldset>
     </div>
+
+    <div class="col-lg-9 coll9padding" id="user_details_test">
+        <h3>Results per user </h3>
+    </div>
+
 
 
 </div>
