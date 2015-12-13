@@ -103,7 +103,7 @@ public class ResearchGroupTest {
     }
 
     @Test
-    public void testSetandGetID(){
+    public void testcompareToID(){
         //Test getter en setter
         res.setId(12);
         long expected = 12;
