@@ -1,6 +1,5 @@
 package InputDeviceTesting.uantwerpen.model;
 
-import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,23 +17,29 @@ public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @NotNull
     private String title;
 
-    private String Device;
-    private int Targets;
+    @ManyToOne
+    private Device device;
+    @NotNull
+    private int targets;
+    @NotNull
     private long errorThreshold;
-    private long Sequences;
-    private long Difficulty;
-    private long AmplitudeMin;
-    private long AmplitudeMax;
-    private long WidthMin;
-    private long WidthMax;
-    private String ColorMain;
-    private String ColorTargets;
-    private String ColorNext;
-    private String ColorPrevious;
-    private String ColorMissed;
+    @NotNull
+    private long sequences;
+    @NotNull
+    private long difficulty;
+    @NotNull
+    private String colorMain;
+    @NotNull
+    private String colorTargets;
+    @NotNull
+    private String colorNext;
+    @NotNull
+    private String colorPrevious;
+    @NotNull
+    private String colorMissed;
 
     @OneToMany(mappedBy = "test")
     private List<TestSequence> testSequences;
@@ -50,7 +55,20 @@ public class Test {
     @ManyToMany(mappedBy = "testList")
     private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
 
+    public Test() {
+    }
 
+    public Test(String title, Device device, int targets, long errorThreshold, String colorMain, String colorTargets, String colorNext, String colorPrevious, String colorMissed) {
+        this.title = title;
+        this.device = device;
+        this.targets = targets;
+        this.errorThreshold = errorThreshold;
+        this.colorMain = colorMain;
+        this.colorTargets = colorTargets;
+        this.colorNext = colorNext;
+        this.colorPrevious = colorPrevious;
+        this.colorMissed = colorMissed;
+    }
 
     public long getId() {
         return id;
@@ -68,20 +86,20 @@ public class Test {
         this.title = title;
     }
 
-    public String getDevice() {
-        return Device;
+    public Device getDevice() {
+        return device;
     }
 
-    public void setDevice(String device) {
-        Device = device;
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     public int getTargets() {
-        return Targets;
+        return targets;
     }
 
     public void setTargets(int targets) {
-        Targets = targets;
+        this.targets = targets;
     }
 
     public long getErrorThreshold() {
@@ -93,91 +111,59 @@ public class Test {
     }
 
     public long getSequences() {
-        return Sequences;
+        return sequences;
     }
 
     public void setSequences(long sequences) {
-        Sequences = sequences;
+        this.sequences = sequences;
     }
 
     public long getDifficulty() {
-        return Difficulty;
+        return difficulty;
     }
 
     public void setDifficulty(long difficulty) {
-        Difficulty = difficulty;
-    }
-
-    public long getAmplitudeMin() {
-        return AmplitudeMin;
-    }
-
-    public void setAmplitudeMin(long amplitudeMin) {
-        AmplitudeMin = amplitudeMin;
-    }
-
-    public long getAmplitudeMax() {
-        return AmplitudeMax;
-    }
-
-    public void setAmplitudeMax(long amplitudeMax) {
-        AmplitudeMax = amplitudeMax;
-    }
-
-    public long getWidthMin() {
-        return WidthMin;
-    }
-
-    public void setWidthMin(long widthMin) {
-        WidthMin = widthMin;
-    }
-
-    public long getWidthMax() {
-        return WidthMax;
-    }
-
-    public void setWidthMax(long widthMax) {
-        WidthMax = widthMax;
+        this.difficulty = difficulty;
     }
 
     public String getColorMain() {
-        return ColorMain;
+        return colorMain;
     }
 
     public void setColorMain(String colorMain) {
-        ColorMain = colorMain;
+        this.colorMain = colorMain;
     }
 
     public String getColorTargets() {
-        return ColorTargets;
+        return colorTargets;
     }
 
     public void setColorTargets(String colorTargets) {
-        ColorTargets = colorTargets;
+        this.colorTargets = colorTargets;
     }
 
     public String getColorNext() {
-        return ColorNext;
+        return colorNext;
     }
 
     public void setColorNext(String colorNext) {
-        ColorNext = colorNext;
+        this.colorNext = colorNext;
     }
 
     public String getColorPrevious() {
-        return ColorPrevious;
+        return colorPrevious;
     }
 
     public void setColorPrevious(String colorPrevious) {
-        ColorPrevious = colorPrevious;
+        this.colorPrevious = colorPrevious;
     }
 
     public String getColorMissed() {
-        return ColorMissed;
+        return colorMissed;
     }
 
     public void setColorMissed(String colorMissed) {
-        ColorMissed = colorMissed;
+        this.colorMissed = colorMissed;
     }
 
     public List<TestSequence> getTestSequences() {
@@ -221,19 +207,4 @@ public class Test {
     }
 
 
-    /*@Override
-    public String toString() {
-        return "Test{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", amountTargets=" + amountTargets +
-                ", description='" + description + '\'' +
-                ", testSequences=" + testSequences +
-                ", testSubjects=" + testSubjects +
-                ", relativeErrorMax=" + relativeErrorMax +
-                ", createdDate=" + createdDate +
-                ", modifiedDate=" + modifiedDate +
-                ", researchGroupList=" + researchGroupList +
-                '}';
-    }*/
 }

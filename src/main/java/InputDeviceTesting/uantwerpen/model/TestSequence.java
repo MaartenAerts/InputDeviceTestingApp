@@ -6,6 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by TooLate on 26/10/2015.
@@ -18,8 +19,8 @@ public class TestSequence {
 
     private int sequenceIndex;
 
-    @OneToOne(mappedBy = "testsequence",cascade = CascadeType.ALL)
-    private TestResult testResult;
+    @OneToMany(mappedBy = "testsequence",cascade = CascadeType.ALL)
+    private List<TestResult> testResultList;
 
     @ManyToOne
     Test test;
@@ -29,13 +30,16 @@ public class TestSequence {
     @NotNull
     double targetWidth;
 
-    @NotNull
     @CreatedDate
     private LocalDateTime createdDate;
-
-    @NotNull
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public TestSequence(int sequenceIndex, double targetWidth, double targetAmplitudes) {
+        this.sequenceIndex = sequenceIndex;
+        this.targetWidth = targetWidth;
+        this.targetAmplitudes = targetAmplitudes;
+    }
 
     public long getId() {
         return id;
@@ -45,12 +49,12 @@ public class TestSequence {
         this.id = id;
     }
 
-    public TestResult getTestResult() {
-        return testResult;
+    public List<TestResult> getTestResultList() {
+        return testResultList;
     }
 
-    public void setTestResult(TestResult testResult) {
-        this.testResult = testResult;
+    public void setTestResultList(List<TestResult> testResultList) {
+        this.testResultList = testResultList;
     }
 
     public Test getTest() {
@@ -93,34 +97,13 @@ public class TestSequence {
         this.modifiedDate = modifiedDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TestSequence that = (TestSequence) o;
-
-        if (getId() != that.getId()) return false;
-        if (Double.compare(that.getTargetAmplitudes(), getTargetAmplitudes()) != 0) return false;
-        if (Double.compare(that.getTargetWidth(), getTargetWidth()) != 0) return false;
-        if (!getTest().equals(that.getTest())) return false;
-        if (!getCreatedDate().equals(that.getCreatedDate())) return false;
-        return getModifiedDate().equals(that.getModifiedDate());
-
+    public int getSequenceIndex() {
+        return sequenceIndex;
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getTest().hashCode();
-        temp = Double.doubleToLongBits(getTargetAmplitudes());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getTargetWidth());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + getCreatedDate().hashCode();
-        result = 31 * result + getModifiedDate().hashCode();
-        return result;
+    public void setSequenceIndex(int sequenceIndex) {
+        this.sequenceIndex = sequenceIndex;
     }
+
+
 }

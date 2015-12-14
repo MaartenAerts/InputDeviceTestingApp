@@ -1,12 +1,10 @@
 package InputDeviceTesting.uantwerpen.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by TooLate on 25/10/2015.
@@ -23,7 +21,8 @@ public class Device implements Serializable{
     private String vendor;
     @NotNull
     private String version;
-
+    @OneToMany(mappedBy = "device")
+    private List<Test> test;
 
     public Device() {
     }
@@ -66,6 +65,14 @@ public class Device implements Serializable{
         this.version = version;
     }
 
+    public List<Test> getTest() {
+        return test;
+    }
+
+    public void setTest(List<Test> test) {
+        this.test = test;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,7 +83,8 @@ public class Device implements Serializable{
         if (getId() != device.getId()) return false;
         if (!getName().equals(device.getName())) return false;
         if (!getVendor().equals(device.getVendor())) return false;
-        return getVersion().equals(device.getVersion());
+        if (!getVersion().equals(device.getVersion())) return false;
+        return getTest() != null ? getTest().equals(device.getTest()) : device.getTest() == null;
 
     }
 
@@ -86,6 +94,7 @@ public class Device implements Serializable{
         result = 31 * result + getName().hashCode();
         result = 31 * result + getVendor().hashCode();
         result = 31 * result + getVersion().hashCode();
+        result = 31 * result + (getTest() != null ? getTest().hashCode() : 0);
         return result;
     }
 }

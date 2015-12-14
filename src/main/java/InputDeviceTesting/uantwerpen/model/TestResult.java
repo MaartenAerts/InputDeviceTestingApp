@@ -5,7 +5,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Niels on 26/11/2015.
@@ -24,14 +23,11 @@ public class TestResult {
     //@ManyToMany(mappedBy = "tests")
     //private List<TestSubject> testSubjects;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @ManyToOne
     private TestSequence testsequence;
 
-    //Task Conditions
-    private double trials;
-    private double A;
-    private double W;
+    @ManyToOne
+    TestSubject testSubject;
 
     //Movement behaviour
     private double Ae;
@@ -49,6 +45,22 @@ public class TestResult {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
+    public TestResult() {
+    }
+
+    public TestResult(TestSequence testsequence, TestSubject testSubject,
+                      double ae, double we, double IDe, double error, double MT, double ER, double TP) {
+        this.testsequence = testsequence;
+        this.testSubject = testSubject;
+        this.Ae = ae;
+        this.We = we;
+        this.IDe = IDe;
+        this.error = error;
+        this.MT = MT;
+        this.ER = ER;
+        this.TP = TP;
+    }
+
     public long getId() {
         return id;
     }
@@ -63,30 +75,6 @@ public class TestResult {
 
     public void setTestsequence(TestSequence testsequence) {
         this.testsequence = testsequence;
-    }
-
-    public double getTrials() {
-        return trials;
-    }
-
-    public void setTrials(double trials) {
-        this.trials = trials;
-    }
-
-    public double getA() {
-        return A;
-    }
-
-    public void setA(double a) {
-        A = a;
-    }
-
-    public double getW() {
-        return W;
-    }
-
-    public void setW(double w) {
-        W = w;
     }
 
     public double getAe() {
@@ -159,5 +147,22 @@ public class TestResult {
 
     public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public TestSubject getTestSubject() {
+        return testSubject;
+    }
+
+    public void setTestSubject(TestSubject testSubject) {
+        this.testSubject = testSubject;
+    }
+
+    public void setTrials(Double trials) {
+    }
+
+    public void setA(Double a) {
+    }
+
+    public void setW(Double w) {
     }
 }

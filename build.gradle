@@ -15,7 +15,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot' 
-apply plugin: 'io.spring.dependency-management' 
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "jacoco"
+
 
 jar {
     baseName = 'InputDeviceTesting'
@@ -26,6 +28,10 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jacoco {
+    toolVersion = "0.7.1.201405082137"
 }
 //configurations {
 //    provided
