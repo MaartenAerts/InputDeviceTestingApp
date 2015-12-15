@@ -115,7 +115,7 @@ public class TestController {
             model.addAttribute("formErrors","Test needs a title!!!");
             return "createTest";
         }
-        test.setDevice(deviceRepo.findByDevice(test.getDeviceString()));
+        //test.setDevice(deviceRepo.findByDevice(test.getDeviceString()));
         ModelAndView modelAndView = new ModelAndView();
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
