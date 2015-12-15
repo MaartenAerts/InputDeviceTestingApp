@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/DeviceTestApp.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script th:src="@{/js/reportUser.js}"></script>
+    <!--<script th:src="@{/js/reportUser.js}"></script>  -->
+    <script th:src="@{/js/plotly-latest.min.js}"></script>
 
 </head>
 <body>
@@ -116,7 +117,7 @@
             <label class="col-md-8">Number of testSubjects:</label>
             <h4 class="text-primary" >5</h4>
 
-            <label class="col-md-8">Number of completed tests:</label>
+            <label class="col-md-8">Number of sequences:</label>
             <h4 class="text-primary" id="completedTestCount">4</h4>
 
             <div class="col-md-6 paddingleft">
@@ -200,18 +201,25 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-            <div class="col-md-6 paddingleft">
-                <div class="col-lg-10">
-                    <span class="input-group-btn">
+            <div class="col-md-12 paddingleft col-sm-height">
                         <h4 class="col-md-8">Difficulty:</h4>
-                        <!--<h5 class="text-primary col-lg-2" style="margin-left: 10%"></h5>
-                         insert boxplot here-->
-                        
-                    </span>
-                </div>
+                        <div id="boxplotDifficulty"></div>
+
+                        <script>
+                            var boxplotDifficulty = {
+                                x: [1,7,10,13],
+                                type: 'box',
+                                name: 'Difficulty'
+                            };
+
+                            var data = [boxplotDifficulty];
+                            var layout = {
+                                title: 'Horizontal Box Plot'
+                            }
+
+                            Plotly.newPlot('boxplotDifficulty', data,layout);
+                        </script>
             </div>
-                </div>
         </fieldset>
     </div>
 
