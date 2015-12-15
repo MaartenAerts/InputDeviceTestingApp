@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -61,9 +58,13 @@ public class TestController {
 
 
 
-    @RequestMapping("test")//Todo:moet {id} worden
-    public ModelAndView getTest(){
-        return new ModelAndView("test");
+    @RequestMapping(value ="/{id}")
+    public ModelAndView getTest(@PathVariable("id") int id){
+        ModelAndView modelAndView = new ModelAndView("test");
+        blub  = testRepo.findById(id);
+        modelAndView.addObject("TestObj", blub);
+
+        return modelAndView;
     }
 
 

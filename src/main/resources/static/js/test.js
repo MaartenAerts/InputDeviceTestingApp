@@ -7,15 +7,15 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
     // in te stellen parameters via applicatie
-    var aantalCirkels = 7; // enkel oneven toelaten via createTest !!!
+    var aantalCirkels = parseInt(document.getElementById('aantalTargets').value); // enkel oneven toelaten via createTest !!!
     var radiusBigCircle = 240; //Math.min(this.props.width, this.props.height) / 2.5;
     var radius = radiusBigCircle / 7.5;
-    var errorMax = 0.5;
-    var colorMainCircle = "#ffffff";
-    var colorTarget = "red";
-    var colorNextTarget = "green";
-    var colorClickedTarget = "yellow";
-    var colorMissedTarget = "#660000";
+    var errorMax = parseInt(document.getElementById('errorThreshold').value) / 100;
+    var colorMainCircle = document.getElementById('colorMain').value;
+    var colorTarget = document.getElementById('colorTargets').value;
+    var colorNextTarget = document.getElementById('colorNext').value;
+    var colorClickedTarget = document.getElementById('colorClicked').value;
+    var colorMissedTarget = document.getElementById('colorMissed').value;
     // door te geven parameters naar databank
     var Ae = 0;
     var We = 0;
@@ -64,6 +64,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             };
         }
         Test.prototype.render = function () {
+            alert(errorMax);
             var strokeWidthBigCircle = radiusBigCircle / 50;
             var cxBigCircle = this.props.width / 2;
             var cyBigCircle = this.props.height / 2;

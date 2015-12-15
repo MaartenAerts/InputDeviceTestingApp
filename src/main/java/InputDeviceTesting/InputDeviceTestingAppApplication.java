@@ -29,7 +29,7 @@ public class InputDeviceTestingAppApplication {
 
 
     @Bean
-    CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo, final TestRepo testRepo, final DeviceRepo deviceRepo, final TestSubjectRepo testSubjectRepo){
+    CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo, final TestRepo testRepo, final DeviceRepo deviceRepo, final TestSubjectRepo testSubjectRepo, final TestSequenceRepo testSequenceRepo){
         final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
         researcher.addRole(new Role("HEADRESEARCHER"));
         researcher.addRole(new Role("RESEARCHER"));
@@ -73,7 +73,7 @@ public class InputDeviceTestingAppApplication {
         Device device2 =  new Device("playstation kaske", "Logitech", "4.1");
         Device device =  new Device("Muis", "Logitech", "1.0");
         Test test = new Test("Degelijke titel",
-               device ,25, 10, "red", "yellow", "blue", "green", "black");
+               device ,15, 50, "#ffffff", "#ff0000", "#006400", "#ffff00", "#660000");
         List<TestSequence> testSequences = new ArrayList<TestSequence>();
         testSequences.add(new TestSequence(0, 250, 25));
         testSequences.add(new TestSequence(1, 500, 50));
@@ -120,6 +120,7 @@ public class InputDeviceTestingAppApplication {
                 deviceRepo.save(device2);
                 testRepo.save(test);
                 researchGroupRepo.save(researchGroup1);
+                testSequenceRepo.save(testSequences);
             }
         };
     }

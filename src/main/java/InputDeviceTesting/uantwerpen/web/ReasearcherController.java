@@ -24,12 +24,6 @@ public class ReasearcherController {
     @Autowired
     private ResearchGroupRepo researchGroupRepo;
 
-    @ModelAttribute("allResearcherGroups")
-    public List<ResearchGroup> populateResearcherGroups() {
-        List<ResearchGroup> researchGroupList = researchGroupRepo.findAll();
-        Collections.sort(researchGroupList);
-        return researchGroupList;
-    }
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;
