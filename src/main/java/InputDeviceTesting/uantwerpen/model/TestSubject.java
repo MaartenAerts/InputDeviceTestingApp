@@ -22,6 +22,8 @@ public class TestSubject implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private String firstName;
+    private String lastName;
     private String illness;
     private String description;
     @Email
@@ -29,10 +31,8 @@ public class TestSubject implements Serializable {
     @Column(unique = true)
     private String email;
 
-    @NotNull
     @CreatedDate
     private LocalDateTime createdDate;
-    @NotNull
     @LastModifiedDate
     private LocalDateTime modifiedDate;
     @ManyToMany
@@ -53,6 +53,22 @@ public class TestSubject implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstName;
+    }
+
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastname() {
+        return lastName;
+    }
+
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getIllness() {
@@ -112,4 +128,9 @@ public class TestSubject implements Serializable {
         this.testResultList = testResultList;
     }
 
+    @Override
+    public String toString() {
+        return "TestSubject:[ Id = " + this.id + "firstName = " + this.firstName + "lastName = " + this.lastName + "email = " + this.email
+                + "illness = " + this.illness + "description = " + this.description + " ]";
+    }
 }
