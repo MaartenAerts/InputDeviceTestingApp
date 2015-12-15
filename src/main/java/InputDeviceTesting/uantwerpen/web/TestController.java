@@ -4,6 +4,7 @@ import InputDeviceTesting.uantwerpen.model.*;
 import InputDeviceTesting.uantwerpen.repo.DeviceRepo;
 import InputDeviceTesting.uantwerpen.repo.TestRepo;
 import InputDeviceTesting.uantwerpen.repo.TestResultRepo;
+import InputDeviceTesting.uantwerpen.repo.TestSubjectRepo;
 import InputDeviceTesting.uantwerpen.service.TestResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class TestController {
     @Autowired
     private DeviceRepo deviceRepo;
 
+    @Autowired
+    private TestSubjectRepo testSubjectRepo;
+
     private Test blub;
 
     private TestResult testResult;
@@ -46,6 +50,13 @@ public class TestController {
     public List<Device> populateDevices() {
         List<Device> deviceList = deviceRepo.findAll();
         return deviceList;
+    }
+
+    @ModelAttribute("alltestsubjects")
+    public List<TestSubject> populataTestSubjects()
+    {
+        List<TestSubject> testSubjectList = testSubjectRepo.findAll();
+        return testSubjectList;
     }
 
 

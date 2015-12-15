@@ -47,7 +47,7 @@
                             <div class='col-sm-6'>
                                 <label for="input_device">Input Device:</label>
                             <span class="input-group-btn form control" id="input_device">
-                                <select class="form-control" type="email" name="email">
+                                <select class="form-control" type="text" name="email">
                                     <option th:each="device:${allDevices}"
                                             th:value="${device.name}"
                                             th:text="${device.name}">
@@ -133,10 +133,10 @@
 
 
                                 <label for="email">testers:</label>
-                                <span class="input-group-btn form control" id="email">
-                                    <select class="form-control" type="email" name="email">
-                                    <option th:each="testers:${allTesters}"
-                                            th:value="${testers.email}">
+                                <span class="input-group-btn form control">
+                                    <select id="email" class="form-control" type="email" name="email">
+                                    <option  th:each="testers:${alltestsubjects}"
+                                            th:text="${testers.email}">
                                     </option>
                                     </select>
                                 </span>
@@ -254,7 +254,7 @@
                                 var row = table2.insertRow(-1);
                                 var cell1 = row.insertCell(0);
                                 var cell2 = row.insertCell(1);
-                                cell1.innerHTML = email.value;
+                                cell1.innerHTML = email.options[email.selectedIndex].text;
                                 cell2.innerHTML = '<input type="button" class="btn btn-danger btn-sm" value = "Delete" onClick="deleteRowuser(this)"/>';
                             });
 

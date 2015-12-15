@@ -40,7 +40,11 @@ public class TestSubject implements Serializable {
     @OneToMany(mappedBy = "testSubject", cascade = CascadeType.ALL)
     List<TestResult> testResultList;
 
-    public TestSubject(String email) {
+    public TestSubject(String firstName, String lastName, String illness, String description, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.illness = illness;
+        this.description = description;
         this.email = email;
     }
 

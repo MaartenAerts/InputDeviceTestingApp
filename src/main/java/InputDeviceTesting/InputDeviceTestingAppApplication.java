@@ -1,10 +1,8 @@
 package InputDeviceTesting;
 
 import InputDeviceTesting.uantwerpen.model.*;
-import InputDeviceTesting.uantwerpen.repo.DeviceRepo;
-import InputDeviceTesting.uantwerpen.repo.ResearchGroupRepo;
-import InputDeviceTesting.uantwerpen.repo.ResearcherRepo;
-import InputDeviceTesting.uantwerpen.repo.TestRepo;
+import InputDeviceTesting.uantwerpen.repo.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +20,8 @@ import java.util.stream.IntStream;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class InputDeviceTestingAppApplication {
 
+
+
     public static void main(String[] args) {
 
         SpringApplication.run(InputDeviceTestingAppApplication.class, args);
@@ -29,7 +29,7 @@ public class InputDeviceTestingAppApplication {
 
 
     @Bean
-    CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo, final TestRepo testRepo, final DeviceRepo deviceRepo){
+    CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo, final TestRepo testRepo, final DeviceRepo deviceRepo, final TestSubjectRepo testSubjectRepo){
         final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
         researcher.addRole(new Role("HEADRESEARCHER"));
         researcher.addRole(new Role("RESEARCHER"));
@@ -50,6 +50,9 @@ public class InputDeviceTestingAppApplication {
         researcher5.addRole(new Role("HEADRESEARCHER"));
         researcher5.addRole(new Role("TOPPIE"));
 
+        final TestSubject testSubject2 = new TestSubject("alain", "van dam", "vijske", "synalco medics", "alain@synalco.com");
+        final TestSubject testSubject3 = new TestSubject("Baltazaar", "boma", "vrouwezot", "boma vleesindustrie nv", "boma@vleesindustrie_nv.com");
+
         final ResearchGroup researchGroup1 = new ResearchGroup();
         researchGroup1.setCreator(researcher);
         researchGroup1.setGroupName("Group Name");
@@ -58,8 +61,9 @@ public class InputDeviceTestingAppApplication {
         researchGroup1.addResearcher(researcher);
 
         List<TestSubject> testSubjects = IntStream.range(0,9)
-                .mapToObj(i -> new TestSubject(i + "@test.com")).collect(Collectors.toList());
+                .mapToObj(i -> new TestSubject("test","test2", "testje","hallo",i + "@test.com")).collect(Collectors.toList());
         Random random = new Random(System.currentTimeMillis());
+        Device device2 =  new Device("playstation kaske", "Logitech", "4.1");
         Device device =  new Device("Muis", "Logitech", "1.0");
         Test test = new Test("Degelijke titel",
                device ,25, 10, "red", "yellow", "blue", "green", "black");
@@ -98,7 +102,10 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher5);
                 researcher5.addRole(new Role("LOLOLOLO"));
                 researcherRepo.save(researcher5);
+                testSubjectRepo.save(testSubject2);
+                testSubjectRepo.save(testSubject3);
                 deviceRepo.save(device);
+                deviceRepo.save(device2);
                 testRepo.save(test);
                 researchGroupRepo.save(researchGroup1);
             }
