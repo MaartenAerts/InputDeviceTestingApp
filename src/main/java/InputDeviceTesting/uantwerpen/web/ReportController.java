@@ -99,7 +99,7 @@ public class ReportController
 
         modelMap.put("testsubjects", testSubjects.size());
         modelMap.put("testsequences", testSequences.size());
-        modelMap.put("ae", ae);
+        modelMap.put("ae", 10);
         modelMap.put("we", we);
         modelMap.put("ide", ide);
         modelMap.put("mt", mt);
@@ -112,9 +112,10 @@ public class ReportController
         modelMap.put("maxwidth", maxWidth);
         modelMap.put("Test", test);
 
-
-
-        return new ModelAndView("report", modelMap);
+        ModelAndView modelAndView = new ModelAndView("report", modelMap);
+        String titel = "Mijn Titel";
+        modelAndView.addObject("titel", titel);
+        return modelAndView;
     }
     public Test findTest(long testId){
         Test test = testRepo.findOne(testId);
