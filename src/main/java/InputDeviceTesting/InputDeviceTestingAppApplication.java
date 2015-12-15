@@ -52,6 +52,13 @@ public class InputDeviceTestingAppApplication {
 
         final TestSubject testSubject2 = new TestSubject("alain", "van dam", "vijske", "synalco medics", "alain@synalco.com");
         final TestSubject testSubject3 = new TestSubject("Baltazaar", "boma", "vrouwezot", "boma vleesindustrie nv", "boma@vleesindustrie_nv.com");
+        final TestSubject testSubject4 = new TestSubject("carmen", "waterslager", "poets", "boma vleesindustrie nv", "carmen@vleesindustrie_nv.com");
+        final TestSubject testSubject5 = new TestSubject("markske", "vertongen", "loemp", "boma vleesindustrie nv", "markske@vleesindustrie_nv.com");
+        final TestSubject testSubject6 = new TestSubject("bieke", "de bakker", "", "boma vleesindustrie nv", "bieke@vleesindustrie_nv.com");
+        final TestSubject testSubject7 = new TestSubject("fernand", "costermans", "vrouwezot", "antiek", "fenrand@antiek.com");
+        final TestSubject testSubject8 = new TestSubject("pascalleke", "de bakker", "", "caféke", "pascalle@café.com");
+
+
 
         final ResearchGroup researchGroup1 = new ResearchGroup();
         researchGroup1.setCreator(researcher);
@@ -104,6 +111,11 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher5);
                 testSubjectRepo.save(testSubject2);
                 testSubjectRepo.save(testSubject3);
+                testSubjectRepo.save(testSubject4);
+                testSubjectRepo.save(testSubject5);
+                testSubjectRepo.save(testSubject6);
+                testSubjectRepo.save(testSubject7);
+                testSubjectRepo.save(testSubject8);
                 deviceRepo.save(device);
                 deviceRepo.save(device2);
                 testRepo.save(test);

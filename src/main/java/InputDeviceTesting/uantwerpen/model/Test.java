@@ -20,8 +20,10 @@ public class Test {
     @NotNull
     private String title;
 
+    private String deviceString;
+
     @ManyToOne
-    private Device device;
+    private  Device device;
     @NotNull
     private int targets;
     @NotNull
@@ -84,6 +86,14 @@ public class Test {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDeviceString() {
+        return deviceString;
+    }
+
+    public void setDeviceString(String deviceString) {
+        this.deviceString = deviceString;
     }
 
     public Device getDevice() {

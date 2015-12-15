@@ -20,32 +20,12 @@
         <h1 id="containers" align="center">Test Subjects</h1>
     </div>
 
-
-    <h2>Test Subjects</h2>
-    <table class="table table-striped">
-        <tr>
-            <th>First name:</th>
-            <th>last name:</th>
-            <th>email:</th>
-            <th>illnes:</th>
-            <th>description:</th>
-        </tr>
-
-        <tr th:each="testsubject : ${alltestsubjects}">
-            <td th:text="${testsubject.firstname}"/>
-            <td th:text="${testsubject.lastname}"/>
-            <td th:text="${testsubject.email}"/>
-            <td th:text="${testsubject.illness}"/>
-            <td th:text="${testsubject.description}"/>
-        </tr>
-    </table>
-
     <div style="margin-top:5%">
         <div class=" col-md-4 col-sm-6">
 
         </div>
 
-        <div class="well bs-component col-md-4 col-sm-6">
+        <div class="well bs-component col-md-4 col-sm-8">
             <form th:action="@{/testsubjects/NewTestSubject}" action="/testsubjects/NewTestSubject" method="POST" commandName="SubjectForm">
                 <fieldset>
                     <legend>New Test subject</legend>
@@ -79,7 +59,36 @@
             </form>
 
         </div>
+
     </div>
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>First name:</th>
+                <th>last name:</th>
+                <th>email:</th>
+                <th>illnes:</th>
+                <th>description:</th>
+            </tr>
+
+            <tr th:each="testsubject : ${alltestsubjects}">
+                <td th:text="${testsubject.firstname}"/>
+                <td th:text="${testsubject.lastname}"/>
+                <td th:text="${testsubject.email}"/>
+                <td th:text="${testsubject.illness}"/>
+                <td th:text="${testsubject.description}"/>
+            </tr>
+        </table>
+
+
+
+
+
+
+
+
+
 
 
 </div>

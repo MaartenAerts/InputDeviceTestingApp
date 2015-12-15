@@ -9,18 +9,7 @@
     <script type="text/javascript" th:href="@{/js/create-test.js}"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <script>
-        require.config({
-            baseUrl: "/../js"
-        });
 
-        require( ["create-test"], function()
-        {
-
-            alert("hallo");
-            /*...*/
-        });
-    </script>
 </head>
 <body>
 <div class="container">
@@ -47,7 +36,7 @@
                             <div class='col-sm-6'>
                                 <label for="input_device">Input Device:</label>
                             <span class="input-group-btn form control" id="input_device">
-                                <select class="form-control" type="text" name="email">
+                                <select class="form-control" type="text" name="deviceString">
                                     <option th:each="device:${allDevices}"
                                             th:value="${device.name}"
                                             th:text="${device.name}">
@@ -283,7 +272,6 @@
         </form>
     </div>
 </div>
-
 
 </body>
 </html>
