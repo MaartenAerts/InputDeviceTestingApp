@@ -46,7 +46,7 @@
 
                             <div class='col-sm-6'>
                                 <label for="input_device">Input Device:</label>
-                            <span class="input-group-btn form controll" id="input_device">
+                            <span class="input-group-btn form control" id="input_device">
                                 <select class="form-control" type="email" name="email">
                                     <option th:each="device:${allDevices}"
                                             th:value="${device.name}"
@@ -130,14 +130,25 @@
 
                             <div class='col-sm-6' style="margin-top: 1%">
                                 <label for="email">testers:</label>
-                                <input type="text" id="email" class="form-control"/>
-                                <button type="button" style="margin-top: 1%" id="tester" class="btn btn-info">Add tester</button>
-                                <div class="div-table-content" >
-                                <table id="emails" class="table table-striped" >
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </table>
+
+
+                                <label for="email">testers:</label>
+                                <span class="input-group-btn form control" id="email">
+                                    <select class="form-control" type="email" name="email">
+                                    <option th:each="testers:${allTesters}"
+                                            th:value="${testers.email}">
+                                    </option>
+                                    </select>
+                                </span>
+                                <button type="button" style="margin-top: 1%" id="tester" for="list" class="btn btn-info">Add
+                                    tester
+                                </button>
+                                <div class="div-table-content">
+                                    <table id="emails" class="table table-striped">
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>

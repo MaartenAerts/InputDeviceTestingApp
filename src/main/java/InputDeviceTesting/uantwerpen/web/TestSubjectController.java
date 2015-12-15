@@ -34,7 +34,7 @@ public class TestSubjectController
     public String Register(@ModelAttribute("SubjectForm") TestSubject testSubject)
     {
         testSubjectRepo.save(testSubject);
-        return "redirect:/testsubject/testsubject";
+        return "redirect:/testsubjects/testsubjects";
     }
 
 
