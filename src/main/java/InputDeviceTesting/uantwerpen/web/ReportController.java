@@ -2,23 +2,20 @@ package InputDeviceTesting.uantwerpen.web;
 
 import InputDeviceTesting.uantwerpen.model.Test;
 import InputDeviceTesting.uantwerpen.model.TestResult;
+import InputDeviceTesting.uantwerpen.model.TestSequence;
+import InputDeviceTesting.uantwerpen.model.TestSubject;
 import InputDeviceTesting.uantwerpen.repo.TestRepo;
 import InputDeviceTesting.uantwerpen.repo.TestResultRepo;
 import InputDeviceTesting.uantwerpen.repo.TestSequenceRepo;
-import org.hibernate.jpa.criteria.ValueHandlerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Created by stuerjoris on 19/11/15.
@@ -27,9 +24,9 @@ import java.util.stream.Stream;
 @RequestMapping("/report/")
 public class ReportController
 {
-    TestRepo testRepo;
-    TestResultRepo testResultRepo;
-    TestSequenceRepo testSequenceRepo;
+    private final TestRepo testRepo;
+    private final TestResultRepo testResultRepo;
+    private final TestSequenceRepo testSequenceRepo;
 
     @Autowired
     public ReportController(TestRepo testRepo, TestResultRepo testResultRepo, TestSequenceRepo testSequenceRepo) {
@@ -46,34 +43,85 @@ public class ReportController
 
     //via id in link
     @RequestMapping(value = "{testId}", method= RequestMethod.GET)
-    public String reportTest(@PathVariable long testId)
+    public ModelAndView reportTest(@PathVariable long testId)
     {
+        ModelMap modelMap = new ModelMap();
+        Test test =findTest(testId);
+        List<TestSubject> testSubjects = test.getTestSubjects();
+        List<TestSequence> testSequences = test.getTestSequences();
+        double ae=0, we=0, ide=0, mt=0, er=0, tp = 0, error=0;
+        int amount=0;
+        int minAmp=0,maxAmp=0, minWidth=0, maxWidth=0;
+
+        for (TestSequence testSequence: testSequences) {
+            for (TestResult testResult: testSequence.getTestResultList()) {
+                ae+=testResult.getAe();
+                we+=testResult.getWe();
+                ide+=testResult.getIDe();
+                mt+=testResult.getMT();
+                er+=testResult.getER();
+                tp+=testResult.getTP();
+                error+=testResult.getError();
+                amount++;
+            }
+            if (minAmp!=0){
+                minAmp = minAmp<testSequence.getTargetAmplitudes()? minAmp: (int) testSequence.getTargetAmplitudes();
+            }
+            else {
+                minAmp= (int) testSequence.getTargetAmplitudes();
+            }
+            if (maxAmp!=0){
+                maxAmp = minAmp>testSequence.getTargetAmplitudes()? minAmp: (int) testSequence.getTargetAmplitudes();
+            }
+            else {
+                maxAmp= (int) testSequence.getTargetAmplitudes();
+            }
+            if (minWidth!=0){
+                minWidth = minAmp<testSequence.getTargetWidth()? minAmp: (int) testSequence.getTargetWidth();
+            }
+            else {
+                minWidth= (int) testSequence.getTargetWidth();
+            }
+            if (maxWidth!=0){
+                maxWidth = maxWidth>testSequence.getTargetWidth()? minAmp: (int) testSequence.getTargetWidth();
+            }
+            else {
+                maxWidth= (int) testSequence.getTargetWidth();
+            }
+        }
+        ae/=amount;
+        we/=amount;
+        ide/=amount;
+        mt/=amount;
+        er/=amount;
+        tp/=amount;
+        error/=amount;
+
+        modelMap.put("testsubjects", testSubjects.size());
+        modelMap.put("testsequences", testSequences.size());
+        modelMap.put("ae", ae);
+        modelMap.put("we", we);
+        modelMap.put("ide", ide);
+        modelMap.put("mt", mt);
+        modelMap.put("er", er);
+        modelMap.put("tp", tp);
+        modelMap.put("error", error);
+        modelMap.put("minamp", minAmp);
+        modelMap.put("maxamp", maxAmp);
+        modelMap.put("minwidth", minWidth);
+        modelMap.put("maxwidth", maxWidth);
+        modelMap.put("Test", test);
 
 
-      // List<Test> tests = IntStream.range(1,4).map(i -> testRepo.findByDifficulty(i)).collect(Collectors.toList()) ;
-       // List<Double> averageByDifficulty = testResultRepo.avgByDifficulty();
-        //List<Test> tests= testRepo.eagerAll();
 
-
-
-
-
-
-
-        return "report";
+        return new ModelAndView("report", modelMap);
+    }
+    public Test findTest(long testId){
+        Test test = testRepo.findOne(testId);
+        return test;
     }
 
-    private double getAverageByTest(long testId){
-        //List<TestResult> testResults= testResultRepo.findByTestId(testId);
-        double averageThroughput=0;
-
-
-        //testResults.stream().mapToDouble(TestResult::getTP).average();
-        //testResults.stream().mapToDouble(TestResult::getTP).average();
-
-
-        return new Double(0);
+    public List<Test> findAllTests() {
+        return testRepo.findAll();
     }
-
-
 }

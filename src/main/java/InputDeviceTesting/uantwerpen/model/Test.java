@@ -41,7 +41,7 @@ public class Test {
     @NotNull
     private String colorMissed;
 
-    @OneToMany(mappedBy = "test")
+    @OneToMany(mappedBy = "test", fetch = FetchType.EAGER)
     private List<TestSequence> testSequences;
 
     @ManyToMany(mappedBy = "tests")

@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TestSequenceRepo extends JpaRepository<TestSequence,Long>{
+
 }

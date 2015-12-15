@@ -19,7 +19,7 @@ public class TestSequence {
 
     private int sequenceIndex;
 
-    @OneToMany(mappedBy = "testsequence",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "testsequence",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<TestResult> testResultList;
 
     @ManyToOne
