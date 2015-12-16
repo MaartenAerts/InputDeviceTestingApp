@@ -74,7 +74,6 @@ public class TestController {
     }
 
 
-
     @RequestMapping(value ="/{id}")
     public ModelAndView getTest(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView("test");
@@ -82,6 +81,8 @@ public class TestController {
         Test blub  = testRepo.findById(id);
         modelAndView.addObject("TestObj", blub);
 
+       // TestSequence blubSequence = this.testSequenceList;
+        //modelAndView.addObject("TestSeqObj", blubSequence);
         return modelAndView;
     }
 
