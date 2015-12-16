@@ -157,7 +157,7 @@ public class TestController {
         }
         //Wa doede gij mij aan Cri: ;'(
         test.setDevice(deviceRepo.findByName(test.getDeviceName()));
-        test.setTestSequences(this.testSequenceList);
+        test.setTestSequences(testSequenceList);
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
         test.setTestSubjects(testSubjectList);
