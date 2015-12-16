@@ -92,8 +92,6 @@ public class TestController {
         Test blub  = testRepo.findById(id);
         modelAndView.addObject("TestObj", blub);
 
-       // TestSequence blubSequence = this.testSequenceList;
-        //modelAndView.addObject("TestSeqObj", blubSequence);
         return modelAndView;
     }
 

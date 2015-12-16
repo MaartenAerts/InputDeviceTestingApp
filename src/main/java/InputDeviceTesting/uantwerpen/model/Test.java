@@ -62,7 +62,6 @@ public class Test {
         this.title = title;
         this.device = device;
         this.targets = targets;
-        //this.sequences = sequences;
         this.errorThreshold = errorThreshold;
         this.colorMain = colorMain;
         this.colorTargets = colorTargets;

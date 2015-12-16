@@ -18,6 +18,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var colorNextTarget = document.getElementById('colorNext').value;
     var colorClickedTarget = document.getElementById('colorClicked').value;
     var colorMissedTarget = document.getElementById('colorMissed').value;
+    var sequentieMax = parseInt(document.getElementById('aantalSequences').value); // 2; aantal sequenties
     // door te geven parameters naar databank
     var Ae = 0;
     var We = 0;
@@ -54,7 +55,6 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
     var trackingArrayY = new Array();
     var interval;
     var sequentieNummer = 1;
-    var sequentieMax = 2;
     var testGedaan = false;
     var Test = (function (_super) {
         __extends(Test, _super);
@@ -66,7 +66,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             };
         }
         Test.prototype.render = function () {
-            alert(radiusBigCircle);
+            //alert(sequentieMax);
             var strokeWidthBigCircle = radiusBigCircle / 50;
             var cxBigCircle = this.props.width / 2;
             var cyBigCircle = this.props.height / 2;

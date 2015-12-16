@@ -48,17 +48,32 @@
     <div id="canvas_for_test" align="center" />
 
     <div th:each="thisTest : ${TestObj}" >
-        <form>
-            <input type="hidden" th:value="${thisTest.targets}" id="aantalTargets"/>
-            <!--<input type="hidden" th:value="${thisTest.sequences.getTargetAmplitudes()}" id="amplitude" />
-            <input type="hidden" th:value="${thisTest.sequences.getTargetWidth()}" id="targetwidth" /> -->
-            <input type="hidden" th:value="${thisTest.errorThreshold}" id="errorThreshold"/>
-            <input type="hidden" th:value="${thisTest.colorMain}" id="colorMain"/>
-            <input type="hidden" th:value="${thisTest.colorTargets}" id="colorTargets"/>
-            <input type="hidden" th:value="${thisTest.colorNext}" id="colorNext"/>
-            <input type="hidden" th:value="${thisTest.colorPrevious}" id="colorClicked"/>
-            <input type="hidden" th:value="${thisTest.colorMissed}" id="colorMissed"/>
-           <!-- <input type="hidden" th:value="${thisTest.Testsequence.size}" id="sequencelist"/>-->
+        <form id="paramForm" name="paramForm">
+        <input type="hidden" th:value="${thisTest.targets}" id="aantalTargets"/>
+      <!--  <input type="hidden" th:value="${thisTest.testSequences.}" id="amplitude" />
+        <input type="hidden" th:value="${thisTest.testSequences.getTargetWidth()}" id="targetwidth" /> -->
+        <input type="hidden" th:value="${thisTest.errorThreshold}" id="errorThreshold"/>
+        <input type="hidden" th:value="${thisTest.colorMain}" id="colorMain"/>
+        <input type="hidden" th:value="${thisTest.colorTargets}" id="colorTargets"/>
+        <input type="hidden" th:value="${thisTest.colorNext}" id="colorNext"/>
+        <input type="hidden" th:value="${thisTest.colorPrevious}" id="colorClicked"/>
+        <input type="hidden" th:value="${thisTest.colorMissed}" id="colorMissed"/>
+        <input type="hidden" th:value="${thisTest.testSequences}" id ="lijstSequencesMax" />
+            <script>
+                var lijstSequentiesAlsString = document.getElementById('lijstSequencesMax').value;
+                // komt binnen als string, niet als array en moet terug omgezet worden naar een array om het aantal elementen te kunnen tellen
+                var lijstSequentiesAlsArray = lijstSequentiesAlsString.split(", ");
+                var aantalSequenties = lijstSequentiesAlsArray.length;
+                // alert(aantalSequenties); // werkt
+                var inputAantalSequenties = document.createElement('input');
+                inputAantalSequenties.type = 'hidden';
+                inputAantalSequenties.value = aantalSequenties;
+                inputAantalSequenties.id = 'aantalSequences';           // id van inputfield dat je kan aanspreken
+                var theForm = document.forms['paramForm'];
+                theForm.appendChild(inputAantalSequenties);
+            </script>
+
+      <!--  <input type="hidden" th:value="${thisTest.testSequences.targetAmplitudes}" id ="lijstSequencesMax" /> -->
         </form>
     </div>
 
