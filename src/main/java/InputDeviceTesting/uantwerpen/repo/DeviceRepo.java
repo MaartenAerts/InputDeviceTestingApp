@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DeviceRepo extends JpaRepository<Device,Long> {
 
-    //Device findByDevice(String name);
+    Device findByName(@Param("name")String name);
 }

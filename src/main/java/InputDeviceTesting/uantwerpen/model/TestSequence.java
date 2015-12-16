@@ -30,10 +30,16 @@ public class TestSequence {
     @NotNull
     double targetWidth;
 
+    private double difficulty;
+
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public TestSequence() {
+
+    }
 
     public TestSequence(int sequenceIndex, double targetWidth, double targetAmplitudes) {
         this.sequenceIndex = sequenceIndex;
@@ -79,6 +85,14 @@ public class TestSequence {
 
     public void setTargetWidth(double targetWidth) {
         this.targetWidth = targetWidth;
+    }
+
+    public double getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(double difficulty) {
+        this.difficulty = difficulty;
     }
 
     public LocalDateTime getCreatedDate() {

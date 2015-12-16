@@ -48,7 +48,7 @@ public class DashboardController {
         return "redirect:/dashboard";
     }
     @RequestMapping("/dashboard")
-    public String ShowDashboardPage(Principal principal){
+    public String ShowDashboardPage(Model model,ModelAndView modelAndView, Principal principal){
         String researcherLogin = principal.getName();// get the username/email after login
         return "dashboard";
     }

@@ -20,7 +20,7 @@ public class Test {
     @NotNull
     private String title;
 
-    private String deviceString;
+    private String deviceName;
 
     @ManyToOne
     private  Device device;
@@ -30,8 +30,7 @@ public class Test {
     private long errorThreshold;
     @NotNull
     private long sequences;
-    @NotNull
-    private long difficulty;
+
     @NotNull
     private String colorMain;
     @NotNull
@@ -88,13 +87,9 @@ public class Test {
         this.title = title;
     }
 
-    public String getDeviceString() {
-        return deviceString;
-    }
+    public String getDeviceName() {return deviceName;}
 
-    public void setDeviceString(String deviceString) {
-        this.deviceString = deviceString;
-    }
+    public void setDeviceName(String deviceName) {this.deviceName = deviceName;}
 
     public Device getDevice() {
         return device;
@@ -126,14 +121,6 @@ public class Test {
 
     public void setSequences(long sequences) {
         this.sequences = sequences;
-    }
-
-    public long getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(long difficulty) {
-        this.difficulty = difficulty;
     }
 
     public String getColorMain() {

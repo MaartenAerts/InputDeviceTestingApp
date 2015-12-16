@@ -1,10 +1,9 @@
 package InputDeviceTesting.uantwerpen.web;
 
 import InputDeviceTesting.uantwerpen.model.*;
-import InputDeviceTesting.uantwerpen.repo.DeviceRepo;
-import InputDeviceTesting.uantwerpen.repo.TestRepo;
-import InputDeviceTesting.uantwerpen.repo.TestResultRepo;
-import InputDeviceTesting.uantwerpen.repo.TestSubjectRepo;
+import InputDeviceTesting.uantwerpen.repo.*;
+
+import InputDeviceTesting.uantwerpen.service.CreateTestForm;
 import InputDeviceTesting.uantwerpen.service.TestResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,9 +35,16 @@ public class TestController {
     private DeviceRepo deviceRepo;
 
     @Autowired
+    private TestSequenceRepo testSequenceRepo;
+
+    @Autowired
     private TestSubjectRepo testSubjectRepo;
 
-    private Test blub;
+    private Test test;
+
+    private TestSequence testSequence;
+
+    private List<TestSequence> testSequenceList;
 
     private TestResult testResult;
 
@@ -56,13 +61,19 @@ public class TestController {
         return testSubjectList;
     }
 
+    @ModelAttribute("seqList")
+    public List<TestSequence> populateTestSequences() {
+        return this.testSequenceList;
+    }
+
 
 
     @RequestMapping(value ="/{id}")
     public ModelAndView getTest(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView("test");
-        blub  = testRepo.findById(id);
-        modelAndView.addObject("TestObj", blub);
+
+        /*blub  = testRepo.findById(id);
+        modelAndView.addObject("TestObj", blub);*/
 
         return modelAndView;
     }
@@ -94,9 +105,11 @@ public class TestController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public ModelAndView createTest(){
-        blub = null;
-        return new ModelAndView("createTest");
+    public String createTest(Model model){
+        model.addAttribute("test",new Test());
+        testSequenceList = new ArrayList<>();
+        //model.addAttribute("testSequence",new CreateTestForm());
+        return "createTest";
     }
 
     /*@RequestMapping(value="createTest", method=RequestMethod.POST)
@@ -106,22 +119,41 @@ public class TestController {
         return modelAndView;
     }*/
 
-    @RequestMapping(value = "createTest", method=RequestMethod.POST)
-    public String CreateTest(@ModelAttribute("createTestForm") Test test,BindingResult bindingResult,Model model){
+    @RequestMapping(value = "createTest", method=RequestMethod.POST, params = {"saveTest"})
+    public String CreateTest(@ModelAttribute("test") Test test,CreateTestForm lol,BindingResult bindingResult,Model model, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
             model.addAttribute("formErrors","Form has " + bindingResult.getErrorCount() +" invalid or empty values");
-            return "createTest";
+            //model.addAttribute("AllSequences", testSequenceList);
+            return ("createTest");
         }
         if(test.getTitle()=="" || test.getTitle().isEmpty()){
             model.addAttribute("formErrors","Test needs a title!!!");
-            return "createTest";
+            //model.addAttribute("AllSequences", testSequenceList);
+            return ("createTest");
         }
-        //test.setDevice(deviceRepo.findByDevice(test.getDeviceString()));
-        ModelAndView modelAndView = new ModelAndView();
+        if(testSequenceList.isEmpty()){
+            model.addAttribute("seqErrors","Sequence cannot be empty!!!");
+            return ("createTest");
+        }
+        //Wa doede gij mij aan Cri: ;'(
+        test.setDevice(deviceRepo.findByName(test.getDeviceName()));
+        test.setTestSequences(this.testSequenceList);
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
         testRepo.save(test);
-        return "redirect:/test/addsequencetotest";
+        redirectAttributes.addFlashAttribute("test", "Test created!");
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "createTest", params = {"addSequence"})
+    public ModelAndView AddSequence(TestSequence testSequence,BindingResult bindingResult,Model model){
+       System.out.println("Homo");
+        ModelAndView modelAndView = new ModelAndView("createTest");
+        testSequence.setSequenceIndex(testSequenceList.size());
+        testSequence.setDifficulty((Math.log(testSequence.getTargetAmplitudes()/testSequence.getTargetWidth())+1)/Math.log(2));
+        testSequenceList.add(testSequence);
+        return modelAndView;
+
     }
 
 
