@@ -44,7 +44,7 @@ public class Test {
     @OneToMany(mappedBy = "test", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TestSequence> testSequences;
 
-    @ManyToMany(mappedBy = "tests", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "tests", fetch = FetchType.EAGER)
     private List<TestSubject> testSubjects;
 
     @CreatedDate

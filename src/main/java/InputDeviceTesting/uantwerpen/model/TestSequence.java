@@ -23,7 +23,7 @@ public class TestSequence {
     @OneToMany(mappedBy = "testsequence",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<TestResult> testResultList;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     Test test;
 
     @NotNull

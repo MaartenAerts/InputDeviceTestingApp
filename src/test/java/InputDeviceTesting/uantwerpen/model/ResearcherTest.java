@@ -1,5 +1,6 @@
 package InputDeviceTesting.uantwerpen.model;
 
+import InputDeviceTesting.uantwerpen.web.TestController;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.*;
 import org.junit.Test;
@@ -10,8 +11,15 @@ import java.util.Objects;
 
 
 import InputDeviceTesting.uantwerpen.model.Researcher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 /**
@@ -69,6 +77,9 @@ public class ResearcherTest {
         assertEquals(expected2,actual2);
     }
 
+    @Autowired
+    TestController testController;
+
     @Test
     public void testCompareID(){
         //Volgorde testen
@@ -78,5 +89,8 @@ public class ResearcherTest {
         long actual = researcher1.compareTo(researcher2);
         assertEquals(expected,actual);
 
+
     }
+
+
 }
