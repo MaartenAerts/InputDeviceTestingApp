@@ -140,6 +140,7 @@ public class TestController {
         test.setTestSequences(this.testSequenceList);
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
+        testSequenceRepo.save(testSequenceList);
         testRepo.save(test);
         redirectAttributes.addFlashAttribute("test", "Test created!");
         return "redirect:/dashboard";
