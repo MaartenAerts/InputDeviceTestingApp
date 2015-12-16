@@ -50,17 +50,21 @@ public class TestController {
 
     private TestResult testResult;
 
+
+
     @ModelAttribute("allDevices")
     public List<Device> populateDevices() {
         List<Device> deviceList = deviceRepo.findAll();
         return deviceList;
     }
 
+    private List<TestSubject> testSubjectListAll;
+
     @ModelAttribute("alltestsubjects")
     public List<TestSubject> populataTestSubjects()
     {
-        List<TestSubject> testSubjectList = testSubjectRepo.findAll();
-        return testSubjectList;
+        testSubjectListAll = testSubjectRepo.findAll();
+        return testSubjectListAll;
     }
 
     @ModelAttribute("seqList")
@@ -114,7 +118,7 @@ public class TestController {
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createTest(Model model){
-        model.addAttribute("test",new Test());
+            model.addAttribute("test",new Test());
         testSequenceList = new ArrayList<>();
         testSubjectList = new ArrayList<>();
         //model.addAttribute("testSequence",new CreateTestForm());
@@ -170,7 +174,11 @@ public class TestController {
     public ModelAndView AddSubject(TestSubject testSubject,BindingResult bindingResult,Model model){
         ModelAndView modelAndView = new ModelAndView("createTest");
         if(testSubjectList.contains(testSubject)==false) {
-            testSubjectList.add(testSubject);
+            for(TestSubject ts : testSubjectListAll) {
+                if(ts.getEmail().equals(testSubject.getEmail())) {
+                    testSubjectList.add(ts);
+                }
+            }
         }
         return modelAndView;
 
