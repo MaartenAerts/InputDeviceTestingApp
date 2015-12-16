@@ -29,24 +29,24 @@ public class InputDeviceTestingAppApplication {
 
 
     @Bean
-    CommandLineRunner init(final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo, final TestRepo testRepo, final DeviceRepo deviceRepo, final TestSubjectRepo testSubjectRepo, final TestSequenceRepo testSequenceRepo){
-        final Researcher researcher = new Researcher("lol@brol.fu","trol","King","Lepel", "organ", LocalDateTime.now() , LocalDateTime.now());
+    CommandLineRunner init(final TestResultRepo testResultRepo, final TestSequenceRepo testSequenceRepo, final ResearcherRepo researcherRepo, final ResearchGroupRepo researchGroupRepo, final TestRepo testRepo, final DeviceRepo deviceRepo, final TestSubjectRepo testSubjectRepo) {
+        final Researcher researcher = new Researcher("lol@brol.fu", "trol", "King", "Lepel", "organ", LocalDateTime.now(), LocalDateTime.now());
         researcher.addRole(new Role("HEADRESEARCHER"));
         researcher.addRole(new Role("RESEARCHER"));
         researcher.addRole(new Role("LEUTROL"));
 
-        final Researcher researcher2 = new Researcher("lol@bro.fu","blub","PAPA","Mama", "Familie", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher2 = new Researcher("lol@bro.fu", "blub", "PAPA", "Mama", "Familie", LocalDateTime.now(), LocalDateTime.now());
         researcher2.addRole(new Role("RESEARCHER"));
 
-        final Researcher researcher3 = new Researcher("Lekkere@Soep.fu","Pil","Shakira","Belgium", "Thuis", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher3 = new Researcher("Lekkere@Soep.fu", "Pil", "Shakira", "Belgium", "Thuis", LocalDateTime.now(), LocalDateTime.now());
         researcher3.addRole(new Role("RESEARCHER"));
 
-        final Researcher researcher4 = new Researcher("Kietel@brol.fu","bak","PRefix","test", "test", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher4 = new Researcher("Kietel@brol.fu", "bak", "PRefix", "test", "test", LocalDateTime.now(), LocalDateTime.now());
         researcher4.addRole(new Role("RESEARCHER"));
         researcher4.addRole(new Role("TESTER"));
         researcher4.addRole(new Role("TROL"));
 
-        final Researcher researcher5 = new Researcher("Re5@brol.fu","pass5","5plep","plop", "kabouter", LocalDateTime.now() , LocalDateTime.now());
+        final Researcher researcher5 = new Researcher("Re5@brol.fu", "pass5", "5plep", "plop", "kabouter", LocalDateTime.now(), LocalDateTime.now());
         researcher5.addRole(new Role("HEADRESEARCHER"));
         researcher5.addRole(new Role("TOPPIE"));
 
@@ -66,36 +66,43 @@ public class InputDeviceTestingAppApplication {
         researchGroup1.setCreatedDate(LocalDateTime.now());
         researchGroup1.setModifiedDate(LocalDateTime.now());
         researchGroup1.addResearcher(researcher);
-
-        List<TestSubject> testSubjects = IntStream.range(0,9)
-                .mapToObj(i -> new TestSubject("test","test2", "testje","hallo",i + "@test.com")).collect(Collectors.toList());
-        Random random = new Random(System.currentTimeMillis());
-        Device device2 =  new Device("playstation kaske", "Logitech", "4.1");
-        Device device =  new Device("Muis", "Logitech", "1.0");
+        Device device2 = new Device("playstation kaske", "Logitech", "4.1");
+        Device device = new Device("Muis", "Logitech", "1.0");
         Test test = new Test("Degelijke titel",
-               device ,15, 50, "#ffffff", "#ff0000", "#006400", "#ffff00", "#660000");
+                device, 25, 10, "red", "yellow", "blue", "green", "black");
+        List<TestSubject> testSubjects = IntStream.range(0, 9)
+                .mapToObj(i -> new TestSubject("test", "test2", "testje", "hallo", i + "@test.com", test)).collect(Collectors.toList());
+        Random random = new Random(System.currentTimeMillis());
+
+
+        TestSequence testSequence1 = new TestSequence(0, 250, 25);
+        TestSequence testSequence2 = new TestSequence(1, 500, 50);
+        TestSequence testSequence3 = new TestSequence(2, 150, 15);
+
         List<TestSequence> testSequences = new ArrayList<TestSequence>();
-        testSequences.add(new TestSequence(0, 250, 25));
-        testSequences.add(new TestSequence(1, 500, 50));
-        testSequences.add(new TestSequence(2, 150, 15));
+        List<TestResult> fullTestResult = new ArrayList<TestResult>();
+        testSequences.add(testSequence1);
+        testSequences.add(testSequence2);
+        testSequences.add(testSequence3);
         test.setTestSequences(testSequences);
-        for (TestSubject testSubject: testSubjects) {
+        // test.setTestSubjects(testSubjects);
+        for (TestSubject testSubject : testSubjects) {
             List<TestResult> testResults = new ArrayList<TestResult>();
-            for (TestSequence testSequence: testSequences) {
-                testResults.add(
-                        new TestResult(testSequence,testSubject,
-                                random.doubles(200,400).findFirst().getAsDouble(),
-                                random.doubles(0,50).findFirst().getAsDouble(),
-                                random.doubles(6,20).findFirst().getAsDouble(),
-                                random.doubles(0,4).findFirst().getAsDouble(),
-                                random.doubles(600,800).findFirst().getAsDouble(),
-                                random.doubles(0,10).findFirst().getAsDouble(),
-                                random.doubles(10,20).findFirst().getAsDouble()));
+            for (TestSequence testSequence : testSequences) {
+                TestResult testResult = new TestResult(testSubject, random.doubles(200, 400).findFirst().getAsDouble(),
+                        random.doubles(0, 50).findFirst().getAsDouble(),
+                        random.doubles(6, 20).findFirst().getAsDouble(),
+                        random.doubles(0, 4).findFirst().getAsDouble(),
+                        random.doubles(600, 800).findFirst().getAsDouble(),
+                        random.doubles(0, 10).findFirst().getAsDouble(),
+                        random.doubles(10, 20).findFirst().getAsDouble());
+//                testResults.add(testResult);
+                testSequence.addTestResult(testResult);
             }
             testSubject.setTestResultList(testResults);
         }
 
-        test.setTestSubjects(testSubjects);
+//            fullTestResult.addAll(testResults);
         researchGroup1.addTest(test);
 
 
@@ -111,16 +118,23 @@ public class InputDeviceTestingAppApplication {
                 researcherRepo.save(researcher5);
                 testSubjectRepo.save(testSubject2);
                 testSubjectRepo.save(testSubject3);
+//                deviceRepo.save(device);
+                deviceRepo.save(device2);
+                testSubjectRepo.save(testSubjects);
+
                 testSubjectRepo.save(testSubject4);
                 testSubjectRepo.save(testSubject5);
                 testSubjectRepo.save(testSubject6);
                 testSubjectRepo.save(testSubject7);
                 testSubjectRepo.save(testSubject8);
-                deviceRepo.save(device);
-                deviceRepo.save(device2);
-                testRepo.save(test);
+//                testSequenceRepo.save(testSequences);
+//
+//                testRepo.save(test);
+//
+//                testSequenceRepo.save(testSequences);
                 researchGroupRepo.save(researchGroup1);
-                testSequenceRepo.save(testSequences);
+
+                //   testResultRepo.save(fullTestResult);
             }
         };
     }

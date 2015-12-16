@@ -237,7 +237,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             //alert("AantalErrors: " + localStorage.getItem("aantalErrors_1"));
         };
         Test.prototype.saveToDb = function () {
-                var theForm = document.forms['testResultForm'];
+            var theForm = document.forms['testResultForm'];
             for (var i = 1; i <= sequentieMax; i++) {
                 this.addInput(theForm, 'trials', localStorage.getItem("trial_" + i));
                 this.addInput(theForm, 'A', localStorage.getItem("a_" + i));

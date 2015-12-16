@@ -48,10 +48,7 @@ public class TestResult {
     public TestResult() {
     }
 
-    public TestResult(TestSequence testsequence, TestSubject testSubject,
-                      double ae, double we, double IDe, double error, double MT, double ER, double TP) {
-        this.testsequence = testsequence;
-        this.testSubject = testSubject;
+    public TestResult(TestSubject testSubject, double ae, double we, double IDe, double error, double MT, double ER, double TP) {
         this.Ae = ae;
         this.We = we;
         this.IDe = IDe;
@@ -59,6 +56,9 @@ public class TestResult {
         this.MT = MT;
         this.ER = ER;
         this.TP = TP;
+      //  this.testsequence= testSequence;
+        this.testSubject = testSubject;
+
     }
 
     public long getId() {

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,6 @@ public class TestSequence {
     private LocalDateTime modifiedDate;
 
     public TestSequence() {
-
     }
 
     public TestSequence(int sequenceIndex, double targetWidth, double targetAmplitudes) {
@@ -120,4 +120,11 @@ public class TestSequence {
     }
 
 
+    public void addTestResult(TestResult testResult) {
+        if(testResultList==null){
+            testResultList = new ArrayList<TestResult>();
+        }
+        testResult.setTestsequence(this);
+        testResultList.add(testResult);
+    }
 }

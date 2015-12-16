@@ -21,7 +21,7 @@ public class Device implements Serializable{
     private String vendor;
     @NotNull
     private String version;
-    @OneToMany(mappedBy = "device")
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
     private List<Test> test;
 
     public Device() {

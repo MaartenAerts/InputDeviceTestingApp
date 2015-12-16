@@ -30,8 +30,7 @@ public class ResearchGroup implements Serializable , Comparable<ResearchGroup> {
     @JoinTable(name="RESEARCHERGOUP_RESEARCHER", joinColumns={@JoinColumn(name="RESEARCHERGOUP_ID")}, inverseJoinColumns={@JoinColumn(name="RESEARCHER_ID")})
     private List<Researcher> researcherList = new ArrayList<Researcher>();
     private int amountOfResearchers;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="RESEARCHERGOUP_TEST", joinColumns={@JoinColumn(name="RESEARCHERGOUP_ID")}, inverseJoinColumns={@JoinColumn(name="TEST_ID")})
+    @OneToMany(mappedBy = "researchGroup", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Test> testList = new ArrayList<Test>();
     private int amountOfTests;
 

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,10 +36,22 @@ public class TestSubject implements Serializable {
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Test> tests;
     @OneToMany(mappedBy = "testSubject", cascade = CascadeType.ALL)
-    List<TestResult> testResultList;
+    List<TestResult> testResultList= new ArrayList<TestResult>();
+
+    public TestSubject() {
+    }
+
+    public TestSubject(String firstName, String lastName, String illness, String description, String email, Test test) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.illness = illness;
+        this.description = description;
+        this.email = email;
+        this.addTest(test);
+    }
 
     public TestSubject(String firstName, String lastName, String illness, String description, String email) {
         this.firstName = firstName;
@@ -48,8 +61,13 @@ public class TestSubject implements Serializable {
         this.email = email;
     }
 
-    public TestSubject() {
+    public void addTest(Test test) {
+        if (tests == null){
+            tests = new ArrayList<Test>();
+        }
+        tests.add(test);
     }
+
 
     public long getId() {
         return id;
@@ -129,6 +147,7 @@ public class TestSubject implements Serializable {
     }
 
     public void setTestResultList(List<TestResult> testResultList) {
+        testResultList.stream().forEach(tr-> tr.setTestSubject(this));
         this.testResultList = testResultList;
     }
 

@@ -20,17 +20,16 @@ public class Test {
     @NotNull
     private String title;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Device device;
     private String deviceName;
 
-    @ManyToOne
-    private  Device device;
     @NotNull
     private int targets;
     @NotNull
     private long errorThreshold;
     @NotNull
     private long sequences;
-
     @NotNull
     private String colorMain;
     @NotNull
@@ -42,10 +41,10 @@ public class Test {
     @NotNull
     private String colorMissed;
 
-    @OneToMany(mappedBy = "test", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "test", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TestSequence> testSequences;
 
-    @ManyToMany(mappedBy = "tests")
+    @ManyToMany(mappedBy = "tests", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TestSubject> testSubjects;
 
     @CreatedDate
@@ -53,8 +52,8 @@ public class Test {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
-    @ManyToMany(mappedBy = "testList")
-    private List<ResearchGroup> researchGroupList = new ArrayList<ResearchGroup>();
+    @ManyToOne
+    private ResearchGroup researchGroup;
 
     public Test() {
     }
@@ -123,6 +122,7 @@ public class Test {
         this.sequences = sequences;
     }
 
+
     public String getColorMain() {
         return colorMain;
     }
@@ -168,14 +168,19 @@ public class Test {
     }
 
     public void setTestSequences(List<TestSequence> testSequences) {
+        testSequences.stream().forEach(ts -> ts.setTest(this));
         this.testSequences = testSequences;
     }
 
     public List<TestSubject> getTestSubjects() {
+        if( testSubjects==null){
+            testSubjects = new ArrayList<TestSubject>();
+        }
         return testSubjects;
     }
 
     public void setTestSubjects(List<TestSubject> testSubjects) {
+        testSubjects.stream().forEach(ts -> ts.addTest(this));
         this.testSubjects = testSubjects;
     }
 
@@ -195,13 +200,21 @@ public class Test {
         this.modifiedDate = modifiedDate;
     }
 
-    public List<ResearchGroup> getResearchGroupList() {
-        return researchGroupList;
+    public ResearchGroup getResearchGroup() {
+        return researchGroup;
     }
 
-    public void setResearchGroupList(List<ResearchGroup> researchGroupList) {
-        this.researchGroupList = researchGroupList;
+    public void setResearchGroup(ResearchGroup researchGroup) {
+        this.researchGroup = researchGroup;
     }
 
-
+    public void addTestSequence(TestSequence testSequence) {
+        if (this.testSequences!= null){
+            testSequences.add(testSequence);
+        }
+        else{
+            testSequences = new ArrayList<TestSequence>();
+            testSequences.add(testSequence);
+        }
+    }
 }

@@ -31,13 +31,5 @@ public class ReportControllerTests {
         assertNotNull(test.getTestSequences());
         assertNotNull(test.getTestSequences().get(0).getTestResultList());
     }
-    @Test
-    public void findTestTest(){
-        InputDeviceTesting.uantwerpen.model.Test test= reportController.findTest(0);
-        assertNotNull(test);
-    }
-    @Test
-    public void findAllTests(){
-        assertNotNull(reportController.findAllTests().get(0));
-    }
+
 }
