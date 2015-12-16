@@ -79,8 +79,8 @@ public class TestController {
     public ModelAndView getTest(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView("test");
 
-        /*blub  = testRepo.findById(id);
-        modelAndView.addObject("TestObj", blub);*/
+        Test blub  = testRepo.findById(id);
+        modelAndView.addObject("TestObj", blub);
 
         return modelAndView;
     }
