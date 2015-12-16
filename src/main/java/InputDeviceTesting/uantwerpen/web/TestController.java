@@ -46,6 +46,8 @@ public class TestController {
 
     private List<TestSequence> testSequenceList;
 
+    private List<TestSubject> testSubjectList;
+
     private TestResult testResult;
 
     @ModelAttribute("allDevices")
@@ -64,6 +66,11 @@ public class TestController {
     @ModelAttribute("seqList")
     public List<TestSequence> populateTestSequences() {
         return this.testSequenceList;
+    }
+
+    @ModelAttribute("subList")
+    public List<TestSubject> populateTestSubjects() {
+        return this.testSubjectList;
     }
 
 
@@ -108,6 +115,7 @@ public class TestController {
     public String createTest(Model model){
         model.addAttribute("test",new Test());
         testSequenceList = new ArrayList<>();
+        testSubjectList = new ArrayList<>();
         //model.addAttribute("testSequence",new CreateTestForm());
         return "createTest";
     }
@@ -140,6 +148,7 @@ public class TestController {
         test.setTestSequences(this.testSequenceList);
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
+        test.setTestSubjects(testSubjectList);
         testSequenceRepo.save(testSequenceList);
         testRepo.save(test);
         redirectAttributes.addFlashAttribute("test", "Test created!");
@@ -148,7 +157,6 @@ public class TestController {
 
     @RequestMapping(value = "createTest", params = {"addSequence"})
     public ModelAndView AddSequence(TestSequence testSequence,BindingResult bindingResult,Model model){
-       System.out.println("Homo");
         ModelAndView modelAndView = new ModelAndView("createTest");
         testSequence.setSequenceIndex(testSequenceList.size());
         testSequence.setDifficulty((Math.log(testSequence.getTargetAmplitudes()/testSequence.getTargetWidth())+1)/Math.log(2));
@@ -156,6 +164,17 @@ public class TestController {
         return modelAndView;
 
     }
+
+    @RequestMapping(value = "createTest", params = {"addSubject"})
+    public ModelAndView AddSubject(TestSubject testSubject,BindingResult bindingResult,Model model){
+        ModelAndView modelAndView = new ModelAndView("createTest");
+        if(testSubjectList.contains(testSubject)==false) {
+            testSubjectList.add(testSubject);
+        }
+        return modelAndView;
+
+    }
+
 
 
     @RequestMapping(value = "addsequencetotest", method = RequestMethod.GET)

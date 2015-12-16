@@ -137,4 +137,9 @@ public class TestSubject implements Serializable {
         return "TestSubject:[ Id = " + this.id + "firstName = " + this.firstName + "lastName = " + this.lastName + "email = " + this.email
                 + "illness = " + this.illness + "description = " + this.description + " ]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.email.equals(((TestSubject)obj).email);
+    }
 }
