@@ -56,6 +56,11 @@ public class ResearchGroupController {
         return researcherList;
     }
 
+    @ModelAttribute("Tests")
+    public List<Test> populateTests(){
+        List<Test> testList = testRepo.findAll();
+        return testList;
+    }
 
     @RequestMapping("/researchGroup")
     public String ShowResearchGroupPage(@RequestParam(value="name", defaultValue="") String groupName, Model model){

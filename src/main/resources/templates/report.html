@@ -11,12 +11,10 @@
 
 </head>
 <body>
-
 <div th:include="navbar :: page"></div>
-
 <div class="container">
     <div class="page-header" style="margin-top: 7%">
-        <h1 id="containers" align="center">Test report</h1>
+        <h1 id="containers" align="center" th:text="${Test.Title}"></h1>
     </div>
 
     <div style="margin-top: 2%" class="bs-component well col-lg-3">
@@ -26,7 +24,7 @@
                 <div>
                     <label class="col-md-8">Title:</label>
                     <div style="alignment: left">
-                        <p class="text-primary" th:text="${titel}"></p>
+                        <p class="text-primary" th:text="${Test.Title}"></p>
                     </div>
                 </div>
                 <div>
@@ -95,6 +93,27 @@
                         <input type="color" name="ColorMissed" id="color_missed_target" placeholder="kleur" value="#660000" disabled="true" class="form-control"/>
                     </div>
                 </div>
+                
+                <legend style="margin-top: 4%">Device</legend>
+                <div>
+                    <label class="col-lg-8">Type of device:</label>
+                    <div style="alignment: left">
+                        <h5 class="text-primary" th:text="${Test.Device.Name}"></h5>
+                    </div>
+                </div>
+                <div>
+                    <label class="col-lg-8">Build number:</label>
+                    <div style="alignment: left">
+                        <p class="text-primary"  th:text="${Test.Device.Version}"></p>
+                    </div>
+                </div>
+                <div>
+                    <label class="col-lg-8">Info:</label>
+                    <div style="alignment: left">
+                        <p class="text-primary" th:text="${Test.Device.Vendor}"></p>
+                    </div>
+                </div>
+
             </div>
         </fieldset>
     </div>
@@ -140,21 +159,6 @@
                         </span>
                 </div>
 
-                <h4 class="col-md-6">Device:</h4>
-                <div class="col-lg-10">
-                        <span class="input-group-btn">
-                            <h5 class="col-md-2" style="margin-left: 8%">Type of device:</h5>
-                            <h5 class="text-primary col-md-2" style="margin-left: 20%">Test device</h5>
-                        </span>
-                </div>
-
-                <div class="col-lg-10">
-                        <span class="input-group-btn">
-                            <h5 class="col-lg-2" style="margin-left: 8%">Build number:</h5>
-                            <h5 class="text-primary col-lg-2" style="margin-left: 20%">Build number</h5>
-                        </span>
-                </div>
-
             </div>
 
 
@@ -163,31 +167,25 @@
 
                 <div class="col-lg-10">
                         <span class="input-group-btn">
-                            <h5 class="col-md-2" style="margin-left: 8%">MT=</h5>
-                            <h5 class="text-primary col-lg-8">0</h5>
+                            <h5 class="col-md-2" style="margin-left: 8%" >MT=</h5>
+                            <h5 class="text-primary col-lg-8" th:text="${mt}"></h5>
                         </span>
                 </div>
                 <div class="col-lg-10">
 
                         <span class="input-group-btn">
                             <h5 class="col-md-2" style="margin-left: 8%">ER=</h5>
-                            <h5 class="text-primary col-lg-8">0</h5>
+                            <h5 class="text-primary col-lg-8" th:text="${er}"></h5>
                         </span>
                 </div>
 
                 <div class="col-lg-10">
                          <span class="input-group-btn">
                             <h5 class="col-md-2" style="margin-left: 8%">TP=</h5>
-                            <h5 class="text-primary col-lg-8">0</h5>
+                            <h5 class="text-primary col-lg-8" th:text="${tp}"></h5>
                         </span>
                 </div>
 
-                <div style="margin-top: 20%" class="col-lg-10">
-                         <span class="input-group-btn">
-                            <label for="Info">Info</label>
-                           <textarea class="form-control" rows="2" id="Info" data-emoji_font="true" style="font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol', Symbola, EmojiSymbols !important;"></textarea>
-                        </span>
-                </div>
             </div>
 
             <h4 class="col-md-8">Difficulty:</h4>
@@ -215,6 +213,9 @@
         </fieldset>
     </div>
 
+
+    <div style="margin-top: 1%" class=" col-lg-3">
+        </div>
     <div class="col-lg-9 coll9padding" id="user_details_test">
         <h3>Results per testsubject </h3>
         <fieldset class="bs-component well ">

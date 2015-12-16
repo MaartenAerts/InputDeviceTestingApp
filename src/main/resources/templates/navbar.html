@@ -14,19 +14,17 @@
         <div class="navbar-header">
             <a  th:href="@{/dashboard}" ><img src="../images/navbarlogo.png" th:class="img-responsive" style="margin-top: 1%" /></a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse nav-pills" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a class="btn btn-default" th:href="@{/researchers}">Researchers</a>
+                    <a class="btn btn-default" th:href="@{/researchers}" >Researchers</a>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">Researchgroup <b class="caret"></b></a>
-                    <ul class="dropdown-menu" th:each="researcherGroup : ${allResearcherGroups}"  >
-                        <li><a th:href="@{'/researchGroup?name=' + ${researcherGroup.groupName}}" th:text="${researcherGroup.groupName}"></a></li>
-                        <li><a th:href="@{/bootstrap3/bootstrap3-activation}">Groep 1</a></li>
+                    <ul class="dropdown-menu" >
+                        <li><a>Group Name</a></li>
                         <li class="divider"></li>
                         <li><a th:href="@{/researchGroup}">New ResearchGroup</a></li>
                     </ul>

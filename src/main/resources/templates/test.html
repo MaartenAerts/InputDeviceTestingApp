@@ -49,15 +49,16 @@
 
     <div th:each="thisTest : ${TestObj}" >
         <form>
-        <input type="hidden" th:value="${thisTest.targets}" id="aantalTargets"/>
-        <!--<input type="hidden" th:value="${thisTest.sequences.getTargetAmplitudes()}" id="amplitude" />
-        <input type="hidden" th:value="${thisTest.sequences.getTargetWidth()}" id="targetwidth" /> -->
-        <input type="hidden" th:value="${thisTest.errorThreshold}" id="errorThreshold"/>
-        <input type="hidden" th:value="${thisTest.colorMain}" id="colorMain"/>
-        <input type="hidden" th:value="${thisTest.colorTargets}" id="colorTargets"/>
-        <input type="hidden" th:value="${thisTest.colorNext}" id="colorNext"/>
-        <input type="hidden" th:value="${thisTest.colorPrevious}" id="colorClicked"/>
-        <input type="hidden" th:value="${thisTest.colorMissed}" id="colorMissed"/>
+            <input type="hidden" th:value="${thisTest.targets}" id="aantalTargets"/>
+            <!--<input type="hidden" th:value="${thisTest.sequences.getTargetAmplitudes()}" id="amplitude" />
+            <input type="hidden" th:value="${thisTest.sequences.getTargetWidth()}" id="targetwidth" /> -->
+            <input type="hidden" th:value="${thisTest.errorThreshold}" id="errorThreshold"/>
+            <input type="hidden" th:value="${thisTest.colorMain}" id="colorMain"/>
+            <input type="hidden" th:value="${thisTest.colorTargets}" id="colorTargets"/>
+            <input type="hidden" th:value="${thisTest.colorNext}" id="colorNext"/>
+            <input type="hidden" th:value="${thisTest.colorPrevious}" id="colorClicked"/>
+            <input type="hidden" th:value="${thisTest.colorMissed}" id="colorMissed"/>
+           <!-- <input type="hidden" th:value="${thisTest.Testsequence.size}" id="sequencelist"/>-->
         </form>
     </div>
 

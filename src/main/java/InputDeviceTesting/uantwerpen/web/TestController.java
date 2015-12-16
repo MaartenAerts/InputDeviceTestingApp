@@ -58,6 +58,13 @@ public class TestController {
         return deviceList;
     }
 
+
+    @ModelAttribute("Tests")
+    public List<Test> populateTests(){
+        List<Test> testList = testRepo.findAll();
+        return testList;
+    }
+
     private List<TestSubject> testSubjectListAll;
 
     @ModelAttribute("alltestsubjects")

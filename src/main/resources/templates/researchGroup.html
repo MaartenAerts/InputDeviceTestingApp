@@ -29,19 +29,25 @@
     <h2 style="margin-top: 3%">Tests</h2>
 
 
-    <table class="table table-striped">
-        <tr>
+    <table class="table">
+        <tr class="well bs-component">
             <th>TITLE</th>
             <th>DESCRIPTION</th>
             <th>CREATEDDATE</th>
-            <th>MODIFIEDDATE</th>
+            <th>Open Test</th>
+            <th>Report</th>
         </tr>
         <tr> </tr>
         <tr th:each="test : ${Tests}">
                     <td  th:text="${test.title}"/>
-                    <td th:text="${test.description}"/>
                     <td th:text="${test.createdDate}"/>
                     <td th:text="${test.modifiedDate}"/>
+                <td>
+                    <a th:href="@{|/test/${test.id}|}" class="btn btn-info btn-sm">Open Test</a>
+                </td>
+            <td>
+                <a th:href="@{|/report/${test.id}|}" class="btn btn-info btn-sm">view Report</a>
+            </td>
         </tr>
     </table>
 
