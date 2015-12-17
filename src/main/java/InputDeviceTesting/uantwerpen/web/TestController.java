@@ -86,25 +86,44 @@ public class TestController {
 
     private Test blub;
 
+    private TestSubject bla;
+
     @RequestMapping(value ="/{id}")
     public ModelAndView getTest(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView("test");
         blub = null;
+        bla = null;
         blub  = testRepo.findById(id);
         modelAndView.addObject("TestObj", blub);
 
         return modelAndView;
     }
 
-    List<TestSequence> trol = new ArrayList<>();
-    List<TestResult> testResultList = new ArrayList<>();
-    TestSequence bla = new TestSequence();
+    @RequestMapping(value ="/{id}/{subid}")
+    public ModelAndView getTest(@PathVariable("id") int id,@PathVariable("subid") int subid){
+        ModelAndView modelAndView = new ModelAndView("test");
+        blub = null;
+        bla = null;
+        blub  = testRepo.findById(id);
+
+        bla = testSubjectRepo.findById(subid);
+
+        modelAndView.addObject("TestObj", blub);
+
+        return modelAndView;
+    }
+
 
     @RequestMapping(value = "rapport", method = RequestMethod.POST)
-    public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper) {
+    public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper, Model model) {
 
         //System.out.println("Trololololo");
         int amountOfObjects = (testResultWrapper.getTestResults().size())/7;
+
+        if(bla != null){
+            //Doe iets me die subject
+            testResult.setTestSubject(bla);
+        }
 
 
         for (int i = 0; i < amountOfObjects; i++){

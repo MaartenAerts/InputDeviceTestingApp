@@ -256,6 +256,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             //var myTestResultForm = document.getElementById('testResultForm');
             var myTestResultFormElement = React.createElement(HTMLFormElement, null, "myTestResultForm");
             //myTestResultFormElement.submit();
+            localStorage.clear();
             document.getElementById('testResultForm').submit();
         };
         Test.prototype.addInput = function (theForm, name, value) {

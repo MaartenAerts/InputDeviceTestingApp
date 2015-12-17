@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <link rel="stylesheet" th:href="@{../css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.css}"/>
     <meta charset="UTF-8"/>
     <title>app</title>
     <script th:src="@{/js/react.js}"></script>
@@ -72,7 +73,7 @@
 
             <input type="hidden" th:value="${TestObj.testSequences[0].id}" id="eersteTestSequentieId" />
 
-            <input th:each="TestSequence,i : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${i.index}__].targetAmplitudes}" th:id="'Amplitude_'+ ${TestObj.testSequences[__${i.index}__].id}" />
+            <input th:each="TestSequence,i : ${TestObj.testSequences}" type="text" th:value="*{TestObj.testSequences[__${i.index}__].targetAmplitudes}" th:id="'Amplitude_'+ ${TestObj.testSequences[__${i.index}__].id}" />
 
             <script>
                 var sequentieNummer = localStorage.getItem("sequentieNummer");
@@ -123,6 +124,8 @@
     <form th:action="@{/test/rapport}" action="/test/rapport" method="POST" commandName="resultForm" id="testResultForm" name="testResultForm">
 
     </form>
+
+
 
 </div>
 </body>
