@@ -69,15 +69,15 @@ public class InputDeviceTestingAppApplication {
         Device device2 = new Device("playstation kaske", "Logitech", "4.1");
         Device device = new Device("Muis", "Logitech", "1.0");
         Test test = new Test("Degelijke titel",
-                device, 25, 10, "red", "yellow", "blue", "green", "black");
+                device, 13, 50, "#ffffff", "#ff0000", "#006400", "#ffff00", "#660000");
         List<TestSubject> testSubjects = IntStream.range(0, 9)
                 .mapToObj(i -> new TestSubject("test", "test2", "testje", "hallo", i + "@test.com", test)).collect(Collectors.toList());
         Random random = new Random(System.currentTimeMillis());
 
 
-        TestSequence testSequence1 = new TestSequence(0, 250, 25);
-        TestSequence testSequence2 = new TestSequence(1, 500, 50);
-        TestSequence testSequence3 = new TestSequence(2, 150, 15);
+        TestSequence testSequence1 = new TestSequence(0, 20, 100);
+        TestSequence testSequence2 = new TestSequence(1, 25, 200);
+        TestSequence testSequence3 = new TestSequence(2, 40, 250);
 
         List<TestSequence> testSequences = new ArrayList<TestSequence>();
         List<TestResult> fullTestResult = new ArrayList<TestResult>();

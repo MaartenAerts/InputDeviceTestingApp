@@ -73,7 +73,35 @@
                 theForm.appendChild(inputAantalSequenties);
             </script>
 
-      <!--  <input type="hidden" th:value="${thisTest.testSequences.targetAmplitudes}" id ="lijstSequencesMax" /> -->
+            <input th:each="TestSequence,i : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${i.index}__].targetAmplitudes}" th:id="'Amplitude_'+ ${i.index}" />
+
+            <script>
+                var sequentieNummer = localStorage.getItem("sequentieNummer");
+               //alert(sequentieNummer);
+                var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de amplitudes beginnen bij 0
+                var amplitude = document.getElementById('Amplitude_' + inputVeldTePakken).value;
+                var amplitudeInputVeld = document.createElement('input');
+                amplitudeInputVeld.type = 'hidden';
+                amplitudeInputVeld.value = amplitude;
+                amplitudeInputVeld.id = 'amplitudeCirkelTePakken';      // dit id in test.js inlezen
+                var theForm = document.forms['paramForm'];
+                theForm.appendChild(amplitudeInputVeld);
+            </script>
+
+            <input th:each="TestSequence,j : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${j.index}__].targetWidth}" th:id="'Width_'+ ${j.index}" />
+
+            <script>
+                var sequentieNummer = localStorage.getItem("sequentieNummer");
+                //alert(sequentieNummer);
+                var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de widths beginnen bij 0
+                var widthTarget = document.getElementById('Width_' + inputVeldTePakken).value;
+                var widthInputVeld = document.createElement('input');
+                widthInputVeld.type = 'hidden';
+                widthInputVeld.value = widthTarget;
+                widthInputVeld.id = 'widthTargetsTePakken';      // dit id in test.js inlezen
+                var theForm = document.forms['paramForm'];
+                theForm.appendChild(widthInputVeld);
+            </script>
         </form>
     </div>
 

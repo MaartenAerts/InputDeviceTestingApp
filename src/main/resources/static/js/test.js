@@ -8,10 +8,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
     // in te stellen parameters via applicatie
     var aantalCirkels = parseInt(document.getElementById('aantalTargets').value); // enkel oneven toelaten via createTest !!!
-    //var radiusBigCircle = parseInt(document.getElementById('amplitude').value); //240; //Math.min(this.props.width, this.props.height) / 2.5;
-    //var radius = parseInt(document.getElementById('targetwidth').value); //radiusBigCircle/7.5;
-    var radiusBigCircle = 240;
-    var radius = radiusBigCircle / 7.5;
+    var radiusBigCircle = parseInt(document.getElementById('amplitudeCirkelTePakken').value); //240; //Math.min(this.props.width, this.props.height) / 2.5;
+    var radius = parseInt(document.getElementById('widthTargetsTePakken').value); //radiusBigCircle/7.5;
+    //var radiusBigCircle = 240;
+    //var radius = radiusBigCircle/7.5;
     var errorMax = parseInt(document.getElementById('errorThreshold').value) / 100;
     var colorMainCircle = document.getElementById('colorMain').value;
     var colorTarget = document.getElementById('colorTargets').value;
@@ -66,7 +66,7 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             };
         }
         Test.prototype.render = function () {
-            //alert(sequentieMax);
+            alert(radiusBigCircle);
             var strokeWidthBigCircle = radiusBigCircle / 50;
             var cxBigCircle = this.props.width / 2;
             var cyBigCircle = this.props.height / 2;
