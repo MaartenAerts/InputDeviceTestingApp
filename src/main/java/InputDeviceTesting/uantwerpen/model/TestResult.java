@@ -61,6 +61,8 @@ public class TestResult {
 
     }
 
+
+
     public long getId() {
         return id;
     }
@@ -157,12 +159,4 @@ public class TestResult {
         this.testSubject = testSubject;
     }
 
-    public void setTrials(Double trials) {
-    }
-
-    public void setA(Double a) {
-    }
-
-    public void setW(Double w) {
-    }
 }

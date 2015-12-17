@@ -100,19 +100,19 @@ public class TestController {
     public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper) {
 
         //System.out.println("Trololololo");
-        int amountOfObjects = (testResultWrapper.getTestResults().size())/10;
+        int amountOfObjects = (testResultWrapper.getTestResults().size())/7;
         for (int i = 0; i < amountOfObjects; i++){
             testResult = new TestResult();
-            testResult.setTrials(testResultWrapper.getTestResults().get(i*10));
-            testResult.setA(testResultWrapper.getTestResults().get((i*10)+1));
-            testResult.setW(testResultWrapper.getTestResults().get((i*10)+2));
-            testResult.setAe(testResultWrapper.getTestResults().get((i * 10) + 3));
-            testResult.setWe(testResultWrapper.getTestResults().get((i * 10) + 4));
-            testResult.setIDe(testResultWrapper.getTestResults().get((i * 10) + 5));
-            testResult.setError(testResultWrapper.getTestResults().get((i * 10) + 6));
-            testResult.setMT(testResultWrapper.getTestResults().get((i * 10) + 7));
-            testResult.setER(testResultWrapper.getTestResults().get((i * 10) + 8));
-            testResult.setTP(testResultWrapper.getTestResults().get((i * 10) + 9));
+
+            //testResult.setA(testResultWrapper.getTestResults().get((i*10)+1));
+            //testResult.setW(testResultWrapper.getTestResults().get((i*10)+2));
+            testResult.setAe(testResultWrapper.getTestResults().get((i * 7) ));
+            testResult.setWe(testResultWrapper.getTestResults().get((i * 7) + 1));
+            testResult.setIDe(testResultWrapper.getTestResults().get((i * 7) + 2));
+            testResult.setError(testResultWrapper.getTestResults().get((i * 7) + 3));
+            testResult.setMT(testResultWrapper.getTestResults().get((i * 7) + 4));
+            testResult.setER(testResultWrapper.getTestResults().get((i * 7) + 5));
+            testResult.setTP(testResultWrapper.getTestResults().get((i * 7) + 6));
             testResult.setCreatedDate(LocalDateTime.now());
             testResult.setModifiedDate(LocalDateTime.now());
 

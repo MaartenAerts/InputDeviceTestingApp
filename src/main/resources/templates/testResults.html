@@ -20,9 +20,6 @@
     <h2 style="margin-top: 3%">Head Researchers</h2>
     <table class="table table-striped">
         <tr>
-            <th>TRIALS</th>
-            <th>A</th>
-            <th>W</th>
             <th>Ae</th>
             <th>We</th>
             <th>IDe</th>
@@ -33,9 +30,6 @@
         </tr>
         <tr th:each="results : ${allResults}">
 
-                    <td  th:text="${results.trials}"/>
-                    <td th:text="${results.A}"/>
-                    <td th:text="${results.W}"/>
                     <td th:text="${results.Ae}"/>
                     <td th:text="${results.We}"/>
                     <td th:text="${results.IDe}"/>
