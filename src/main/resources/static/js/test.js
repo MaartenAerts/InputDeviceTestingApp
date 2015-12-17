@@ -8,10 +8,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 define(["require", "exports", 'react', 'react-dom'], function (require, exports, React, ReactDom) {
     // in te stellen parameters via applicatie
     var aantalCirkels = parseInt(document.getElementById('aantalTargets').value); // enkel oneven toelaten via createTest !!!
-    //var radiusBigCircle = parseInt(document.getElementById('amplitudeCirkelTePakken').value); //240; //Math.min(this.props.width, this.props.height) / 2.5;
-    //var radius = parseInt(document.getElementById('widthTargetsTePakken').value); //radiusBigCircle/7.5;
-    var radiusBigCircle = 240;
-    var radius = radiusBigCircle / 7.5;
+    var radiusBigCircle = parseInt(document.getElementById('amplitudeCirkelTePakken').value); //240; //Math.min(this.props.width, this.props.height) / 2.5;
+    var radius = parseInt(document.getElementById('widthTargetsTePakken').value); //radiusBigCircle/7.5;
+    //var radiusBigCircle = 240;
+    //var radius = radiusBigCircle/7.5;
     var errorMax = parseInt(document.getElementById('errorThreshold').value) / 100;
     var colorMainCircle = document.getElementById('colorMain').value;
     var colorTarget = document.getElementById('colorTargets').value;
@@ -66,8 +66,8 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
             };
         }
         Test.prototype.render = function () {
-            //alert(radiusBigCircle);
-            //  localStorage.clear();
+            //alert(sequentieNummer);
+            //localStorage.clear();
             var strokeWidthBigCircle = radiusBigCircle / 50;
             var cxBigCircle = this.props.width / 2;
             var cyBigCircle = this.props.height / 2;
@@ -242,21 +242,20 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
         Test.prototype.saveToDb = function () {
             var theForm = document.forms['testResultForm'];
             for (var i = 1; i <= sequentieMax; i++) {
-                //this.addInput(theForm, 'trials', localStorage.getItem("trial_" + i));
-                //this.addInput(theForm, 'A', localStorage.getItem("a_" + i));
-                //this.addInput(theForm, 'W', localStorage.getItem("w_" + i));
+                this.addInput(theForm, 'trials', localStorage.getItem("trial_" + i));
+                this.addInput(theForm, 'A', localStorage.getItem("a_" + i));
+                this.addInput(theForm, 'W', localStorage.getItem("w_" + i));
                 this.addInput(theForm, 'Ae', localStorage.getItem("ae_" + i));
-                this.addInput(theForm, 'We', localStorage.getItem("we_" + i));
+                this.addInput(theForm, 'We', localStorage.getItem("ew_" + i));
                 this.addInput(theForm, 'IDe', localStorage.getItem("ide_" + i));
-                this.addInput(theForm, 'error', localStorage.getItem("aantalErrors_" + i));
+                this.addInput(theForm, 'error', localStorage.getItem("aantalErrors__" + i));
                 this.addInput(theForm, 'MT', localStorage.getItem("mt_" + i));
                 this.addInput(theForm, 'ER', localStorage.getItem("er_" + i));
                 this.addInput(theForm, 'TP', localStorage.getItem("tp_" + i));
             }
-            //var myTestResultForm = document.getElementById('testResultForm');
+            var myTestResultForm = document.getElementById('testResultForm');
             var myTestResultFormElement = React.createElement(HTMLFormElement, null, "myTestResultForm");
-            //myTestResultFormElement.submit();
-            document.getElementById('testResultForm').submit();
+            myTestResultFormElement.submit();
         };
         Test.prototype.addInput = function (theForm, name, value) {
             var input = document.createElement('input');

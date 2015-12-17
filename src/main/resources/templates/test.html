@@ -70,12 +70,18 @@
                 theForm.appendChild(inputAantalSequenties);
             </script>
 
-            <input th:each="TestSequence,i : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${i.index}__].targetAmplitudes}" th:id="'Amplitude_'+ ${i.index}" />
+            <input type="hidden" th:value="${TestObj.testSequences[0].id}" id="eersteTestSequentieId" />
+
+            <input th:each="TestSequence,i : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${i.index}__].targetAmplitudes}" th:id="'Amplitude_'+ ${TestObj.testSequences[__${i.index}__].id}" />
 
             <script>
                 var sequentieNummer = localStorage.getItem("sequentieNummer");
                //alert(sequentieNummer);
-                var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de amplitudes beginnen bij 0
+                var inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value) + parseInt(sequentieNummer)-1;
+                //alert(document.getElementById('eersteTestSequentieId').value);
+                //alert(sequentieNummer);
+                //alert(inputVeldTePakken);
+                //var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de amplitudes beginnen bij 0
                 var amplitude = document.getElementById('Amplitude_' + inputVeldTePakken).value;
                 var amplitudeInputVeld = document.createElement('input');
                 amplitudeInputVeld.type = 'hidden';
@@ -83,14 +89,16 @@
                 amplitudeInputVeld.id = 'amplitudeCirkelTePakken';      // dit id in test.js inlezen
                 var theForm = document.forms['paramForm'];
                 theForm.appendChild(amplitudeInputVeld);
+                //alert(amplitude);
             </script>
 
-            <input th:each="TestSequence,j : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${j.index}__].targetWidth}" th:id="'Width_'+ ${j.index}" />
+            <input th:each="TestSequence,j : ${TestObj.testSequences}" type="hidden" th:value="*{TestObj.testSequences[__${j.index}__].targetWidth}" th:id="'Width_'+ ${TestObj.testSequences[__${j.index}__].id}" />
 
             <script>
                 var sequentieNummer = localStorage.getItem("sequentieNummer");
                 //alert(sequentieNummer);
-                var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de widths beginnen bij 0
+                var inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value) + parseInt(sequentieNummer)-1;
+                //var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de widths beginnen bij 0
                 var widthTarget = document.getElementById('Width_' + inputVeldTePakken).value;
                 var widthInputVeld = document.createElement('input');
                 widthInputVeld.type = 'hidden';
