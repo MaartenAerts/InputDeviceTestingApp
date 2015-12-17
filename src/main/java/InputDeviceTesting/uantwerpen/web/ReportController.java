@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class ReportController
         double ae=0, we=0, ide=0, mt=0, er=0, tp = 0, error=0;
         int amount=0;
         int minAmp=0,maxAmp=0, minWidth=0, maxWidth=0;
-
+        List<Double> tplist = new ArrayList<Double>();
         for (TestSequence testSequence: testSequences) {
             for (TestResult testResult: testSequence.getTestResultList()) {
                 ae+=testResult.getAe();
@@ -61,6 +62,7 @@ public class ReportController
                 mt+=testResult.getMT();
                 er+=testResult.getER();
                 tp+=testResult.getTP();
+                tplist.add(testResult.getTP());
                 error+=testResult.getError();
                 amount++;
             }
@@ -111,6 +113,7 @@ public class ReportController
         modelMap.put("minwidth", minWidth);
         modelMap.put("maxwidth", maxWidth);
         modelMap.put("Test", test);
+        modelMap.put("allTp", tplist);
 
         return new ModelAndView("report", modelMap);
     }

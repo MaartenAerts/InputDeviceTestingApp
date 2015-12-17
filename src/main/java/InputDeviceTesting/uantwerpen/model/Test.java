@@ -96,6 +96,7 @@ public class Test {
 
     public void setDevice(Device device) {
         this.device = device;
+        device.addTest(this);
     }
 
     public int getTargets() {
