@@ -4,6 +4,7 @@ package InputDeviceTesting.uantwerpen.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class Device implements Serializable{
     @NotNull
     private String version;
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
-    private List<Test> test;
+    private List<Test> tests;
 
     public Device() {
     }
@@ -66,11 +67,11 @@ public class Device implements Serializable{
     }
 
     public List<Test> getTest() {
-        return test;
+        return tests;
     }
 
     public void setTest(List<Test> test) {
-        this.test = test;
+        this.tests = test;
     }
 
     @Override
@@ -96,5 +97,12 @@ public class Device implements Serializable{
         result = 31 * result + getVersion().hashCode();
         result = 31 * result + (getTest() != null ? getTest().hashCode() : 0);
         return result;
+    }
+
+    public void addTest(Test test) {
+        if (tests== null){
+            tests = new ArrayList<Test>();
+        }
+        tests.add(test);
     }
 }
