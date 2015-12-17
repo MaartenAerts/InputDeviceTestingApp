@@ -311,9 +311,10 @@ class Test extends React.Component<propke,stateje>
             this.addInput(theForm,'TP',localStorage.getItem("tp_" + i));
         }
 
-        var myTestResultForm = document.getElementById('testResultForm');
-        var myTestResultFormElement = <HTMLFormElement>myTestResultForm</HTMLFormElement>;
-        myTestResultFormElement.submit();
+        //var myTestResultForm = document.getElementById('testResultForm');
+        var myTestResultFormElement = React.createElement(HTMLFormElement, null, "myTestResultForm");
+        //myTestResultFormElement.submit();
+        document.getElementById('testResultForm').submit();
     }
 
     addInput(theForm,name,value){

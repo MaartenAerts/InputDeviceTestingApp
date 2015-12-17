@@ -253,9 +253,10 @@ define(["require", "exports", 'react', 'react-dom'], function (require, exports,
                 this.addInput(theForm, 'ER', localStorage.getItem("er_" + i));
                 this.addInput(theForm, 'TP', localStorage.getItem("tp_" + i));
             }
-            var myTestResultForm = document.getElementById('testResultForm');
+            //var myTestResultForm = document.getElementById('testResultForm');
             var myTestResultFormElement = React.createElement(HTMLFormElement, null, "myTestResultForm");
-            myTestResultFormElement.submit();
+            //myTestResultFormElement.submit();
+            document.getElementById('testResultForm').submit();
         };
         Test.prototype.addInput = function (theForm, name, value) {
             var input = document.createElement('input');
