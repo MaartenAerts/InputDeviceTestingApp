@@ -76,8 +76,13 @@
 
             <script>
                 var sequentieNummer = localStorage.getItem("sequentieNummer");
-               //alert(sequentieNummer);
-                var inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value) + parseInt(sequentieNummer)-1;
+               alert(sequentieNummer);
+                var inputVeldTePakken;
+                if(sequentieNummer != null) {
+                    inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value) + parseInt(sequentieNummer) - 1;
+                } else {
+                    inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value);
+                }
                 //alert(document.getElementById('eersteTestSequentieId').value);
                 //alert(sequentieNummer);
                 //alert(inputVeldTePakken);
@@ -97,7 +102,12 @@
             <script>
                 var sequentieNummer = localStorage.getItem("sequentieNummer");
                 //alert(sequentieNummer);
-                var inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value) + parseInt(sequentieNummer)-1;
+                var inputVeldTePakken;
+                if(sequentieNummer != null) {
+                    inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value) + parseInt(sequentieNummer) - 1;
+                } else {
+                    inputVeldTePakken = parseInt(document.getElementById('eersteTestSequentieId').value);
+                }
                 //var inputVeldTePakken = sequentieNummer - 1;        // want sequentienummer begint bij 1 te tellen en de widths beginnen bij 0
                 var widthTarget = document.getElementById('Width_' + inputVeldTePakken).value;
                 var widthInputVeld = document.createElement('input');
