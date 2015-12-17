@@ -84,23 +84,29 @@ public class TestController {
         return this.testSubjectList;
     }
 
+    private Test blub;
 
     @RequestMapping(value ="/{id}")
     public ModelAndView getTest(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView("test");
-
-        Test blub  = testRepo.findById(id);
+        blub = null;
+        blub  = testRepo.findById(id);
         modelAndView.addObject("TestObj", blub);
 
         return modelAndView;
     }
 
+    List<TestSequence> trol = new ArrayList<>();
+    List<TestResult> testResultList = new ArrayList<>();
+    TestSequence bla = new TestSequence();
 
     @RequestMapping(value = "rapport", method = RequestMethod.POST)
     public String SaveResults(@ModelAttribute("resultForm")TestResultWrapper testResultWrapper) {
 
         //System.out.println("Trololololo");
         int amountOfObjects = (testResultWrapper.getTestResults().size())/7;
+
+
         for (int i = 0; i < amountOfObjects; i++){
             testResult = new TestResult();
 
@@ -115,9 +121,15 @@ public class TestController {
             testResult.setTP(testResultWrapper.getTestResults().get((i * 7) + 6));
             testResult.setCreatedDate(LocalDateTime.now());
             testResult.setModifiedDate(LocalDateTime.now());
-
-            testResultRepo.save(testResult);
+            //trol = test.getTestSequences();
+            //bla = trol.get(i);
+            //testResultRepo.save(testResult);
+            //testResultList.add(testResult);
+            blub.getTestSequences().get(i).addTestResult(testResult);
         }
+
+        testRepo.save(blub);
+
         return "redirect:/testResults";
     }
 
@@ -159,7 +171,7 @@ public class TestController {
         test.setCreatedDate(LocalDateTime.now());
         test.setModifiedDate(LocalDateTime.now());
         test.setTestSubjects(testSubjectList);
-//        testSequenceRepo.save(testSequenceList);
+        testSequenceRepo.save(testSequenceList);
         testSequenceList.clear();
         testSubjectList.clear();
         testRepo.save(test);
@@ -183,6 +195,7 @@ public class TestController {
         if(testSubjectList.contains(testSubject)==false) {
             for(TestSubject ts : testSubjectListAll) {
                 if(ts.getEmail().equals(testSubject.getEmail())) {
+                    ts.setCreatedDate(LocalDateTime.now());
                     testSubjectList.add(ts);
                 }
             }
