@@ -30,13 +30,13 @@
                 <div>
                     <label class="col-md-8">Number of Targets:</label>
                     <div style="alignment: left">
-                        <p class="text-primary">nog invullen</p>
+                        <p class="text-primary" th:text="${Test.targets}" ></p>
                     </div>
                 </div>
                 <div>
                     <label class="col-md-8">Error threshold:</label>
                     <div style="alignment: left">
-                        <p class="text-primary">50%</p>
+                        <p class="text-primary" th:text="${Test.errorThreshold}"></p>
                     </div>
                 </div>
                 <div>
@@ -66,31 +66,31 @@
                 <div>
                     <label class="col-md-8">Color main circle:</label>
                     <div style="alignment: left">
-                        <input type="color" name="ColorMain" placeholder="kleur" id="Color_main_circle" value="#ffffff" disabled="true" class="form-control"/>
+                        <input type="color" th:value="${Test.colorMain}" name="ColorMain" placeholder="kleur" id="Color_main_circle" disabled="true" class="form-control"/>
                     </div>
                 </div>
                 <div>
                     <label class="col-md-8">Color targets:</label>
                     <div style="alignment: left">
-                        <input type="color" name="ColorTargets" id="Color_targets" placeholder="kleur" value="#ff0000" disabled="true" class="form-control"/>
+                        <input type="color" th:value="${Test.colorTargets}" name="ColorTargets" id="Color_targets" placeholder="kleur" disabled="true" class="form-control"/>
                     </div>
                 </div>
                 <div>
                     <label class="col-md-8">Color next target:</label>
                     <div style="alignment: left">
-                        <input type="color" name="ColorNext" placeholder="kleur" id="Color_next_target" value="#006400" disabled="true" class="form-control"/>
+                        <input type="color"  th:value="${Test.colorNext}" name="ColorNext" placeholder="kleur" id="Color_next_target"  disabled="true" class="form-control"/>
                     </div>
                 </div>
                 <div>
                     <label class="col-md-8">Color clicked target:</label>
                     <div style="alignment: left">
-                        <input type="color" name="ColorPrevious" id="Color_previous_target" placeholder="kleur" value="#ffff00" disabled="true" class="form-control"/>
+                        <input type="color" th:value="${Test.colorPrevious}" name="ColorPrevious" id="Color_previous_target" placeholder="kleur" disabled="true" class="form-control"/>
                     </div>
                 </div>
                 <div>
                     <label class="col-md-8">Color missed target:</label>
                     <div style="alignment: left">
-                        <input type="color" name="ColorMissed" id="color_missed_target" placeholder="kleur" value="#660000" disabled="true" class="form-control"/>
+                        <input type="color" th:value="${Test.colorMissed}" name="ColorMissed" id="color_missed_target" placeholder="kleur" disabled="true" class="form-control"/>
                     </div>
                 </div>
                 
