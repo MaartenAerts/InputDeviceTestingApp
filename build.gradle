@@ -18,6 +18,11 @@ apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: "jacoco"
 
+def jdkHome = System.getenv("JAVA_HOME")
+
+dependencies {
+    compile files("$jdkHome/lib/tools.jar")
+}
 
 jar {
     baseName = 'InputDeviceTesting'
